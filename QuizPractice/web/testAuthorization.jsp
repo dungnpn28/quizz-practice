@@ -12,6 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <form  method="post" action="userauthorization">
+            <input type="submit" name="admin" value="Admin"><br>
+            <input type="submit" name="customer" value="Customer"><br>
+        </form>
     </body>
 </html>
