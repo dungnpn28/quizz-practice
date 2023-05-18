@@ -23,6 +23,15 @@ public class UserAuthorizationController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Check if the user has admin role in web.xml
+        if (req.isUserInRole("admin")) {
+            // If the user has admin role, redirect to admin page
+            resp.sendRedirect("Admin.jsp");
+        } else if (req.isUserInRole("customer")) {
+            // If the user has customer role, redirect to customer page
+            resp.sendRedirect("accessdenied.jsp");
+        }
+
         
     }
     

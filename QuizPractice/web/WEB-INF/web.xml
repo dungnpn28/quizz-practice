@@ -4,6 +4,36 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+    <auth-constraint>
+        <role-name>admin</role-name>
+    </auth-constraint>
+    <auth-constraint>
+        <role-name>customer</role-name>
+    </auth-constraint>
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>customer</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>customer</web-resource-name>
+            <url-pattern>/customer/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>customer</role-name>
+        </auth-constraint>
+    </security-constraint>
     <servlet>
         <servlet-name>UserAuthorizationController</servlet-name>
         <servlet-class>controller.UserAuthorizationController</servlet-class>

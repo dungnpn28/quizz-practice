@@ -24,13 +24,13 @@ public class LoginController extends HttpServlet {
                 String role = "admin";
                 HttpSession session = req.getSession();
                 session.setAttribute("role", role);
-                req.getRequestDispatcher("testAuthorization.html").forward(req, resp);
+                req.getRequestDispatcher("/userauthorization").forward(req, resp);
             }
             if(req.getParameter("account").equals("admin@admin.com") && req.getParameter("password").equals("123")){
                 String role = "customer";  
                 HttpSession session = req.getSession();
                 session.setAttribute("role", role);
-                req.getRequestDispatcher("testAuthorization.html").forward(req, resp);
+                req.getRequestDispatcher("/userauthorization").forward(req, resp);
             }
         }
 
