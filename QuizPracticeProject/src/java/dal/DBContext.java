@@ -19,10 +19,23 @@ public class DBContext {
     protected Connection connection;
     public DBContext()
     {
+<<<<<<< HEAD
         try {
             String user = "sa";
             String pass = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=Database_Name";
+=======
+        //@Students: You are allowed to edit user, pass, url variables to fit 
+        //your system configuration
+        //You can also add more methods for Database Interaction tasks. 
+        //But we recommend you to do it in another class
+        // For example : StudentDBContext extends DBContext , 
+        //where StudentDBContext is located in dal package, 
+        try {
+            String user = "sa";
+            String pass = "123";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=Quiz_Practice";
+>>>>>>> c632a9655487262327b1b035f44ec03996efb3ee
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
