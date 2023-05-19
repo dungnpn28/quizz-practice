@@ -102,9 +102,74 @@
 #i3:checked ~ .nav #dot3{
     background: #fff;
 }
+.row{
+    display: flex;
+}
+.boxContainer {
+    margin-left: 20px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột có độ rộng bằng nhau */
+    grid-template-rows: repeat(2, 1fr); /* Chia thành 2 hàng có chiều cao bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các ô */            
+}
 
+.box {
+    display: flex; /* Sử dụng Flexbox để chia thành hai cột */
+    background-color: #ccc;
+    border: solid 3px;
+    border-color: #333;
+    border-radius: 5px;
+}
 
+.thumbnail_container{
+    /*display: flex;*/
+    margin: 0 auto;
+    margin-bottom: 20px;
+    /*position: relative;*/
+    width: 35%;
+    /*height: 30%;*/
+    height: 0;
+    padding-bottom: 35%;
+    justify-content: center;
+    border: solid 3px;
+    border-color: #333;
+    border-radius: 5px;
+}
 
+.tn1{
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: flex-start;
+    
+}
+
+.vid1{
+    margin-left: 40px;
+    border: solid 3px;
+    border-color: #333;
+    border-radius: 5px;
+}
+
+.tn2{
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.vid2{
+    margin-left: 40px;
+}
+
+.contact{
+    text-align: center;
+}
 .footer {
     color: aliceblue;
     background-color: #08A2C7;

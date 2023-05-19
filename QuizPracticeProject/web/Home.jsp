@@ -57,33 +57,8 @@
         </div>
     </div>
     
-    <style >
-        .boxContainer {
-            margin-left: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột có độ rộng bằng nhau */
-            grid-template-rows: repeat(2, 1fr); /* Chia thành 2 hàng có chiều cao bằng nhau */
-            gap: 40px; /* Khoảng cách giữa các ô */
-            
-        }
-
-        .box {
-            display: flex; /* Sử dụng Flexbox để chia thành hai cột */
-            background-color: #ccc;
-            border: solid 3px;
-            border-color: #333;
-            border-radius: 5px;
-
-        }
-        .boxImage img{
-            flex: 1; /* Chiếm 50% chiều rộng */
-        }
-
-        .boxContent {
-            flex: 1; /* Chiếm 50% chiều rộng */
-        }
-    </style>
-    <h4> Featured subjects</h4>a
+    
+    <h4> Featured subjects <a href="">View all subjects</a></h4>
     <div class="row">
         <div class="boxContainer col-md-7">
             <div class="box">
@@ -151,11 +126,29 @@
                     <h2>Tiêu đề</h2>
                     <p>Nội dung</p>
                 </div>
+            </div>    
+        </div>
+        
+        <div class="thumbnail_container">
+            <div class="tn1">
+                Title 
+                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/ZKjIHQxG_3Q" frameborder="0" allowfullscreen class="vid1"></iframe>
             </div>
+            
+            <div class="tn2">
+                Title 
+                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/DVEUcbPkb-c" frameborder="0" allowfullscreen class="vid1"></iframe>
+            </div>
+            <div class="contact">
+                FACEBOOK: <a href="">Links</a><br>
+                CONTACT: <a href="">Links</a>
+            </div>          
         </div>
     </div>
+    
+    <h4>Hot posts <a href="">View all posts</a></h4>
 
-    <br/>
+    
 
 
 </body>
