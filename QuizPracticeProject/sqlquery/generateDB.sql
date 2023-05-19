@@ -305,27 +305,28 @@ VALUES(1, 'C#', 'Programming', 'Active', 'C# is a general-purpose, multi-paradig
       (4, 'C++', 'Programming', 'Active', 'C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".'),
       (5, 'C', 'Programming', 'Active', 'C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions, and has found lasting use in applications previously coded in assembly language.');
 
+GO
 INSERT INTO [question](subject_id, content, option_a, option_b, option_c, option_d, answer, created, modified)
 VALUES (1, 'What is the capital of Vietnam?', 'Ha Noi', 'Ho Chi Minh', 'Da Nang', 'Hai Phong', 'Ha Noi', GETDATE(), GETDATE()),
 	   (2, 'What is the capital of USA?', 'New York', 'Washington DC', 'Los Angeles', 'Chicago', 'Washington DC', GETDATE(), GETDATE()),
 	   (3, 'What is the capital of Japan?', 'Tokyo', 'Osaka', 'Kyoto', 'Yokohama', 'Tokyo', GETDATE(), GETDATE()),
 	   (4, 'What is the capital of China?', 'Beijing', 'Shanghai', 'Hong Kong', 'Shenzhen', 'Beijing', GETDATE(), GETDATE()),
 	   (5, 'What is the capital of Thailand?', 'Bangkok', 'Phuket', 'Pattaya', 'Chiang Mai', 'Bangkok', GETDATE(), GETDATE());
-
+GO
 INSERT INTO price_package (duration, price, sale, status)
 VALUES ('1', 100000, 0, 'active'),
 	   ('7', 200000, 0.4, 'active'),
 	   ('30', 300000, 0, 'active'),
 	   ('90', 400000, 0, 'active'),
 	   ('360', 500000, 0, 'active')
-
+GO
 INSERT INTO registration (subject_id, price_package_id, user_id, created) 
 VALUES (1, 1, 1, GETDATE()), 
 	   (2, 2, 2, GETDATE()), 
 	   (3, 3, 3, GETDATE()), 
 	   (4, 4, 4, GETDATE()), 
 	   (5, 5, 5, GETDATE());
-
+GO
 INSERT INTO lesson (subject_id, name, type, topic)
 VALUES (1, 'Lesson 1', 'Video', 'Topic 1'),
 	   (2, 'Lesson 2', 'Video', 'Topic 2'),
