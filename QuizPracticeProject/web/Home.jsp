@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <body>
     <%@include file="components/header.jsp" %>
-    
+
     <!-- SLIDER -->
     <div class="slider">
         <input type="radio" name="images" id="i1" checked>
@@ -56,18 +56,16 @@
 
         </div>
     </div>
-    
-    
+
+
     <h4> Featured subjects <a href="">View all subjects</a></h4>
     <div class="row">
         <div class="boxContainer col-md-7">
             <div class="box">
                 <div class="boxImage">
-                    <!-- Đặt nội dung ảnh tại đây -->
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSus7K6uN2jdBRHM2LhBtC7LAfrgTzmyMOg4GX8_uDh&s" width="100" height="120 alt="Ảnh">
                 </div>
                 <div class="boxContent">
-                    <!-- Đặt nội dung khác tại đây -->
                     <h2>Tiêu đề</h2>
                     <p>Nội dung</p>
                 </div>
@@ -126,15 +124,15 @@
                     <h2>Tiêu đề</h2>
                     <p>Nội dung</p>
                 </div>
-            </div>    
+            </div>
         </div>
-        
+
         <div class="thumbnail_container">
             <div class="tn1">
                 Title 
                 <iframe width="300px" height="150px" src="https://www.youtube.com/embed/ZKjIHQxG_3Q" frameborder="0" allowfullscreen class="vid1"></iframe>
             </div>
-            
+
             <div class="tn2">
                 Title 
                 <iframe width="300px" height="150px" src="https://www.youtube.com/embed/DVEUcbPkb-c" frameborder="0" allowfullscreen class="vid1"></iframe>
@@ -145,10 +143,27 @@
             </div>          
         </div>
     </div>
-    
+
     <h4>Hot posts <a href="">View all posts</a></h4>
 
-    
+    <div class="post_Container">
+        <div class="post_box">
+            <h3>Title</h3>
+            <div class="content">
+                <div class="th_cnt">
+                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/ZKjIHQxG_3Q" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <p>
+                        Aas df asd fasd fasd fasd fas dfa sdf asdf asdf asdf asdd fasdfasdf asdf asdf sad fasdf as df
+                    </p>
+                </div>
+                <h5>DATE</h5>
+            </div>
+        </div>
+
+        <div class="post_box">
+            thumbnail
+        </div>
+    </div>
 
 
 </body>
