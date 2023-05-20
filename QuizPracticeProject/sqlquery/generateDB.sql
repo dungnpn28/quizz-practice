@@ -43,8 +43,8 @@ CREATE TABLE [subject] (
 	dimension_id integer NOT NULL,
 	name varchar(20) NOT NULL,
 	category varchar(20) NOT NULL,
-	status varchar(10) NOT NULL,
-	description varchar NOT NULL,
+	status bit NOT NULL,
+	description text NOT NULL,
   CONSTRAINT [PK_SUBJECT] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -57,7 +57,7 @@ CREATE TABLE [price_package] (
 	duration integer NOT NULL,
 	price money NOT NULL,
 	sale decimal NOT NULL,
-	status varchar(10) NOT NULL,
+	status bit NOT NULL,
   CONSTRAINT [PK_PRICE_PACKAGE] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -82,7 +82,6 @@ CREATE TABLE [exam] (
 	id integer identity(1,1) NOT NULL,
 	name varchar(255) NOT NULL,
 	user_id integer NOT NULL,
-	exam_id integer NOT NULL,
 	[level] varchar NOT NULL,
 	duration time NOT NULL,
 	pass_rate decimal NOT NULL,
@@ -127,14 +126,12 @@ CREATE TABLE [question] (
 )
 GO
 CREATE TABLE [result] (
-	id integer identity(1,1) NOT NULL,
-	user_id integer NOT NULL,
 	exam_id integer NOT NULL,
 	score decimal NOT NULL,
 	created datetime NOT NULL,
   CONSTRAINT [PK_RESULT] PRIMARY KEY CLUSTERED
   (
-  [id] ASC
+  [exam_id] ASC
   ) WITH (IGNORE_DUP_KEY = OFF)
 
 )
@@ -143,7 +140,7 @@ CREATE TABLE [user_profile] (
 	user_id integer NOT NULL,
 	avatar varchar(255),
 	full_name nvarchar(255) NOT NULL,
-	gender varchar(6) NOT NULL,
+	gender bit NOT NULL,
 	dob date NOT NULL,
 	phone_number varchar(20) NOT NULL,
 	created datetime NOT NULL,
@@ -160,9 +157,9 @@ CREATE TABLE [blog] (
 	thumbnail varchar(255) NOT NULL,
 	author_id integer NOT NULL,
 	title varchar(255) NOT NULL,
-	category nvarchar(20) NOT NULL,
-	flag nvarchar NOT NULL,
-	[status] varchar(20) NOT NULL,
+	category varchar(20) NOT NULL,
+	flag varchar(255),
+	[status] bit NOT NULL,
 	content text NOT NULL,
 	created datetime NOT NULL,
 	modified datetime NOT NULL,
@@ -176,10 +173,10 @@ GO
 CREATE TABLE [slider] (
 	id integer identity(1,1) NOT NULL,
 	publisher_id integer NOT NULL,
-	title varchar NOT NULL,
-	[image] varchar NOT NULL,
-	backlink varchar NOT NULL,
-	status varchar NOT NULL,
+	title varchar(255) NOT NULL,
+	[image] varchar(255) NOT NULL,
+	backlink varchar(255) NOT NULL,
+	status bit NOT NULL,
   CONSTRAINT [PK_SLIDER] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -192,10 +189,10 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [user] CHECK CONSTRAINT [user_fk0]
 GO
-ALTER TABLE [user_profile] WITH CHECK ADD CONSTRAINT [user_fk1] FOREIGN KEY ([user_id]) REFERENCES [user]([id])
+ALTER TABLE [user_profile] WITH CHECK ADD CONSTRAINT [user_profile_fk0] FOREIGN KEY ([user_id]) REFERENCES [user]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [user] CHECK CONSTRAINT [user_fk1]
+ALTER TABLE [user_profile] CHECK CONSTRAINT [user_profile_fk0]
 GO
 
 
@@ -227,11 +224,6 @@ ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk0] FOREIGN KEY ([user_id]) 
 ON UPDATE CASCADE
 GO
 ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk0]
-GO
-ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk1] FOREIGN KEY ([exam_id]) REFERENCES [exam]([id])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk1]
 GO
 
 ALTER TABLE [lesson] WITH CHECK ADD CONSTRAINT [lesson_fk0] FOREIGN KEY ([subject_id]) REFERENCES [subject]([id])
@@ -279,13 +271,13 @@ VALUES ('dungnpnhe171417@fpt.edu.vn', 123, 2),
 
 GO
 
-INSERT INTO [user_profile]([user_id], gender, dob, phone_number, created, modified)
-VALUES (1, 'Nguyễn Phạm Nam Dũng', 'Male', '28/10/2003', '0375470304' , GETDATE() , GETDATE()),
-	   (2, 'Nguyễn Thị Dũng', 'Female', '03/10/1989', '0434574455' , GETDATE() , GETDATE()),
-	   (3, 'Phạm Thị Thoại', 'Male', '22/09/1999', '0999999999' , GETDATE() , GETDATE()),
-	   (4, 'Nguyễn Minh Đại', 'Male', '09/02/2003', '0111111111' , GETDATE() , GETDATE()),
-	   (5, 'Vũ Ngọc Hiếu', 'Male', '01/01/2003', '0111111112' , GETDATE() , GETDATE()),
-       (6, 'Bùi Lân Việt', 'Female', '11/08/2003', '06473835648' , GETDATE() , GETDATE());
+INSERT INTO [user_profile]([user_id], full_name, gender, dob, phone_number, created, modified)
+VALUES (1, 'Nguyễn Phạm Nam Dũng', '1', '2003-10-28', '0375470304' , GETDATE() , GETDATE()),
+	   (2, 'Nguyễn Thị Dũng', '0', '1989-10-03', '0434574455' , GETDATE() , GETDATE()),
+	   (3, 'Phạm Thị Thoại', '1', '1999-09-22', '0999999999' , GETDATE() , GETDATE()),
+	   (4, 'Nguyễn Minh Đại', '1', '2001-09-08', '0111111111' , GETDATE() , GETDATE()),
+	   (5, 'Vũ Ngọc Hiếu', '1', '2004-01-01', '0111111112' , GETDATE() , GETDATE()),
+       (6, 'Bùi Lân Việt', '0', '2003-08-11', '06473835648' , GETDATE() , GETDATE());
 
 GO
 
@@ -299,11 +291,11 @@ VALUES ('Math', 'Subject', 'Mathematics is the study of numbers, shapes and patt
 GO
 
 INSERT INTO [subject](dimension_id, [name], category, [status], [description])
-VALUES(1, 'C#', 'Programming', 'Active', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.'),
-	  (2, 'Java', 'Programming', 'Active', 'Java is a general-purpose computer-programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.'),
-      (3, 'Python', 'Programming', 'Active', 'Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.'),
-      (4, 'C++', 'Programming', 'Active', 'C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".'),
-      (5, 'C', 'Programming', 'Active', 'C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions, and has found lasting use in applications previously coded in assembly language.');
+VALUES(1, 'C#', 'Programming', '1', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.'),
+	  (2, 'Java', 'Programming', '1', 'Java is a general-purpose computer-programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.'),
+      (3, 'Python', 'Programming', '1', 'Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.'),
+      (4, 'C++', 'Programming', '1', 'C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".'),
+      (5, 'C', 'Programming', '1', 'C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions, and has found lasting use in applications previously coded in assembly language.');
 
 GO
 INSERT INTO [question](subject_id, content, option_a, option_b, option_c, option_d, answer, created, modified)
@@ -314,11 +306,11 @@ VALUES (1, 'What is the capital of Vietnam?', 'Ha Noi', 'Ho Chi Minh', 'Da Nang'
 	   (5, 'What is the capital of Thailand?', 'Bangkok', 'Phuket', 'Pattaya', 'Chiang Mai', 'Bangkok', GETDATE(), GETDATE());
 GO
 INSERT INTO price_package (duration, price, sale, status)
-VALUES ('1', 100000, 0, 'active'),
-	   ('7', 200000, 0.4, 'active'),
-	   ('30', 300000, 0, 'active'),
-	   ('90', 400000, 0, 'active'),
-	   ('360', 500000, 0, 'active')
+VALUES ('1', 100000, 0, '1'),
+	   ('7', 200000, 0.4, '0'),
+	   ('30', 300000, 0, '1'),
+	   ('90', 400000, 0, '1'),
+	   ('360', 500000, 0, '1')
 GO
 INSERT INTO registration (subject_id, price_package_id, user_id, created) 
 VALUES (1, 1, 1, GETDATE()), 
@@ -334,3 +326,4 @@ VALUES (1, 'Lesson 1', 'Video', 'Topic 1'),
 	   (4, 'Lesson 4', 'Video', 'Topic 4'), 
 	   (5, 'Lesson 5', 'Video', 'Topic 5');
 
+--drop database Quiz_Practice
