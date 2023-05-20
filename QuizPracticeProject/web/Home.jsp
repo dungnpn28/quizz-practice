@@ -63,7 +63,7 @@
         <div class="boxContainer col-md-7">
             <div class="box">
                 <div class="boxImage">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSus7K6uN2jdBRHM2LhBtC7LAfrgTzmyMOg4GX8_uDh&s" width="100" height="120 alt="Ảnh">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSus7K6uN2jdBRHM2LhBtC7LAfrgTzmyMOg4GX8_uDh&s" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <h2>Tiêu đề</h2>
@@ -73,7 +73,7 @@
             <div class="box">
                 <div class="boxImage">
                     <!-- Đặt nội dung ảnh tại đây -->
-                    <img src="https://images.pexels.com/photos/15770288/pexels-photo-15770288.jpeg?cs=srgb&dl=pexels-screeny-15770288.jpg&fm=jpg" width="100" height="120  " alt="Ảnh">
+                    <img src="https://images.pexels.com/photos/15770288/pexels-photo-15770288.jpeg?cs=srgb&dl=pexels-screeny-15770288.jpg&fm=jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -84,7 +84,7 @@
             <div class="box">
                 <div class="boxImage">
                     <!-- Đặt nội dung ảnh tại đây -->
-                    <img src="https://images.pexels.com/photos/15770293/pexels-photo-15770293.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" width="100" height="120  " alt="Ảnh">
+                    <img src="https://images.pexels.com/photos/15770293/pexels-photo-15770293.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -95,7 +95,7 @@
             <div class="box">
                 <div class="boxImage">
                     <!-- Đặt nội dung ảnh tại đây -->
-                    <img src="https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto\u003dcompress\u0026cs\u003dtinysrgb\u0026dpr\u003d1\u0026w\u003d500" width="100" height="120  " alt="Ảnh">
+                    <img src="https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto\u003dcompress\u0026cs\u003dtinysrgb\u0026dpr\u003d1\u0026w\u003d500" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -106,7 +106,7 @@
             <div class="box">
                 <div class="boxImage">
                     <!-- Đặt nội dung ảnh tại đây -->
-                    <img src="https://anhnendep.net/wp-content/uploads/2016/10/hinh-nen-dein-thoai-hoa-anh-dao-07.jpg" width="100" height="120  " alt="Ảnh">
+                    <img src="https://anhnendep.net/wp-content/uploads/2016/10/hinh-nen-dein-thoai-hoa-anh-dao-07.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -117,7 +117,7 @@
             <div class="box">
                 <div class="boxImage">
                     <!-- Đặt nội dung ảnh tại đây -->
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQexjvhaBUFs5ZvWakftt4msuMArkusMInrg&usqp=CAU" width="100" height="120  " alt="Ảnh">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQexjvhaBUFs5ZvWakftt4msuMArkusMInrg&usqp=CAU" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -148,20 +148,35 @@
 
     <div class="post_Container">
         <div class="post_box">
-            <h3>Title</h3>
+            <div class="ti_da">
+                <h3>Title</h3>
+                <h5>DATE: 12/12/2003</h5>
+            </div>
+            
             <div class="content">
                 <div class="th_cnt">
                     <iframe width="200px" height="150px" src="https://www.youtube.com/embed/ZKjIHQxG_3Q" frameborder="0" allowfullscreen class="vid1"></iframe>
-                    <p>
-                        Aas df asd fasd fasd fasd fas dfa sdf asdf asdf asdf asdd fasdfasdf asdf asdf sad fasdf as df
+                    <p class="title">
+                        Description
                     </p>
                 </div>
-                <h5>DATE</h5>
             </div>
         </div>
 
         <div class="post_box">
-            thumbnail
+            <div class="ti_da">
+                <h3>Title<h5>DATE:</h5></h3>
+                
+            </div>
+            
+            <div class="content">
+                <div class="th_cnt">
+                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/ZKjIHQxG_3Q" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <p class="title">
+                        Aas df asd fasd fasd fasd fas dfa sdf asdf asdf asdf asdd fasdfasdf asdf asdf sad fasdf as df
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -122,6 +122,9 @@
     border-color: #333;
     border-radius: 5px;
     margin: 20px;
+    width: 200px;
+    height: 120px;
+    
 }
 
 .thumbnail_container{
@@ -193,13 +196,27 @@
     display: flex;
 }
 
-.post_box h3{
+.ti_da h3, .ti_da h5{
     text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+/*    margin-top: 10px;
+    margin-bottom: 10px;*/
+}
+
+.post_box h5{
+    float: right;   
 }
 
 .th_cnt{
     display: flex;
 }
+
+.th_cnt p{
+    margin-left: 20px;
+}
+
 .footer {
     color: aliceblue;
     background-color: #08A2C7;
