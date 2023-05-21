@@ -81,6 +81,7 @@ GO
 CREATE TABLE [exam] (
 	id integer identity(1,1) NOT NULL,
 	name varchar(255) NOT NULL,
+	subject_id integer NOT NULL,
 	user_id integer NOT NULL,
 	[level] varchar NOT NULL,
 	duration time NOT NULL,
@@ -224,6 +225,12 @@ ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk0] FOREIGN KEY ([user_id]) 
 ON UPDATE CASCADE
 GO
 ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk0]
+GO
+
+ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk1] FOREIGN KEY ([subject_id]) REFERENCES [subject]([id])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk1]
 GO
 
 ALTER TABLE [lesson] WITH CHECK ADD CONSTRAINT [lesson_fk0] FOREIGN KEY ([subject_id]) REFERENCES [subject]([id])
