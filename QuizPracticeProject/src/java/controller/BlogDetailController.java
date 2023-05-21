@@ -5,7 +5,7 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-import dao.BlogDetailDAO;
+import dao.BlogDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,9 +34,12 @@ public class BlogDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
-        BlogDetailDAO dao = new BlogDetailDAO();
+        BlogDAO dao = new BlogDAO();
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
+        int author_id = blog.getAuthor_id();
+        String author = dao.getAuthor(author_id);
+        request.setAttribute("author", author);
         request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
     }
 

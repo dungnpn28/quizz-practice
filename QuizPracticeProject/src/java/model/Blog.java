@@ -4,6 +4,7 @@
  */
 package model;
 
+import dao.BlogDAO;
 import java.sql.Date;
 
 /**
@@ -14,7 +15,7 @@ public class Blog {
     private int id;
     private String thumbnail;
     private int author_id;
-    private String tile;
+    private String title;
     private String category;
     private String flag;
     private String status;
@@ -25,11 +26,11 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String thumbnail, int author_id, String tile, String category, String flag, String status, String content, Date created, Date modified) {
+    public Blog(int id, String thumbnail, int author_id, String title, String category, String flag, String status, String content, Date created, Date modified) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.author_id = author_id;
-        this.tile = tile;
+        this.title = title;
         this.category = category;
         this.flag = flag;
         this.status = status;
@@ -62,12 +63,12 @@ public class Blog {
         this.author_id = author_id;
     }
 
-    public String getTile() {
-        return tile;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTile(String tile) {
-        this.tile = tile;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCategory() {
@@ -117,6 +118,5 @@ public class Blog {
     public void setModified(Date modified) {
         this.modified = modified;
     }
-    
     
 }

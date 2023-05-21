@@ -1,4 +1,4 @@
-﻿create database Quiz_Practice
+﻿﻿create database Quiz_Practice
 GO
 use Quiz_Practice
 GO
@@ -43,8 +43,8 @@ CREATE TABLE [subject] (
 	dimension_id integer NOT NULL,
 	name varchar(20) NOT NULL,
 	category varchar(20) NOT NULL,
-	status varchar(10) NOT NULL,
-	description varchar NOT NULL,
+	status bit NOT NULL,
+	description text NOT NULL,
   CONSTRAINT [PK_SUBJECT] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -57,7 +57,7 @@ CREATE TABLE [price_package] (
 	duration integer NOT NULL,
 	price money NOT NULL,
 	sale decimal NOT NULL,
-	status varchar(10) NOT NULL,
+	status bit NOT NULL,
   CONSTRAINT [PK_PRICE_PACKAGE] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -81,8 +81,8 @@ GO
 CREATE TABLE [exam] (
 	id integer identity(1,1) NOT NULL,
 	name varchar(255) NOT NULL,
+	subject_id integer NOT NULL,
 	user_id integer NOT NULL,
-	exam_id integer NOT NULL,
 	[level] varchar NOT NULL,
 	duration time NOT NULL,
 	pass_rate decimal NOT NULL,
@@ -127,14 +127,12 @@ CREATE TABLE [question] (
 )
 GO
 CREATE TABLE [result] (
-	id integer identity(1,1) NOT NULL,
-	user_id integer NOT NULL,
 	exam_id integer NOT NULL,
 	score decimal NOT NULL,
 	created datetime NOT NULL,
   CONSTRAINT [PK_RESULT] PRIMARY KEY CLUSTERED
   (
-  [id] ASC
+  [exam_id] ASC
   ) WITH (IGNORE_DUP_KEY = OFF)
 
 )
@@ -143,7 +141,7 @@ CREATE TABLE [user_profile] (
 	user_id integer NOT NULL,
 	avatar varchar(255),
 	full_name nvarchar(255) NOT NULL,
-	gender varchar(6) NOT NULL,
+	gender bit NOT NULL,
 	dob date NOT NULL,
 	phone_number varchar(20) NOT NULL,
 	created datetime NOT NULL,
@@ -160,9 +158,9 @@ CREATE TABLE [blog] (
 	thumbnail varchar(255) NOT NULL,
 	author_id integer NOT NULL,
 	title varchar(255) NOT NULL,
-	category nvarchar(20) NOT NULL,
-	flag nvarchar NOT NULL,
-	[status] varchar(20) NOT NULL,
+	category varchar(20) NOT NULL,
+	flag varchar(255),
+	[status] bit NOT NULL,
 	content text NOT NULL,
 	created datetime NOT NULL,
 	modified datetime NOT NULL,
@@ -176,10 +174,10 @@ GO
 CREATE TABLE [slider] (
 	id integer identity(1,1) NOT NULL,
 	publisher_id integer NOT NULL,
-	title varchar NOT NULL,
-	[image] varchar NOT NULL,
-	backlink varchar NOT NULL,
-	status varchar NOT NULL,
+	title varchar(255) NOT NULL,
+	[image] varchar(255) NOT NULL,
+	backlink varchar(255) NOT NULL,
+	status bit NOT NULL,
   CONSTRAINT [PK_SLIDER] PRIMARY KEY CLUSTERED
   (
   [id] ASC
@@ -192,10 +190,10 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [user] CHECK CONSTRAINT [user_fk0]
 GO
-ALTER TABLE [user_profile] WITH CHECK ADD CONSTRAINT [user_fk1] FOREIGN KEY ([user_id]) REFERENCES [user]([id])
+ALTER TABLE [user_profile] WITH CHECK ADD CONSTRAINT [user_profile_fk0] FOREIGN KEY ([user_id]) REFERENCES [user]([id])
 ON UPDATE CASCADE
 GO
-ALTER TABLE [user] CHECK CONSTRAINT [user_fk1]
+ALTER TABLE [user_profile] CHECK CONSTRAINT [user_profile_fk0]
 GO
 
 
@@ -228,7 +226,8 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk0]
 GO
-ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk1] FOREIGN KEY ([exam_id]) REFERENCES [exam]([id])
+
+ALTER TABLE [exam] WITH CHECK ADD CONSTRAINT [exam_fk1] FOREIGN KEY ([subject_id]) REFERENCES [subject]([id])
 ON UPDATE CASCADE
 GO
 ALTER TABLE [exam] CHECK CONSTRAINT [exam_fk1]
@@ -279,13 +278,13 @@ VALUES ('dungnpnhe171417@fpt.edu.vn', 123, 2),
 
 GO
 
-INSERT INTO [user_profile]([user_id], gender, dob, phone_number, created, modified)
-VALUES (1, 'Nguyễn Phạm Nam Dũng', 'Male', '28/10/2003', '0375470304' , GETDATE() , GETDATE()),
-	   (2, 'Nguyễn Thị Dũng', 'Female', '03/10/1989', '0434574455' , GETDATE() , GETDATE()),
-	   (3, 'Phạm Thị Thoại', 'Male', '22/09/1999', '0999999999' , GETDATE() , GETDATE()),
-	   (4, 'Nguyễn Minh Đại', 'Male', '09/02/2003', '0111111111' , GETDATE() , GETDATE()),
-	   (5, 'Vũ Ngọc Hiếu', 'Male', '01/01/2003', '0111111112' , GETDATE() , GETDATE()),
-       (6, 'Bùi Lân Việt', 'Female', '11/08/2003', '06473835648' , GETDATE() , GETDATE());
+INSERT INTO [user_profile]([user_id], full_name, gender, dob, phone_number, created, modified)
+VALUES (1, 'Nguyễn Phạm Nam Dũng', '1', '2003-10-28', '0375470304' , GETDATE() , GETDATE()),
+	   (2, 'Nguyễn Thị Dũng', '0', '1989-10-03', '0434574455' , GETDATE() , GETDATE()),
+	   (3, 'Phạm Thị Thoại', '1', '1999-09-22', '0999999999' , GETDATE() , GETDATE()),
+	   (4, 'Nguyễn Minh Đại', '1', '2001-09-08', '0111111111' , GETDATE() , GETDATE()),
+	   (5, 'Vũ Ngọc Hiếu', '1', '2004-01-01', '0111111112' , GETDATE() , GETDATE()),
+       (6, 'Bùi Lân Việt', '0', '2003-08-11', '06473835648' , GETDATE() , GETDATE());
 
 GO
 
@@ -299,11 +298,11 @@ VALUES ('Math', 'Subject', 'Mathematics is the study of numbers, shapes and patt
 GO
 
 INSERT INTO [subject](dimension_id, [name], category, [status], [description])
-VALUES(1, 'C#', 'Programming', 'Active', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.'),
-	  (2, 'Java', 'Programming', 'Active', 'Java is a general-purpose computer-programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.'),
-      (3, 'Python', 'Programming', 'Active', 'Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.'),
-      (4, 'C++', 'Programming', 'Active', 'C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".'),
-      (5, 'C', 'Programming', 'Active', 'C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions, and has found lasting use in applications previously coded in assembly language.');
+VALUES(1, 'C#', 'Programming', '1', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.'),
+	  (2, 'Java', 'Programming', '1', 'Java is a general-purpose computer-programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.'),
+      (3, 'Python', 'Programming', '1', 'Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.'),
+      (4, 'C++', 'Programming', '1', 'C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or "C with Classes".'),
+      (5, 'C', 'Programming', '1', 'C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions, and has found lasting use in applications previously coded in assembly language.');
 
 GO
 INSERT INTO [question](subject_id, content, option_a, option_b, option_c, option_d, answer, created, modified)
@@ -314,11 +313,11 @@ VALUES (1, 'What is the capital of Vietnam?', 'Ha Noi', 'Ho Chi Minh', 'Da Nang'
 	   (5, 'What is the capital of Thailand?', 'Bangkok', 'Phuket', 'Pattaya', 'Chiang Mai', 'Bangkok', GETDATE(), GETDATE());
 GO
 INSERT INTO price_package (duration, price, sale, status)
-VALUES ('1', 100000, 0, 'active'),
-	   ('7', 200000, 0.4, 'active'),
-	   ('30', 300000, 0, 'active'),
-	   ('90', 400000, 0, 'active'),
-	   ('360', 500000, 0, 'active')
+VALUES ('1', 100000, 0, '1'),
+	   ('7', 200000, 0.4, '0'),
+	   ('30', 300000, 0, '1'),
+	   ('90', 400000, 0, '1'),
+	   ('360', 500000, 0, '1')
 GO
 INSERT INTO registration (subject_id, price_package_id, user_id, created) 
 VALUES (1, 1, 1, GETDATE()), 
@@ -334,10 +333,53 @@ VALUES (1, 'Lesson 1', 'Video', 'Topic 1'),
 	   (4, 'Lesson 4', 'Video', 'Topic 4'), 
 	   (5, 'Lesson 5', 'Video', 'Topic 5');
 
-GO
+
 INSERT INTO blog (thumbnail, author_id, title, category, flag, [status], content, created, modified)
-VALUES ('IDC1',1, 'KYS1', 'IDK1', 'T', 'IDK', 'Skill issue1', GETDATE(), GETDATE()),
-	('IDC2', 2, 'KYS2', 'IDK2', 'F', 'IDK', 'Skill issue2', GETDATE(), GETDATE()),
-	('IDC3', 3, 'KYS3', 'IDK3', 'T', 'IDK', 'Skill issue3', GETDATE(), GETDATE()),
-	('IDC4', 4, 'KYS4', 'IDK4', 'F', 'IDK', 'Skill issue4', GETDATE(), GETDATE()),
-	('IDC5', 5, 'KYS5', 'IDK5', 'T', 'IDK', 'Skill issue5', GETDATE(), GETDATE());
+VALUES ('https://assets.bizclikmedia.net/900/936356725b9d4aa5c02cec9f3dcb2b2c:f40875c49b56bb5c6c82f9bd80564ced/gettyimages-1399581170.webp',1, 'What’s next for the metaverse?', 'IT', 'T', 1, 'Partha Ghosh, Head of Consulting at Infosys, explores how businesses are still intrigued by the potential of the metaverse across multiple industries
+There has been much hype about metaverse in the last few years. So much so that metaverse technologies featured in Gartner’s 2022 Hype Cycle. To be sure, this was with a 10-year outlook.
+
+Admittedly, metaverse is still at a nascent stage. For one, metaverse doesn’t exist as a single entity like, say, the Internet. Today, metaverse comprises a series of multiple emerging technologies. This makes it difficult for businesses to identify the viability of investments and understand the challenges that come with adoption. Some believe the Metaverse bubble has burst; or at-least the excitement has diminished. Indeed, search traffic for the word ‘Metaverse’ has significantly decreased since last year. 
+
+Even with the ‘conditions apply’ caveat in its Hype Cycle, Gartner acknowledges that metaverse technologies provide innovative opportunities for businesses. According to the analyst, at least 25 per cent of people are predicted to spend at least an hour daily in a metaverse for either entertainment or work.
+
+Understanding the potential before embracing metaverse
+There are several current and potential use cases to seek inspiration from. While it appears that the metaverse lends itself to industries such as fashion, beauty, travel, or gaming, nothing could be further from the truth. The metaverse promises to bring together technologies to create a virtual environment that can help companies achieve efficiency and intelligence while working remotely. 
+
+The metaverse is already transforming traditional processes in manufacturing, and corporate/employee training. For instance, BMW has leveraged Nvidia, to replicate its factory building, assembly equipment and also employees. Physically devices or machines can be put under different stress conditions by creating their digital twins. This virtual metaverse makes it possible for companies to reduce planning times and improve flexibility and precision.
+
+Metaverse is all about immersive experiences powered by experiential technology. How we apply its capabilities is a play of our creativity and imagination. By 2024, there are predictions of over 34 million VR headsets installed around the world, potentially meaning that even public companies and government organizations might begin to implement VR headsets into their services, so you can expect to see them installed in numerous places.
+
+Gaming platforms such as Roblox offering metaverse elements are highly popular among gamers. Today, it enjoys 214.10 million monthly active users as of February 2023. Clarks, the footwear giant, has made its first entrance into the metaverse to offer an immersive experience, the Cicaverse experience that celebrates its unisex sneaker style, the Cica.
+
+Last summer, conjoined twins in Brazil were separated with the help of virtual reality. The digital map of the twins’ shared cranium made it possible for medical teams in Britain and Brazil to rehearse for the procedure from their own countries through VR before executing it on ground. Surgeries like these have paved the way for metaverse technologies to make a difference in healthcare.
+
+Beyond the corporate world, metaverse can also help farmers test out different harvesting strategies and monitor crop growth and yield. Using precision agriculture on a metaverse platform can potentially help farmers make better decisions on planting and harvesting.
+
+Similarly, real estate in the metaverse has been on the rise. According to a research report, the global demand for metaverse real estate is expected to reach $3,600 million in 2025, up from $358 million in 2020. Metaverse real estate has also ushered in a new era of ecommerce with fashion brands such as Nike and Gucci investing in virtual spaces.
+
+Creating an effective Metaverse strategy
+Metaverse strategy will vary from industry to industry. What works for manufacturing will not work for fashion, obviously. It is therefore crucial to find a partner who isn’t just technically sound but also brings in domain expertise. 
+
+On one hand, even governments are jumping onto the metaverse bandwagon but there is cautious optimism on the outlook and strategies.  
+
+The government of UAE has published a Dubai Metaverse Strategy to turn Dubai into one of the world’s top 10 metaverse economies as well as a global hub for the metaverse community. The European Commission is seeking feedback on its proposals to develop rules to manage virtual worlds and has called for more regulatory scrutiny of the metaverse, to mitigate the risk of having a small number of big players becoming future gatekeepers of virtual worlds.
+
+The calculated approach will not just help businesses address challenges such as cybersecurity in metaverse, but also bring in fresh perspective on what the business can do for its customers in the metaverse.
+
+When businesses partner with experienced enterprise integrators and software firms that themselves maintain partnerships with major metaverse, Web3, and hyperscaler services, they can gain confidence in the ability to develop and deploy dependable, secure, and scalable metaverse solutions.
+
+Partha Ghosh heads consulting across Europe for Digital Experience at Infosys and is based out of London. He has nearly three decades of experience across Online and Omni-channel Commerce, Retail, Banking domains and BPM and Enterprise Application Integration; delivering mission-critical business outcomes.  
+
+Partha is passionate about business and technology innovations and building high performance organizations and teams, having worked extensively in core product development and global consulting organizations. He has been a Business and Solution Advisor to multiple global System Integrators and retailers in the omni-channel commerce space. ', GETDATE(), GETDATE())
+;
+
+	select full_name from [user_profile] where user_id = 13;
+
+	
+USE master;
+GO
+ALTER DATABASE Quiz_Practice 
+SET SINGLE_USER 
+WITH ROLLBACK IMMEDIATE;
+GO
+DROP DATABASE Quiz_Practice;

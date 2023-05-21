@@ -20,17 +20,22 @@
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <h1>
-            <c:out value="${blog.thumbnail}"/>
-        </h1>
-        
-        <h2>
-            <c:out value="${blog.created}"/>
+        <img src = "${blog.thumbnail}" alt="Can't display image" class="center">        
+        <h2 class="left">
+            Updated date: <c:out value="${blog.modified}"/>
+            <br>
+            Category: <c:out value="${blog.category}"/>
+            <br>
+            Author: <c:out value="${author}"/>
         </h2>
-        <p class="format_post">
-            <h3>
+        <h1>
+            <br>
+            <c:out value="${blog.title}"/>
+        </h1>
+        <br>
+        
+        <h3><p class="content">
             <c:out value="${blog.content}"/>
-            </h3>
-        </p>
-    </body>
+        </p></h3>
+</body>
 </html>
