@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 
 /**
  *
@@ -55,7 +54,7 @@ public class UserAuthorizationFilter implements Filter {
         } else {
             // User does not have the necessary permission, redirect to an error page or
             // display an access denied message
-            resp.sendRedirect("accessDenied.jsp");
+            resp.sendRedirect("AccessDenied.jsp");
         }
     }
 
@@ -106,7 +105,7 @@ public class UserAuthorizationFilter implements Filter {
 
         if (requestedURL.contains("SimulationExams.jsp")) {
             switch (role) {
-                case "marketing":
+                case "customer":
                     return true;
                 case "admin":
                     return true;
@@ -130,11 +129,5 @@ public class UserAuthorizationFilter implements Filter {
 
     }
     
-    //convert date dd/mm/yyyy to yyyy-mm-dd
-    public static String convertDate(String date) {
-        String[] arr = date.split("/");
-        String newDate = arr[2] + "-" + arr[1] + "-" + arr[0];
-        return newDate;
-    }
 
 }
