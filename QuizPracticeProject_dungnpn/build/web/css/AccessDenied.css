@@ -1,0 +1,26 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 21, 2023, 2:06:07 AM
+    Author     : Acer
+*/
+body{
+    background-color: black;
+    color: white;
+    font-family: Montserrat-san-serifs;
+}
+
+h1 {
+    color: red;
+    font-weight: bold;
+}
+
+p{
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+

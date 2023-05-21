@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/dal/RoleDAO.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/controller/UserAuthorizationFilter.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/model/User.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/web/css/Home.css</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/controller/UserAuthorizationController.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/model/UserProfile.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/dal/DBContext.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/src/java/model/Role.java</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/web/css/AccessDenied.css</file>
+            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject_dungnpn/web/AccessDenied.jsp</file>
+        </group>
     </open-files>
 </project-private>
