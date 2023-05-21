@@ -334,3 +334,10 @@ VALUES (1, 'Lesson 1', 'Video', 'Topic 1'),
 	   (4, 'Lesson 4', 'Video', 'Topic 4'), 
 	   (5, 'Lesson 5', 'Video', 'Topic 5');
 
+GO
+INSERT INTO blog (thumbnail, author_id, title, category, flag, [status], content, created, modified)
+VALUES ('IDC1',1, 'KYS1', 'IDK1', 'T', 'IDK', 'Skill issue1', GETDATE(), GETDATE()),
+	('IDC2', 2, 'KYS2', 'IDK2', 'F', 'IDK', 'Skill issue2', GETDATE(), GETDATE()),
+	('IDC3', 3, 'KYS3', 'IDK3', 'T', 'IDK', 'Skill issue3', GETDATE(), GETDATE()),
+	('IDC4', 4, 'KYS4', 'IDK4', 'F', 'IDK', 'Skill issue4', GETDATE(), GETDATE()),
+	('IDC5', 5, 'KYS5', 'IDK5', 'T', 'IDK', 'Skill issue5', GETDATE(), GETDATE());

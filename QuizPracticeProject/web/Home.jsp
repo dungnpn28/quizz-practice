@@ -40,7 +40,7 @@
         <input type="radio" name="images" id="i3">
 
 
-        <!-- slide 1 -->
+<!--         slide 1 
         <div class="slide_img" id="one">
             <img src="http://vietnamese.cri.cn/mmsource/images/2017/06/02/d18f170450234ed1acd704f4944c4157.jpg" alt="">
             <label for="i3" class="previous"></label>
@@ -48,7 +48,7 @@
         </div>
 
 
-        <!-- slide 2 -->
+         slide 2 
         <div class="slide_img" id="two">
             <img src="https://www.sagen.com.vn/Data/Sites/1/Product/250/truong-dai-hoc-fpt-binh-dinh-h2..jpg" alt="">
             <label for="i1" class="previous"></label>
@@ -56,7 +56,7 @@
         </div>
 
 
-        <!-- slide 3 -->
+         slide 3 
         <div class="slide_img" id="three">
             <img src="https://uni.fpt.edu.vn/Data/Sites/1/media/1-anh/133136198_156947376226863_5664584930400544253_n.jpg" alt="">
             <label for="i2" class="previous"></label>
@@ -68,7 +68,7 @@
             <label class="dots" id="dot2" for="i2"></label>
             <label class="dots" id="dot3" for="i3"></label>
 
-        </div>
+        </div>-->
 
 
 
@@ -100,6 +100,12 @@
         </div>
     </div>
 
+    <div class="overlay" id="divOne">
+        <div class="wrapper">
+            <%@include file="Register.jsp" %>
+        </div>
+    </div>
+    
     <%@include file="components/footer.jsp" %>
 </body>
 </html>

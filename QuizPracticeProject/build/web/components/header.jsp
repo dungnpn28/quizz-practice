@@ -17,7 +17,7 @@
                     <li><a href="blogslist.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="signIn.jsp">Login</a></li>
-                    <li><a href="">Register</a></li>
+                    <li><a href="#divOne">Register</a></li>
                 </ul>
             </div>
         </div>

@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="form-group">
+            <form action="blogdetail" method="post">
+                  <label for="blog">Blog </label>
+                  <input type="text" id="id" name="id" value=""/>
+                <p><input type="submit" value="Read Blog">
+            </form>  
+        </div>   
     </body>
 </html>
