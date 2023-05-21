@@ -103,6 +103,11 @@
     
 }
 
+/*.boxContent{
+    width: 50px;
+    text-align: center;
+}*/
+
 .thumbnail_container{
     background-color: #ccc;
     margin: 0 auto;
@@ -193,18 +198,4 @@
     margin-left: 20px;
 }
 
-/*.footer {
-    color: aliceblue;
-    background-color: #333;
-}
-
-.footer_detail {
-display: flex;
-margin-left: 25%;
-}
-
-.footer_detail div {
-width: 50%;
-margin: 25px;
-}*/
 
