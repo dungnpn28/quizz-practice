@@ -8,6 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/Login.css">
@@ -15,7 +18,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <section class="h-100 gradient-form" style="background-color: #eee">
+        <section class="h-100 gradient-form">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-xl-10">
@@ -23,7 +26,7 @@
                             <div class="row g-0">
                                 <div class="col-lg-6">
                                     <div class="card-body p-md-5 mx-md-4">
-
+                                        <a href="#" class="close">&times;</a>
                                         <div class="text-center">
                                             <img src="img/2.png"
                                                  style="width: 185px;" alt="logo">
@@ -35,21 +38,21 @@
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="form2Example11">Username</label>
-                                                <input type="email" id="form2Example11" class="form-control"
+                                                <input type="email" id="form2Example11" class="form-control" name="account"
                                                        placeholder="Email address" />
                                         
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="form2Example22">Password</label>
-                                                <input type="password" id="form2Example22" class="form-control" placeholder="Password" />
+                                                <input type="password" id="form2Example22" class="form-control" name="password" placeholder="Password" />
                                                 
                                             </div>
 
                                             <div class="text-center pt-1 mb-5 pb-1">
-                                                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
+                                                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                                                     in</button>
-                                                <a class="text-muted" href="#!">Forgot password?</a>
+                                                <a class="text-muted" href="Emailresetpassword.jsp">Forgot password?</a>
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
