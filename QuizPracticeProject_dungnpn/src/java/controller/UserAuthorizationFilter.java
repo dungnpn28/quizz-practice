@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 
 /**
  *
@@ -44,6 +45,9 @@ public class UserAuthorizationFilter implements Filter {
         // Get the requested resource URL
         String requestedURL = req.getRequestURI();
 
+        // Determine the required permissions for the resource based on its URL
+        // String requiredPermission = determineRequiredPermission(requestedURL);
+
         // Check if the user's role has the necessary permission
         if (hasPermission(role, requestedURL)) {
             // User has the necessary permission, allow the request to proceed
@@ -51,7 +55,7 @@ public class UserAuthorizationFilter implements Filter {
         } else {
             // User does not have the necessary permission, redirect to an error page or
             // display an access denied message
-            resp.sendRedirect("AccessDenied.jsp");
+            resp.sendRedirect("accessDenied.jsp");
         }
     }
 
@@ -60,91 +64,14 @@ public class UserAuthorizationFilter implements Filter {
             switch (role) {
                 case "guest":
                     return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
-                case "marketing":
-                    return true;
-                case "sale":
-                    return true;
-                case "expert":
-                    return true;
                 default:
-                    return false;
+                    return true;
             }
         }
 
         if (requestedURL.contains("GuestHome.jsp")) {
             switch (role) {
                 case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
-                case "marketing":
-                    return true;
-                case "sale":
-                    return true;
-                case "expert":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("Login.jsp")) {
-            switch (role) {
-                case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
-                case "marketing":
-                    return true;
-                case "sale":
-                    return true;
-                case "expert":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("Register.jsp")) {
-            switch (role) {
-                case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
-                case "marketing":
-                    return true;
-                case "sale":
-                    return true;
-                case "expert":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("Logout.jsp")) {
-            switch (role) {
-                case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
-                case "marketing":
-                    return true;
-                case "sale":
-                    return true;
-                case "expert":
                     return true;
                 default:
                     return false;
@@ -152,44 +79,62 @@ public class UserAuthorizationFilter implements Filter {
         }
 
         if (requestedURL.contains("AccessDenied.jsp")) {
+            return true;
+        }
+
+        if (requestedURL.contains("BlogList.jsp")) {
             switch (role) {
-                case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
                 case "marketing":
                     return true;
-                case "sale":
-                    return true;
-                case "expert":
+                case "admin":
                     return true;
                 default:
                     return false;
             }
         }
 
-        if (requestedURL.contains("ProductDetail.jsp")) {
+        if (requestedURL.contains("BlogDetails.jsp")) {
             switch (role) {
-                case "guest":
-                    return false;
-                case "customer":
-                    return true;
-                case "admin":
-                    return true;
                 case "marketing":
                     return true;
-                case "sale":
-                    return true;
-                case "expert":
+                case "admin":
                     return true;
                 default:
                     return false;
             }
         }
-        return true;
 
+        if (requestedURL.contains("SimulationExams.jsp")) {
+            switch (role) {
+                case "marketing":
+                    return true;
+                case "admin":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        if (requestedURL.contains("MyRegistrations.jsp")) {
+            switch (role) {
+                case "marketing":
+                    return true;
+                case "admin":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        return false;
+
+    }
+    
+    //convert date dd/mm/yyyy to yyyy-mm-dd
+    public static String convertDate(String date) {
+        String[] arr = date.split("/");
+        String newDate = arr[2] + "-" + arr[1] + "-" + arr[0];
+        return newDate;
     }
 
 }
