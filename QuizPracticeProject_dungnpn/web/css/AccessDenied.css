@@ -29,10 +29,6 @@ h1 {
     font-size: 16px;
     align-self: center;
 }
-
-.button:hover {
-    opacity: 60%;
-}
 .but {
     display: flex;
     justify-content: center;
