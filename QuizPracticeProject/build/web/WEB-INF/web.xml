@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
+=======
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"> 
+    <servlet>
+        <servlet-name>LogInController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailResetPasswordController</servlet-name>
+        <servlet-class>controller.EmailResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>controller.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+     <servlet-name>ChangePasswordController</servlet-name>
+>>>>>>> parent of ab65327 (del)
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
@@ -17,6 +35,21 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet-mapping>
+<<<<<<< HEAD
+=======
+        <servlet-name>LogInController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailResetPasswordController</servlet-name>
+        <url-pattern>/emailresetpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+>>>>>>> parent of ab65327 (del)
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
