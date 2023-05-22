@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.RoleDAO;
 import dal.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -17,23 +18,23 @@ import model.User;
  *
  * @author Dell
  */
-public class ResetPasswordController extends HttpServlet {
+public class UserAuthorizationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession sessions = req.getSession();
-        String password = req.getParameter("password");
-        User usertoreset = (User) sessions.getAttribute("usertoreset");
-        UserDAO p = new UserDAO();
-        
-        p.updatePassword(usertoreset.getAccount(), password);
-        sessions.removeAttribute("usertoreset");
-        req.getRequestDispatcher("Home.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        User u = (User) session.getAttribute("user");
+        RoleDAO r = new RoleDAO();
+        if (r.getRoleNameByUserId(u.getId()) != null) {
+            req.getRequestDispatcher("GuestHome.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("Home.jsp").forward(req, resp);
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.getRequestDispatcher("ResetPassword.jsp").forward(req, resp);
+        resp.sendRedirect("Login.jsp");
     }
-    
+
 }

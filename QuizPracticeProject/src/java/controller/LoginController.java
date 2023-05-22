@@ -4,8 +4,7 @@
  */
 package controller;
 
-<<<<<<< HEAD
-=======
+
 import dal.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -15,15 +14,12 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import model.User;
 
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
+
 /**
  *
  * @author Acer
  */
-<<<<<<< HEAD
-public class LoginController {
-    
-=======
+
 public class LoginController extends HttpServlet {
 
     @Override
@@ -51,5 +47,4 @@ public class LoginController extends HttpServlet {
         super.doGet(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
 }

@@ -3,20 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-import java.util.ArrayList;
-import java.util.List;
-<<<<<<< HEAD
-import model.User;
-/**
- *
- * @author LENOVO
- */
-public class UserDAO extends MyDAO{
-=======
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import model.User;
 
 /**
@@ -25,7 +11,6 @@ import model.User;
  */
 public class UserDAO extends MyDAO {
 
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     public User getUsersByID(int xId) {
         xSql = "SELECT *\n"
                 + "  FROM [dbo].[user]\n"
@@ -66,8 +51,6 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
 
     public User checkAccount(String account) {
         try {
@@ -125,5 +108,4 @@ public class UserDAO extends MyDAO {
         }
     }
 
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
 }
