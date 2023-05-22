@@ -20,8 +20,8 @@ public class User {
         this.password = password;
         this.role_id = role_id;
     }
-
-    public User() {
+    
+     public User() {
     }
 
     public int getId() {
@@ -55,5 +55,4 @@ public class User {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
-    
 }
