@@ -1,6 +1,11 @@
 <%-- 
+<<<<<<< HEAD
+    Document   : Register
+    Created on : May 22, 2023, 8:16:17 AM
+=======
     Document   : Login
     Created on : May 22, 2023, 8:16:07 AM
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     Author     : Acer
 --%>
 
@@ -8,6 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         </style>
@@ -18,6 +24,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>Hello World!</h1>
         <section class="h-100 gradient-form">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">

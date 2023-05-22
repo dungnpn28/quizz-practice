@@ -1,6 +1,11 @@
 <%-- 
+<<<<<<< HEAD
+    Document   : BlogDetails
+    Created on : May 22, 2023, 8:19:23 AM
+=======
     Document   : Successful
     Created on : May 22, 2023, 8:17:04 AM
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     Author     : Acer
 --%>
 
@@ -51,6 +56,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+
+        <h1>Hello World!</h1>
         <h1>THE REPASSWORD LINK HAS BEEN SENDED TO YOUR EMAIL  </h1>
         <a href="Home.jsp"> HOME</a>
     </body>
