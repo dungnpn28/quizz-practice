@@ -29,7 +29,7 @@ public class EmailResetPasswordController extends HttpServlet {
         UserDAO p = new UserDAO();
         if(p.checkAccount(to) == null){
             req.setAttribute("mess", "This account does not exist");
-            req.getRequestDispatcher("Emailresetpassword.jsp").forward(req, resp);
+            req.getRequestDispatcher("EmailResetPassword.jsp").forward(req, resp);
         }else{
         
          User user = p.checkAccount(to);
