@@ -14,34 +14,17 @@ import model.User;
  *
  * @author Dell
  */
-public class UserDAO {
+public class UserDAO extends MyDAO {
 
-    Connection cnn = null;
-    Statement stm =null;
-    ResultSet rs =null;
-    PreparedStatement pstm= null;
     
-    private void connect() {
-        try {
-            cnn = (new DBContext()).connection;
-            if (cnn != null) {
-                System.out.println("Connect success");
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    public UserDAO() {
-        connect();
-    }
     
    public User checkAccount(String account){
         try {
             String strSelect = "select * from [user] \n" +
 "                     where account = ?";
-            pstm = cnn.prepareStatement(strSelect);
-            pstm.setString(1, account);        
-            rs = pstm.executeQuery();
+            ps = con.prepareStatement(strSelect);
+            ps.setString(1, account);        
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return new User(rs.getInt(1), 
                         rs.getString(2),
@@ -59,10 +42,10 @@ public class UserDAO {
             String strSelect = "select * from [user] \n" +
 "                     where account = ? and \n" +
 "                     [password] = ?";
-            pstm = cnn.prepareStatement(strSelect);
-            pstm.setString(1, account);
-            pstm.setString(2, password);
-            rs = pstm.executeQuery();
+            ps = con.prepareStatement(strSelect);
+            ps.setString(1, account);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return new User(rs.getInt(1), 
                         rs.getString(2),
@@ -80,12 +63,12 @@ public class UserDAO {
    public void updatePassword(String account, String password){
         try {
             String strAdd = "update [user] set [password] = ? where account = ?";
-            pstm = cnn.prepareStatement(strAdd);
-            pstm.setString(1, password);
-            pstm.setString(2, account);
+            ps = con.prepareStatement(strAdd);
+            ps.setString(1, password);
+            ps.setString(2, account);
            
 
-            pstm.executeUpdate();
+            ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("updatePassword: " + e.getMessage());
         }
