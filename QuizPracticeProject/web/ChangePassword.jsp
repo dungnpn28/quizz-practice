@@ -43,5 +43,7 @@
             </div>
         </div>
     </body>
+            <%@include file="components/Footer.jsp" %>
+
     <script src="js/PopUp.js" type="text/javascript"></script>
 </html>
