@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import model.User;
 
@@ -25,7 +26,8 @@ public class LoginController extends HttpServlet {
             String password = req.getParameter("password");
             UserDAO p = new UserDAO();
             User a = p.login(account, password);
-
+             HttpSession sessions = req.getSession();
+             sessions.setAttribute("user", a);
             if (a == null) {
                 req.setAttribute("mess", "Wrong user or pass");
                 req.getRequestDispatcher("Login.jsp").forward(req, resp);
