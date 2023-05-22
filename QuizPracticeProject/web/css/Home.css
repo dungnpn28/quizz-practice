@@ -1,0 +1,148 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 22, 2023, 8:29:26 AM
+    Author     : Acer
+*/
+
+.header_content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_logo img {
+    width: 20%;
+}
+.header_menu ul{
+    display: flex;  
+}
+.header_menu ul li{
+    margin: 12px;
+    list-style-type: none;
+    display: flex;
+}
+.header_menu ul li a {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(52, 178, 201);
+    font-weight: bold;
+    padding: 10px;
+}
+
+.slider{
+    margin: 0 auto;
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 40%;
+    background: #333;
+    border: solid 10px;
+    border-color: #333;
+    border-radius: 5px;
+}
+
+.slide_img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.slide_img img{
+    width: 100%;
+    height: 100%;
+}
+
+#i1, #i2, #i3{
+    display: none;
+}
+
+.previous, .next{
+    width: 12%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    z-index: 99;
+}
+
+.previous{
+    left: 0;
+}
+
+.next{
+    right: 0;
+}
+
+.nav{
+    width: 100%;
+    height: 11px;
+    bottom: 12%;
+    position: absolute;
+    text-align: center;
+    z-index: 99;
+}
+
+.dots{
+    top: -5px;
+    width: 18px;
+    height: 18px;
+    margin: 0 4px;
+    position: relative;
+    border-radius: 50%;
+    display: inline-block;
+    background: rgba(0, 0, 0, .6);
+}
+.slide_img{
+    z-index: -1;
+}
+
+#i1:checked ~ #one,
+#i2:checked ~ #two,
+#i3:checked ~ #three{
+    z-index: 9;
+}
+
+#i1:checked ~ .nav #dot1,
+#i2:checked ~ .nav #dot2,
+#i3:checked ~ .nav #dot3{
+    background: #fff;
+}
+
+.footer {
+    color: aliceblue;
+    background-color: #08A2C7;
+}
+
+.footer_detail {
+display: flex;
+margin-left: 25%;
+}
+
+.footer_detail div {
+width: 50%;
+margin: 25px;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom:0;
+    left:0;
+    right:0;
+    background: rgba(0,0,0,0.8);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target{
+    visibility: visible;
+    opacity: 1;
+    }
+
+
+
+
