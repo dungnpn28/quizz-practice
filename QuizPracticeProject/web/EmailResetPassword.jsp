@@ -1,4 +1,6 @@
 <%-- 
+    Document   : PracticeList
+    Created on : May 22, 2023, 8:18:09 AM
     Document   : EmailResetPassword
     Created on : May 22, 2023, 8:16:56 AM
     Author     : Acer
@@ -8,6 +10,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         </style>
