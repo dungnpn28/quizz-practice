@@ -9,7 +9,10 @@
 <html>
     <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
             body{
@@ -49,16 +52,24 @@
                 margin: 0;
             }
         </style>
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <h1>Hello World!</h1>
 =======
         <h1>THE REPASSWORD LINK HAS BEEN SENDED TO YOUR EMAIL  </h1>
         <a href="Home.jsp"> HOME</a>
 >>>>>>> parent of ab65327 (del)
+=======
+        <h1>THE REPASSWORD LINK HAS BEEN SENDED TO YOUR EMAIL  </h1>
+        <a href="Home.jsp"> HOME</a>
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     </body>
 </html>

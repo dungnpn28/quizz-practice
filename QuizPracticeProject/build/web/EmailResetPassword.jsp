@@ -9,12 +9,15 @@
 <html>
     <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         </style>
@@ -68,6 +71,9 @@
         <script>
             document.getElementById("submitButton").disabled = true;
         </script>
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     </body>
 </html>

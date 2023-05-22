@@ -5,12 +5,27 @@
 package dal;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import model.User;
 /**
  *
  * @author LENOVO
  */
 public class UserDAO extends MyDAO{
+=======
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import model.User;
+
+/**
+ *
+ * @author Dell
+ */
+public class UserDAO extends MyDAO {
+
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     public User getUsersByID(int xId) {
         xSql = "SELECT *\n"
                 + "  FROM [dbo].[user]\n"
@@ -51,4 +66,64 @@ public class UserDAO extends MyDAO{
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
+=======
+
+    public User checkAccount(String account) {
+        try {
+            String strSelect = "select * from [user] \n"
+                    + "                     where account = ?";
+            ps = con.prepareStatement(strSelect);
+            ps.setString(1, account);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+
+            }
+        } catch (Exception e) {
+            System.out.println("checkAccount: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public User login(String account, String password) {
+        try {
+            String strSelect = "select * from [user] \n"
+                    + "                     where account = ? and \n"
+                    + "                     [password] = ?";
+            ps = con.prepareStatement(strSelect);
+            ps.setString(1, account);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+
+            }
+        } catch (Exception e) {
+            System.out.println("login: " + e.getMessage());
+        }
+        return null;
+
+    }
+
+    public void updatePassword(String account, String password) {
+        try {
+            String strAdd = "update [user] set [password] = ? where account = ?";
+            ps = con.prepareStatement(strAdd);
+            ps.setString(1, password);
+            ps.setString(2, account);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updatePassword: " + e.getMessage());
+        }
+    }
+
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
 }

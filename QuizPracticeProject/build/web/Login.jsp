@@ -9,21 +9,30 @@
 <html>
     <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/Login.css">
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <h1>Hello World!</h1>
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <section class="h-100 gradient-form">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -84,6 +93,9 @@
             </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     </body>
 </html>

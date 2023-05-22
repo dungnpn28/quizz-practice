@@ -9,19 +9,28 @@
 <html>
     <head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/Home.css" type="text/css"/>
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <h1>Hello World!</h1>
 =======
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
         <%@include file="components/Header.jsp" %>
 
 
@@ -99,6 +108,9 @@
             </div>
         </div>
         <%@include file="components/Footer.jsp" %>
+<<<<<<< HEAD
 >>>>>>> parent of ab65327 (del)
+=======
+>>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     </body>
 </html>
