@@ -12,10 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.ExamDAO;
 import dal.SubjectDAO;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Exam;
 import model.Subject;
+import model.User;
 
 /**
  *
@@ -52,15 +54,16 @@ public class SimulationExamController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
-
+        HttpSession session = request.getSession();
+        User x = (User) session.getAttribute("user");
         ExamDAO eDAO = new ExamDAO();
         SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
         subjectList = sDAO.getSubjects();
         List<Exam> examList = new ArrayList<>();
-        examList = eDAO.getExamByUserID(1);
+        examList = eDAO.getExamByUserID(x.getId());
         if (examList.isEmpty() || examList == null) {
-            out.print("deo co list");
+            out.print("Khong co list");
             request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
         } else {
 
