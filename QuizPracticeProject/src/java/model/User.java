@@ -9,6 +9,7 @@ package model;
  * @author Acer
  */
 public class User {
+
     private int id;
     private String account;
     private String password;
@@ -20,8 +21,10 @@ public class User {
         this.password = password;
         this.role_id = role_id;
     }
-    
-     public User() {
+
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
     }
 
     public int getId() {
