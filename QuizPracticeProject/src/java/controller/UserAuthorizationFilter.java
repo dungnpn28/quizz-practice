@@ -30,7 +30,7 @@ public class UserAuthorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("testinggg");
+
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("ChangePassword.jsp") {
+        if (requestedURL.contains("ChangePassword.jsp")) {
             switch (role) {
                 case "Guest":
                     return true;
@@ -67,6 +67,68 @@ public class UserAuthorizationFilter implements Filter {
                 
             }
         }
+        
+        if (requestedURL.contains("PracticeList.jsp")) {
+            switch (role) {
+                case "Customer":
+                    return true;
+                default:
+                    return false;               
+            }
+        }
+        
+        if (requestedURL.contains("ResetPassword.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return false;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        if (requestedURL.contains("SimulationExam.jsp")) {
+            switch (role) {
+                case "Customer":
+                    return true;
+                default:
+                    return false;            
+            }
+        }
+        
+        if (requestedURL.contains("Successful.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return false;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        if (requestedURL.contains("Successful.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return false;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        if (requestedURL.contains("Footer.jsp")) {
+            return false;
+        }
+        
+        if (requestedURL.contains("Header.jsp")) {
+            return false;
+        }
+        
+        if (requestedURL.contains("CusHeader.jsp")) {
+            return false;
+        }
+        
+        
         return true;
     }
 
