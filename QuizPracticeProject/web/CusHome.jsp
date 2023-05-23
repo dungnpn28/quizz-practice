@@ -1,25 +1,19 @@
-<%-- 
-    Document   : Home.jsp
-    Created on : May 22, 2023, 8:13:13 AM
-    Author     : Acer
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <div>
+    <div>
         <link rel="stylesheet" href="css/Home.css" type="text/css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>QuizPractice</title>
     </div>
-    </head>
-    <%@include file="components/Header.jsp"%>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <body>
-        <!-- SLIDER -->
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+    <%@include file="components/CusHeader.jsp" %>
+
+    <!-- SLIDER -->
     <div class="slider">
         <input type="radio" name="images" id="i1" checked>
         <input type="radio" name="images" id="i2">
@@ -71,7 +65,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="" width="100" height="100%" alt="Ảnh">
+                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -81,7 +75,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="" width="100" height="100%" alt="Ảnh">
+                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -91,7 +85,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="" width="100" height="100%" alt="Ảnh">
+                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -101,7 +95,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="" width="100" height="100%" alt="Ảnh">
+                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -111,7 +105,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="" width="100" height="100%" alt="Ảnh">
+                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -124,12 +118,12 @@
         <div class="thumbnail_container">
             <div class="tn1">
                 Title 
-                <iframe width="300px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
             </div>
 
             <div class="tn2">
                 Title 
-                <iframe width="300px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
             </div>
             <div class="contact">
                 FACEBOOK: <a href="">Links</a><br>
@@ -149,7 +143,7 @@
 
             <div class="content">
                 <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
                     <p class="title">
                         Description
                     </p>
@@ -165,7 +159,7 @@
 
             <div class="content">
                 <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
                     <p class="title">
                         Description
                     </p>
@@ -173,7 +167,6 @@
             </div>
         </div>
     </div>
-        
-    </body>
-    <%@include file="components/Footer.jsp" %>
+</body>
+<%@include file="components/Footer.jsp" %>x
 </html>

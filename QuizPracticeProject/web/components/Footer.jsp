@@ -3,7 +3,7 @@
     Created on : May 22, 2023, 9:50:00 AM
     Author     : LENOVO
 --%>
-
+<link rel="stylesheet" href="css/Footer.css"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <footer>
     <div class="footer">

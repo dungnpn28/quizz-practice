@@ -64,23 +64,36 @@ public class ChangePasswordController extends HttpServlet {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        User x = (User)session.getAttribute("user");
+        User x = (User) session.getAttribute("user");
         String oldPassword = request.getParameter("oldPass");
         String password1 = request.getParameter("pass1");
         String password2 = request.getParameter("pass2");
+        String errorMessage = "";
         UserDAO u = new UserDAO();
         if (!oldPassword.equals(x.getPassword())) {
-            out.print("Mat khau nhap sai");
-
-//            response.sendRedirect("ChangePassword.jsp");
-            request.getRequestDispatcher("ChangePassword.jsp").include(request, response);
+            errorMessage = "Please re-enter old password";
+            sendResponse(response, errorMessage);
+            return;
+        }else if (!password1.matches("^(?=.*[A-Z!@#$%^&*(),.?\":{}|<>]).{6,}$")) {
+            errorMessage = "Please re-enter new password, it should be at least 6 characters long, contain at least one special character or one uppercase letter";
+            sendResponse(response, errorMessage);
+            return;
         } else if (!password1.equals(password2)) {
-            out.print("password does not match");
-        } else {
-
-            u.updatePassword(x, password2);
-            response.sendRedirect("Home.jsp");
+            errorMessage = "New password and new password again does not match";
+            sendResponse(response, errorMessage);
+            return;
         }
+        u.updatePassword(x, password2);
+        sendResponse(response, "");
+    }
+
+    private void sendResponse(HttpServletResponse response, String errorMessage) throws IOException {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(errorMessage);
+        out.flush();
     }
 
     /**
