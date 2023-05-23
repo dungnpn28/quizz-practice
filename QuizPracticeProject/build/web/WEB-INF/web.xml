@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"> 
     <servlet>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>ChangePasswordController</servlet-name>
-=======
-=======
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"> 
-    <servlet>
->>>>>>> 8cb8171a1b48533543d57fd04892d77dd4f82fa0
         <servlet-name>LogInController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
@@ -27,13 +14,6 @@
     </servlet>
     <servlet>
      <servlet-name>ChangePasswordController</servlet-name>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> parent of ab65327 (del)
-=======
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
->>>>>>> 8cb8171a1b48533543d57fd04892d77dd4f82fa0
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
@@ -49,14 +29,6 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet-mapping>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
->>>>>>> 8cb8171a1b48533543d57fd04892d77dd4f82fa0
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
@@ -69,13 +41,6 @@
         <url-pattern>/resetpassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> parent of ab65327 (del)
-=======
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
->>>>>>> 8cb8171a1b48533543d57fd04892d77dd4f82fa0
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
