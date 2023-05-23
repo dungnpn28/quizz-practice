@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"> 
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LogInController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
@@ -13,7 +13,7 @@
         <servlet-class>controller.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
-     <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
@@ -27,6 +27,10 @@
     <servlet>
         <servlet-name>SimulationExamController</servlet-name>
         <servlet-class>controller.SimulationExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-class>controller.UserAuthorizationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>SimulationExamController</servlet-name>
         <url-pattern>/simulationExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAuthorization</servlet-name>
+        <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
