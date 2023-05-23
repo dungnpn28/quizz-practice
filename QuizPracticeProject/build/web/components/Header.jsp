@@ -21,7 +21,7 @@
             <div class="header_menu">
                 
                 <ul>                
-                    <li><a href="Blogslist.jsp">Post</a></li>
+                    <li><a href="BlogList.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
