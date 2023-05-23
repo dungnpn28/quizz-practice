@@ -16,7 +16,7 @@
     <body>
         <div class="header_content">
             <div class="header_logo">
-                <a href="Home.jsp"><img src="https://img.freepik.com/premium-vector/quiz-logo-poll-questionnaire-icon-symbol_101884-1076.jpg?w=740"></a>
+                <a href="Home.jsp"><img src="img\2.png"></a>
             </div>
 
             <div class="header_menu">
