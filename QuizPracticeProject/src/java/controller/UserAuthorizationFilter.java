@@ -40,7 +40,13 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         RoleDAO r = new RoleDAO();
         User u = (User) session.getAttribute("user");
-        String role = r.getRoleNameByUserId(u.getId());
+        String role = "";
+        if (u != null) {
+            role = r.getRoleNameByUserId(u.getId());
+        }
+        if (role == null) {
+            role = "Guest";
+        }
         String requestedURL = req.getRequestURI();
         if (hasPermission(role, requestedURL)) {
             fc.doFilter(req, resp);
@@ -50,80 +56,80 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("Home.jsp")) {
+        if (requestedURL.contains("ChangePassword.jsp")) {
             switch (role) {
-                case "guest":
+                case "Guest":
+                    return true;
+                case "user":
                     return false;
                 default:
-                    return true;
+                    return false;
+                
             }
         }
-
-        if (requestedURL.contains("GuestHome.jsp")) {
+        
+        if (requestedURL.contains("PracticeList.jsp")) {
             switch (role) {
-                case "guest":
+                case "Customer":
                     return true;
                 default:
-                    return false;
+                    return false;               
             }
         }
-
-        if (requestedURL.contains("AccessDenied.jsp")) {
-            return true;
-        }
-
-        if (requestedURL.contains("BlogList.jsp")) {
+        
+        if (requestedURL.contains("ResetPassword.jsp")) {
             switch (role) {
-                case "marketing":
-                    return true;
-                case "admin":
-                    return true;
-                default:
+                case "Guest":
                     return false;
+                default:
+                    return true;
+                
             }
         }
-
-        if (requestedURL.contains("BlogDetails.jsp")) {
+        
+        if (requestedURL.contains("SimulationExam.jsp")) {
             switch (role) {
-                case "marketing":
-                    return true;
-                case "admin":
+                case "Customer":
                     return true;
                 default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("SimulationExams.jsp")) {
-            switch (role) {
-                case "customer":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("EmailResetPassword.jsp")) {
-            switch (role) {
-                case "guest":
-                    return false;
-                default:
-                    return true;
+                    return false;            
             }
         }
         
         if (requestedURL.contains("Successful.jsp")) {
             switch (role) {
-                case "customer":
-                    return true;
-                default:
+                case "Guest":
                     return false;
+                default:
+                    return true;
+                
             }
         }
-
-        return false;
-
+        
+        if (requestedURL.contains("Successful.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return false;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        if (requestedURL.contains("Footer.jsp")) {
+            return false;
+        }
+        
+        if (requestedURL.contains("Header.jsp")) {
+            return false;
+        }
+        
+        if (requestedURL.contains("CusHeader.jsp")) {
+            return false;
+        }
+        
+        
+        return true;
     }
-    
 
 }

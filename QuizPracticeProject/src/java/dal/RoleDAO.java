@@ -11,7 +11,7 @@ package dal;
 public class RoleDAO extends MyDAO{
     
     public String getRoleNameByUserId(int id) {
-        String roleName = "";
+        String roleName = null;
         String statement = "SELECT r.name FROM [User] u JOIN [Role] r ON u.role_id = r.id WHERE u.id = ?";
         try {
             ps = con.prepareStatement(statement);
