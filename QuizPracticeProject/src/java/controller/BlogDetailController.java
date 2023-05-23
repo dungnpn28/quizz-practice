@@ -5,7 +5,7 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-import dao.BlogDAO;
+import dal.BlogDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ import model.Blog;
  *
  * @author ACER
  */
-@WebServlet(urlPatterns = {"/blogdetail"})
+@WebServlet(name = "BlogDetailController", urlPatterns = {"/blogDetail"})
 public class BlogDetailController extends HttpServlet {
 
     /**

@@ -27,35 +27,35 @@
                         <div class="card rounded-3 text-black">
                             <div class="row g-0">
                                 <div class="col-lg-6">
-                                    <div class="card-body p-md-5 mx-md-4">
+                                    <div class="card-body mx-md-4">
                                         <a href="#" class="close">&times;</a>
                                         <div class="text-center">
                                             <img src="img/2.png"
-                                                 style="width: 185px;" alt="logo">
+                                                 style="width: 150px;" alt="logo">
 
                                         </div>
 
-                                        <form action="register" method="post">
+                                        <form action="register" method="post" >
 
 
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="Name">Full name: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="Name">Full name: </label>
                                                 <input type="text" id="Name" class="form-control"
                                                        name="Name" value="" required = "required"
                                                        placeholder="Full name" />
 
                                             </div>
 
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="Email">Email: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="Email">Email: </label>
                                                 <input type="email" id="Email" class="form-control"
                                                        name="Email" value="" required = "required"
                                                        placeholder="Email address" />
 
                                             </div>
 
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="Mobile">Mobile: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="Mobile">Mobile: </label>
                                                 <input type="tel" id="Mobile" class="form-control"
                                                        name="Mobile" value="" required = "required"
                                                        pattern="0[0-9]{9}"
@@ -63,32 +63,44 @@
 
                                             </div>
 
-                                            <div class="form-outline mb-4">
-                                                <label for="Gender">Gender: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="Gender">Gender: </label>
 
                                                 <input type="radio" name="Gender" id="Gender" 
-                                                       value="male" required = "required"/>Male
+                                                       value=1 required = "required"/>Male
                                                 <input type="radio" name="Gender" id="Gender" 
-                                                       value="female" required = "required"/>Female
+                                                       value=0 required = "required"/>Female
                                             </div>
 
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="Pass">Password: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="dob">Date of birth: </label>
+                                                <input type="date" id="dob" class="form-control"
+                                                       name="dob" value="" required = "required"
+                                                       placeholder="dob" />
+
+                                            </div>
+                                            
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="Pass">Password: </label>
                                                 <input type="password" id="Pass" class="form-control"
                                                        name="Pass" value="" required = "required"
                                                        placeholder="Password" />
 
                                             </div>
 
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="rePass">Retype Password: </label>
+                                            <div class="form-outline mb-3">
+                                                <label class="inputLabel" for="rePass">Retype Password: </label>
                                                 <input type="password" id="rePass" class="form-control"
                                                        name="rePass" value="" required = "required"
                                                        placeholder="Retype Password" />
 
                                             </div>
 
-                                            <p><input type="submit" value="register">
+                                            <div class="text-center pt-1 mb-3 pb-1">
+                                                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
+                                                Register</button>
+                                            </div>
+
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Already have an account?</p>

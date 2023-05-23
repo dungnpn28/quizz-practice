@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package dal;
 
 import dal.DBContext;
+import dal.MyDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,18 +18,13 @@ import model.User;
  *
  * @author ACER
  */
-public class BlogDAO {
-
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+public class BlogDAO extends MyDAO{
 
     public Blog getBlogDetail(String id) {
-        String query = "select * from [blog]\n"
+        xSql = "select * from [blog]\n"
                 + "where id = ?";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -51,10 +47,9 @@ public class BlogDAO {
     
     public List<Blog> getBlogList() {
         List<Blog> list = new ArrayList<>();
-        String query = "select * from [blog]";
+        xSql = "select * from [blog]";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Blog(rs.getInt(1),//id
@@ -75,11 +70,10 @@ public class BlogDAO {
     }
 
     public String getAuthor(int id) {
-        String query = "select full_name from [user_profile]\n"
+        xSql = "select full_name from [user_profile]\n"
                 + "where user_id = ?";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {

@@ -383,3 +383,7 @@ SET SINGLE_USER
 WITH ROLLBACK IMMEDIATE;
 GO
 DROP DATABASE Quiz_Practice;
+
+select id from [user] where account = 'argentorium@gmail.com'
+
+insert into [user_profile] values(15,NULL,'Thinh','1','1999-10-10','0764871490',GETDATE(),GETDATE());

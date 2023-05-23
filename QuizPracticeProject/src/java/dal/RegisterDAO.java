@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package dal;
 import dal.DBContext;
+import dal.MyDAO;
 import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,17 +16,14 @@ import java.util.Date;
  *
  * @author ACER
  */
-public class RegisterDAO {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+public class RegisterDAO extends MyDAO{
     
     public void registerUser(String email, String pass) throws SQLException {
-        String query = "insert into [user]\n"
+        xSql = "insert into [user]\n"
                 + "values(?,?,2)";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            con = new DBContext().connection;
+            ps = con.prepareStatement(xSql);
             ps.setString(1, email);
             ps.setString(2, pass);
             ps.executeUpdate();
@@ -34,11 +32,10 @@ public class RegisterDAO {
     }
     
     public User checkUserExist(String email){
-        String query = "select * from [user]\n"
+        xSql = "select * from [user]\n"
                 + "where account = ?";
         try{
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -53,11 +50,10 @@ public class RegisterDAO {
     }
     
     public int getID(String email) {
-        String query = "select id from [user]\n"
+        xSql = "select id from [user]\n"
                 + "where account = ?";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -68,20 +64,16 @@ public class RegisterDAO {
         return 0;
     }
     
-    public void registerProfile(int id, String name, String mobile, String gender) throws SQLException {
-        SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        String currentDate = SDF.format(date);
-
-        String query = "insert into user_profile\n"
-                + "values(?,'0',?,?,'1999-01-01',?,GETDATE(),GETDATE())";
+    public void registerProfile(int id, String name, String mobile, String dob, String gender) throws SQLException {
+        xSql = "insert into [user_profile]\n"
+                + "values(?,NULL,?,?,?,?,GETDATE(),GETDATE())";
         try {
-            conn = new DBContext().connection;
-            ps = conn.prepareStatement(query);
+            ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
             ps.setString(2, name);
             ps.setString(3, gender);
-            ps.setString(4, mobile);
+            ps.setString(4, dob);
+            ps.setString(5, mobile);
             ps.executeUpdate();
         } catch (Exception e) {
         }

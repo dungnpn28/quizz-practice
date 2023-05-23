@@ -4,7 +4,7 @@
  */
 package model;
 
-import dao.BlogDAO;
+import dal.BlogDAO;
 import java.sql.Date;
 
 /**

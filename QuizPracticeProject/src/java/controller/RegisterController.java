@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dao.RegisterDAO;
+import dal.RegisterDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +13,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -34,7 +39,7 @@ public class RegisterController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         String name = request.getParameter("Name");
         String email = request.getParameter("Email");
@@ -42,19 +47,33 @@ public class RegisterController extends HttpServlet {
         String gender = request.getParameter("Gender");
         String pass = request.getParameter("Pass");
         String rePass = request.getParameter("rePass");
+        String dob = request.getParameter("dob");
         if (pass.equals(rePass)) {
-            RegisterDAO dao = new RegisterDAO();
-            User existUser = dao.checkUserExist(email);
-            if (existUser == null) {
-                dao.registerUser(email, pass);
-                int id = dao.getID(email);
-                dao.registerProfile(id, name, mobile, gender);
-                response.sendRedirect("Home.jsp");
+            if (validateDob(dob)) {
+                RegisterDAO dao = new RegisterDAO();
+                User existUser = dao.checkUserExist(email);
+                if (existUser == null) {
+                    dao.registerUser(email, pass);
+                    int id = dao.getID(email);
+                    dao.registerProfile(id, name, mobile, dob, gender);
+                    response.sendRedirect("Home.jsp");
+                } else {
+                    response.sendRedirect("Register.jsp");
+                }
             } else {
                 response.sendRedirect("Register.jsp");
             }
         } else {
             response.sendRedirect("Register.jsp");
+        }
+    }
+
+    protected boolean validateDob(String dob) {
+        if (dob != "") {
+            LocalDate Date = LocalDate.parse((CharSequence) dob);
+            return Period.between(Date, LocalDate.now()).getYears() >= 18;
+        } else {
+            return false;
         }
     }
 
@@ -74,6 +93,8 @@ public class RegisterController extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,6 +112,8 @@ public class RegisterController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
