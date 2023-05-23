@@ -7,31 +7,85 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Acer
 */
 
-body{
-    background-color: black;
-    color: white;
-    font-family: "Montserrat", sans-serif;
+@-webkit-keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50%{
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
 }
 
-h1 {
-    color: red;
-    font-weight: bold;
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-40px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+.container {
+    background-color: #0a8ba8;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    transform: translatey(0px);
+    -webkit-animation: float 6s ease-in-out infinite;
+    animation: float 2s infinite;
+
+}
+
+.photo img {
+    width: 100%;
+    height: auto;
+    background: transparent;
+}
+.btt {
+    display: flex;
+    justify-content: center;
 }
 
 .button {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
+    padding: 15px 25px;
+    background-color: #e74c3c;
+    color: #ffffff;
     text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    align-self: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
 }
-.but {
-    display: flex;
-    justify-content: center;
+
+.button:hover {
+    background-color: #c0392b;
+    cursor: pointer;
+}
+
+.message {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+}
+
+.message h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
 }
 
 
