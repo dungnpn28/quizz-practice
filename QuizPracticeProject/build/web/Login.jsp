@@ -1,11 +1,8 @@
 <%-- 
-<<<<<<< HEAD
     Document   : Register
     Created on : May 22, 2023, 8:16:17 AM
-=======
     Document   : Login
     Created on : May 22, 2023, 8:16:07 AM
->>>>>>> 9691002def4d42048332bfc6f1ea1d14769bdd80
     Author     : Acer
 --%>
 
