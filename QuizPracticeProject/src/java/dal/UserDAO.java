@@ -11,32 +11,6 @@ import model.User;
  */
 public class UserDAO extends MyDAO {
 
-    public User getUsersByID(int xId) {
-        xSql = "SELECT *\n"
-                + "  FROM [dbo].[user]\n"
-                + "  where id = ?";
-        String xAccount;
-        String xPassword;
-        int xRole;
-        User x = null;
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setInt(1, xId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                xAccount = rs.getString("account");
-                xPassword = rs.getString("password");
-                xRole = rs.getInt("role_id");
-                x = new User(xId, xAccount, xPassword, xRole);
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (x);
-    }
-
     public void updatePassword(User x, String newPassword) {
         xSql = "UPDATE [dbo].[user]\n"
                 + "   SET [password] =?\n"
