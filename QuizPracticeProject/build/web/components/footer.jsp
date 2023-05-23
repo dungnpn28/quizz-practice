@@ -1,9 +1,9 @@
 <%-- 
-    Document   : footer
-    Created on : May 17, 2023, 3:09:35 PM
+    Document   : Footer
+    Created on : May 22, 2023, 9:50:00 AM
     Author     : LENOVO
 --%>
-
+<link rel="stylesheet" href="css/Footer.css"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <footer>
     <div class="footer">

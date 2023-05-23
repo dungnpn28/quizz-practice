@@ -21,11 +21,6 @@ public class User {
         this.role_id = role_id;
     }
     
-    public User(String account, String password){
-        this.account = account;
-        this.password = password;
-    }
-    
      public User() {
     }
 
@@ -60,4 +55,10 @@ public class User {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
+    
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+    
 }

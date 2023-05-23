@@ -1,0 +1,23 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 22, 2023, 9:47:00 AM
+    Author     : LENOVO
+*/
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px; /* Khoảng cách trong ô */
+    width: 200px; /* Rộng của ô */
+}
+.rectangle-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+}
+

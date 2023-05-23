@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Register
-    Created on : May 22, 2023, 8:16:17 AM
+    Document   : BlogList
+    Created on : May 22, 2023, 8:19:09 AM
     Author     : Acer
 --%>
 
