@@ -6,30 +6,29 @@ package model;
 
 /**
  *
- * @author ACER
+ * @author Acer
  */
 public class User {
-
-    private String id;
+    private int id;
     private String account;
     private String password;
-    private String role;
+    private int role_id;
 
-    public User() {
-    }
-
-    public User(String id, String account, String password, String role) {
+    public User(int id, String account, String password, int role_id) {
         this.id = id;
         this.account = account;
         this.password = password;
-        this.role = role;
+        this.role_id = role_id;
+    }
+    
+     public User() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,12 +48,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
-    
 }
