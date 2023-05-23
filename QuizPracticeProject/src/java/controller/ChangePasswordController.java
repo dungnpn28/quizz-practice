@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
 import dal.UserDAO;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -62,11 +63,12 @@ public class ChangePasswordController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        User x = (User)session.getAttribute("user");
         String oldPassword = request.getParameter("oldPass");
         String password1 = request.getParameter("pass1");
         String password2 = request.getParameter("pass2");
         UserDAO u = new UserDAO();
-        User x = u.getUsersByID(1);
         if (!oldPassword.equals(x.getPassword())) {
             out.print("Mat khau nhap sai");
 
