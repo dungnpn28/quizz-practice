@@ -37,5 +37,25 @@
             <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/dal/DBContext.java</file>
             <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/WEB-INF/web.xml</file>
         </group>
+        <group name="SE1714">
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/PracticeList.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogDetails.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/RegisterDAO.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterController.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/Subject.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Login.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/UserProfile.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/Exam.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/css/Register.css</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Register.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/Blog.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Home.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/User.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/ChangePasswordController.java</file>
+        </group>
     </open-files>
 </project-private>
