@@ -21,7 +21,9 @@ public class User {
         this.role_id = role_id;
     }
     
-     public User() {
+     public User(String account, String password) {
+         this.account = account;
+         this.password = password;
     }
 
     public int getId() {

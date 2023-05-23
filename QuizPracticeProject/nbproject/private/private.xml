@@ -12,5 +12,10 @@
             <file>file:/E:/FPT%20Subjects/SE5/SWP/quizWeb_hieuvn/summer2023-swp391.se1714-g4/QuizPracticeProject/web/css/Home.css</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/quizWeb_hieuvn/summer2023-swp391.se1714-g4/QuizPracticeProject/web/ChangePassword.jsp</file>
         </group>
+        <group name="SE1714">
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterController.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/User.java</file>
+        </group>
     </open-files>
 </project-private>
