@@ -30,7 +30,7 @@ public class UserAuthorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        System.out.println("testinggg");
     }
 
     @Override
@@ -40,7 +40,13 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         RoleDAO r = new RoleDAO();
         User u = (User) session.getAttribute("user");
-        String role = r.getRoleNameByUserId(u.getId());
+        String role = "";
+        if (u != null) {
+            role = r.getRoleNameByUserId(u.getId());
+        }
+        if (role == null) {
+            role = "Guest";
+        }
         String requestedURL = req.getRequestURI();
         if (hasPermission(role, requestedURL)) {
             fc.doFilter(req, resp);
@@ -50,80 +56,18 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("Home.jsp")) {
+        if (requestedURL.contains("ChangePassword.jsp") {
             switch (role) {
-                case "guest":
+                case "Guest":
+                    return true;
+                case "user":
                     return false;
                 default:
-                    return true;
-            }
-        }
-
-        if (requestedURL.contains("GuestHome.jsp")) {
-            switch (role) {
-                case "guest":
-                    return true;
-                default:
                     return false;
+                
             }
         }
-
-        if (requestedURL.contains("AccessDenied.jsp")) {
-            return true;
-        }
-
-        if (requestedURL.contains("BlogList.jsp")) {
-            switch (role) {
-                case "marketing":
-                    return true;
-                case "admin":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("BlogDetails.jsp")) {
-            switch (role) {
-                case "marketing":
-                    return true;
-                case "admin":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("SimulationExams.jsp")) {
-            switch (role) {
-                case "customer":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        if (requestedURL.contains("EmailResetPassword.jsp")) {
-            switch (role) {
-                case "guest":
-                    return false;
-                default:
-                    return true;
-            }
-        }
-        
-        if (requestedURL.contains("Successful.jsp")) {
-            switch (role) {
-                case "customer":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        return false;
-
+        return true;
     }
-    
 
 }
