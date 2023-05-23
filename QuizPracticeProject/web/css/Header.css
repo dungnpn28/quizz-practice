@@ -1,0 +1,23 @@
+.header_content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_logo img {
+    width: 120px;
+}
+.header_menu ul{
+    display: flex;
+}
+.header_menu ul li{
+    margin: 12px;
+    list-style-type: none;
+    display: flex;
+}
+.header_menu ul li a {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(52, 178, 201);
+    font-weight: bold;
+    padding: 10px;
+}

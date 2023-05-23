@@ -1,0 +1,14 @@
+.footer {
+    color: white;
+    background-color: #333;
+}
+
+.footer_detail {
+    display: flex;
+    margin-left: 25%;
+}
+
+.footer_detail div {
+    width: 50%;
+    margin: 25px;
+}
