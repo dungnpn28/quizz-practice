@@ -37,8 +37,8 @@
                     submenu.classList.toggle("open_menu");
                 }
             </script>
-            <div id="popUpModal" class="modal">
-                <div class="modal-content">
+            <div id="popUpModal" class="modal_popUp">
+                <div class="modal-content_popUp">
                     <span class="close">&times;</span>
                     <h2>Change password</h2>
 
@@ -53,6 +53,7 @@
                 </div>
             </div>
         </div>
+        <script src="js/PopUp.js" type="text/javascript"></script>
     </body>
-    <script src="js/PopUp.js" type="text/javascript"></script>
+
 </html>
