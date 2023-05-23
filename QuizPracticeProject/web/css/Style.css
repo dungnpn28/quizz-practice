@@ -7,7 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : LENOVO
 */
 
-.modal {
+.modal_popUp {
     display: none; /* Ẩn ban đầu */
     position: fixed; /* Cố định vị trí */
     z-index: 1; /* Hiển thị trên các phần tử khác */
@@ -19,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
 }
 
-.modal-content {
+.modal-content_popUp {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;

@@ -20,8 +20,8 @@
         <%@include file="components/Header.jsp" %>
         <a href="#" id="popUpLink">Thay đổi mật khẩu</a>
 
-        <div id="popUpModal" class="modal">
-            <div class="modal-content">
+        <div id="popUpModal" class="modal_popUp">
+            <div class="modal-content_popUp">
                 <span class="close">X</span>
                 <h2>Change password</h2>
 
