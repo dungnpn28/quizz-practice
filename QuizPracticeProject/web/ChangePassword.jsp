@@ -18,32 +18,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <body>
         <%@include file="components/Header.jsp" %>
-        <style>
-            form input {
-                padding: 10px;
-                margin:20px;
-            }
-        </style>
-
         <a href="#" id="popUpLink">Thay đổi mật khẩu</a>
 
         <div id="popUpModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close">X</span>
                 <h2>Change password</h2>
 
                 <form id="changePasswordForm" method="POST" action="changePassword">
-
                     Old password<input type="password" name="oldPass" placeholder="Old password" required><br/>
                     New password<input type="password" name="pass1" placeholder="new password" required><br/>
                     New password again<input type="password" name="pass2" placeholder="new password again" required>
                     <br/>
                     <button type="submit">Change</button>
                 </form>
+                <div id="errorMessage" class="error-message"></div>
             </div>
         </div>
-    </body>
-            <%@include file="components/Footer.jsp" %>
+        <script src="js/PopUp.js" type="text/javascript"></script>
 
-    <script src="js/PopUp.js" type="text/javascript"></script>
+    </body>
+    <%@include file="components/Footer.jsp" %>
+
 </html>
