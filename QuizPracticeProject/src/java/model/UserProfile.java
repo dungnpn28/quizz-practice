@@ -38,6 +38,14 @@ public class UserProfile {
         this.dob = dob;
     }
     
+    public UserProfile(int user_id,String avatar,String full_name, int gender, String dob, String phone_number) {
+        this.user_id = user_id;
+        this.avatar = avatar;
+        this.full_name = full_name;
+        this.gender = gender;
+        this.dob = dob;
+        this.phone_number = phone_number;
+    }
 
     public int getUser_id() {
         return user_id;
