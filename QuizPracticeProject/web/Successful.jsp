@@ -48,14 +48,15 @@
                 height: 100vh;
                 margin: 0;
             }
+            
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
 
-        <h1>Hello World!</h1>
-        <h1>THE REPASSWORD LINK HAS BEEN SENDED TO YOUR EMAIL  </h1>
-        <a href="Home.jsp"> HOME</a>
+        
+        <h1 style="color:white">THE REPASSWORD LINK HAS BEEN SENDED TO YOUR EMAIL  </h1>
+        <a href="home"> HOME</a>
     </body>
 </html>
