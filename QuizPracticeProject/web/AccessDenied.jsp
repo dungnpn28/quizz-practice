@@ -26,9 +26,7 @@
                 <p>Uh oh, you are not allowed to access this page<br/>Maybe you mistyped in the url? Here's a button to go back to Home Page!</p>
             </div>
             <div class="btt">
-                <form action="userauthorization" method="post">
-                    <input type="submit" class="button" value="Go back Home">
-                </form>
+                <a class="button">Go back Home</a>
             </div>
         </div>
     </body>

@@ -40,14 +40,13 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         RoleDAO r = new RoleDAO();
         User u = (User) session.getAttribute("user");
-        String role = null;
+        String role = "";
         if (u != null) {
             role = r.getRoleNameByUserId(u.getId());
         }
         if (role == null) {
             role = "Guest";
         }
-        System.out.println("leuleuleu" + role);
         String requestedURL = req.getRequestURI();
         if (hasPermission(role, requestedURL)) {
             fc.doFilter(req, resp);
@@ -57,7 +56,7 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("ChangePassword.jsp")  || requestedURL.contains("changePassword")) {
+        if (requestedURL.contains("ChangePassword.jsp")) {
             switch (role) {
                 case "Guest":
                     return true;
@@ -69,7 +68,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("PracticeList.jsp") || requestedURL.contains("practiceList")) {
+        if (requestedURL.contains("PracticeList.jsp")) {
             switch (role) {
                 case "Customer":
                     return true;
@@ -78,7 +77,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("ResetPassword.jsp") || requestedURL.contains("resetPassword")) {
+        if (requestedURL.contains("ResetPassword.jsp")) {
             switch (role) {
                 case "Guest":
                     return false;
@@ -88,7 +87,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("SimulationExam.jsp")  || requestedURL.contains("simulationExam")) {
+        if (requestedURL.contains("SimulationExam.jsp")) {
             switch (role) {
                 case "Customer":
                     return true;
@@ -96,53 +95,13 @@ public class UserAuthorizationFilter implements Filter {
                     return false;            
             }
         }
-
-        if (requestedURL.contains("Login.jsp") || requestedURL.contains("login")) {
-            switch (role) {
-                case "Guest":
-                    return true;
-                default:
-                    return false;
-                
-            }
-        }
-
-        if (requestedURL.contains("Register.jsp") || requestedURL.contains("register")) {
-            switch (role) {
-                case "Guest":
-                    return false;
-                default:
-                    return true;
-                
-            }
-        }
-
-        if (requestedURL.contains("Home.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return true;
-                default:
-                    return false;
-                
-            }
-        }
-
-        if (requestedURL.contains("CusHome.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return false;
-                default:
-                    return true;
-                
-            }
-        }
         
-        if (requestedURL.contains("searchBySybject")) {
+        if (requestedURL.contains("Successful.jsp")) {
             switch (role) {
-                case "Customer":
-                    return true;
-                default:
+                case "Guest":
                     return false;
+                default:
+                    return true;
                 
             }
         }
