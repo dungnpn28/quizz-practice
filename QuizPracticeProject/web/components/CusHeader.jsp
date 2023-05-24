@@ -51,6 +51,7 @@
                         <br/>
                         <button type="submit">Change</button>
                     </form>
+                    <div id="errorMessage" class="error-message"></div>
                 </div>
             </div>
         </div>
