@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="header_content">
-            <a href="CusHome.jsp"><img src="img\2.png" class="header_logo"></a>
+            <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
             <div class="header_menu">
                 <ul>
                     <li><a href="BlogList.jsp">Post</a></li>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="menu" id="submenu">
                     <ul>
-                        <h4>${userName}</h4>
+                        <li>${userName}</li>
                         <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
                         <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
                         <li><img src="img/edit.png" alt=""><a href="">Edit Profile</a></li>
