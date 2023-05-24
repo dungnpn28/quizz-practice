@@ -56,7 +56,7 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("ChangePassword.jsp")) {
+        if (requestedURL.contains("ChangePassword.jsp")  || requestedURL.contains("changePassword")) {
             switch (role) {
                 case "Guest":
                     return true;
@@ -68,7 +68,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("PracticeList.jsp")) {
+        if (requestedURL.contains("PracticeList.jsp") || requestedURL.contains("practiceList")) {
             switch (role) {
                 case "Customer":
                     return true;
@@ -77,7 +77,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("ResetPassword.jsp")) {
+        if (requestedURL.contains("ResetPassword.jsp") || requestedURL.contains("resetPassword")) {
             switch (role) {
                 case "Guest":
                     return false;
@@ -87,7 +87,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
         
-        if (requestedURL.contains("SimulationExam.jsp")) {
+        if (requestedURL.contains("SimulationExam.jsp")  || requestedURL.contains("simulationExam")) {
             switch (role) {
                 case "Customer":
                     return true;
@@ -95,13 +95,53 @@ public class UserAuthorizationFilter implements Filter {
                     return false;            
             }
         }
-        
-        if (requestedURL.contains("Successful.jsp")) {
+
+        if (requestedURL.contains("Login.jsp") || requestedURL.contains("login")) {
+            switch (role) {
+                case "Guest":
+                    return true;
+                default:
+                    return false;
+                
+            }
+        }
+
+        if (requestedURL.contains("Register.jsp") || requestedURL.contains("register")) {
             switch (role) {
                 case "Guest":
                     return false;
                 default:
                     return true;
+                
+            }
+        }
+
+        if (requestedURL.contains("GuestHome.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return true;
+                default:
+                    return false;
+                
+            }
+        }
+
+        if (requestedURL.contains("Home.jsp")) {
+            switch (role) {
+                case "Guest":
+                    return false;
+                default:
+                    return true;
+                
+            }
+        }
+        
+        if (requestedURL.contains("searchBySybject")) {
+            switch (role) {
+                case "Customer":
+                    return true;
+                default:
+                    return false;
                 
             }
         }
