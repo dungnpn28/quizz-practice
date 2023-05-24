@@ -12,9 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.ExamDAO;
 import dal.SubjectDAO;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Exam;
 import model.Subject;
+import model.User;
 
 /**
  *
@@ -34,17 +36,19 @@ public class SearchBySubjectController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User x = (User) session.getAttribute("user");
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = sDAO.getSubjects();
         ExamDAO eDAO = new ExamDAO();
         if (subjectId == 0) {
-            List<Exam> examList = eDAO.getExamByUserID(1);
+            List<Exam> examList = eDAO.getExamByUserID(x.getId());
             request.setAttribute("examList", examList);
             request.setAttribute("subjectList", subjectList);
             request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);
         } else {
-            List<Exam> examList = eDAO.getExamByUserIDandSubID(1, subjectId);
+            List<Exam> examList = eDAO.getExamByUserIDandSubID(x.getId(), subjectId);
             request.setAttribute("examList", examList);
             request.setAttribute("subjectList", subjectList);
             request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);
