@@ -36,6 +36,10 @@
         <servlet-name>SimulationExamController</servlet-name>
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserAuthorizationController</servlet-name>
+        <servlet-class>controller.UserAuthorizationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>SimulationExamController</servlet-name>
         <url-pattern>/simulationExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAuthorizationController</servlet-name>
+        <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

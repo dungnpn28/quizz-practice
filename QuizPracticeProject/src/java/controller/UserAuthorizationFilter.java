@@ -40,13 +40,14 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         RoleDAO r = new RoleDAO();
         User u = (User) session.getAttribute("user");
-        String role = "";
+        String role = null;
         if (u != null) {
             role = r.getRoleNameByUserId(u.getId());
         }
         if (role == null) {
             role = "Guest";
         }
+        System.out.println("leuleuleu" + role);
         String requestedURL = req.getRequestURI();
         if (hasPermission(role, requestedURL)) {
             fc.doFilter(req, resp);
@@ -116,7 +117,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
 
-        if (requestedURL.contains("GuestHome.jsp")) {
+        if (requestedURL.contains("Home.jsp")) {
             switch (role) {
                 case "Guest":
                     return true;
@@ -126,7 +127,7 @@ public class UserAuthorizationFilter implements Filter {
             }
         }
 
-        if (requestedURL.contains("Home.jsp")) {
+        if (requestedURL.contains("CusHome.jsp")) {
             switch (role) {
                 case "Guest":
                     return false;

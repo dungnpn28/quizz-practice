@@ -35,7 +35,6 @@ public class LoginController extends HttpServlet {
                 req.setAttribute("mess", "Wrong user or pass");
                 req.getRequestDispatcher("Login.jsp").forward(req, resp);
             } else {
-
                 req.getRequestDispatcher("Home.jsp").forward(req, resp);
 
             }
