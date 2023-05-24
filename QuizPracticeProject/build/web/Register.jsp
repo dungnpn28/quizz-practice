@@ -78,18 +78,24 @@
 
                                             </div>
                                             
+                                            </div>
+                                            
                                             <div class="form-outline mb-3">
                                                 <label class="inputLabel" for="Pass">Password: </label>
                                                 <input type="password" id="Pass" class="form-control"
-                                                       name="Pass" value="" required = "required"
+                                                       name="Pass" value=""pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
+                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters"
+                                                       required = "required"
                                                        placeholder="Password" />
-
+                                                       
                                             </div>
 
                                             <div class="form-outline mb-3">
                                                 <label class="inputLabel" for="rePass">Retype Password: </label>
                                                 <input type="password" id="rePass" class="form-control"
-                                                       name="rePass" value="" required = "required"
+                                                       name="rePass" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
+                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters" 
+                                                       required = "required"
                                                        placeholder="Retype Password" />
 
                                             </div>
