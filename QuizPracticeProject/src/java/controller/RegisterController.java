@@ -87,7 +87,7 @@ public class RegisterController extends HttpServlet {
                         String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                                 + "To finish registration please go to the following page:<br>"
                                 + "<a href=\"http://localhost:8080/QuizPracticeProject/registerverified\">Click here</a><br>"
-                                + "If you do not wish to register, ignore this message. It will expire in a few hours<br>"
+                                + "If you do not wish to register, ignore this message."
                                 + "All the best,<br>QUIZZERO.";
                         MimeMessage message = new MimeMessage(session);
                         message.setFrom(new InternetAddress("quizzeroproject@gmail.com")); // Change accordingly
@@ -114,7 +114,7 @@ public class RegisterController extends HttpServlet {
             } else {
                 response.setContentType("text/html");
                 pw.println("<script type=\"text/javascript\">");
-                pw.println("alert('You must be 18 year old to register');");
+                pw.println("alert('You must be 16 year old to register');");
                 pw.println("</script>");
                 RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
                 rd.include(request, response);
@@ -132,7 +132,7 @@ public class RegisterController extends HttpServlet {
     protected boolean validateDob(String dob) {
         if (dob != "") {
             LocalDate Date = LocalDate.parse((CharSequence) dob);
-            return Period.between(Date, LocalDate.now()).getYears() >= 18;
+            return Period.between(Date, LocalDate.now()).getYears() >= 16;
         } else {
             return false;
         }
