@@ -55,7 +55,7 @@
                                     <div class="col-md-7" class="info">
                                         <p> Email: <input name="email" type="email" value="<%=u.getAccount()%>" disabled >
                                         <p> Full Name: <input name="fullname" type="text" value="<%=up.getFull_name()%>" >
-                                        <p> Phone number: <input name="phonenum" type="tel"value="<%=up.getPhone_number()%>" >
+                                        <p> Phone number: <input name="phonenum" type="tel"value="<%=up.phone_number()%>" >
                                             ${requestScope.tbao}
                                         <p> Dob: <input name="dob" type="date" value="<%=up.getDob()%>" >
                                         <p> Gender: 
