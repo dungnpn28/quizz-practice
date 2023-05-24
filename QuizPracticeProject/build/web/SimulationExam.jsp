@@ -61,7 +61,7 @@
                                     <option value="${Subject.id}">${Subject.name}</option>
                                 </c:forEach>
                             </select>
-                            <button type="submit">Chóoe</button>
+                            <button type="submit">Choose</button>
                         </form>
 
                     </div>
