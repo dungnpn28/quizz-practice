@@ -1,25 +1,30 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller;
 
-import dal.BlogDAO;
+import dal.UserProfileDAO;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import model.Blog;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import model.User;
+import model.UserProfile;
 
 /**
  *
- * @author ACER
+ * @author dai
  */
-@WebServlet(name = "BlogDetailController", urlPatterns = {"/blogDetail"})
-public class BlogDetailController extends HttpServlet {
+public class ChangeUserProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +38,7 @@ public class BlogDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
-        
-        BlogDAO dao = new BlogDAO();
-        Blog blog = dao.getBlogDetail(id);
-        request.setAttribute("blog", blog);
-        
-        int author_id = blog.getAuthor_id();
-        String author = dao.getAuthor(author_id);
-        request.setAttribute("author", author);
-        
-        int category_id = blog.getCategory_id();
-        String category = dao.getCategoryName(category_id);
-        request.setAttribute("category", category);
-        
-        request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,6 +68,36 @@ public class BlogDetailController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int xUser_id = user.getId();
+        int genderValue = 0;
+        String xAvatar = request.getParameter("avatar");
+//        Part filePart = request.getPart(xAvatar);
+//        InputStream fileContent = filePart.getInputStream();
+//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+//        Files.copy(fileContent, Paths.get("/path/to/upload/directory/" + fileName));
+        String xFull_name = request.getParameter("fullname");
+        String xPhone_number = request.getParameter("phonenum");
+        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
+        String input = xPhone_number;
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if (!matcher.matches()) {
+            request.setAttribute("tbao", "Invalid phone number");
+            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+        } else {
+            String xDob = request.getParameter("dob");
+            String xGender = request.getParameter("radB1");
+            if (xGender.equals("male")) {
+                genderValue = 1;
+            }
+            UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
+            UserProfileDAO u = new UserProfileDAO();
+            u.update(up);
+            response.sendRedirect("Home.jsp");
+        }
     }
 
     /**
