@@ -51,6 +51,8 @@
     <servlet>
         <servlet-name>CusHomeController</servlet-name>
         <servlet-class>controller.CusHomeController</servlet-class>
+        <servlet-name>ChangeUserProfileController</servlet-name>
+        <servlet-class>controller.ChangeUserProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -95,6 +97,8 @@
     <servlet-mapping>
         <servlet-name>CusHomeController</servlet-name>
         <url-pattern>/cusHome</url-pattern>
+        <servlet-name>ChangeUserProfileController</servlet-name>
+        <url-pattern>/changeUserProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
