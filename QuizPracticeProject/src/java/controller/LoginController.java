@@ -6,6 +6,7 @@ package controller;
 
 
 import dal.UserDAO;
+import dal.UserProfileDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +36,10 @@ public class LoginController extends HttpServlet {
                 req.setAttribute("mess", "Wrong user or pass");
                 req.getRequestDispatcher("Login.jsp").forward(req, resp);
             } else {
-                req.getRequestDispatcher("Home.jsp").forward(req, resp);
+                UserProfileDAO upDAO = new UserProfileDAO();
+                String userName = upDAO.getUserName(a.getId());
+                req.setAttribute("userName", userName);
+                req.getRequestDispatcher("CusHome.jsp").forward(req, resp);
 
             }
         

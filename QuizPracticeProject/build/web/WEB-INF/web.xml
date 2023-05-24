@@ -37,8 +37,20 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserAuthorizationController</servlet-name>
+        <servlet-name>UserAuthorization</servlet-name>
         <servlet-class>controller.UserAuthorizationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListController</servlet-name>
+        <servlet-class>controller.BlogListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CusHomeController</servlet-name>
+        <servlet-class>controller.CusHomeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -69,9 +81,27 @@
         <url-pattern>/simulationExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>UserAuthorizationController</servlet-name>
         <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
+=======
+        <servlet-name>UserAuthorization</servlet-name>
+        <url-pattern>/userauthorization</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/BlogListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusHomeController</servlet-name>
+        <url-pattern>/cusHome</url-pattern>
+    </servlet-mapping>
+>>>>>>> main
     <session-config>
         <session-timeout>
             30

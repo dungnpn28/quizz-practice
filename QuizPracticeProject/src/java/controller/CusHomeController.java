@@ -4,25 +4,21 @@
  */
 package controller;
 
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.ExamDAO;
-import dal.SubjectDAO;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Exam;
-import model.Subject;
 import model.User;
 
 /**
  *
- * @author LENOVO
+ * @author ADMIN
  */
-public class SearchByExamNameController extends HttpServlet {
+public class CusHomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,19 +32,12 @@ public class SearchByExamNameController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            User x = (User) session.getAttribute("user");
-            String keyword = request.getParameter("keyword");
-            ExamDAO eDAO = new ExamDAO();
-            List<Exam> examList = eDAO.getExamByName(keyword, x.getId());
-            SubjectDAO sDAO = new SubjectDAO();
-            List<Subject> subjectList = sDAO.getSubjects();
-            request.setAttribute("subjectList", subjectList);
-            request.setAttribute("examList", examList);
-            request.setAttribute("key", keyword);
-            request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);
-        }
+        HttpSession sessions = request.getSession();
+        User a = (User) sessions.getAttribute("user");
+        UserProfileDAO upDAO = new UserProfileDAO();
+        String userName = upDAO.getUserName(a.getId());
+        request.setAttribute("username",userName);
+        request.getRequestDispatcher("CusHome.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

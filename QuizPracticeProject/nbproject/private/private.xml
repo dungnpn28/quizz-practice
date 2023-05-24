@@ -3,47 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/css/Resetpassword.css</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/Home.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/ResetPassword.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/AccessDenied.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/BlogDetails.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/Successful.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/css/AccessDenied.css</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/UserAuthorizationController.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/EmailResetPassword.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/dal/RoleDAO.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/Register.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/UserAuthorizationFilter.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/Login.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/css/Login.css</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/css/Home.css</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/index.html</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/BlogList.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/LoginController.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/UserProfile.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/model/Exam.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/css/SimulationExam.css</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/nbproject/build-impl.xml</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/ChangePasswordController.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/ResetPasswordController.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/META-INF/context.xml</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/ChangePassword.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/SimulationExam.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/controller/EmailResetPasswordController.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/PracticeList.jsp</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/src/java/dal/DBContext.java</file>
-            <file>file:/D:/02.%20FPTU/05.%20Semester%205/02.%20SWP391/04.%20PROJECT/QuizPracticeProject/web/WEB-INF/web.xml</file>
-        </group>
-        <group name="SE1714">
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/UserProfile.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogDetails.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Successful.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Register.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/User.java</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/UserAuthorizationFilter.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/Home.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/BlogList.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/dal/DBContext.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/components/Header.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

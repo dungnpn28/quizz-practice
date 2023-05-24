@@ -61,7 +61,7 @@
                                     <option value="${Subject.id}">${Subject.name}</option>
                                 </c:forEach>
                             </select>
-                            <button type="submit">Chóoe</button>
+                            <button type="submit">Choose</button>
                         </form>
 
                     </div>
@@ -83,8 +83,8 @@
                 </div>
             </div>
         </div>
-        <div id="popUpModal" class="modal">
-            <div class="modal-content">
+        <div id="popUpModal" class="modal_popUp">
+            <div class="modal-content_popUp">
                 <span class="close">&times;</span>
                 <h2>Exam Detail</h2>
                 <br/>
