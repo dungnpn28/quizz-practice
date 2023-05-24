@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .modal_popUp {
     display: none; /* Ẩn ban đầu */
     position: fixed; /* Cố định vị trí */
-    z-index: 1; /* Hiển thị trên các phần tử khác */
+    z-index: 999999; /* Hiển thị trên các phần tử khác */
     left: 0;
     top: 0;
     width: 100%;
