@@ -64,11 +64,7 @@
                 <form>
                     <input type="text" name="search" placeholder="search..." class="search_box">
                     <select>
-                        <option>C#</option>
-                        <option>Java</option>
-                        <option>Python</option>
-                        <option>C++</option>
-                        <option>C</option>
+                        <option>${Category}</option>
                     </select>
                 </form>
                 <div class="thumbnail_container">

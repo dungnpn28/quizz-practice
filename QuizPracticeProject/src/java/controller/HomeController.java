@@ -31,18 +31,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,6 +46,18 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        UserDAO p = new UserDAO();
+        User a = p.login(account, password);
+        
+        if(a== null){
+            request.getRequestDispatcher("Home.jsp").forward(request, response);
+        }else{
+            HttpSession sessions = request.getSession();
+        sessions.setAttribute("user", a);
+            request.getRequestDispatcher("CusHome.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -69,18 +70,8 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        UserDAO p = new UserDAO();
-        User a = p.login(account, password);
-        HttpSession sessions = request.getSession();
-        sessions.setAttribute("user", a);
-        if(a== null){
-            request.getRequestDispatcher("Home.jsp").forward(request, response);
-        }else{
-            request.getRequestDispatcher("CusHome.jsp").forward(request, response);
-        }
+        processRequest(request, response);
+        
     }
 
     /** 
