@@ -19,6 +19,7 @@
     <%@include file="components/Header.jsp"%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <body>
+        
         <!-- SLIDER -->
     <div class="slider">
         <input type="radio" name="images" id="i1" checked>

@@ -25,7 +25,7 @@
                 </div>
                 <div class="menu" id="submenu">
                     <ul>
-                        <h4>${userName}</h4>
+                        <li>${userName}</li>
                         <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
                         <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
                         <li><img src="img/edit.png" alt=""><a href="">Edit Profile</a></li>
