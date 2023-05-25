@@ -152,6 +152,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+            response.sendRedirect("Register.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -172,6 +173,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+            response.sendRedirect("Register.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
