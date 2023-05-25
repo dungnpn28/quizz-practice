@@ -101,7 +101,7 @@ public class UserAuthorizationFilter implements Filter {
         }
         
         if (requestedURL.contains("register") || requestedURL.contains("RegisterController")) {
-            return !role.equals("Guest");
+            return role.equals("Guest");
 
         }
 
