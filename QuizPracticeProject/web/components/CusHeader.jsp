@@ -40,7 +40,7 @@
             </script>
             <div id="popUpModal" class="modal_popUp">
                 <div class="modal-content_popUp">
-                    <span class="close">&times;</span>
+                    <button class="close-popup">&times;</button>
                     <h2>Change password</h2>
 
                     <form id="changePasswordForm" method="POST" action="changePassword">
@@ -54,6 +54,14 @@
                     <div id="errorMessage" class="error-message"></div>
                 </div>
             </div>
+            <script>
+                var closeBtn = document.querySelector('.close-popup');
+                var popUpModal = document.getElementById('popUpModal');
+
+                closeBtn.addEventListener('click', function () {
+                    popUpModal.style.display = 'none';
+                });
+            </script>
         </div>
         <script src="js/PopUp.js" type="text/javascript"></script>
     </body>
