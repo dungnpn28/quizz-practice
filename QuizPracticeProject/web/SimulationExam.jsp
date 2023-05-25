@@ -83,14 +83,28 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div id="popUpModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
+=======
+        <div id="popUpModal" class="modal_popUp">
+            <div class="modal-content_popUp">
+                <button class="close-popup">&times;</button>
+>>>>>>> 1da2923d02025c2d010af81eea0312c723f31920
                 <h2>Exam Detail</h2>
                 <br/>
                 <a href="QuizHandlePage.jsp">Quiz Handle</a>
             </div>
         </div>
+        <script>
+            var closeBtn = document.querySelector('.close-popup');
+            var popUpModal = document.getElementById('popUpModal');
+
+            closeBtn.addEventListener('click', function () {
+                popUpModal.style.display = 'none';
+            });
+        </script>
     </body>
     <%@include file="components/Footer.jsp" %>
     <script src="js/PopUp.js" type="text/javascript"></script>

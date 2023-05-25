@@ -3,9 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/FPT/SWP391/backup/SWP391_project/QuizPracticeProject/web/CusHome.jsp</file>
             <file>file:/D:/FPT/SWP391/backup/SWP391_project/QuizPracticeProject/src/java/controller/LoginController.java</file>
             <file>file:/D:/FPT/SWP391/backup/SWP391_project/QuizPracticeProject/web/css/CusHome.css</file>
+=======
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/Header.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/UserProfile.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/CusHeader.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Register.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SearchBySubjectController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/AccessDenied.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/UserProfileDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogList.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/CusHomeController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/ChangePassword.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/UserAuthorizationFilter.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/Style.css</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SimulationExamController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Login.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/CusHeader.css</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/MyDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/LoginController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/HomeController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/Home.css</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SimulationExam.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/ChangePasswordController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/UserDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/js/PopUp.js</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/CusHome.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/DBContext.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SearchByExamNameController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Exam.java</file>
+>>>>>>> 1da2923d02025c2d010af81eea0312c723f31920
         </group>
     </open-files>
 </project-private>
