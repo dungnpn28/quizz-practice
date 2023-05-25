@@ -16,7 +16,7 @@
     <body>
         <div class="header_content">
             <div class="header_logo">
-                <a href="Home.jsp"><img src="img\2.png"></a>
+                <a href="home"><img src="img\2.png"></a>
             </div>
 
             <div class="header_menu">
@@ -24,7 +24,7 @@
                 <ul>                
                     <li><a href="BlogList.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
-                    <li><a href="login">Login</a></li>
+                    <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
                 </ul>
             </div>

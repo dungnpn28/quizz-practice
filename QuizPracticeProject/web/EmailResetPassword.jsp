@@ -9,7 +9,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>     
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
         </style>
@@ -28,7 +33,10 @@
                     submitButton.disabled = false;
                 }
             }
-          
+            function goBack() {
+                window.history.go(-1);
+            }
+
         </script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
@@ -52,7 +60,7 @@
                     <button onclick="noti()" type="submit" id="submitButton" class="btn btn-primary w-100">   Send reset link</button>
                 </form>
                 <div class="d-flex justify-content-between mt-4">
-                    <a class="" href="login">Back to log in</a>
+                    <a class="" onclick="goBack()">Back to log in</a>
 
                 </div>
             </div>

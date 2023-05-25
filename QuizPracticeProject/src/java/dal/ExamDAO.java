@@ -19,11 +19,10 @@ public class ExamDAO extends MyDAO {
 
     public List<Exam> getExamByUserID(int userID) {
         List<Exam> examList = new ArrayList<>();
-        xSql = "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate, exam.description\n"
-                + "                FROM exam\n"
-                + "                INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
-                + "                INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "                WHERE exam_user.user_id = ? and exam.mode = 1";
+        xSql = "SELECT exam.id,subject.name as subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
+                + "FROM exam\n"
+                + "JOIN subject ON exam.subject_id = subject.id\n"
+                + "where exam.user_id = ?";
         int xID;
         String xSubjectName;
         String xName;
@@ -32,7 +31,6 @@ public class ExamDAO extends MyDAO {
         String xxDuration;
         double xPass_rate;
         int xNumQue;
-        String xDescription;
         Exam x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -49,8 +47,7 @@ public class ExamDAO extends MyDAO {
                 xxDuration = dateFormat.format(xDuration);
                 xPass_rate = rs.getDouble("pass_rate");
                 xNumQue = rs.getInt("number_of_question");
-                xDescription = rs.getString("description");
-                x = new Exam(xID, xName, xLevel, xxDuration, xPass_rate, xNumQue, xSubjectName, xDescription);
+                x = new Exam(xID, xName, xLevel, xxDuration, xPass_rate, xNumQue, xSubjectName);
                 examList.add(x);
             }
             rs.close();
@@ -63,11 +60,10 @@ public class ExamDAO extends MyDAO {
 
     public List<Exam> getExamByUserIDandSubID(int userID, int subID) {
         List<Exam> examList = new ArrayList<>();
-        xSql = "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
+        xSql = "SELECT exam.id,subject.name as subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
                 + "FROM exam\n"
-                + "INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
-                + "INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "WHERE exam_user.user_id = ? and exam.mode = 1 and subject_id = ?";;
+                + "JOIN subject ON exam.subject_id = subject.id\n"
+                + "where exam.user_id = ? and subject.id = ?";
         int xID;
         String xSubjectName;
         String xName;
@@ -107,11 +103,10 @@ public class ExamDAO extends MyDAO {
 
     public List<Exam> getExamByName(String keyword, int id) {
         List<Exam> examList = new ArrayList<>();
-        xSql = "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
+        xSql = "SELECT exam.id,subject.name as subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
                 + "FROM exam\n"
-                + "INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
-                + "INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "WHERE exam_user.user_id = ? and exam.mode = 1 and exam.name like ?";
+                + "JOIN subject ON exam.subject_id = subject.id\n"
+                + "where exam.user_id = ? and exam.name like ?";
         int xID;
         String xSubjectName;
         String xName;

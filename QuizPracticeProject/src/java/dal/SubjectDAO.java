@@ -22,7 +22,7 @@ public class SubjectDAO extends MyDAO {
             int xID;
             int xDimesion_id;
             String xName;
-            int xCategory;
+            String xCategory;
             boolean xStatus;
             String xDescription;
             Subject x;
@@ -31,7 +31,7 @@ public class SubjectDAO extends MyDAO {
                 xDimesion_id = rs.getInt("dimension_id");
 
                 xName = rs.getString("name");
-                xCategory = rs.getInt("category_id");
+                xCategory = rs.getString("category");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
 
@@ -56,7 +56,7 @@ public class SubjectDAO extends MyDAO {
 
             int xDimesion_id;
             String xName;
-            int xCategory_id;
+            String xCategory;
             boolean xStatus;
             String xDescription;
             Subject x;
@@ -65,11 +65,11 @@ public class SubjectDAO extends MyDAO {
                 xDimesion_id = rs.getInt("dimension_id");
 
                 xName = rs.getString("name");
-                xCategory_id = rs.getInt("xCategory_id");
+                xCategory = rs.getString("category");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
 
-                x = new Subject(id, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
+                x = new Subject(id, xDimesion_id, xName, xCategory, xStatus, xDescription);
                 t.add(x);
             }
             rs.close();

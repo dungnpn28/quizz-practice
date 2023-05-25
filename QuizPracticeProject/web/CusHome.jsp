@@ -3,7 +3,7 @@
 <html>
     <head>
     <div>
-        <link rel="stylesheet" href="css/Home.css" type="text/css"/>
+        <link rel="stylesheet" href="css/CusHome.css" type="text/css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,7 +22,7 @@
 
         <!-- slide 1 -->
         <div class="slide_img" id="one">
-            <img src="http://vietnamese.cri.cn/mmsource/images/2017/06/02/d18f170450234ed1acd704f4944c4157.jpg" alt="">
+            <img src="" alt="">
             <label for="i3" class="previous"></label>
             <label for="i2" class="next"></label>
         </div>
@@ -30,7 +30,7 @@
 
         <!-- slide 2 -->
         <div class="slide_img" id="two">
-            <img src="https://www.sagen.com.vn/Data/Sites/1/Product/250/truong-dai-hoc-fpt-binh-dinh-h2..jpg" alt="">
+            <img src="" alt="">
             <label for="i1" class="previous"></label>
             <label for="i3" class="next"></label>
         </div>
@@ -38,7 +38,7 @@
 
         <!-- slide 3 -->
         <div class="slide_img" id="three">
-            <img src="https://uni.fpt.edu.vn/Data/Sites/1/media/1-anh/133136198_156947376226863_5664584930400544253_n.jpg" alt="">
+            <img src="" alt="">
             <label for="i2" class="previous"></label>
             <label for="i1" class="next"></label>
         </div>
@@ -56,7 +56,7 @@
         <div class="boxContainer col-md-7">
             <div class="box">
                 <div class="boxImage">
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100%" height="100%" alt="Ảnh">
+                    <img src="" width="100%" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <h2>Tiêu đề</h2>
@@ -65,7 +65,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
+                    <img src="" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -75,7 +75,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
+                    <img src="" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -85,7 +85,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
+                    <img src="" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -95,7 +95,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
+                    <img src="" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -105,7 +105,7 @@
             </div>
             <div class="box">
                 <div class="boxImage">                        
-                    <img src="https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg" width="100" height="100%" alt="Ảnh">
+                    <img src="" width="100" height="100%" alt="Ảnh">
                 </div>
                 <div class="boxContent">
                     <!-- Đặt nội dung khác tại đây -->
@@ -118,12 +118,12 @@
         <div class="thumbnail_container">
             <div class="tn1">
                 Title 
-                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
+                <image>
             </div>
 
             <div class="tn2">
                 Title 
-                <iframe width="300px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
+                <img>
             </div>
             <div class="contact">
                 FACEBOOK: <a href="">Links</a><br>
@@ -143,7 +143,7 @@
 
             <div class="content">
                 <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <img>
                     <p class="title">
                         Description
                     </p>
@@ -159,7 +159,7 @@
 
             <div class="content">
                 <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="https://www.youtube.com/embed/WZR7S9080MQ" frameborder="0" allowfullscreen class="vid1"></iframe>
+                    <img>
                     <p class="title">
                         Description
                     </p>

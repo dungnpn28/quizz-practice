@@ -21,7 +21,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
         <section class="h-100 gradient-form">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -30,7 +30,7 @@
                             <div class="row g-0">
                                 <div class="col-lg-6">
                                     <div class="card-body p-md-5 mx-md-4">
-                                        <a href="home" class="close">&times;</a>
+                                        <a href="#" class="close">&times;</a>
                                         <div class="text-center">
                                             <img src="img/2.png"
                                                  style="width: 185px;" alt="logo">
@@ -56,13 +56,12 @@
                                             <div class="text-center pt-1 mb-5 pb-1">
                                                 <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                                                     in</button>
-                                                <div class="text-danger">${mess}</div>
-                                                <a class="text-muted" href="emailresetpassword">Forgot password?</a>
+                                                <a class="text-muted" href="EmailResetPassword.jsp">Forgot password?</a>
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Don't have an account?</p>
-                                                <button type="button" class="btn btn-outline-danger"><a href="register">Create new</a></button>
+                                                <button type="button" class="btn btn-outline-danger">Create new</button>
                                             </div>
 
                                         </form>

@@ -34,19 +34,12 @@ public class BlogDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
-        
         BlogDAO dao = new BlogDAO();
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
-        
         int author_id = blog.getAuthor_id();
         String author = dao.getAuthor(author_id);
         request.setAttribute("author", author);
-        
-        int category_id = blog.getCategory_id();
-        String category = dao.getCategoryName(category_id);
-        request.setAttribute("category", category);
-        
         request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
     }
 

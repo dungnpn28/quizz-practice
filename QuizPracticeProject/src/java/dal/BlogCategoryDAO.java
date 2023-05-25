@@ -11,31 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Blog_Category;
+import model.BlogCategory;
 
 /**
  *
  * @author ADMIN
  */
-public class Blog_CategoryDAO extends MyDAO {
+public class BlogCategoryDAO extends MyDAO {
 
-    public List<Blog_Category> getCategory() {
-        List<Blog_Category> b = new ArrayList<>();
+    public List<BlogCategory> getCategory() {
+        List<BlogCategory> b = new ArrayList<>();
         try {
             xSql = "select * from blog_category";
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xId;
             String xName;
-            Blog_Category x;
+            BlogCategory x;
             while(rs.next()){
                 xId = rs.getInt("id");
                 xName = rs.getString("name");
-                x = new Blog_Category(xId,xName);
+                x = new BlogCategory(xId,xName);
                 b.add(x);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Blog_CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogCategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (b);
     }

@@ -16,7 +16,7 @@ public class Blog {
     private String thumbnail;
     private int author_id;
     private String title;
-    private int category_id;
+    private String category;
     private String flag;
     private String status;
     private String content;
@@ -26,12 +26,12 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, String status, String content, Date created, Date modified) {
+    public Blog(int id, String thumbnail, int author_id, String title, String category, String flag, String status, String content, Date created, Date modified) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.author_id = author_id;
         this.title = title;
-        this.category_id = category_id;
+        this.category = category;
         this.flag = flag;
         this.status = status;
         this.content = content;
@@ -71,12 +71,12 @@ public class Blog {
         this.title = title;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getFlag() {

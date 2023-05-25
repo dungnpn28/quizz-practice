@@ -11,7 +11,7 @@ import java.sql.Date;
  * @author LENOVO
  */
 public class Exam {
-
+    
     private int id;
     private String name;
     private int subject_id;
@@ -21,7 +21,6 @@ public class Exam {
     private double pass_rate;
     private int number_of_question;
     private Date created;
-    private String description;
     private String subjectName;
 
     public Exam() {
@@ -49,25 +48,6 @@ public class Exam {
         this.subjectName = subjectName;
     }
 
-    public Exam(int id, String name, int level, String duration, double pass_rate, int number_of_question, String subjectName, String description) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.duration = duration;
-        this.pass_rate = pass_rate;
-        this.number_of_question = number_of_question;
-        this.subjectName = subjectName;
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getSubjectName() {
         return subjectName;
     }
@@ -75,6 +55,8 @@ public class Exam {
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }
+    
+    
 
     public int getId() {
         return id;

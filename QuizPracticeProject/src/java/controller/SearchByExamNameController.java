@@ -11,12 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.ExamDAO;
-import dal.SubjectDAO;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Exam;
-import model.Subject;
-import model.User;
 
 /**
  *
@@ -37,14 +33,10 @@ public class SearchByExamNameController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            User x = (User) session.getAttribute("user");
             String keyword = request.getParameter("keyword");
             ExamDAO eDAO = new ExamDAO();
-            List<Exam> examList = eDAO.getExamByName(keyword, x.getId());
-            SubjectDAO sDAO = new SubjectDAO();
-            List<Subject> subjectList = sDAO.getSubjects();
-            request.setAttribute("subjectList", subjectList);
+            List<Exam> examList = eDAO.getExamByName(keyword, 1);
+
             request.setAttribute("examList", examList);
             request.setAttribute("key", keyword);
             request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);

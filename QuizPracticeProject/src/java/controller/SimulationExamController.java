@@ -63,6 +63,7 @@ public class SimulationExamController extends HttpServlet {
         List<Exam> examList = new ArrayList<>();
         examList = eDAO.getExamByUserID(x.getId());
         if (examList.isEmpty() || examList == null) {
+            out.print("Khong co list");
             request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
         } else {
 

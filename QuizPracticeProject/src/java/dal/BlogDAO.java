@@ -32,7 +32,7 @@ public class BlogDAO extends MyDAO{
                         rs.getString(2),//thumbnail
                         rs.getInt(3),//author id
                         rs.getString(4),//title
-                        rs.getInt(5),//category
+                        rs.getString(5),//category
                         rs.getString(6),//flag
                         rs.getString(7),//status
                         rs.getString(8),//content
@@ -56,7 +56,7 @@ public class BlogDAO extends MyDAO{
                         rs.getString(2),//thumbnail
                         rs.getInt(3),//author id
                         rs.getString(4),//title
-                        rs.getInt(5),//category
+                        rs.getString(5),//category
                         rs.getString(6),//flag
                         rs.getString(7),//status
                         rs.getString(8),//content
@@ -66,7 +66,7 @@ public class BlogDAO extends MyDAO{
             }
         } catch (Exception e) {
         }
-        return null;
+        return list;
     }
 
     public String getAuthor(int id) {

@@ -5,7 +5,6 @@
 package controller;
 
 import dal.RegisterDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -52,7 +51,6 @@ public class RegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pw = response.getWriter();
         String name = request.getParameter("Name");
         String email = request.getParameter("Email");
         String phone_number = request.getParameter("Mobile");
@@ -87,7 +85,7 @@ public class RegisterController extends HttpServlet {
                         String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                                 + "To finish registration please go to the following page:<br>"
                                 + "<a href=\"http://localhost:8080/QuizPracticeProject/registerverified\">Click here</a><br>"
-                                + "If you do not wish to register, ignore this message."
+                                + "If you do not wish to register, ignore this message. It will expire in a few hours<br>"
                                 + "All the best,<br>QUIZZERO.";
                         MimeMessage message = new MimeMessage(session);
                         message.setFrom(new InternetAddress("quizzeroproject@gmail.com")); // Change accordingly
@@ -104,35 +102,20 @@ public class RegisterController extends HttpServlet {
                     }
 
                 } else {
-                    response.setContentType("text/html");
-                    pw.println("<script type=\"text/javascript\">");
-                    pw.println("alert('The email already exist');");
-                    pw.println("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-                    rd.include(request, response);
+                    response.sendRedirect("Register.jsp");
                 }
             } else {
-                response.setContentType("text/html");
-                pw.println("<script type=\"text/javascript\">");
-                pw.println("alert('You must be 16 year old to register');");
-                pw.println("</script>");
-                RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-                rd.include(request, response);
+                response.sendRedirect("Register.jsp");
             }
         } else {
-            response.setContentType("text/html");
-            pw.println("<script type=\"text/javascript\">");
-            pw.println("alert('Password and retype password must match');");
-            pw.println("</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-            rd.include(request, response);
+            response.sendRedirect("Register.jsp");
         }
     }
 
     protected boolean validateDob(String dob) {
         if (dob != "") {
             LocalDate Date = LocalDate.parse((CharSequence) dob);
-            return Period.between(Date, LocalDate.now()).getYears() >= 16;
+            return Period.between(Date, LocalDate.now()).getYears() >= 18;
         } else {
             return false;
         }
