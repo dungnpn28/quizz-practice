@@ -40,7 +40,7 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         RoleDAO r = new RoleDAO();
         User u = (User) session.getAttribute("user");
-        String role = "";
+        String role = null;
         if (u != null) {
             role = r.getRoleNameByUserId(u.getId());
         }
@@ -56,79 +56,67 @@ public class UserAuthorizationFilter implements Filter {
     }
 
     private boolean hasPermission(String role, String requestedURL) {
-        if (requestedURL.contains("ChangePassword.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return true;
-                case "user":
-                    return false;
-                default:
-                    return false;
-                
-            }
+        if (requestedURL.contains("ChangePassword.jsp") || requestedURL.contains("changepassword")) {
+            return role.equals("Guest");
         }
-        
+
         if (requestedURL.contains("PracticeList.jsp")) {
-            switch (role) {
-                case "Customer":
-                    return true;
-                default:
-                    return false;               
-            }
+            return role.equals("Customer");
+        }
+
+
+        if (requestedURL.contains("simulationExam") || requestedURL.contains("SimulationExam.jsp")) {
+            return role.equals("Customer");
+
+        }
+
+        if (requestedURL.contains("changeUserProfile") || requestedURL.contains("UserProfile.jsp")) {
+            return !role.equals("Guest");
+
+        }
+
+        if (requestedURL.contains("emailresetpassword") || requestedURL.contains("EmailResetPassword.jsp")) {
+            return role.equals("Guest");
+
+        }
+
+        if (requestedURL.contains("resetpassword") || requestedURL.contains("ResetPassword.jsp")) {
+            return role.equals("Guest");
+
         }
         
-        if (requestedURL.contains("ResetPassword.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return false;
-                default:
-                    return true;
-                
-            }
+        if (requestedURL.contains("CusHome.jsp") || requestedURL.contains("cusHome")) {
+            return !role.equals("Guest");
+
         }
         
-        if (requestedURL.contains("SimulationExam.jsp")) {
-            switch (role) {
-                case "Customer":
-                    return true;
-                default:
-                    return false;            
-            }
+        if (requestedURL.contains("Home.jsp") || requestedURL.contains("home")) {
+            return role.equals("Guest");
+
         }
-        
+
         if (requestedURL.contains("Successful.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return false;
-                default:
-                    return true;
-                
-            }
+            return !role.equals("Guest");
+
         }
         
-        if (requestedURL.contains("Successful.jsp")) {
-            switch (role) {
-                case "Guest":
-                    return false;
-                default:
-                    return true;
-                
-            }
+        if (requestedURL.contains("register") || requestedURL.contains("RegisterController")) {
+            return role.equals("Guest");
+
         }
-        
+
         if (requestedURL.contains("Footer.jsp")) {
             return false;
         }
-        
-        if (requestedURL.contains("Header.jsp")) {
-            return false;
-        }
-        
+
         if (requestedURL.contains("CusHeader.jsp")) {
             return false;
         }
-        
-        
+
+        if (requestedURL.contains("Header.jsp")) {
+            return false;
+        }
+
         return true;
     }
 

@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="header_content">
-            <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
+            <a href="CusHome.jsp"><img src="img\2.png" class="header_logo"></a>
             <div class="header_menu">
                 <ul>
                     <li><a href="BlogList.jsp">Post</a></li>
@@ -28,7 +28,7 @@
                         <li>${userName}</li>
                         <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
                         <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
-                        <li><img src="img/edit.png" alt=""><a href="">Edit Profile</a></li>
+                        <li><img src="img/logout.png" alt=""><a href="Home.jsp">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             </script>
             <div id="popUpModal" class="modal_popUp">
                 <div class="modal-content_popUp">
-                    <span class="close">&times;</span>
+                    <button class="close-popup">&times;</button>
                     <h2>Change password</h2>
 
                     <form id="changePasswordForm" method="POST" action="changePassword">
@@ -54,6 +54,14 @@
                     <div id="errorMessage" class="error-message"></div>
                 </div>
             </div>
+            <script>
+                var closeBtn = document.querySelector('.close-popup');
+                var popUpModal = document.getElementById('popUpModal');
+
+                closeBtn.addEventListener('click', function () {
+                    popUpModal.style.display = 'none';
+                });
+            </script>
         </div>
         <script src="js/PopUp.js" type="text/javascript"></script>
     </body>
