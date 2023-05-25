@@ -16,17 +16,12 @@
         <title>Quizerro</title>
     </head>
     <body>
-        <%@include file="components/Header.jsp" %>
+        <%@include file="components/CusHeader.jsp" %>
         <h1>Practice List</h1>
         <div class="button">
             <div class="left-button">
                 <select name="subjects">
                     <option value="1">All subjects</option>
-                    <option value="2">C#</option>
-                    <option value="3">Java</option>
-                    <option value="4">Python</option>
-                    <option value="5">C++</option>
-                    <option value="6">C</option>
                 </select>
             </div>
             <div class="right-buttons">
@@ -34,7 +29,7 @@
                     <a href="PracticeDetails.jsp">New Practice</a>
                 </button>
                 <button type="button" >
-                    <a href="SimulationExam.jsp">Simulation Exam</a>
+                    <a href="simulationExam">Simulation Exam</a>
                 </button>
             </div>
         </div>

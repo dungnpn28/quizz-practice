@@ -3,14 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Exam.java</file>
             <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/ChangeUserProfileController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/UserProfile.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/User.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/AccessDenied.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/components/Header.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SearchBySubjectController.java</file>
             <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/UserProfileDAO.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/User.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/CusHomeController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/components/CusHeader.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/js/PreviewImage.js</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/components/Footer.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SimulationExam.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
             <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/css/Style.css</file>
             <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/UserProfile.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/Login.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/CusHome.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/UserProfile.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SimulationExamController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SearchByExamNameController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Exam.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeList.jsp</file>
         </group>
     </open-files>
 </project-private>
