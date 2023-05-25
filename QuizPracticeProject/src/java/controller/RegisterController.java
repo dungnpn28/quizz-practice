@@ -76,7 +76,7 @@ public class RegisterController extends HttpServlet {
                     props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                     props.put("mail.smtp.auth", "true");
                     props.put("mail.smtp.port", "465");
-
+                    
                     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication("quizzeroproject@gmail.com", "dytmgttusivorrvq");
@@ -97,12 +97,12 @@ public class RegisterController extends HttpServlet {
 
                         // Send message
                         Transport.send(message);
-
+                        
                         request.getRequestDispatcher("Home.jsp").forward(request, response);
                     } catch (MessagingException e) {
                         throw new RuntimeException(e);
                     }
-
+                    
                 } else {
                     response.setContentType("text/html");
                     pw.println("<script type=\"text/javascript\">");
@@ -128,7 +128,7 @@ public class RegisterController extends HttpServlet {
             rd.include(request, response);
         }
     }
-
+    
     protected boolean validateDob(String dob) {
         if (dob != "") {
             LocalDate Date = LocalDate.parse((CharSequence) dob);
@@ -150,13 +150,14 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            processRequest(request, response);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        response.sendRedirect("Register.jsp");
     }
 
     /**

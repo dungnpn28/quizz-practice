@@ -62,7 +62,7 @@
     </servlet>
     <servlet>
         <servlet-name>RegisterVerifiedController</servlet-name>
-        <servlet-class>controller.RegisterController</servlet-class>
+        <servlet-class>controller.RegisterVerifiedController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
