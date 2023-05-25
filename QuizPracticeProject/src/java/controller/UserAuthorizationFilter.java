@@ -86,12 +86,12 @@ public class UserAuthorizationFilter implements Filter {
         }
         
         if (requestedURL.contains("CusHome.jsp") || requestedURL.contains("cusHome")) {
-            return role.equals("Guest");
+            return !role.equals("Guest");
 
         }
         
         if (requestedURL.contains("Home.jsp") || requestedURL.contains("home")) {
-            return !role.equals("Guest");
+            return role.equals("Guest");
 
         }
 
