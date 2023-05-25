@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.BlogCategoryDAO;
+import dal.Blog_CategoryDAO;
 import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +13,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import model.Blog;
 import model.Blog_Category;
 
@@ -47,10 +49,10 @@ public class BlogListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws ServletException, IOException {
         processRequest(req, resp);
-        
-        BlogCategoryDAO bd = new BlogCategoryDAO();
-        String Category = bd.getCategory(5);
-        req.setAttribute("Category", Category);
+        Blog_CategoryDAO bc = new Blog_CategoryDAO();
+        List<Blog_Category> BlogCategory = new ArrayList<>();
+        BlogCategory = bc.getCategory();
+        req.setAttribute("BlogCategory",BlogCategory);       
         req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
         
         

@@ -5,6 +5,8 @@
 
 package controller;
 
+import dal.BlogDAO;
+import dal.SliderDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Blog;
+import model.Slider;
 import model.User;
 
 /**
@@ -50,7 +55,6 @@ public class HomeController extends HttpServlet {
         String password = request.getParameter("password");
         UserDAO p = new UserDAO();
         User a = p.login(account, password);
-        
         if(a== null){
             request.getRequestDispatcher("Home.jsp").forward(request, response);
         }else{
@@ -58,6 +62,12 @@ public class HomeController extends HttpServlet {
         sessions.setAttribute("user", a);
             request.getRequestDispatcher("CusHome.jsp").forward(request, response);
         }
+        List<Blog> listBlog = new BlogDAO().getBlogList();
+        request.setAttribute("listBlog", listBlog);
+
+        List<Slider> listSlider = new SliderDAO().getSlider();
+        request.setAttribute("listSlider",listSlider);
+        
     } 
 
     /** 

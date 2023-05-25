@@ -32,7 +32,7 @@
                 gd = "female";
             }
         %>
-        <%@include file="components/Header.jsp" %>
+        <%@include file="components/CusHeader.jsp" %>
 
         <a href="#PopUp" class="btn btn-primary" data-toggle="modal">Profile</a>
         <a href="#">
