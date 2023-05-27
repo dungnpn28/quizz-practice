@@ -1,28 +1,29 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
-import dal.ExamDAO;
-import dal.SubjectDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import model.Exam;
 import model.Subject;
+import java.util.List;
+import dal.PracticeListDAO;
+import dal.SubjectDAO;
 import model.User;
+import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServlet;
 
 /**
  *
  * @author dai
  */
-public class PracticeList1Controller extends HttpServlet {
+public class PracticeListSubjectController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,15 +40,21 @@ public class PracticeList1Controller extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             User x = (User) session.getAttribute("user");
-            String keyword = request.getParameter("keyword");
-            ExamDAO eDAO = new ExamDAO();
-            List<Exam> examList = eDAO.getExamByName(keyword, x.getId());
+            int subjectId = Integer.parseInt(request.getParameter("subjectId"));
             SubjectDAO sDAO = new SubjectDAO();
             List<Subject> subjectList = sDAO.getSubjects();
-            request.setAttribute("subjectList", subjectList);
-            request.setAttribute("examList", examList);
-            request.setAttribute("key", keyword);
-            request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+            PracticeListDAO eDAO = new PracticeListDAO();
+            if (subjectId == 0) {
+                List<Exam> examList = eDAO.getExamByUserID(x.getId());
+                request.setAttribute("examList", examList);
+                request.setAttribute("subjectList", subjectList);
+                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+            } else {
+                List<Exam> examList = eDAO.getExamByUserIDandSubID(x.getId(), subjectId);
+                request.setAttribute("examList", examList);
+                request.setAttribute("subjectList", subjectList);
+                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+            }
         }
     }
 
