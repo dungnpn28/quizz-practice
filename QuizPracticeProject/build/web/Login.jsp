@@ -57,7 +57,7 @@
                                                 <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                                                     in</button>
                                                 <div class="text-danger">${mess}</div>
-                                                <a class="text-muted" href="emailresetpassword">Forgot password?</a>
+                                                <a class="text-muted" href="emailresetpassword">Reset password?</a>
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">

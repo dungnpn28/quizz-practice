@@ -1,10 +1,11 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
-import dal.ExamDAO;
+import dal.PracticeListDAO;
 import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +23,7 @@ import model.User;
  *
  * @author dai
  */
-public class PracticeList2Controller extends HttpServlet {
+public class PracticeListExamNameController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,21 +40,15 @@ public class PracticeList2Controller extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             User x = (User) session.getAttribute("user");
-            int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+            String keyword = request.getParameter("keyword");
+            PracticeListDAO eDAO = new PracticeListDAO();
+            List<Exam> examList = eDAO.getExamByName(keyword, x.getId());
             SubjectDAO sDAO = new SubjectDAO();
             List<Subject> subjectList = sDAO.getSubjects();
-            ExamDAO eDAO = new ExamDAO();
-            if (subjectId == 0) {
-                List<Exam> examList = eDAO.getExamByUserID(x.getId());
-                request.setAttribute("examList", examList);
-                request.setAttribute("subjectList", subjectList);
-                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
-            } else {
-                List<Exam> examList = eDAO.getExamByUserIDandSubID(x.getId(), subjectId);
-                request.setAttribute("examList", examList);
-                request.setAttribute("subjectList", subjectList);
-                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
-            }
+            request.setAttribute("subjectList", subjectList);
+            request.setAttribute("examList", examList);
+            request.setAttribute("key", keyword);
+            request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
         }
     }
 
