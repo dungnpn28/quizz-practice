@@ -47,6 +47,32 @@
         <h3><p class="content">
                 <c:out value="${blog.content}"/>
             </p></h3>
+        <div class="search">
+            <form>
+                <input type="text" name="search" placeholder="search..." class="search_box">
+                <select>
+                    <option>${Category}</option>
+                </select>
+            </form>
+            <div class="thumbnail_container">
+                <div class="tn1"> 
+                    Title
+                    <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+
+                </div>
+
+                <div class="tn2">
+                    Title
+                    <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+
+                </div>
+                <div class="contact">
+                    <h3>Static<br><span>contacts/links</span>
+                    </h3>
+
+                </div>          
+            </div>
+        </div>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>

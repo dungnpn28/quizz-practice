@@ -81,8 +81,8 @@
                                             <div class="form-outline mb-3">
                                                 <label class="inputLabel" for="Pass">Password: </label>
                                                 <input type="password" id="Pass" class="form-control"
-                                                       name="Pass" value=""pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
-                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters"
+                                                       name="Pass" value="" <%-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
+                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters" --%> 
                                                        required = "required"
                                                        placeholder="Password" />
                                                        

@@ -12,12 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.User;
-import model.UserProfile;
 
 /**
  *
@@ -36,20 +33,8 @@ public class RegisterVerifiedController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterVerifiedController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterVerifiedController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,22 +49,21 @@ public class RegisterVerifiedController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessions = request.getSession();
-        User user = (User) sessions.getAttribute("user");
-        UserProfile userprofile=(UserProfile) sessions.getAttribute("userprofile");
-        RegisterDAO dao = new RegisterDAO();
         try {
-            dao.registerUser(user.getAccount(), user.getPassword());
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone_number = request.getParameter("phone_number");
+            int gender = Integer.parseInt(request.getParameter("gender"));
+            String pass = request.getParameter("pass");
+            String dob = request.getParameter("dob");
+            RegisterDAO dao = new RegisterDAO();
+            dao.registerUser(email, pass);
+            int id = dao.getID(email);
+            dao.registerProfile(id, name, gender, dob, phone_number);
+            response.sendRedirect("Home.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int id = dao.getID(user.getAccount());
-        try {
-            dao.registerProfile(id, userprofile.getFull_name(), userprofile.phone_number(), userprofile.getDob(), userprofile.getGender());
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
     }
 
     /**
@@ -93,7 +77,11 @@ public class RegisterVerifiedController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
