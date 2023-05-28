@@ -213,7 +213,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .th_cnt{
-    display: flex;
+    display: inline-block;
 }
 
 .th_cnt p{

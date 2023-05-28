@@ -49,10 +49,10 @@ public class BlogListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws ServletException, IOException {
         processRequest(req, resp);
-        Blog_CategoryDAO bc = new Blog_CategoryDAO();
-        List<Blog_Category> BlogCategory = new ArrayList<>();
-        BlogCategory = bc.getCategory();
-        req.setAttribute("BlogCategory",BlogCategory);       
+        List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
+        req.setAttribute("listCategory",listCategory);
+        List<Blog> listBlog = new BlogDAO().getBlogList();
+        req.setAttribute("listBlog", listBlog);
         req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
         
         

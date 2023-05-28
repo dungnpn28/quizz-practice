@@ -90,10 +90,11 @@
 
                     <div class="content">
                         <div class="th_cnt">
-                            <img src="${Blog.getThumbnail()}" width="200px" alt="Ảnh">
+                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}"width="200px" alt="Ảnh"></a>
                             <p class="title">
                                 ${Blog.getContent()}
                             </p>
+
                         </div>
                     </div>
                 </div>
