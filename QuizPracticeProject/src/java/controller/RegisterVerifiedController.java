@@ -12,9 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.User;
 
 /**
  *
@@ -50,17 +54,41 @@ public class RegisterVerifiedController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String phone_number = request.getParameter("phone_number");
-            int gender = Integer.parseInt(request.getParameter("gender"));
-            String pass = request.getParameter("pass");
-            String dob = request.getParameter("dob");
+            String name64 = request.getParameter("name64");
+            String email64 = request.getParameter("email64");
+            String phone_number64 = request.getParameter("phone_number64");
+            String gender64 = request.getParameter("gender64");
+            String pass64 = request.getParameter("pass64");
+            String dob64 = request.getParameter("dob64");
+            String expirationDate = request.getParameter("expirationDate");
+            
+            String now = LocalDateTime.now().toString();
+            if(expirationDate.compareTo(now) < 0){
+            
+            byte[] decodedBytes = Base64.getDecoder().decode(name64);
+            String name = new String(decodedBytes, StandardCharsets.UTF_8);
+            decodedBytes = Base64.getDecoder().decode(email64);
+            String email = new String(decodedBytes, StandardCharsets.UTF_8);
+            decodedBytes = Base64.getDecoder().decode(phone_number64);
+            String phone_number = new String(decodedBytes, StandardCharsets.UTF_8);
+            decodedBytes = Base64.getDecoder().decode(gender64);
+            String gender = new String(decodedBytes, StandardCharsets.UTF_8);
+            decodedBytes = Base64.getDecoder().decode(pass64);
+            String pass = new String(decodedBytes, StandardCharsets.UTF_8);
+            decodedBytes = Base64.getDecoder().decode(dob64);
+            String dob = new String(decodedBytes, StandardCharsets.UTF_8);
+                        
             RegisterDAO dao = new RegisterDAO();
-            dao.registerUser(email, pass);
-            int id = dao.getID(email);
-            dao.registerProfile(id, name, gender, dob, phone_number);
-            response.sendRedirect("Home.jsp");
+            User existUser = dao.checkUserExist(email);
+            if (existUser == null) {
+                dao.registerUser(email, pass);
+                int id = dao.getID(email);
+                dao.registerProfile(id, name, Integer.parseInt(gender), dob, phone_number);
+                response.sendRedirect("Home.jsp");
+            }
+            }else{
+                response.sendRedirect("Register.jsp");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
         }

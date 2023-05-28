@@ -16,7 +16,9 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -40,30 +42,45 @@ public class RegisterController extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        
         PrintWriter pw = response.getWriter();
         String name = request.getParameter("Name");
         String email = request.getParameter("Email");
         String phone_number = request.getParameter("Mobile");
-        int gender = Integer.parseInt(request.getParameter("Gender"));
+        String gender = request.getParameter("Gender");
         String pass = request.getParameter("Pass");
         String rePass = request.getParameter("rePass");
         String dob = request.getParameter("dob");
+        
+        String name64 = Base64.getEncoder().encodeToString(name.getBytes());
+        String email64 = Base64.getEncoder().encodeToString(email.getBytes());
+        String phone_number64 = Base64.getEncoder().encodeToString(phone_number.getBytes());
+        String gender64 = Base64.getEncoder().encodeToString(gender.getBytes());
+        String pass64 = Base64.getEncoder().encodeToString(pass.getBytes());
+        String dob64 = Base64.getEncoder().encodeToString(dob.getBytes());
+        
+        LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(30);
+        
         if (pass.equals(rePass)) {
             if (validateDob(dob)) {
                 RegisterDAO dao = new RegisterDAO();
                 User existUser = dao.checkUserExist(email);
                 if (existUser == null) {
+                    
                         String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                                 + "To finish registration please go to the following page:<br>"
-                                + "<a href=\"http://localhost:9999/QuizPracticeProject/registerverified?name="+name
-                                +"&email="+email+"&phone_number="+phone_number+"&gender="+gender
-                                +"&pass="+pass+"&dob="+dob+"\">Click here</a><br>"
-                                + "If you do not wish to register, ignore this message."
+                                + "<a href=\"http://localhost:9999/QuizPracticeProject/registerverified?name64="+name64
+                                +"&email64="+email64+"&phone_number64="+phone_number64+"&gender64="+gender64
+                                +"&pass64="+pass64+"&dob64="+dob64+"&expirationDate="+expirationDate+"\">Click here</a><br>"
+                                + "If you do not wish to register, ignore this message, it will expire in 30 minutes"
                                 + "All the best,<br>QUIZZERO.";
+                        
                         SendingEmail sendMail = new SendingEmail();
                         sendMail.sendEmail(email, emailContent);
                         response.sendRedirect("Home.jsp");
+                
                 } else {
+                
                     response.setContentType("text/html");
                     pw.println("<script type=\"text/javascript\">");
                     pw.println("alert('The email already exist');");
