@@ -19,6 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>QuizPractice</title>
+        <script src="js/PopUp.js" type="text/javascript"></script>
     </div>
 </head>
 <%@include file="components/Header.jsp"%>
@@ -101,7 +102,7 @@
             </c:if>
         </c:forEach>
     </div>
-
-</body>
-<%@include file="components/Footer.jsp" %>
+    <%@include file = "Login.jsp"%>  
+    </body>
+    <%@include file="components/Footer.jsp" %>
 </html>

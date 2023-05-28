@@ -11,6 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.Base64;
 import model.User;
 
 /**
@@ -21,19 +24,39 @@ public class ResetPasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession sessions = req.getSession();
-        String password = req.getParameter("password");
-        User usertoreset = (User) sessions.getAttribute("usertoreset");
-        UserDAO p = new UserDAO();
-        
-        p.updatePassword(usertoreset.getAccount(), password);
-        sessions.removeAttribute("usertoreset");
-        req.getRequestDispatcher("Home.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.getRequestDispatcher("ResetPassword.jsp").forward(req, resp);
+        String email = req.getParameter("email");
+        String token = req.getParameter("token");
+
+        // Check if the token exists and has not expired
+        HttpSession session = req.getSession();
+        LocalDateTime expirationDateTime = (LocalDateTime) session.getAttribute("expirationDateTime");
+
+        if (expirationDateTime != null && LocalDateTime.now().isBefore(expirationDateTime)) {
+            String encodedTo = req.getParameter("email");
+            byte[] decodedBytes = Base64.getDecoder().decode(encodedTo);
+            String originalTo = new String(decodedBytes, StandardCharsets.UTF_8);
+
+            UserDAO p = new UserDAO();
+            User user = p.checkAccount(originalTo);
+            if (user == null) {
+                resp.sendRedirect("login");
+            } else {
+
+                session.setAttribute("users", user);
+                resp.sendRedirect("resetpassword2");
+            }
+        
+        } else {
+            // Token is invalid or has expired, display an error message or redirect to an appropriate page
+          
+            resp.sendRedirect("Error.jsp");
+        }
+
     }
-    
+
 }
