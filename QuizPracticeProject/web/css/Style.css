@@ -15,13 +15,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;  /*Cho phép cuộn nội dung nếu cần */
+/*    overflow: auto;*/
     background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
 }
 
 .modal-content_popUp {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 7% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 500px; /*thay đổi cái chiều rộng ở đây */
