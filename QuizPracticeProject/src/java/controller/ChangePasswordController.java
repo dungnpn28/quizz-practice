@@ -74,8 +74,8 @@ public class ChangePasswordController extends HttpServlet {
             errorMessage = "Please re-enter old password";
             sendResponse(response, errorMessage);
             return;
-        }else if (!password1.matches("^(?=.*[A-Z!@#$%^&*(),.?\":{}|<>]).{6,}$")) {
-            errorMessage = "Please re-enter new password, it should be at least 6 characters long, contain at least one special character or one uppercase letter";
+        }else if (!password1.matches("^(?=.*[A-Z!@#$%^&*(),.?\":{}|<>]).{6,20}$")) {
+            errorMessage = "Please re-enter new password, it should be from 6 to 20 characters long, contain at least one special character or one uppercase letter";
             sendResponse(response, errorMessage);
             return;
         } else if (!password1.equals(password2)) {

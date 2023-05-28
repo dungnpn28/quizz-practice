@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
             UserProfileDAO upDAO = new UserProfileDAO();
             String userName = upDAO.getUserName(a.getId());
             sessions.setAttribute("userName", userName);
-            req.getRequestDispatcher("CusHome.jsp").forward(req, resp);
+            req.getRequestDispatcher("cusHome").forward(req, resp);
 
         }
 

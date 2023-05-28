@@ -4,26 +4,20 @@
  */
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author ADMIN
  */
-public class BlogCategory {
+public class Blog_Category {
     private int id;
     private String name;
 
-    public BlogCategory() {
+    public Blog_Category() {
     }
 
-    public BlogCategory(int id, String name) {
+    public Blog_Category(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public BlogCategory(int xId, String xThumbnail, int xAuthor_id, String xTitle, int xCategory_id, boolean xFlag, boolean xStatus, String xContent, Date xCreated, Date xModified) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getId() {

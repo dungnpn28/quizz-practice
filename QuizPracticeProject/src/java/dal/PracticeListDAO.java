@@ -4,7 +4,6 @@
  */
 package dal;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,17 +12,16 @@ import model.Exam;
 
 /**
  *
- * @author LENOVO
+ * @author dai
  */
-public class ExamDAO extends MyDAO {
-
+public class PracticeListDAO extends MyDAO{
     public List<Exam> getExamByUserID(int userID) {
         List<Exam> examList = new ArrayList<>();
         xSql = "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate, exam.description\n"
                 + "                FROM exam\n"
                 + "                INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
                 + "                INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "                WHERE exam_user.user_id = ? and exam.mode = 1";
+                + "                WHERE exam_user.user_id = ? and exam.mode = 0";
         int xID;
         String xSubjectName;
         String xName;
@@ -67,7 +65,7 @@ public class ExamDAO extends MyDAO {
                 + "FROM exam\n"
                 + "INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
                 + "INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "WHERE exam_user.user_id = ? and exam.mode = 1 and subject_id = ?";;
+                + "WHERE exam_user.user_id = ? and exam.mode = 0 and subject_id = ?";;
         int xID;
         String xSubjectName;
         String xName;
@@ -111,7 +109,7 @@ public class ExamDAO extends MyDAO {
                 + "FROM exam\n"
                 + "INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
                 + "INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "WHERE exam_user.user_id = ? and exam.mode = 1 and exam.name like ?";
+                + "WHERE exam_user.user_id = ? and exam.mode = 0 and exam.name like ?";
         int xID;
         String xSubjectName;
         String xName;

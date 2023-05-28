@@ -46,7 +46,6 @@
         <div class="boxContainer col-md-7 mb-5">
             <c:forEach items="${listBlog}" var="Blog">
                 <div class="box">
-
                     <div class="boxImage">
                         <img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh">
                     </div>
@@ -81,37 +80,25 @@
     <h4>Hot posts <a href="">View all posts</a></h4>
 
     <div class="post_Container">
-        <div class="post_box">
-            <div class="ti_da">
-                <h3>Title</h3>
-                <h5>DATE:</h5>
-            </div>
+        <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
+            <c:if test="${loop.index < 2}">
+                <div class="post_box ">
+                    <div class="ti_da">
+                        <h3>${Blog.getTitle()}</h3>
+                        <h5>${Blog.getCreated()}</h5>
+                    </div>
 
-            <div class="content">
-                <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
-                    <p class="title">
-                        Description
-                    </p>
+                    <div class="content">
+                        <div class="th_cnt">
+                            <img src="${Blog.getThumbnail()}" width="200px" alt="Ảnh">
+                            <p class="title">
+                                ${Blog.getContent()}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="post_box">
-            <div class="ti_da">
-                <h3>Title</h3>
-                <h5>DATE:</h5>
-            </div>
-
-            <div class="content">
-                <div class="th_cnt">
-                    <iframe width="200px" height="150px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
-                    <p class="title">
-                        Description
-                    </p>
-                </div>
-            </div>
-        </div>
+            </c:if>
+        </c:forEach>
     </div>
 
 </body>

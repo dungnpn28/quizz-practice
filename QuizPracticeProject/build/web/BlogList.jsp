@@ -4,7 +4,6 @@
     Author     : Acer
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -65,9 +64,7 @@
                 <form>
                     <input type="text" name="search" placeholder="search..." class="search_box">
                     <select>
-                        <c:forEach items="${BlogCategory}" var="BlogCategory">
-                            <option value="${BlogCategory.id}">${BlogCategory.getName()}</option>
-                        </c:forEach>
+                        <option>${Category}</option>
                     </select>
                 </form>
                 <div class="thumbnail_container">

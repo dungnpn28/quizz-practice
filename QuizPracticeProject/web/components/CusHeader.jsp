@@ -16,6 +16,7 @@
                 <ul>
                     <li><a href="BlogList.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
+                    <li><a href="practiceList">Practice List</a></li>
                 </ul>
             </div>
 

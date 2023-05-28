@@ -1,30 +1,29 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
-import dal.RegisterDAO;
+import dal.PracticeListDAO;
+import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
+import model.Exam;
+import model.Subject;
 import model.User;
-import model.UserProfile;
 
 /**
  *
- * @author ACER
+ * @author dai
  */
-@WebServlet(name = "RegisterVerifiedController", urlPatterns = {"/registerverified"})
-public class RegisterVerifiedController extends HttpServlet {
+public class PracticeListExamNameController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,16 +38,17 @@ public class RegisterVerifiedController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterVerifiedController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterVerifiedController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            User x = (User) session.getAttribute("user");
+            String keyword = request.getParameter("keyword");
+            PracticeListDAO eDAO = new PracticeListDAO();
+            List<Exam> examList = eDAO.getExamByName(keyword, x.getId());
+            SubjectDAO sDAO = new SubjectDAO();
+            List<Subject> subjectList = sDAO.getSubjects();
+            request.setAttribute("subjectList", subjectList);
+            request.setAttribute("examList", examList);
+            request.setAttribute("key", keyword);
+            request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
         }
     }
 
@@ -64,23 +64,7 @@ public class RegisterVerifiedController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessions = request.getSession();
-        User user = (User) sessions.getAttribute("user");
-        UserProfile userprofile=(UserProfile) sessions.getAttribute("userprofile");
-        RegisterDAO dao = new RegisterDAO();
-        try {
-            dao.registerUser(user.getAccount(), user.getPassword());
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int id = dao.getID(user.getAccount());
-        try {
-            dao.registerProfile(id, userprofile.getFull_name(), userprofile.phone_number(), userprofile.getDob(), userprofile.getGender());
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        response.sendRedirect("home");
-        
+        processRequest(request, response);
     }
 
     /**

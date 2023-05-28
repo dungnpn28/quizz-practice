@@ -26,7 +26,7 @@
                 <p>Uh oh, you are not allowed to access this page<br/>Maybe you mistyped in the url? Here's a button to go back to Home Page!</p>
             </div>
             <div class="btt">
-                <a class="button">Go back Home</a>
+                <a class="button" href="userauthorization">Go back Home</a>
             </div>
         </div>
     </body>

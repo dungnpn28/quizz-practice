@@ -4,27 +4,30 @@
  */
 package controller;
 
-import dal.RegisterDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.InputStream;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import model.User;
 import model.UserProfile;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
- * @author ACER
+ * @author dai
  */
-@WebServlet(name = "RegisterVerifiedController", urlPatterns = {"/registerverified"})
-public class RegisterVerifiedController extends HttpServlet {
+public class ChangeUserProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,18 +41,7 @@ public class RegisterVerifiedController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterVerifiedController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterVerifiedController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,23 +56,7 @@ public class RegisterVerifiedController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessions = request.getSession();
-        User user = (User) sessions.getAttribute("user");
-        UserProfile userprofile=(UserProfile) sessions.getAttribute("userprofile");
-        RegisterDAO dao = new RegisterDAO();
-        try {
-            dao.registerUser(user.getAccount(), user.getPassword());
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int id = dao.getID(user.getAccount());
-        try {
-            dao.registerProfile(id, userprofile.getFull_name(), userprofile.phone_number(), userprofile.getDob(), userprofile.getGender());
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterVerifiedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        response.sendRedirect("home");
-        
+        processRequest(request, response);
     }
 
     /**
@@ -95,6 +71,31 @@ public class RegisterVerifiedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int xUser_id = user.getId();
+        int genderValue = 0;
+        String xAvatar = request.getParameter("avatar");
+        String xFull_name = request.getParameter("fullname");
+        String xPhone_number = request.getParameter("phonenum");
+        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
+        String input = xPhone_number;
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if (!matcher.matches()) {
+            request.setAttribute("tbao", "Invalid phone number");
+            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+        } else {
+            String xDob = request.getParameter("dob");
+            String xGender = request.getParameter("radB1");
+            if (xGender.equals("male")) {
+                genderValue = 1;
+            }
+            UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
+            UserProfileDAO u = new UserProfileDAO();
+            u.update(up);
+            response.sendRedirect("CusHome.jsp");
+        }
     }
 
     /**

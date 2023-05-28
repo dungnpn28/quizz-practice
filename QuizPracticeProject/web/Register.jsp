@@ -26,7 +26,7 @@
                             <div class="row g-0">
                                 <div class="col-lg-6">
                                     <div class="card-body mx-md-4">
-                                        <a href="#" class="close">&times;</a>
+                                        <a href="Home.jsp" class="close">&times;</a>
                                         <div class="text-center">
                                             <img src="img/2.png"
                                                  style="width: 150px;" alt="logo">
@@ -81,15 +81,19 @@
                                             <div class="form-outline mb-3">
                                                 <label class="inputLabel" for="Pass">Password: </label>
                                                 <input type="password" id="Pass" class="form-control"
-                                                       name="Pass" value="" required = "required"
+                                                       name="Pass" value=""pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
+                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters"
+                                                       required = "required"
                                                        placeholder="Password" />
-
+                                                       
                                             </div>
 
                                             <div class="form-outline mb-3">
                                                 <label class="inputLabel" for="rePass">Retype Password: </label>
                                                 <input type="password" id="rePass" class="form-control"
-                                                       name="rePass" value="" required = "required"
+                                                       name="rePass" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}" 
+                                                       title="Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters" 
+                                                       required = "required"
                                                        placeholder="Retype Password" />
 
                                             </div>
@@ -102,7 +106,7 @@
 
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Already have an account?</p>
-                                                <button type="button" class="btn btn-outline-danger">Login</button>
+                                                <button type="button"  onclick="location.href ='Login.jsp'" class="btn btn-outline-danger">Login</button>
                                             </div>
 
                                         </form>
