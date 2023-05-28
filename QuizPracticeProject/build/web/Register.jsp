@@ -26,7 +26,7 @@
                             <div class="row g-0">
                                 <div class="col-lg-6">
                                     <div class="card-body mx-md-4">
-                                        <a href="Home.jsp" class="close">&times;</a>
+                                        <a href="home" class="close">&times;</a>
                                         <div class="text-center">
                                             <img src="img/2.png"
                                                  style="width: 150px;" alt="logo">

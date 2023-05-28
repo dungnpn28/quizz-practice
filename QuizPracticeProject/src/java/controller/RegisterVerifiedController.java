@@ -63,7 +63,7 @@ public class RegisterVerifiedController extends HttpServlet {
             String expirationDate = request.getParameter("expirationDate");
             
             String now = LocalDateTime.now().toString();
-            if(expirationDate.compareTo(now) < 0){
+            if(expirationDate.compareTo(now) >= 0){
             
             byte[] decodedBytes = Base64.getDecoder().decode(name64);
             String name = new String(decodedBytes, StandardCharsets.UTF_8);
@@ -84,7 +84,7 @@ public class RegisterVerifiedController extends HttpServlet {
                 dao.registerUser(email, pass);
                 int id = dao.getID(email);
                 dao.registerProfile(id, name, Integer.parseInt(gender), dob, phone_number);
-                response.sendRedirect("Home.jsp");
+                response.sendRedirect("home");
             }
             }else{
                 response.sendRedirect("Register.jsp");

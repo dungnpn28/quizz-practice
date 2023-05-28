@@ -14,9 +14,10 @@
         <group name="SE1714">
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/EmailResetPasswordController.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/EmailResetPassword.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/SendingEmail.java</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/UserDAO.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterVerifiedController.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Register.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/MyDAO.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/RegisterDAO.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterController.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/ResetPasswordController.java</file>

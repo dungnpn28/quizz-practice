@@ -78,7 +78,7 @@ public class RegisterController extends HttpServlet{
                         
                         SendingEmail sendMail = new SendingEmail();
                         sendMail.sendEmail(email, emailContent);
-                        response.sendRedirect("Home.jsp");
+                        response.sendRedirect("home");
                 
                 } else {
                 
