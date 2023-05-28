@@ -66,7 +66,7 @@ public class BlogDAO extends MyDAO{
             }
         } catch (Exception e) {
         }
-        return null;
+        return list;
     }
 
     public String getAuthor(int id) {

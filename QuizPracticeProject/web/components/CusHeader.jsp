@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="header_content">
-            <a href="CusHome.jsp"><img src="img\2.png" class="header_logo"></a>
+            <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
             <div class="header_menu">
                 <ul>
                     <li><a href="BlogList.jsp">Post</a></li>

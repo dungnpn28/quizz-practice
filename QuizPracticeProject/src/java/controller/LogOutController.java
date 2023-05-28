@@ -26,7 +26,7 @@ public class LogOutController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.invalidate();
-        resp.sendRedirect("Home.jsp");
+        resp.sendRedirect("home");
     }
     
 }

@@ -26,7 +26,7 @@
     <body>
         <div class="header_content">
             <div class="header_logo">
-                <a href="Home.jsp"><img src="img\2.png"></a>
+                <a href="home"><img src="img\2.png"></a>
             </div>
 
             <div class="header_menu">
