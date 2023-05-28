@@ -8,9 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-        </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/Emailresetpassword.css">
@@ -27,7 +24,7 @@
             <div class="card-header h5 text-white">Reset your password</div>
             <div class="card-body px-5">
 
-                <form action="resetpassword" method="post" onsubmit="return validateForm()">
+                <form action="resetpassword2" method="post" onsubmit="return validateForm()">
                     <div class="form-outline">
                         <input type="password" class="form-control my-3" id="password" name="password" placeholder="Input your new password" required oninput="validatePassword()" />
                         <div id="passwordError" class="text-danger"></div>
@@ -42,83 +39,7 @@
             </div>
         </div>
 
-        <script>
-            function validatePassword() {
-                var password = document.getElementById("password").value;
-                var passwordError = document.getElementById("passwordError");
+        <script src="js/ValidatePassword.js" type="text/javascript"></script>
 
-                if (password.length < 6) {
-                    passwordError.textContent = "Password should be at least 6 characters long.";
-                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password) && !/[A-Z]/.test(password)) {
-                    passwordError.textContent = "Password should contain at least one special character or one uppercase letter.";
-                } else {
-                    passwordError.textContent = "";
-                }
-
-                enableOrDisableSubmitButton();
-            }
-
-            function validateRepassword() {
-                var password = document.getElementById("password").value;
-                var repassword = document.getElementById("repassword").value;
-                var repasswordError = document.getElementById("repasswordError");
-
-                if (repassword.length < 6) {
-                    repasswordError.textContent = "Password should be at least 6 characters long.";
-                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(repassword) && !/[A-Z]/.test(repassword)) {
-                    repasswordError.textContent = "Password should contain at least one special character or one uppercase letter.";
-                } else if (password !== repassword) {
-                    repasswordError.textContent = "Passwords do not match.";
-                } else {
-                    repasswordError.textContent = "";
-                }
-
-                enableOrDisableSubmitButton();
-            }
-
-            function enableOrDisableSubmitButton() {
-                var passwordError = document.getElementById("passwordError").textContent;
-                var repasswordError = document.getElementById("repasswordError").textContent;
-                var submitButton = document.getElementById("submitButton");
-
-                if (passwordError === "" && repasswordError === "") {
-                    submitButton.disabled = false;
-                } else {
-                    submitButton.disabled = true;
-                }
-            }
-
-            function validateForm() {
-                var password = document.getElementById("password").value;
-                var repassword = document.getElementById("repassword").value;
-                var passwordError = document.getElementById("passwordError");
-                var repasswordError = document.getElementById("repasswordError");
-
-                if (password.length < 6) {
-                    passwordError.textContent = "Password should be at least 6 characters long.";
-                    return false;
-                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password) && !/[A-Z]/.test(password)) {
-                    passwordError.textContent = "Password should contain at least one special character or one uppercase letter.";
-                    return false;
-                } else {
-                    passwordError.textContent = "";
-                }
-
-                if (repassword.length < 6) {
-                    repasswordError.textContent = "Password should be at least 6 characters long.";
-                    return false;
-                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(repassword) && !/[A-Z]/.test(repassword)) {
-                    repasswordError.textContent = "Password should contain at least one special character or one uppercase letter.";
-                    return false;
-                } else if (password !== repassword) {
-                    repasswordError.textContent = "Passwords do not match.";
-                    return false;
-                } else {
-                    repasswordError.textContent = "";
-                }
-
-                return true;
-            }
-        </script>
     </body>
 </html>
