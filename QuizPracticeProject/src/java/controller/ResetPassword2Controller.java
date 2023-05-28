@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.RoleDAO;
+import dal.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,33 +15,30 @@ import model.User;
 
 /**
  *
- * @author Acer
+ * @author Dell
  */
-public class UserAuthorizationController extends HttpServlet{
+public class ResetPassword2Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       HttpSession session = req.getSession();
+        User user  = (User) session.getAttribute("users");
+        String password = req.getParameter("password");
+        UserDAO p = new UserDAO();
+        p.updatePassword(user.getAccount(), password);
+        session.removeAttribute("users");
+        resp.sendRedirect("home");
         
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        RoleDAO r = new RoleDAO();
-        User u = (User) session.getAttribute("user");
-        String role = null;
-        if (u != null) {
-            role = r.getRoleNameByUserId(u.getId());
-        }
-        if (role == null) {
-            role = "Guest";
-        }
-        if (role.equals("Guest")) {
-            req.getRequestDispatcher("home").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("cusHome").forward(req, resp);
+        if(session.getAttribute("users") == null){
+            resp.sendRedirect("AccessDenied.jsp");
+        }else{
+        req.getRequestDispatcher("ResetPassword.jsp").forward(req, resp);
         }
     }
-    
     
 }

@@ -4,7 +4,10 @@
     Author     : dai
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.util.*" %>
+<%@page import = "model.Exam" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +25,9 @@
             <div class="left-button">
                 <select name="subjects">
                     <option value="1">All subjects</option>
+                    <c:forEach items="${subjectList}" var="Subject">
+                        <option value="${Subject.id}">${Subject.name}</option>
+                    </c:forEach>
                 </select>
             </div>
             <div class="right-buttons">
@@ -36,66 +42,17 @@
         <div class="table" >
             <table border="2">
                 <tbody>
-                    <tr>
-                        <td>Subject name<br> Exam name  </td>
-                        <td>10/09/2019<br> Date taken</td>
-                        <td>xx Correct <br> yy Questions</td>
-                        <td>50% <br> Correct</td>
-                        <td>
-                            <a href="PracticeDetails.jsp">View Details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">Test type: Put the test name here</td>
-                    </tr>
-                    <tr>
-                        <td>Subject name<br> Focused Test</td>
-                        <td>10/09/2019<br> Date taken</td>
-                        <td>xx Correct <br> yy Questions</td>
-                        <td>50% <br> Correct</td>
-                        <td>
-                            <a href="PracticeDetails.jsp">View Details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">Keyword/Lesson: Keyword/Lesson/Domain</td>
-                    </tr>
-                    <tr>
-                        <td>Subject name<br> Focused Test</td>
-                        <td>10/09/2019<br> Date taken</td>
-                        <td>xx Correct <br> yy Questions</td>
-                        <td>50% <br> Correct</td>
-                        <td>
-                            <a href="PracticeDetails.jsp">View Details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">Keyword/Lesson: Keyword/Lesson/Domain</td>
-                    </tr>
-                    <tr>
-                        <td>Subject name<br> Exam name  </td>
-                        <td>10/09/2019<br> Date taken</td>
-                        <td>xx Correct <br> yy Questions</td>
-                        <td>50% <br> Correct</td>
-                        <td>
-                            <a href="PracticeDetails.jsp">View Details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">Test type: Put the test name here</td>
-                    </tr>
-                    <tr>
-                        <td>Subject name<br> Exam name  </td>
-                        <td>10/09/2019<br> Date taken</td>
-                        <td>xx Correct <br> yy Questions</td>
-                        <td>50% <br> Correct</td>
-                        <td>
-                            <a href="PracticeDetails.jsp">View Details</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">Test type: Put the test name here</td>
-                    </tr>
+                    <c:forEach var="Exam" items="${examList}">
+                        <tr>
+                            <td>${Exam.getSubjectName()}<br> ${Exam.getName()} </td>
+                            <td>10/09/2019<br> Date taken</td>
+                            <td>xx Correct <br> ${Exam.getNumber_of_question()} Questions</td>
+                            <td>50% <br> Correct</td>
+                            <td>
+                                <a href="">View Details</a>
+                            </td>
+                        </tr>
+                    </c:forEach>        
                 </tbody>
             </table>
         </div>

@@ -16,6 +16,7 @@
                 <ul>
                     <li><a href="BlogList.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
+                    <li><a href="practiceList">Practice List</a></li>
                 </ul>
             </div>
 
@@ -28,7 +29,7 @@
                         <li>${userName}</li>
                         <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
                         <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
-                        <li><img src="img/logout.png" alt=""><a href="Home.jsp">Log out</a></li>
+                        <li><img src="img/logout.png" alt=""><a href="logout">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +41,7 @@
             </script>
             <div id="popUpModal" class="modal_popUp">
                 <div class="modal-content_popUp">
-                    <button class="close-popup">&times;</button>
+                    
                     <h2>Change password</h2>
 
                     <form id="changePasswordForm" method="POST" action="changePassword">
@@ -49,7 +50,8 @@
                         New password<input type="password" name="pass1" placeholder="new password" required><br/>
                         New password again<input type="password" name="pass2" placeholder="new password again" required>
                         <br/>
-                        <button type="submit">Change</button>
+                        <button style="background: linear-gradient(to right, #5CE1E6, #0578A4)" type="submit">Change</button>
+                        <button class="close-popup" style="background-color: #e64545">&times; Cancel</button>
                     </form>
                     <div id="errorMessage" class="error-message"></div>
                 </div>
