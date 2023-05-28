@@ -54,6 +54,11 @@ public class HomeController extends HttpServlet {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
         UserDAO p = new UserDAO();
+        List<Blog> listBlog = new BlogDAO().getBlogList();
+        request.setAttribute("listBlog", listBlog);
+
+        List<Slider> listSlider = new SliderDAO().getSlider();
+        request.setAttribute("listSlider",listSlider);
         User a = p.login(account, password);
         if(a== null){
             request.getRequestDispatcher("Home.jsp").forward(request, response);
@@ -62,11 +67,7 @@ public class HomeController extends HttpServlet {
         sessions.setAttribute("user", a);
             request.getRequestDispatcher("CusHome.jsp").forward(request, response);
         }
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-
-        List<Slider> listSlider = new SliderDAO().getSlider();
-        request.setAttribute("listSlider",listSlider);
+        
         
     } 
 

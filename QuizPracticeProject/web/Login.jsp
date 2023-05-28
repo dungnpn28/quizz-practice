@@ -19,7 +19,7 @@
                 <div class="row g-0">
                     <div class="col-lg-6">
                         <div class="card-body p-md-5 mx-md-4 p-0 m-0 h-100">
-                            <a href="home" class="close">&times;</a>
+                            <button class="close-popup" style="border: none; background: none">&times;</button>
                             <div class="text-center">
                                 <img src="img/2.png"
                                      style="width: 185px;" alt="logo">
@@ -131,5 +131,13 @@
                     </div>
                 </section>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+        <script>
+            var closeBtn = document.querySelector('.close-popup');
+            var popUpModal = document.getElementById('popUpModal');
+
+            closeBtn.addEventListener('click', function () {
+                popUpModal.style.display = 'none';
+            });
+        </script>
     </body>
 </html>
