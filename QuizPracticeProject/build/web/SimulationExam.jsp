@@ -85,12 +85,20 @@
         </div>
         <div id="popUpModal" class="modal_popUp">
             <div class="modal-content_popUp">
-                <span class="close">&times;</span>
+                <button class="close-popup">&times;</button>
                 <h2>Exam Detail</h2>
                 <br/>
                 <a href="QuizHandlePage.jsp">Quiz Handle</a>
             </div>
         </div>
+        <script>
+            var closeBtn = document.querySelector('.close-popup');
+            var popUpModal = document.getElementById('popUpModal');
+
+            closeBtn.addEventListener('click', function () {
+                popUpModal.style.display = 'none';
+            });
+        </script>
     </body>
     <%@include file="components/Footer.jsp" %>
     <script src="js/PopUp.js" type="text/javascript"></script>

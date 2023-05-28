@@ -1,29 +1,29 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
-import dal.BlogDAO;
-import dal.SliderDAO;
-import dal.UserProfileDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import model.Exam;
+import model.Subject;
 import java.util.List;
-import model.Blog;
-import model.Slider;
+import dal.PracticeListDAO;
+import dal.SubjectDAO;
 import model.User;
+import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServlet;
 
 /**
  *
- * @author ADMIN
+ * @author dai
  */
-public class CusHomeController extends HttpServlet {
+public class PracticeListSubjectController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,26 +35,28 @@ public class CusHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-//        processRequest(request, response);
-//        String account = request.getParameter("account");
-//        String password = request.getParameter("password");
-//        UserDAO p = new UserDAO();
-//        User a = p.login(account, password);
-        
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-
-        List<Slider> listSlider = new SliderDAO().getSlider();
-        request.setAttribute("listSlider",listSlider);
-//        if(a== null){
-        //request.getRequestDispatcher("Home.jsp").forward(request, response);
-//        }else{
-//            HttpSession sessions = request.getSession();
-//        sessions.setAttribute("user", a);
-        request.getRequestDispatcher("CusHome.jsp").forward(request, response);
-//        }
-    } 
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            User x = (User) session.getAttribute("user");
+            int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+            SubjectDAO sDAO = new SubjectDAO();
+            List<Subject> subjectList = sDAO.getSubjects();
+            PracticeListDAO eDAO = new PracticeListDAO();
+            if (subjectId == 0) {
+                List<Exam> examList = eDAO.getExamByUserID(x.getId());
+                request.setAttribute("examList", examList);
+                request.setAttribute("subjectList", subjectList);
+                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+            } else {
+                List<Exam> examList = eDAO.getExamByUserIDandSubID(x.getId(), subjectId);
+                request.setAttribute("examList", examList);
+                request.setAttribute("subjectList", subjectList);
+                request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+            }
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

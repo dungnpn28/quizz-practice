@@ -32,7 +32,7 @@
                 gd = "female";
             }
         %>
-        <%@include file="components/Header.jsp" %>
+        <%@include file="components/CusHeader.jsp" %>
 
         <a href="#PopUp" class="btn btn-primary" data-toggle="modal">Profile</a>
         <a href="#">
@@ -44,12 +44,12 @@
                         </div>
                         <div class="modal-body">					
                             <div class="row">
-                                <form action="changeUserProfile" method="post">
+                                <form action="changeUserProfile" method="post" enctype="multipart/form-data">
                                     <div class="col-md-5">
                                         <div class="col text-center">
                                             <img id="imagePreview" width="200" height="250">
                                             <br>
-                                            <input name="avatar" type="file" accept="image/*" onchange="loadFile(event)">
+                                            <input name="avatar" type="file" value="Upload Picture" accept="image/*" onchange="loadFile(event)">
                                         </div>
                                     </div>
                                     <div class="col-md-7" class="info">

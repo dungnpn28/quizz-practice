@@ -4,11 +4,7 @@
     Author     : Acer
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "java.util.*" %>
-<%@page import = "model.Blog" %>
-<%@page import = "model.Blog_Category" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,13 +63,9 @@
             <div class="search">
                 <form>
                     <input type="text" name="search" placeholder="search..." class="search_box">
-
                     <select>
-                        <c:forEach items="listCategory" var="Blog_Category">
-                            <option>${Blog_Category.getName()}</option>
-                        </c:forEach>
+                        <option>${Category}</option>
                     </select>
-
                 </form>
                 <div class="thumbnail_container">
                     <div class="tn1"> 
@@ -89,7 +81,7 @@
                     </div>
                     <div class="contact">
                         <h3>Static<br><span>contacts/links</span>
-                        </h3>
+                            </h3>
 
                     </div>          
                 </div>

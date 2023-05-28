@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Base64;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -105,7 +106,7 @@ public class RegisterController extends HttpServlet{
             rd.include(request, response);
         }
     }
-
+    
     protected boolean validateDob(String dob) {
         if (dob != "") {
             LocalDate Date = LocalDate.parse((CharSequence) dob);
@@ -127,13 +128,14 @@ public class RegisterController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            processRequest(request, response);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        response.sendRedirect("Register.jsp");
     }
 
     /**

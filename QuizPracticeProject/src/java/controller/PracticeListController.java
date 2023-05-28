@@ -5,25 +5,27 @@
 
 package controller;
 
-import dal.Blog_CategoryDAO;
-import dal.BlogDAO;
+import dal.ExamDAO;
+import dal.PracticeListDAO;
+import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Blog;
-import model.Blog_Category;
-
+import model.Exam;
+import model.Subject;
+import model.User;
 
 /**
  *
- * @author ADMIN
+ * @author dai
  */
-public class BlogListController extends HttpServlet {
+public class PracticeListController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,6 +36,7 @@ public class BlogListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
     } 
 
@@ -46,17 +49,27 @@ public class BlogListController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(req, resp);
-        List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-        req.setAttribute("listCategory",listCategory);
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        req.setAttribute("listBlog", listBlog);
-        req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
-        
-        
-        
+        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        User x = (User) session.getAttribute("user");
+        PracticeListDAO eDAO = new PracticeListDAO();
+        SubjectDAO sDAO = new SubjectDAO();
+        List<Subject> subjectList = new ArrayList<>();
+        subjectList = sDAO.getSubjects();
+        List<Exam> examList = new ArrayList<>();
+        examList = eDAO.getExamByUserID(x.getId());
+        if (examList.isEmpty() || examList == null) {
+            request.getRequestDispatcher("PracticeList.jsp").include(request, response);
+        } else {
+
+            request.setAttribute("examList", examList);
+            request.setAttribute("subjectList", subjectList);
+            request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
+
+        }
     } 
 
     /** 

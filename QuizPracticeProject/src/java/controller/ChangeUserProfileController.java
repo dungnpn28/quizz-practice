@@ -11,14 +11,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.User;
 import model.UserProfile;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -68,16 +71,11 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int xUser_id = user.getId();
         int genderValue = 0;
         String xAvatar = request.getParameter("avatar");
-//        Part filePart = request.getPart(xAvatar);
-//        InputStream fileContent = filePart.getInputStream();
-//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//        Files.copy(fileContent, Paths.get("/path/to/upload/directory/" + fileName));
         String xFull_name = request.getParameter("fullname");
         String xPhone_number = request.getParameter("phonenum");
         String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
@@ -96,7 +94,7 @@ public class ChangeUserProfileController extends HttpServlet {
             UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
             UserProfileDAO u = new UserProfileDAO();
             u.update(up);
-            response.sendRedirect("Home.jsp");
+            response.sendRedirect("CusHome.jsp");
         }
     }
 
