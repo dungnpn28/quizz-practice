@@ -63,10 +63,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("listSlider",listSlider);
         User a = p.login(account, password);
 
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-        List<Slider> listSlider = new SliderDAO().getSlider();
-        request.setAttribute("listSlider", listSlider);
+        
         if (a == null) {
             request.getRequestDispatcher("Home.jsp").forward(request, response);
         } else {
