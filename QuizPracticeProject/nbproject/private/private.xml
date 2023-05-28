@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/LogOutController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/AccessDenied.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/WEB-INF/web.xml</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/UserAuthorizationFilter.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/Login.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/EmailResetPasswordController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/components/CusHeader.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/UserAuthorizationController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeList.jsp</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/src/java/dal/Blog_CategoryDAO.java</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/web/Home.jsp</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/web/css/Style.css</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/src/java/controller/BlogListController.java</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/src/java/controller/HomeController.java</file>
+            <file>file:/D:/FPT/SWP391/pull/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
     </open-files>
 </project-private>
