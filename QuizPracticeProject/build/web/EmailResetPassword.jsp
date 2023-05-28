@@ -49,10 +49,11 @@
                     <div class="form-outline">
                         <input type="email" id="typeEmail" class="form-control my-3" name="email" oninput="handleInput()"  placeholder="Input your email"/>
                     </div>
+                    <div class="text-danger">${mess}</div>
                     <button onclick="noti()" type="submit" id="submitButton" class="btn btn-primary w-100">   Send reset link</button>
                 </form>
                 <div class="d-flex justify-content-between mt-4">
-                    <a class="" href="login">Back to log in</a>
+                    <a class="" href="home">Back to log in</a>
 
                 </div>
             </div>
