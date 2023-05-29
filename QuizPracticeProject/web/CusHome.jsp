@@ -9,6 +9,9 @@
 <%@page import = "model.Slider" %>
 <%@page import = "model.Blog" %>
 <%@page import = "java.util.*" %>
+<%@page import= "model.UserProfile"%>
+<%@page import= "dal.UserProfileDAO"%>
+<%@page import= "model.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -21,12 +24,21 @@
         <title>QuizPractice</title>
     </div>
 </head>
-<%@include file="components/CusHeader.jsp"%>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <body>
-
+    <%
+            User u = null;
+            if(session.getAttribute("user") != null) {
+                u = (User) session.getAttribute("user");
+            }
+            UserProfileDAO upd = new UserProfileDAO();
+            UserProfile up = upd.getUserProfile(u.getId());
+            session.setAttribute("up", up);
+    %>
+    <%@include file="components/CusHeader.jsp"%>
 
     <!-- SLIDER -->
     <div class="imageSlider">
@@ -46,16 +58,16 @@
         <div class="boxContainer col-md-7 mb-5">
             <c:forEach varStatus="loop" items="${listSubject}" var="listSubject">
                 <c:if test="${loop.index < 9}">
-                <div class="box">
-                    <div class="boxImage">
-                        <img src="${listSubject.getIllustration()}" width="100px" height="125px" alt="Ảnh">
+                    <div class="box">
+                        <div class="boxImage">
+                            <img src="${listSubject.getIllustration()}" width="100px" height="125px" alt="Ảnh">
+                        </div>
+                        <div class="boxContent">
+                            <h4>${listSubject.getName()}</h4>
+                            <p></p>
+                        </div>
                     </div>
-                    <div class="boxContent">
-                        <h4>${listSubject.getName()}</h4>
-                        <p></p>
-                    </div>
-                </div>
-                    </c:if>
+                </c:if>
             </c:forEach>
         </div>
 
@@ -104,6 +116,6 @@
         </c:forEach>
     </div>
     <%@include file = "Login.jsp"%>  
-    </body>
+</body>
 <%@include file="components/Footer.jsp" %>
 </html>

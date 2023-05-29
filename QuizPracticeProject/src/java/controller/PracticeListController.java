@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.ExamDAO;
 import dal.PracticeListDAO;
 import dal.SubjectDAO;
 import java.io.IOException;
