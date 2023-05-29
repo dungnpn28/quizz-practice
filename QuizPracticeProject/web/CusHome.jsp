@@ -92,7 +92,7 @@
 
                     <div class="content">
                         <div class="th_cnt">
-                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}"width="200px" alt="Ảnh"></a>
+                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}" width="200px" height="125px" alt="Ảnh"></a>
                             <p class="title">
                                 ${Blog.getContent()}
                             </p>
@@ -103,7 +103,7 @@
             </c:if>
         </c:forEach>
     </div>
-
-</body>
+    <%@include file = "Login.jsp"%>  
+    </body>
 <%@include file="components/Footer.jsp" %>
 </html>
