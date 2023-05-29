@@ -20,4 +20,7 @@ td {
     padding: 10px;
     width: 310px;
 }
-
+ul .pagination {
+    display: flex;
+    justify-content: center;
+}

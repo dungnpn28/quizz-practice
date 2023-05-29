@@ -49,6 +49,13 @@
                         </tr>
                     </c:forEach>
                 </table>
+                <ul class="pagination">
+                    <li ><a href="simulationExam?page=${page-1}">Previous</a></li>
+                        <c:forEach begin="1" end="${totalPage}" var="i">
+                        <li><a href="simulationExam?page=${i}">${i}</a></li>
+                        </c:forEach>
+                    <li><a  href="simulationExam?page=${page+1}">Next</a></li>
+                </ul>
             </div>
             <div class="col-md-4">
 
