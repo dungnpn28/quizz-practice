@@ -10,69 +10,95 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-        </style>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/BlogDetail.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Blog</title>
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="css/BlogList.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>JSP Page</title>
     </head>
-    <%@include file="components/Header.jsp"%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <%
+    if (session.getAttribute("user") != null) {
+       // Nếu có user, bao gồm trang cusheader.jsp
+    %>
+    <%@ include file="components/CusHeader.jsp" %>
+    <%
+} else {
+    // Nếu không có user, bao gồm trang header.jsp
+    %>
+    <%@ include file="components/Header.jsp" %>
+    <%
+}
+    %>
+
     <body>
-        <img src = "${blog.thumbnail}" alt="Can't display image" class="center">        
-        <h2 class="left">
-            Updated date: <c:choose>
-                <c:when test="${blog.modified == null }">
-                    <c:out value="${blog.created}"/>
-                </c:when>
-                <c:otherwise>
-                    <c:out value="${blog.modified}"/>
-                </c:otherwise>
-            </c:choose>
-            <br>
-            Category: <c:out value="${category}"/>
-            <br>
-            Author: <c:out value="${author}"/>
-        </h2>
-        <h1>
-            <br>
-            <c:out value="${blog.title}"/>
-        </h1>
-        <br>
+        <div class="blog_list">
 
-        <h3><p class="content">
-                <c:out value="${blog.content}"/>
-            </p></h3>
-        <div class="search">
-            <form>
-                <input type="text" name="search" placeholder="search..." class="search_box">
-                <select>
-                    <option>${Category}</option>
-                </select>
-            </form>
-            <div class="thumbnail_container">
-                <div class="tn1"> 
-                    Title
-                    <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
+            <div class="col-md-7">
+                <img src = "${blog.thumbnail}" alt="Can't display image" class="center">        
+                <h2 class="left">
+                    Updated date: <c:choose>
+                        <c:when test="${blog.modified == null }">
+                            <c:out value="${blog.created}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${blog.modified}"/>
+                        </c:otherwise>
+                    </c:choose>
+                    Category: <c:out value="${category}"/>
+                <br>    
+                    Author: <c:out value="${author}"/>
+                </h2>
+                <br>
+                <h1>
+                    <c:out value="${blog.title}"/>
+                </h1>
+                <br>
+                <h3><p class="content">
+                        <c:out value="${blog.content}"/>
+                    </p></h3>
+            </div>    
+            <div class="search">
+                <form action="searchpost">
+                    <input
+                        value="${key}"
 
-                </div>
+                        type="search"
+                        placeholder="Search by exam name"
+                        aria-label="Search"
+                        name="keyword"
+                        />
+                    <button class="btn" type="submit">
+                        Search
+                    </button>
+                    <select>
+                        <c:forEach items="${listCategory}" var="Blog_Category">
+                            <option>${Blog_Category.getName()}</option>
+                        </c:forEach>
+                    </select>
+                    <div class="thumbnail_container">
+                        <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
+                            <c:if test="${loop.index < 2}">
+                                <div class="tn1"> 
+                                    ${Blog.getTitle()}
+                                    <div class="video">
+                                        <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <div class="contact">
+                            <h3>Static<br><span>contacts/links</span></h3>
 
-                <div class="tn2">
-                    Title
-                    <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
 
-                </div>
-                <div class="contact">
-                    <h3>Static<br><span>contacts/links</span>
-                    </h3>
+                        </div>
+                    </div>          
 
-                </div>          
             </div>
         </div>
+        <%@include file = "Login.jsp"%>  
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>

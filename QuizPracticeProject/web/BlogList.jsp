@@ -41,9 +41,8 @@
             <div class="boxContainer col-md-7">
                 <c:forEach items="${listBlog}" var="Blog">
                     <div class="box">
-
                         <div class="video">
-                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                            <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
                         </div>
                         <div class="content">
                             <h4>${Blog.getTitle()}</h4>
@@ -56,38 +55,40 @@
 
             <div class="search">
                 <form action="searchpost">
-                        <input
-                            value="${key}"
+                    <input
+                        value="${key}"
 
-                            type="search"
-                            placeholder="Search by exam name"
-                            aria-label="Search"
-                            name="keyword"
-                            />
-                        <button class="btn" type="submit">
-                            Search
-                        </button>
-                <select>
+                        type="search"
+                        placeholder="Search by exam name"
+                        aria-label="Search"
+                        name="keyword"
+                        />
+                    <button class="btn" type="submit">
+                        Search
+                    </button>
+                    <select>
                         <c:forEach items="${listCategory}" var="Blog_Category">
                             <option>${Blog_Category.getName()}</option>
                         </c:forEach>
                     </select>
-                <div class="thumbnail_container">
-                    <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
-                        <c:if test="${loop.index < 2}">
-                            <div class="tn1"> 
-                                ${Blog.getTitle()}
-                                <img src="${Blog.getThumbnail()}" width="150px" height="125px" alt="Ảnh">
-                            </div>
-                        </c:if>
-                    </c:forEach>
-                    <div class="contact">
-                        <h3>Static<br><span>contacts/links</span></h3>
+                    <div class="thumbnail_container">
+                        <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
+                            <c:if test="${loop.index < 2}">
+                                <div class="tn1"> 
+                                    ${Blog.getTitle()}
+                                    <div class="video">
+                                        <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <div class="contact">
+                            <h3>Static<br><span>contacts/links</span></h3>
 
 
-                    </div>
-                </div>          
-
+                        </div>
+                    </div>          
+                </form>
             </div>
         </div>
         <%@include file = "Login.jsp"%>  
