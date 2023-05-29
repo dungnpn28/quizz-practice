@@ -18,7 +18,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.trim() === "") {
                     // Không có lỗi, chuyển về trang Home.jsp
-                    window.location.href = "cusHome.jsp";
+                    window.location.href = "cusHome";
                 } else {
                     // Có lỗi, hiển thị thông báo lỗi trên popup
                     $("#errorMessage").html(response);
