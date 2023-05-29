@@ -30,10 +30,10 @@
                         <td> ID </td>
                         <td> subject </td>
                         <td> simulation exam </td>
-                        <td> level </td>
-                        <td> #question </td>
+                        <td> <a href="#" onclick="sortTable('level')">Level</a> </td>
+                        <td> <a href="#" onclick="sortTable('number_of_question')">#question</a> </td>
                         <td> duration </td>
-                        <td> pass rate </td>
+                        <td><a href="#" onclick="sortTable('pass_rate')"> pass rate</a> </td>
                     </tr>
                     <c:forEach var="Exam" items="${examList}">
                         <tr>
@@ -49,12 +49,16 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <ul class="pagination">
-                    <li ><a href="simulationExam?page=${page-1}">Previous</a></li>
+                <ul class="pagination" style="display: flex; justify-content: center;">
+                    <c:if test="${page > 1}">
+                        <li><a href="simulationExam?page=${page-1}">Previous</a></li>
+                        </c:if>
                         <c:forEach begin="1" end="${totalPage}" var="i">
                         <li><a href="simulationExam?page=${i}">${i}</a></li>
                         </c:forEach>
-                    <li><a  href="simulationExam?page=${page+1}">Next</a></li>
+                        <c:if test="${page < totalPage}">
+                        <li><a href="simulationExam?page=${page+1}">Next</a></li>
+                        </c:if>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -85,6 +89,12 @@
                             Search
                         </button>
                     </form>
+                    <button onclick="sortTable(3, true)">Sort by level</button>
+                    <br/>
+                    <button onclick="sortTable(6, false)">Sort by pass rate</button>
+                    <br/>
+                    <button onclick="sortTable(0, true)">Sort by id</button>
+
                 </div>
             </div>
         </div>
@@ -109,6 +119,36 @@
             closeBtnDetail.addEventListener('click', function () {
                 popUpDetailModal.style.display = 'none';
             });
+
+            function sortTable(columnIndex, isNumeric) {
+                var table, rows, switching, i, x, y, shouldSwitch;
+                table = document.getElementById("examTable");
+                switching = true;
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        shouldSwitch = false;
+                        x = rows[i].getElementsByTagName("TD")[columnIndex];
+                        y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+                        if (isNumeric) {
+                            if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+                }
+            }
         </script>
     </body>
     <%@include file="components/Footer.jsp" %>
