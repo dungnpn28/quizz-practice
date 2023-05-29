@@ -10,6 +10,7 @@ package model;
  */
 public class Subject {
     private int id;
+    private String illustration;
     private int dimension_id;
     private String name;
     private int category_id;
@@ -19,8 +20,9 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(int id, int dimension_id, String name, int category_id, boolean status, String description) {
+    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description) {
         this.id = id;
+        this.illustration = illustration;
         this.dimension_id = dimension_id;
         this.name = name;
         this.category_id = category_id;
@@ -34,6 +36,14 @@ public class Subject {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getIllustration() {
+        return illustration;
+    }
+
+    public void setIllustration(String illustration) {
+        this.illustration = illustration;
     }
 
     public int getDimension_id() {
@@ -52,11 +62,11 @@ public class Subject {
         this.name = name;
     }
 
-    public int getCategory() {
+    public int getCategory_id() {
         return category_id;
     }
 
-    public void setCategory(int category_id) {
+    public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
 
@@ -75,6 +85,5 @@ public class Subject {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+
 }

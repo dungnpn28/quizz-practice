@@ -19,83 +19,78 @@
         <title>JSP Page</title>
     </head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <%@include file="components/CusHeader.jsp" %>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    <%
+    if (session.getAttribute("user") != null) {
+       // Nếu có user, bao gồm trang cusheader.jsp
+    %>
+    <%@ include file="components/CusHeader.jsp" %>
+    <%
+} else {
+    // Nếu không có user, bao gồm trang header.jsp
+    %>
+    <%@ include file="components/Header.jsp" %>
+    <%
+}
+    %>
+
     <body>
         <div class="blog_list">
+
             <div class="boxContainer col-md-7">
-                <div class="box">
-                    <div class="video">
-                        <video></video>
-                    </div>
-                    <div class="content">
-                        <h4>TITLE</h4>
-                        <p>brief-info</p>
-                    </div>
-                </div>
+                <c:forEach items="${listBlog}" var="Blog">
+                    <div class="box">
 
-                <div class="box">
-                    <div class="video">
-                        <video></video>
-                    </div>
-                    <div class="content">
-                        <h4>TITLE</h4>
-                        <p>brief-info</p>
-                    </div>
-                </div>
+                        <div class="video">
+                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                        </div>
+                        <div class="content">
+                            <h4>${Blog.getTitle()}</h4>
+                            <p>${Blog.getContent()}</p>
+                        </div>
 
-                <div class="box">
-                    <div class="video">
-                        <video></video>
                     </div>
-                    <div class="content">
-                        <h4>TITLE</h4>
-                        <p>brief-info</p>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <div class="video">
-                        <video></video>
-                    </div>
-                    <div class="content">
-                        <h4>TITLE</h4>
-                        <p>brief-info</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
 
             <div class="search">
-                <form>
-                    <input type="text" name="search" placeholder="search..." class="search_box">
+                <form action="searchpost">
+                        <input
+                            value="${key}"
 
-                    <select>
-                        <c:forEach items="listCategory" var="Blog_Category">
+                            type="search"
+                            placeholder="Search by exam name"
+                            aria-label="Search"
+                            name="keyword"
+                            />
+                        <button class="btn" type="submit">
+                            Search
+                        </button>
+                <select>
+                        <c:forEach items="${listCategory}" var="Blog_Category">
                             <option>${Blog_Category.getName()}</option>
                         </c:forEach>
                     </select>
-
-                </form>
                 <div class="thumbnail_container">
-                    <div class="tn1"> 
-                        Title
-                        <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
-
-                    </div>
-
-                    <div class="tn2">
-                        Title
-                        <iframe width="150px" height="100px" src="" frameborder="0" allowfullscreen class="vid1"></iframe>
-
-                    </div>
+                    <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
+                        <c:if test="${loop.index < 2}">
+                            <div class="tn1"> 
+                                ${Blog.getTitle()}
+                                <img src="${Blog.getThumbnail()}" width="150px" height="125px" alt="Ảnh">
+                            </div>
+                        </c:if>
+                    </c:forEach>
                     <div class="contact">
-                        <h3>Static<br><span>contacts/links</span>
-                        </h3>
+                        <h3>Static<br><span>contacts/links</span></h3>
 
-                    </div>          
-                </div>
+
+                    </div>
+                </div>          
+
             </div>
-
         </div>
+        <%@include file = "Login.jsp"%>  
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>

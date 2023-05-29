@@ -32,7 +32,7 @@
             <div class="header_menu">
 
                 <ul>                
-                    <li><a href="BlogList.jsp">Post</a></li>
+                    <li><a href="BlogListController">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="#" id='popUpLink'>Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>

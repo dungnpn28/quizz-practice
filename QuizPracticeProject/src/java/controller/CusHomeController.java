@@ -6,6 +6,7 @@ package controller;
 
 import dal.BlogDAO;
 import dal.SliderDAO;
+import dal.SubjectDAO;
 import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
 import model.Slider;
+import model.Subject;
 import model.User;
 
 /**
@@ -47,6 +49,9 @@ public class CusHomeController extends HttpServlet {
 
         List<Slider> listSlider = new SliderDAO().getSlider();
         request.setAttribute("listSlider",listSlider);
+        
+        List<Subject> listSubject = new SubjectDAO().getSubjects();
+        request.setAttribute("listSubject", listSubject);
 //        if(a== null){
         //request.getRequestDispatcher("Home.jsp").forward(request, response);
 //        }else{

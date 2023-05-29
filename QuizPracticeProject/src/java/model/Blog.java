@@ -38,7 +38,17 @@ public class Blog {
         this.created = created;
         this.modified = modified;
     }
-
+    
+    public Blog(int id, String thumbnail, int author_id,String title, int category_id, String content, Date created){
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.author_id = author_id;
+        this.title = title;
+        this.category_id = category_id;
+        this.content = content;
+        this.created = created;
+    }
+    
     public int getId() {
         return id;
     }
