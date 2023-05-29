@@ -11,35 +11,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="css/Style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Home.css" rel="stylesheet" type="text/css"/>
+        <link href="css/SimulationExam.css" rel="stylesheet" type="text/css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Simulation Exam</title>
     </head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="css/Style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/Home.css" rel="stylesheet" type="text/css"/>
-    <link href="css/SimulationExam.css" rel="stylesheet" type="text/css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <%@include file="components/Header.jsp" %>
+    <%@include file="components/CusHeader.jsp" %>
     <body>
-        <h2> existing exams </h2>
+        <h1> existing exams </h1>
         <div class="row">
             <div class="col-md-8">
-                <table border="1">
+                <table id="examTable" border="1">
                     <tr>
                         <td> ID </td>
                         <td> subject </td>
                         <td> simulation exam </td>
-                        <td> level </td>
-                        <td> #question </td>
+                        <td> <a href="#" onclick="sortTable('level')">Level</a> </td>
+                        <td> <a href="#" onclick="sortTable('number_of_question')">#question</a> </td>
                         <td> duration </td>
-                        <td> pass rate </td>
+                        <td><a href="#" onclick="sortTable('pass_rate')"> pass rate</a> </td>
                     </tr>
                     <c:forEach var="Exam" items="${examList}">
                         <tr>
                             <td>${Exam.getId()}</td>
                             <td>${Exam.getSubjectName()}</td>
                             <td>
-                                <a href="#" id="popUpLink">${Exam.getName()}</a>
+                                <a href="#" id="popUpDetailExam">${Exam.getName()}</a>
                             </td>
                             <td>${Exam.getLevel() }</td>
                             <td>${Exam.getNumber_of_question()}</td>
@@ -48,6 +49,17 @@
                         </tr>
                     </c:forEach>
                 </table>
+                <ul class="pagination" style="display: flex; justify-content: center;">
+                    <c:if test="${page > 1}">
+                        <li><a href="simulationExam?page=${page-1}">Previous</a></li>
+                        </c:if>
+                        <c:forEach begin="1" end="${totalPage}" var="i">
+                        <li><a href="simulationExam?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${page < totalPage}">
+                        <li><a href="simulationExam?page=${page+1}">Next</a></li>
+                        </c:if>
+                </ul>
             </div>
             <div class="col-md-4">
 
@@ -63,7 +75,6 @@
                             </select>
                             <button type="submit">Choose</button>
                         </form>
-
                     </div>
                     <form action="searchByExamName">
                         <input
@@ -78,26 +89,66 @@
                             Search
                         </button>
                     </form>
-
+                    <button onclick="sortTable(3, true)">Sort by level</button>
+                    <br/>
+                    <button onclick="sortTable(6, false)">Sort by pass rate</button>
+                    <br/>
+                    <button onclick="sortTable(0, true)">Sort by id</button>
 
                 </div>
             </div>
         </div>
-        <div id="popUpModal" class="modal_popUp">
+        <br/>
+        <div id="popUpDetailModal" class="modal_popUp">
             <div class="modal-content_popUp">
-                <button class="close-popup">&times;</button>
+                <button class="close-popupDetailExam">&times;Close</button>
                 <h2>Exam Detail</h2>
                 <br/>
                 <a href="QuizHandlePage.jsp">Quiz Handle</a>
             </div>
         </div>
         <script>
-            var closeBtn = document.querySelector('.close-popup');
-            var popUpModal = document.getElementById('popUpModal');
-
-            closeBtn.addEventListener('click', function () {
-                popUpModal.style.display = 'none';
+            document.getElementById("popUpDetailExam").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("popUpDetailModal").style.display = "block";
             });
+
+            var closeBtnDetail = document.querySelector('.close-popupDetailExam');
+            var popUpDetailExam = document.getElementById('popUpDetailExam');
+
+            closeBtnDetail.addEventListener('click', function () {
+                popUpDetailModal.style.display = 'none';
+            });
+
+            function sortTable(columnIndex, isNumeric) {
+                var table, rows, switching, i, x, y, shouldSwitch;
+                table = document.getElementById("examTable");
+                switching = true;
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        shouldSwitch = false;
+                        x = rows[i].getElementsByTagName("TD")[columnIndex];
+                        y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+                        if (isNumeric) {
+                            if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+                }
+            }
         </script>
     </body>
     <%@include file="components/Footer.jsp" %>
