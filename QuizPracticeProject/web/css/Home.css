@@ -195,8 +195,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left: 20px;
 }
 
-.post_box .content{
-    display: flex;
+.content{
+
 }
 
 .ti_da h3, .ti_da h5{
@@ -213,7 +213,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .th_cnt{
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .th_cnt p{

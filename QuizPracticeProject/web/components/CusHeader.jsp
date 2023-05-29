@@ -14,7 +14,7 @@
             <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
             <div class="header_menu">
                 <ul>
-                    <li><a href="BlogList.jsp">Post</a></li>
+                    <li><a href="BlogListController">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="practiceList">Practice List</a></li>
                 </ul>
