@@ -18,9 +18,11 @@
         <group name="SE1714">
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/WEB-INF/web.xml</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/css/Home.css</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/EmailResetPassword.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/Successful.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/js/PopUp.js</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/RegisterDAO.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/RegisterController.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/AccessDenied.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/css/Login.css</file>
@@ -38,6 +40,7 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/META-INF/context.xml</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/PracticeList.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/UserProfile.jsp</file>
+            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogDetails.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/ChangePassword.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/components/CusHeader.jsp</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/css/Style.css</file>

@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="css/Register.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
+        
     </head>
     <body>
         <div id="popUpModal2" class="modal_popUp2">
@@ -23,7 +24,7 @@
                 <div class="row g-0">
                     <div class="col-lg-6">
                         <div class="card-body mx-md-4 p-0 m-0 h-100">
-                            <a class="close" data-dismiss="modal">&times;</a>
+                            <a class="close" href="home" >&times;</a>
                             <div class="text-center">
                                 <img src="img/2.png"
                                      style="width: 150px;" alt="logo">

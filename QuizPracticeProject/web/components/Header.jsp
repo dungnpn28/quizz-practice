@@ -36,7 +36,7 @@
                     <li><a href="BlogList.jsp">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="#" id='popUpLink'>Login</a></li>
-                    <li><a href="#" id="popUpLink2">Register</a></li>
+                    <li><a href="#" id="popUpLink2" data-toggle="modal">Register</a></li>
                 </ul>
             </div>
         </div>
