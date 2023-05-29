@@ -55,21 +55,29 @@
             </div>
 
             <div class="search">
-                <form>
-                    <input type="text" name="search" placeholder="search..." class="search_box">
+                <form action="searchpost">
+                        <input
+                            value="${key}"
 
-                    <select>
+                            type="search"
+                            placeholder="Search by exam name"
+                            aria-label="Search"
+                            name="keyword"
+                            />
+                        <button class="btn" type="submit">
+                            Search
+                        </button>
+                <select>
                         <c:forEach items="${listCategory}" var="Blog_Category">
                             <option>${Blog_Category.getName()}</option>
                         </c:forEach>
                     </select>
-                </form>
                 <div class="thumbnail_container">
                     <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
                         <c:if test="${loop.index < 2}">
                             <div class="tn1"> 
                                 ${Blog.getTitle()}
-                                <img src="${Blog.getThumbnail()}" width="200px" alt="Ảnh">
+                                <img src="${Blog.getThumbnail()}" width="150px" height="125px" alt="Ảnh">
                             </div>
                         </c:if>
                     </c:forEach>

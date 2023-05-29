@@ -44,17 +44,18 @@
     <h4> Featured subjects <a href="">View all subjects</a></h4>
     <div class="row">
         <div class="boxContainer col-md-7 mb-5">
-            <c:forEach items="${listBlog}" var="blog">
+            <c:forEach varStatus="loop" items="${listSubject}" var="listSubject">
+                <c:if test="${loop.index < 9}">
                 <div class="box">
-
                     <div class="boxImage">
-                        <img src="${blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh">
+                        <img src="${listSubject.getIllustration()}" width="100px" height="125px" alt="Ảnh">
                     </div>
                     <div class="boxContent">
-                        <h4>${blog.getTitle()}</h4>
-                        <p>${blog.getContent()}</p>
+                        <h4>${listSubject.getName()}</h4>
+                        <p></p>
                     </div>
                 </div>
+                    </c:if>
             </c:forEach>
         </div>
 
@@ -64,7 +65,7 @@
                     <div class="tn">
                         ${Blog.getTitle()}
                         <div class="boxImage">
-                            <img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh">
+                            <img src="${Blog.getThumbnail()}" width="150px" height="125px" alt="Ảnh">
                             <br/>
                         </div>
                     </div>
@@ -91,10 +92,11 @@
 
                     <div class="content">
                         <div class="th_cnt">
-                            <img src="${Blog.getThumbnail()}" width="200px" alt="Ảnh">
+                            <a href="BlogDetails.jsp"><img src="${Blog.getThumbnail()}"width="200px" alt="Ảnh"></a>
                             <p class="title">
                                 ${Blog.getContent()}
                             </p>
+
                         </div>
                     </div>
                 </div>

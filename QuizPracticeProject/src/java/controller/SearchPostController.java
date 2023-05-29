@@ -5,27 +5,22 @@
 package controller;
 
 import dal.BlogDAO;
-import dal.SliderDAO;
-import dal.SubjectDAO;
-import dal.UserDAO;
+import dal.Blog_CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
-import model.Slider;
-import model.Subject;
-import model.User;
+import model.Blog_Category;
 
 /**
  *
  * @author ADMIN
  */
-public class HomeController extends HttpServlet {
+public class SearchPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +34,17 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            String keyword = request.getParameter("keyword");
+            BlogDAO bDAO = new BlogDAO();
+            List<Blog> listBlog = bDAO.searchPost(keyword);
+            request.setAttribute("listBlog", listBlog);
+            List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
+            request.setAttribute("listCategory", listCategory);
+            request.setAttribute("key", keyword);
+            request.getRequestDispatcher("BlogList.jsp").forward(request, response);
 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,27 +60,6 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-//        String account = request.getParameter("account");
-//        String password = request.getParameter("password");
-//        UserDAO p = new UserDAO();
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-
-        List<Slider> listSlider = new SliderDAO().getSlider();
-        request.setAttribute("listSlider", listSlider);
-        
-        List<Subject> listSubject = new SubjectDAO().getSubjects();
-        request.setAttribute("listSubject", listSubject);
-//        User a = p.login(account, password);
-//
-//        
-//        if (a == null) {
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
-//        } else {
-//            HttpSession sessions = request.getSession();
-//            sessions.setAttribute("user", a);
-//            request.getRequestDispatcher("CusHome.jsp").forward(request, response);
-//        }
     }
 
     /**
@@ -90,7 +74,6 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
