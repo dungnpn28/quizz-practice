@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ import model.User;
  * @author ACER
  */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet{
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +44,7 @@ public class RegisterController extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         PrintWriter pw = response.getWriter();
         String name = request.getParameter("Name");
         String email = request.getParameter("Email");
@@ -52,61 +53,56 @@ public class RegisterController extends HttpServlet{
         String pass = request.getParameter("Pass");
         String rePass = request.getParameter("rePass");
         String dob = request.getParameter("dob");
-        
+
         String name64 = Base64.getEncoder().encodeToString(name.getBytes());
         String email64 = Base64.getEncoder().encodeToString(email.getBytes());
         String phone_number64 = Base64.getEncoder().encodeToString(phone_number.getBytes());
         String gender64 = Base64.getEncoder().encodeToString(gender.getBytes());
         String pass64 = Base64.getEncoder().encodeToString(pass.getBytes());
         String dob64 = Base64.getEncoder().encodeToString(dob.getBytes());
-        
+
         LocalDateTime expirationDate = LocalDateTime.now().plusMinutes(30);
-        
+        String errorMessage = "";
         if (pass.equals(rePass)) {
             if (validateDob(dob)) {
                 RegisterDAO dao = new RegisterDAO();
                 User existUser = dao.checkUserExist(email);
                 if (existUser == null) {
-                    
-                        String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
-                                + "To finish registration please go to the following page:<br>"
-                                + "<a href=\"http://localhost:9999/QuizPracticeProject/registerverified?name64="+name64
-                                +"&email64="+email64+"&phone_number64="+phone_number64+"&gender64="+gender64
-                                +"&pass64="+pass64+"&dob64="+dob64+"&expirationDate="+expirationDate+"\">Click here</a><br>"
-                                + "If you do not wish to register, ignore this message, it will expire in 30 minutes"
-                                + "All the best,<br>QUIZZERO.";
-                        
-                        SendingEmail sendMail = new SendingEmail();
-                        sendMail.sendEmail(email, emailContent);
-                        response.sendRedirect("home");
-                
-                } else {
-                
-                    response.setContentType("text/html");
+
+                    String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
+                            + "To finish registration please go to the following page:<br>"
+                            + "<a href=\"http://localhost:9999/QuizPracticeProject/registerverified?name64=" + name64
+                            + "&email64=" + email64 + "&phone_number64=" + phone_number64 + "&gender64=" + gender64
+                            + "&pass64=" + pass64 + "&dob64=" + dob64 + "&expirationDate=" + expirationDate + "\">Click here</a><br>"
+                            + "If you do not wish to register, ignore this message, it will expire in 30 minutes"
+                            + "All the best,<br>QUIZZERO.";
+
+                    SendingEmail sendMail = new SendingEmail();
+                    sendMail.sendEmail(email, emailContent);
+                    HttpSession session = request.getSession();
+                    session.invalidate();
                     pw.println("<script type=\"text/javascript\">");
-                    pw.println("alert('The email already exist');");
+                    pw.println("alert('The email have been sent to you. Please verified it to finish registration');");
+                    pw.println("location='home';");
                     pw.println("</script>");
-                    RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-                    rd.include(request, response);
+
+                } else {
+                    errorMessage += "The email already been used";
+                    sendResponse(response, errorMessage);
+                    return;
                 }
             } else {
-                response.setContentType("text/html");
-                pw.println("<script type=\"text/javascript\">");
-                pw.println("alert('You must be 16 year old to register');");
-                pw.println("</script>");
-                RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-                rd.include(request, response);
+                errorMessage += "You must be 16 year old to register";
+                sendResponse(response, errorMessage);
+                return;
             }
         } else {
-            response.setContentType("text/html");
-            pw.println("<script type=\"text/javascript\">");
-            pw.println("alert('Password and retype password must match');");
-            pw.println("</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
-            rd.include(request, response);
+            errorMessage += "Password and repassword dont match";
+            sendResponse(response, errorMessage);
+            return;
         }
     }
-    
+
     protected boolean validateDob(String dob) {
         if (dob != "") {
             LocalDate Date = LocalDate.parse((CharSequence) dob);
@@ -114,6 +110,15 @@ public class RegisterController extends HttpServlet{
         } else {
             return false;
         }
+    }
+
+    private void sendResponse(HttpServletResponse response, String errorMessage) throws IOException {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(errorMessage);
+        out.flush();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

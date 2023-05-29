@@ -20,7 +20,7 @@ public class RegisterDAO extends MyDAO{
     
     public void registerUser(String email, String pass) throws SQLException {
         xSql = "insert into [user]\n"
-                + "values(?,?,2)";
+                + "values(?,?,1)";
         try {
             con = new DBContext().connection;
             ps = con.prepareStatement(xSql);
