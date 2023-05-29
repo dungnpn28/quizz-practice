@@ -18,6 +18,9 @@ td {
 .rectangle-box {
     border: 1px solid #ccc;
     padding: 10px;
-    width: 300px;
+    width: 310px;
 }
-
+ul .pagination {
+    display: flex;
+    justify-content: center;
+}

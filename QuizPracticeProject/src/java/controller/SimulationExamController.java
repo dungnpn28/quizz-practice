@@ -53,6 +53,13 @@ public class SimulationExamController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int PAGE_SIZE = 1;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
+        
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User x = (User) session.getAttribute("user");
@@ -61,7 +68,15 @@ public class SimulationExamController extends HttpServlet {
         List<Subject> subjectList = new ArrayList<>();
         subjectList = sDAO.getSubjects();
         List<Exam> examList = new ArrayList<>();
-        examList = eDAO.getExamByUserID(x.getId());
+//        examList = eDAO.getExamByUserID(x.getId());
+        examList = eDAO.getExamByUserIDwithPaging(x.getId(), page, PAGE_SIZE);
+        int totalExam = eDAO.getTotalExamByUserid(x.getId());
+        int totalPage = totalExam / PAGE_SIZE; //1
+        if (totalExam % PAGE_SIZE != 0) {
+            totalPage += 1;
+        }
+        request.setAttribute("page", page);
+        request.setAttribute("totalPage", totalPage);
         if (examList.isEmpty() || examList == null) {
             request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
         } else {
