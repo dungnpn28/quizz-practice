@@ -77,8 +77,16 @@
         <servlet-class>controller.PracticeListSubjectController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ResetPassword2Controller</servlet-name>
+        <servlet-class>controller.ResetPassword2Controller</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>LogOutController</servlet-name>
         <servlet-class>controller.LogOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPostController</servlet-name>
+        <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -149,8 +157,16 @@
         <url-pattern>/practiceListSubject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ResetPassword2Controller</servlet-name>
+        <url-pattern>/resetpassword2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LogOutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPostController</servlet-name>
+        <url-pattern>/searchpost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

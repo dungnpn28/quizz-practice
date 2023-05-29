@@ -20,6 +20,7 @@ public class SubjectDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xID;
+            String xIllustratoin;
             int xDimesion_id;
             String xName;
             int xCategory;
@@ -28,6 +29,7 @@ public class SubjectDAO extends MyDAO {
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
                 xDimesion_id = rs.getInt("dimension_id");
 
                 xName = rs.getString("name");
@@ -35,7 +37,7 @@ public class SubjectDAO extends MyDAO {
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
 
-                x = new Subject(xID, xDimesion_id, xName, xCategory, xStatus, xDescription);
+                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription);
                 t.add(x);
             }
             rs.close();
@@ -53,7 +55,7 @@ public class SubjectDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-
+            String xIllustration;
             int xDimesion_id;
             String xName;
             int xCategory_id;
@@ -61,15 +63,15 @@ public class SubjectDAO extends MyDAO {
             String xDescription;
             Subject x;
             while (rs.next()) {
-
+                xIllustration = rs.getString("illustration");
                 xDimesion_id = rs.getInt("dimension_id");
-
+                
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("xCategory_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
 
-                x = new Subject(id, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
+                x = new Subject(id, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
                 t.add(x);
             }
             rs.close();

@@ -4,6 +4,9 @@
  */
 package controller;
 
+import dal.BlogDAO;
+import dal.SliderDAO;
+import dal.SubjectDAO;
 import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +15,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Blog;
+import model.Slider;
+import model.Subject;
 import model.User;
 
 /**
@@ -30,15 +37,29 @@ public class CusHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession sessions = request.getSession();
-        User a = (User) sessions.getAttribute("user");
-        UserProfileDAO upDAO = new UserProfileDAO();
-        String userName = upDAO.getUserName(a.getId());
-        request.setAttribute("username",userName);
+    throws ServletException, IOException {
+//        processRequest(request, response);
+//        String account = request.getParameter("account");
+//        String password = request.getParameter("password");
+//        UserDAO p = new UserDAO();
+//        User a = p.login(account, password);
+        
+        List<Blog> listBlog = new BlogDAO().getBlogList();
+        request.setAttribute("listBlog", listBlog);
+
+        List<Slider> listSlider = new SliderDAO().getSlider();
+        request.setAttribute("listSlider",listSlider);
+        
+        List<Subject> listSubject = new SubjectDAO().getSubjects();
+        request.setAttribute("listSubject", listSubject);
+//        if(a== null){
+        //request.getRequestDispatcher("Home.jsp").forward(request, response);
+//        }else{
+//            HttpSession sessions = request.getSession();
+//        sessions.setAttribute("user", a);
         request.getRequestDispatcher("CusHome.jsp").forward(request, response);
-    }
+//        }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

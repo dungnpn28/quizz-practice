@@ -7,10 +7,14 @@ package dal;
 import dal.DBContext;
 import dal.MyDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Blog;
 import model.User;
 
@@ -66,7 +70,7 @@ public class BlogDAO extends MyDAO{
             }
         } catch (Exception e) {
         }
-        return null;
+        return list;
     }
 
     public String getAuthor(int id) {
@@ -97,5 +101,41 @@ public class BlogDAO extends MyDAO{
         } catch (Exception e) {
         }
         return null;
+    }
+    
+    public List<Blog> searchPost(String keyword){
+        List<Blog> resultPost = new ArrayList<>();
+        xSql = "select * from [blog] where content like ?";
+        int xId;
+        String xThumbnail;
+        int xAuthorId;
+        String xTitle;
+        int xCategory_id;
+        String xContent;
+        Date xCreated;
+        Blog x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + keyword + "%");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthorId = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory_id = rs.getInt("category_id");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                
+                x = new Blog(xId,xThumbnail,xAuthorId,xTitle,xCategory_id,xContent,xCreated);
+                resultPost.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (resultPost);
+        
     }
 }

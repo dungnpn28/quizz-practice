@@ -7,7 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Acer
 */
 
-.slider{
+/*.slider{
     margin: 0 auto;
     margin-top: 20px;
     position: relative;
@@ -29,6 +29,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .slide_img img{
     width: 100%;
     height: 100%;
+}*/
+
+.imageSlider {
+    text-align: center;
+}
+
+.imageSlider img {
+    width: 1000px; /* Thay đổi kích thước ảnh tùy ý */
+    height: 550px; /* Thay đổi kích thước ảnh tùy ý */
+    object-fit: cover;
+    border: solid 5px;
+    border-color: #333;
+    border-radius: 5px;
+    /*text-align: center;*/
+    justify-content: space-between;
+    align-items: center;
 }
 
 #i1, #i2, #i3{
@@ -91,7 +107,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
 }
 .boxContainer {
-    margin-left: 20px;
+    margin-left: 50px;
     display: grid;
     width: 40px;
     height: 40px;
@@ -128,15 +144,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border: solid 3px;
     border-color: #333;
     border-radius: 5px;
-    /*margin-left: 700px;*/
+    margin-left: 50px;
 }
 
-.tn1{
+.tn{
     margin-left: 40px;
     display: flex;
     align-items: center;
     margin-top: 30px;
     justify-content: flex-start;
+}
+.tn img{
+    width: 200px;
 }
 
 .vid1{
@@ -146,14 +165,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border-radius: 5px;
 }
 
-.tn2{
-    margin-left: 40px;
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    justify-content: flex-start;
-    margin-bottom: 30px;
-}
 
 .vid2{
     margin-left: 40px;
@@ -184,8 +195,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left: 20px;
 }
 
-.post_box .content{
-    display: flex;
+.content{
+
 }
 
 .ti_da h3, .ti_da h5{
@@ -202,7 +213,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .th_cnt{
-    display: flex;
+    /*display: inline-block;*/
 }
 
 .th_cnt p{
@@ -239,7 +250,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .overlay:target{
     visibility: visible;
     opacity: 1;
-    }
+}
 
 
 
