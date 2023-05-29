@@ -105,6 +105,7 @@
         </c:forEach>
     </div>
     <%@include file = "Login.jsp"%>  
+    <%@include file="Register.jsp" %>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>
