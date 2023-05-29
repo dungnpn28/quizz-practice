@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import= "model.UserProfile"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,6 +11,12 @@
         <title>Quizzero</title>
     </head>
     <body>
+        <%
+            UserProfile a = null;
+            if(session.getAttribute("up") != null) {
+               a = (UserProfile) session.getAttribute("up");
+            }
+        %>
         <div class="header_content">
             <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
             <div class="header_menu">
@@ -22,11 +29,12 @@
 
             <div class="action">
                 <div class="profile" >
-                    <img src="img\UserAva.png" onclick="toggleMenu()">
+                    <img src="uploads\<%=a.getAvatar()%>" onclick="toggleMenu()">
                 </div>
                 <div class="menu" id="submenu">
                     <ul>
-                        <li>${userName}</li>
+                        <!--<li>${userName}</li>-->
+                        <%=a.getFull_name()%>
                         <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
                         <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
                         <li><img src="img/logout.png" alt=""><a href="logout">Log out</a></li>
@@ -41,7 +49,7 @@
             </script>
             <div id="popUpModal" class="modal_popUp">
                 <div class="modal-content_popUp">
-                    
+
                     <h2>Change password</h2>
 
                     <form id="changePasswordForm" method="POST" action="changePassword">

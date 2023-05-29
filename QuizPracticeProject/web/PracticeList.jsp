@@ -52,6 +52,9 @@
                                 <a href="">View Details</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="5">Duration: ${Exam.getDuration()}</td>
+                        </tr>
                     </c:forEach>        
                 </tbody>
             </table>

@@ -73,10 +73,9 @@ public class ChangeUserProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int xUser_id = user.getId();
         int genderValue = 0;
-
         Part file = request.getPart("avatar");
         String xAvatar = file.getSubmittedFileName();
-        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads" + xAvatar;
+        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
         try {
         FileOutputStream fos = new FileOutputStream(uploadPath);
         InputStream is = file.getInputStream();
@@ -105,7 +104,7 @@ public class ChangeUserProfileController extends HttpServlet {
             UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
             UserProfileDAO u = new UserProfileDAO();
             u.update(up);
-            response.sendRedirect("CusHome.jsp");
+            response.sendRedirect("cusHome");
         }
     }
 

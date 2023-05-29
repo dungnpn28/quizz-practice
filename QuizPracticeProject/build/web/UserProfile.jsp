@@ -47,7 +47,7 @@
                                 <form action="changeUserProfile" method="post" enctype="multipart/form-data" >
                                     <div class="col-md-5">
                                         <div class="col text-center">
-                                            <img id="imagePreview" width="200" height="250">
+                                            <img id="imagePreview" src="uploads/<%=up.getAvatar()%>" width="200" height="250">
                                             <br>
                                             <input name="avatar" type="file" accept="image/*"  onchange="loadFile(event)">
                                         </div>
