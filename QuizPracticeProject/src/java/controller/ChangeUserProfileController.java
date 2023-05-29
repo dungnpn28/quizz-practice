@@ -7,26 +7,24 @@ package controller;
 import dal.UserProfileDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.User;
 import model.UserProfile;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
  * @author dai
  */
+@MultipartConfig
 public class ChangeUserProfileController extends HttpServlet {
 
     /**
@@ -75,7 +73,19 @@ public class ChangeUserProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int xUser_id = user.getId();
         int genderValue = 0;
-        String xAvatar = request.getParameter("avatar");
+        Part file = request.getPart("avatar");
+        String xAvatar = file.getSubmittedFileName();
+        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
+        try {
+        FileOutputStream fos = new FileOutputStream(uploadPath);
+        InputStream is = file.getInputStream();
+        byte[] data = new byte[is.available()];
+        is.read(data);
+        fos.write(data);
+        fos.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         String xFull_name = request.getParameter("fullname");
         String xPhone_number = request.getParameter("phonenum");
         String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
@@ -94,7 +104,7 @@ public class ChangeUserProfileController extends HttpServlet {
             UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
             UserProfileDAO u = new UserProfileDAO();
             u.update(up);
-            response.sendRedirect("CusHome.jsp");
+            response.sendRedirect("cusHome");
         }
     }
 
