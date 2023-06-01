@@ -32,8 +32,7 @@
                 gd = "female";
             }
         %>
-        <%@include file="components/CusHeader.jsp" %>
-
+       
         <a href="#PopUp" class="btn btn-primary" data-toggle="modal">Profile</a>
         <a href="#">
             <div id="PopUp" class="modal fade">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         </a>
-        <%@include file="components/Footer.jsp" %> 
+      
     </body>
     <script src="js/PreviewImage.js" type="text/javascript"></script>
 </html>

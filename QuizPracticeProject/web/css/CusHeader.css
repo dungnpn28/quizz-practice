@@ -1,3 +1,11 @@
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+ *{
+     font-family: 'Montserrat', sans-serif;
+     
+ }
+ body{
+     background-color: #ccc;
+ }
 .header_content {
     display: flex;
     justify-content: space-between;
@@ -6,7 +14,7 @@
 }
 
 .header_logo {
-    width: 150px;
+    width: 90px;
 }
 
 .header_menu ul {
@@ -20,13 +28,19 @@
 }
 
 .header_menu ul li a {
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
     color: rgb(52, 178, 201);
     font-weight: bold;
     padding: 10px;
 }
-
+.header_menu ul li a:hover {
+    font-size: 15px;
+    text-decoration: none;
+    color: #26890C;
+    font-weight: bold;
+    padding: 10px;
+}
 .action{
     /*position: flex;*/
     top: 20px;
@@ -35,8 +49,8 @@
 
 .action .profile{
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border: solid #ccc;
     right: 20px;
     border-radius: 50px;
@@ -115,4 +129,12 @@
     color: #555;
     font-weight: 500;
     transition: 0.5s;
+}
+
+
+#sidebarCollapse:active {
+  /* Add the pressed effect styles here */
+  /* Example: darker background color and box shadow */
+  background-color: #dcdcdc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
