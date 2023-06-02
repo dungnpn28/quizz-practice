@@ -18,9 +18,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>JSP Page</title>
     </head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-
+    
     <%
     if (session.getAttribute("user") != null) {
        // Nếu có user, bao gồm trang cusheader.jsp
@@ -34,6 +32,9 @@
     <%
 }
     %>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
     <body>
         <div class="blog_list">
@@ -60,14 +61,14 @@
                             value="${key}"
 
                             type="search"
-                            placeholder="Search by exam name"
+                            placeholder="Search..."
                             aria-label="Search"
                             name="keyword"
                             />
                         <button class="btn" type="submit">
                             Search
                         </button>
-                <select>
+                    <select>
                         <c:forEach items="${listCategory}" var="Blog_Category">
                             <option>${Blog_Category.getName()}</option>
                         </c:forEach>

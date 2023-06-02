@@ -31,11 +31,11 @@
 
     <!-- SLIDER -->
     <div class="imageSlider">
-        <button class="prevButton">Previous</button>
+        <button class="prevButton"><</button>
         <c:forEach items="${listSlider}" var="slider">
             <img src="${slider.getImage()}" alt="Image">
         </c:forEach>
-        <button class="nextButton">Next</button>
+        <button class="nextButton">></button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
