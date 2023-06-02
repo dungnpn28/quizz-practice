@@ -20,7 +20,7 @@ public class RegisterDAO extends MyDAO{
     
     public void registerUser(String email, String pass) throws SQLException {
         xSql = "insert into [user]\n"
-                + "values(?,?,2)";
+                + "values(?,?,1)";
         try {
             con = new DBContext().connection;
             ps = con.prepareStatement(xSql);
@@ -64,9 +64,9 @@ public class RegisterDAO extends MyDAO{
         return 0;
     }
     
-    public void registerProfile(int id, String name, String mobile, String dob, int gender) throws SQLException {
+    public void registerProfile(int id, String name, int gender, String dob, String mobile) throws SQLException {
         xSql = "insert into [user_profile]\n"
-                + "values(?,NULL,?,?,?,?,GETDATE(),GETDATE())";
+                + "values(?,NULL,?,?,?,?,GETDATE(),NULL)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, id);

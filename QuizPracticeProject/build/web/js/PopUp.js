@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-  
+
 $(document).ready(function () {
     $("#changePasswordForm").submit(function (event) {
         event.preventDefault(); // Ngăn chặn việc gửi form mặc định
@@ -56,8 +56,32 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    $("#registerform").submit(function (event) {
+        event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+
+        var form = $(this);
+        var url = form.attr("action");
+
+        $.ajax({
+            type: "post",
+            url: url,
+            data: form.serialize(),
+            success: function (response) {
+                    $("#errorMessage2").html(response);
+            },
+            error: function () {
+                $("#errorMessage2").html("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
+        });
+    });
+});
 
 document.getElementById("popUpLink").addEventListener("click", function (event) {
     event.preventDefault();
     document.getElementById("popUpModal").style.display = "block";
+});
+document.getElementById("popUpLink2").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.getElementById("popUpModal2").style.display = "block";
 });

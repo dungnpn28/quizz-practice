@@ -6,13 +6,16 @@ package controller;
  */
 
 import dal.BlogDAO;
+import dal.Blog_CategoryDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import model.Blog;
+import model.Blog_Category;
 
 /**
  *
@@ -46,6 +49,11 @@ public class BlogDetailController extends HttpServlet {
         int category_id = blog.getCategory_id();
         String category = dao.getCategoryName(category_id);
         request.setAttribute("category", category);
+        
+        List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
+        request.setAttribute("listCategory",listCategory);
+        List<Blog> listBlog = new BlogDAO().getBlogList();
+        request.setAttribute("listBlog", listBlog);
         
         request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
     }

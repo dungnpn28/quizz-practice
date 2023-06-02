@@ -32,8 +32,7 @@
                 gd = "female";
             }
         %>
-        <%@include file="components/CusHeader.jsp" %>
-
+       
         <a href="#PopUp" class="btn btn-primary" data-toggle="modal">Profile</a>
         <a href="#">
             <div id="PopUp" class="modal fade">
@@ -44,12 +43,12 @@
                         </div>
                         <div class="modal-body">					
                             <div class="row">
-                                <form action="changeUserProfile" method="post" enctype="multipart/form-data">
+                                <form action="changeUserProfile" method="post" enctype="multipart/form-data" >
                                     <div class="col-md-5">
                                         <div class="col text-center">
-                                            <img id="imagePreview" width="200" height="250">
+                                            <img id="imagePreview" src="uploads/<%=up.getAvatar()%>" width="200" height="250">
                                             <br>
-                                            <input name="avatar" type="file" value="Upload Picture" accept="image/*" onchange="loadFile(event)">
+                                            <input name="avatar" type="file" accept="image/*"  onchange="loadFile(event)">
                                         </div>
                                     </div>
                                     <div class="col-md-7" class="info">
@@ -80,7 +79,7 @@
                 </div>
             </div>
         </a>
-        <%@include file="components/Footer.jsp" %> 
+      
     </body>
     <script src="js/PreviewImage.js" type="text/javascript"></script>
 </html>

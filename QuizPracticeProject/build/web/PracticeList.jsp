@@ -32,7 +32,7 @@
             </div>
             <div class="right-buttons">
                 <button type="button">
-                    <a href="PracticeDetails.jsp">New Practice</a>
+                    <a href="">New Practice</a>
                 </button>
                 <button type="button" >
                     <a href="simulationExam">Simulation Exam</a>
@@ -44,13 +44,16 @@
                 <tbody>
                     <c:forEach var="Exam" items="${examList}">
                         <tr>
-                            <td>${Exam.getSubjectName()}<br> ${Exam.getName()} </td>
+                            <td>Subject name: ${Exam.getSubjectName()}<br>Exam name: ${Exam.getName()} </td>
                             <td>10/09/2019<br> Date taken</td>
                             <td>xx Correct <br> ${Exam.getNumber_of_question()} Questions</td>
                             <td>50% <br> Correct</td>
                             <td>
                                 <a href="">View Details</a>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">Duration: ${Exam.getDuration()}</td>
                         </tr>
                     </c:forEach>        
                 </tbody>
