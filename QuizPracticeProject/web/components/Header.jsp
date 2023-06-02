@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/Login.css">
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="css/Register.css">
 
         <title>JSP Page</title>
     </head>
@@ -35,7 +36,7 @@
                     <li><a href="BlogListController">Post</a></li>
                     <li><a href="">Subject</a></li>
                     <li><a href="#" id='popUpLink'>Login</a></li>
-                    <li><a href="Register.jsp">Register</a></li>
+                    <li><a href="#" id="popUpLink2" data-toggle="modal">Register</a></li>
                 </ul>
             </div>
         </div>
@@ -45,6 +46,15 @@
 
             closeBtn.addEventListener('click', function () {
                 popUpModal.style.display = 'none';
+            });
+
+        </script>
+        <script>
+            var closeBtn2 = document.querySelector('.close-popup2');
+            var popUpModal2 = document.getElementById('popUpModal2');
+
+            closeBtn2.addEventListener('click', function () {
+                popUpModal2.style.display = 'none';
             });
 
         </script>

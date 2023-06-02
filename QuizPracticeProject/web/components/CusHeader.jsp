@@ -9,6 +9,10 @@
         <link rel="stylesheet" href="css/CusHeader.css"/>
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
         <title>Quizzero</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
         <%
@@ -18,7 +22,13 @@
             }
         %>
         <div class="header_content">
-            <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
+            <div>
+                <a href="cusHome"><img src="img\2.png" class="header_logo"></a>
+                <svg xmlns="http://www.w3.org/2000/svg" id="sidebarCollapse" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+            </div>
+
             <div class="header_menu">
                 <ul>
                     <li><a href="BlogListController">Post</a></li>
@@ -26,20 +36,17 @@
                     <li><a href="practiceList">Practice List</a></li>
                 </ul>
             </div>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="uploads\<%=a.getAvatar()%>" width="60" height="60" alt="Avatar">
+                </button>
 
-            <div class="action">
-                <div class="profile" >
-                    <img src="uploads\<%=a.getAvatar()%>" onclick="toggleMenu()">
-                </div>
-                <div class="menu" id="submenu">
-                    <ul>
-                        <!--<li>${userName}</li>-->
-                        <%=a.getFull_name()%>
-                        <li><img src="img/profile.png" alt=""><a href="UserProfile.jsp">View Profile</a></li>
-                        <li><img src="img/setting.png" alt=""><a href="#" id="popUpLink">Change Password</a></li>
-                        <li><img src="img/logout.png" alt=""><a href="logout">Log out</a></li>
-                    </ul>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-lg" aria-labelledby="dropdownMenuButton">
+                    <li class="d-flex justify-content-center" style="font-weight: bold;font-size: 10px"><%=a.getFull_name()%></li><br>
+                    <li class="d-flex" ><img src="img/profile.png" style="width: 20px" alt=""><a class="dropdown-item"href="UserProfile.jsp">My profile</a></li>
+                    <li class="d-flex"><img src="img/setting.png" style="width: 20px" alt=""><a class="dropdown-item" href="#" id="popUpLink">Change password</a></li>
+                    <li class="d-flex"><img src="img/logout.png" style="width: 20px" alt=""><a class="dropdown-item" href="logout">Log out</a></li>
+                </ul>
             </div>
             <script>
                 let submenu = document.getElementById("submenu");
@@ -64,6 +71,7 @@
                     <div id="errorMessage" class="error-message"></div>
                 </div>
             </div>
+
             <script>
                 var closeBtn = document.querySelector('.close-popup');
                 var popUpModal = document.getElementById('popUpModal');
@@ -72,8 +80,17 @@
                     popUpModal.style.display = 'none';
                 });
             </script>
+            <script>
+                const sidebarCollapse = document.getElementById("sidebarCollapse");
+
+                sidebarCollapse.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                });
+            </script>
+
         </div>
         <script src="js/PopUp.js" type="text/javascript"></script>
+
     </body>
 
 </html>
