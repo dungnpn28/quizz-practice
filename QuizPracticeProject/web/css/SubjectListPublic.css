@@ -1,0 +1,35 @@
+
+@keyframes multicolor-blink {
+    0% {
+        color: red;
+    }
+    25% {
+        color: green;
+    }
+    50% {
+        color: blue;
+    }
+    75% {
+        color: orange;
+    }
+    100% {
+        color: purple;
+    }
+}
+
+.multicolor-blink {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    margin: 10px;
+    color: gold;
+    animation: multicolor-blink 2s infinite;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.table{
+    display: grid;
+    text-align: center
+}

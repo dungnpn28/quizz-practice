@@ -19,6 +19,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/SubjectListPublic.css" rel="stylesheet" type="text/css"/>
+
 
     </head>
     <body>
@@ -42,8 +44,6 @@
         <div class="wrapper">
             <%
             if (session.getAttribute("user") != null) {
-            
-
             %>
             <%@include file="components/navbar.jsp" %>
             <%
@@ -51,41 +51,23 @@
             %>
             <div class="container row d-flex">
                 <div class="post_Container">
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="gif-and-heading d-flex">
-                                <img src="img/icons8-flame.gif" alt="Animated GIF">
-                                <h3 class="mb-3 mt-4">All Subject</h3>
+                    <div class=" col-md-8">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="gif-and-heading d-flex">
+                                    <h3 class="mb-3 mt-4">All Subject</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6 text-right">
-                            <a class="mb-3 me-1" href="#carouselExampleIndicators2" role="button" data-bs-slide="prev">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z"/>
-                                </svg>
-                            </a>
-                            <a class="mb-3" href="#carouselExampleIndicators2" role="button" data-bs-slide="next">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
-                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="col-12">
-                            <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <c:forEach items="${subjectList}" var="item" varStatus="status">
-                                        <c:if test="${status.index % 3 == 0}">
-                                            <div class="carousel-item${status.first ? ' active' : ''}">
-                                                <div class="row">
-                                                </c:if>
+                            <div class="col-12">
+                                <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <c:forEach items="${subjectList}" var="item" varStatus="status">
+                                            <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     <div class="card" style="height:200px">
                                                         <div class="row g-0">
                                                             <div class="col-md-4">
-                                                                <!--<img src="" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">-->
+                                                                <img src="${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="card-body">
@@ -93,18 +75,42 @@
 
                                                                     <div class="card-date">${item.getDescription()}</div>
                                                                 </div>
+                                                                <span class="multicolor-blink">
+                                                                    <c:if test="${item.featured}">
+                                                                        <img src="img/icons8-flame.gif" alt="Animated GIF">
+                                                                        <p style="display: inline;">Featured subject</p>
+                                                                    </c:if>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <c:if test="${status.index % 3 == 2 || status.last}">
-                                                </div>
                                             </div>
-                                        </c:if>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </div>
                                 </div>
+                                <ul class="pagination" style="display: flex; justify-content: center;">
+                                    <c:if test="${page > 1}">
+                                        <li><a href="subjectListPublic?page=${page-1}">Previous</a></li>
+                                        </c:if>
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                        <li><a href="subjectListPublic?page=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${page < totalPage}">
+                                        <li><a href="subjectListPublic?page=${page+1}">Next</a></li>
+                                        </c:if>
+                                </ul>
+                            </div>                       
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="sticky-table-container">
+                            <div class="row d-flex justify-content-center">
+                                <table class="table">
+                                    
+                                </table>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                 </div>
                 <%@include file = "Login.jsp"%> 

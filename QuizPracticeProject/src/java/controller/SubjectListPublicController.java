@@ -49,9 +49,23 @@ public class SubjectListPublicController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int PAGE_SIZE = 5;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
         SubjectDAO sDAO= new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
-        subjectList = sDAO.getSubjects();
+        subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
+        int totalSubject = sDAO.getTotalSubject();
+
+        int totalPage = totalSubject / PAGE_SIZE; //1
+        if (totalSubject % PAGE_SIZE != 0) {
+            totalPage += 1;
+        }
+        request.setAttribute("page", page);
+        request.setAttribute("totalPage", totalPage);
         request.setAttribute("subjectList", subjectList);
         request.getRequestDispatcher("SubjectListPublic.jsp").forward(request, response);
     }
