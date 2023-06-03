@@ -53,7 +53,7 @@ public class SimulationExamController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        int PAGE_SIZE = 1;
+        int PAGE_SIZE = 2;
         int page = 1;
         String pageStr = request.getParameter("page");
         if (pageStr != null) {
