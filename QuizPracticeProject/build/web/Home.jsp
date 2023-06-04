@@ -86,7 +86,7 @@
                                     <img src="img/icons8-flame.gif" alt="Animated GIF">
                                     <h3 class="mb-3 mt-4">FEATURED SUBJECTS</h3>
                                 </div>
-                                <a href="subjectListPublic">VIEW ALL SUBJECTS</a>
+                                <a href="#">VIEW ALL SUBJECTS</a>
                             </div>
                             <div class="col-6 text-right">
                                 <a class="mb-3 me-1" href="#carouselExampleIndicators2" role="button" data-bs-slide="prev">
