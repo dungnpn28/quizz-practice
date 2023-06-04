@@ -194,7 +194,39 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                            </div>                       
+                            </div>                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="latest col-md-4">
+                    <div class="sticky-table-container">
+                    <div class="row justify-content-center">
+                        <h5 style="font-size: 30px">LATEST POST</h5>
+                        <div class="col-lg-10">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="item" items="${listBlog}">
+                                        <tr>
+                                            <td>
+                                                <div class="table-image">
+                                                    <img src="${item.getThumbnail()}" alt="Image">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p style="font-weight: bold">${item.getTitle()}</p>
+                                                <a href="#"> Read more</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
