@@ -1,0 +1,55 @@
+
+@keyframes multicolor-blink {
+    0% {
+        color: red;
+    }
+    25% {
+        color: green;
+    }
+    50% {
+        color: blue;
+    }
+    75% {
+        color: orange;
+    }
+    100% {
+        color: purple;
+    }
+}
+
+.multicolor-blink {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    margin: 10px;
+    color: gold;
+    animation: multicolor-blink 2s infinite;
+}
+
+.registerButton button{
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #11ab2d;
+    width: 150px;
+    height: 50px;
+}
+
+.alreadyRegistedButton button {
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #999797;
+    width: 150px;
+    height: 50px;
+    color: #ffffff;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.filterTable{
+    display: grid;
+    text-align: center
+}

@@ -129,7 +129,7 @@ body{
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid $lila-line;
+    border-bottom: 1px solid;
 }
 
 #sidebar ul p {
