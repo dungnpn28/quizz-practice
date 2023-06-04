@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Subject;
@@ -49,20 +50,38 @@ public class SubjectListPublicController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        HttpSession sessions = request.getSession();
         int PAGE_SIZE = 5;
         int page = 1;
         String pageStr = request.getParameter("page");
         if (pageStr != null) {
             page = Integer.parseInt(pageStr);
         }
-        SubjectDAO sDAO= new SubjectDAO();
+        SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
         subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
+        String checkAll = request.getParameter("checkAll");
+        if (checkAll != null && checkAll.equals("true")) {
+            sessions.removeAttribute("checkRegisted");
+        }
         int totalSubject = sDAO.getTotalSubject();
 
         int totalPage = totalSubject / PAGE_SIZE; //1
         if (totalSubject % PAGE_SIZE != 0) {
             totalPage += 1;
+        }
+        String checkRegisted = request.getParameter("checkRegisted");
+        if (checkRegisted != null && checkRegisted.equals("true")) {
+
+            sessions.setAttribute("checkRegisted", checkRegisted);
+        }
+        if (sessions.getAttribute("checkRegisted") != null) {
+            subjectList = sDAO.getRegistedSubjectsWithPaging(page, PAGE_SIZE);
+            totalSubject = sDAO.getTotalRegistedSubject();
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
         }
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
@@ -82,7 +101,7 @@ public class SubjectListPublicController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**

@@ -25,11 +25,19 @@
     color: gold;
     animation: multicolor-blink 2s infinite;
 }
+
+.registerButton button{
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: greenyellow;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
 }
-.table{
+.filterTable{
     display: grid;
     text-align: center
 }

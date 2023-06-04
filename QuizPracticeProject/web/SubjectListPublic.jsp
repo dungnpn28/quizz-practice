@@ -50,7 +50,7 @@
             } 
             %>
             <div class="container row d-flex">
-                <div class="post_Container">
+                <div class="container row d-flex justify-content-between">
                     <div class=" col-md-8">
                         <div class="row">
                             <div class="col-6">
@@ -81,6 +81,9 @@
                                                                         <p style="display: inline;">Featured subject</p>
                                                                     </c:if>
                                                                 </span>
+                                                                <span class="registerButton">
+                                                                    <button href="">Register</button>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -91,9 +94,12 @@
                                 </div>
                                 <ul class="pagination" style="display: flex; justify-content: center;">
                                     <c:if test="${page > 1}">
-                                        <li><a href="subjectListPublic?page=${page-1}">Previous</a></li>
-                                        </c:if>
-                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                        <form action="subjectListPublic" method="GET" id="postForm">
+                                            <input type="hidden" name="page" value="${page-1}">
+                                            <a href="#" onclick="document.getElementById('postForm').submit(); return false;">Previous</a>
+                                        </form>
+                                    </c:if>
+                                    <c:forEach begin="1" end="${totalPage}" var="i">
                                         <li><a href="subjectListPublic?page=${i}">${i}</a></li>
                                         </c:forEach>
                                         <c:if test="${page < totalPage}">
@@ -106,8 +112,32 @@
                     <div class="col-md-4 ">
                         <div class="sticky-table-container">
                             <div class="row d-flex justify-content-center">
-                                <table class="table">
-                                    
+                                <table class="filterTable">
+                                    <div class="searchBox">
+                                        <form action="subjectListPublic" method="post">
+                                            <input
+                                                value="${key}"
+
+                                                type="search"
+                                                placeholder="Search by exam name"
+                                                aria-label="Search"
+                                                name="keyword"
+                                                />
+                                            <button class="btn" type="submit">
+                                                Search
+                                            </button>
+                                        </form>
+                                        <br/>
+                                        <form action="subjectListPublic" method="get">
+                                            <input type="hidden" name="checkAll" value="true">
+                                            <button type="submit">All Subject</button>
+                                        </form>
+                                        <br/>
+                                        <form action="subjectListPublic" method="get">
+                                            <input type="hidden" name="checkRegisted" value="true">
+                                            <button type="submit">Feature Subject</button>
+                                        </form>
+                                    </div>
                                 </table>
                             </div>
                         </div>
@@ -120,9 +150,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('#carouselExampleIndicators2').carousel();
-            });
+                                                $(document).ready(function () {
+                                                    $('#carouselExampleIndicators2').carousel();
+                                                });
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
