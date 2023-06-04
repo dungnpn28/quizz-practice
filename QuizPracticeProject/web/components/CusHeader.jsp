@@ -71,15 +71,15 @@
                     <div id="errorMessage" class="error-message"></div>
                 </div>
             </div>
-            <!--<script src="js/PopUp.js" type="text/javascript"></script>-->
-            <!--            <script>
-                            var closeBtn = document.querySelector('.close-popup');
-                            var popUpModal = document.getElementById('popUpModal');
-            
-                            closeBtn.addEventListener('click', function () {
-                                popUpModal.style.display = 'none';
-                            });
-                        </script>-->
+
+            <script>
+                var closeBtn = document.querySelector('.close-popup');
+                var popUpModal = document.getElementById('popUpModal');
+
+                closeBtn.addEventListener('click', function () {
+                    popUpModal.style.display = 'none';
+                });
+            </script>
             <script>
                 const sidebarCollapse = document.getElementById("sidebarCollapse");
 
