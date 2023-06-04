@@ -55,7 +55,7 @@
                     <c:forEach items="${listSlider}" var="slider" varStatus="status">
                         <div class="carousel-item ${status.first ? 'active' : ''}">
                             <a href="${slider.getBacklink()}">
-                                <img src="${slider.getImage()}" class="d-block w-100 carousel-image" alt="...">
+                                <img src="${slider.getImage()}" class="d-block w-100 carousel-image " alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>${slider.getTitle()}</h5>
                                     <p>Some representative placeholder content for the first slide.</p>
