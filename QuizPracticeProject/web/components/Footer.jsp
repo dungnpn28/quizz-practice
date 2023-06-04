@@ -69,7 +69,7 @@
                             </li>
                             <li>
                                 <img src='img/telephone.png' style='width: 15px'>
-                                09123456789
+                                0375470304
                             </li>
 
                         </ul>
@@ -83,7 +83,7 @@
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                 © 2023 MADE BY TEAM 4:
-                <a class="text-white" href="Home.jsp">Let's go beyond zero to become a hero</a>
+                <p class="text-white">Let's go beyond zero to become a hero</p>
             </div>
             <!-- Copyright -->
         </footer>

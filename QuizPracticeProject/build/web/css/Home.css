@@ -347,3 +347,10 @@ table a:hover{
     text-decoration: none;
     color:white;
 }
+
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+    
