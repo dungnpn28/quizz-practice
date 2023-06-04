@@ -75,7 +75,7 @@ public class ChangeUserProfileController extends HttpServlet {
         int genderValue = 0;
         Part file = request.getPart("avatar");
         String xAvatar = file.getSubmittedFileName();
-        String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads" + xAvatar;
+        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
         try {
         FileOutputStream fos = new FileOutputStream(uploadPath);
         InputStream is = file.getInputStream();
