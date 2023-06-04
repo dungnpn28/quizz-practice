@@ -26,7 +26,7 @@
         <title>QuizPractice</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
 
-
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </div>
@@ -92,7 +92,7 @@
                                     <img src="img/icons8-flame.gif" alt="Animated GIF">
                                     <h3 class="mb-3 mt-4">FEATURED SUBJECTS</h3>
                                 </div>
-                                <a href="subjectListPublic">VIEW ALL SUBJECTS</a>
+                                <a href="#">VIEW ALL SUBJECTS</a>
                             </div>
                             <div class="col-6 text-right">
                                 <a class="mb-3 me-1" href="#carouselExampleIndicators2" role="button" data-bs-slide="prev">
@@ -194,52 +194,52 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                            </div>                       
-                        </div>
+                            </div>                        </div>
+
                     </div>
                 </div>
-
+                
                 <div class="col-md-4">
                     <div class="sticky-table-container">
-                        <div class="row justify-content-center">
-                            <h5 style="font-size: 30px">LATEST POST</h5>
-                            <div class="col-lg-10">
-                                <table class="table">
-                                    <thead>
+                    <div class="row justify-content-center">
+                        <h5 style="font-size: 30px">LATEST POST</h5>
+                        <div class="col-lg-10">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Content</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="item" items="${listBlog}">
                                         <tr>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Content</th>
+                                            <td>
+                                                <div class="table-image">
+                                                    <img src="${item.getThumbnail()}" alt="Image">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p style="font-weight: bold">${item.getTitle()}</p>
+                                                <a href="#"> Read more</a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="item" items="${listBlog}">
-                                            <tr>
-                                                <td>
-                                                    <div class="table-image">
-                                                        <img src="${item.getThumbnail()}" alt="Image">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p style="font-weight: bold">${item.getTitle()}</p>
-                                                    <a href="#"> Read more</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
-<%@include file = "Login.jsp"%> 
+    <%@include file = "Login.jsp"%> 
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

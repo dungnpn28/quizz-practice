@@ -30,32 +30,25 @@
                         <td> ID </td>
                         <td> subject </td>
                         <td> simulation exam </td>
-                        <td> Level </td>
-                        <td> #question</td>
+                        <td> <a href="#" onclick="sortTable('level')">Level</a> </td>
+                        <td> <a href="#" onclick="sortTable('number_of_question')">#question</a> </td>
                         <td> duration </td>
-                        <td> pass rate </td>
+                        <td><a href="#" onclick="sortTable('pass_rate')"> pass rate</a> </td>
                     </tr>
                     <c:forEach var="Exam" items="${examList}">
                         <tr>
                             <td>${Exam.getId()}</td>
                             <td>${Exam.getSubjectName()}</td>
-                            <td><a href="#" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
+                            <td>
+                                <a href="#" id="popUpDetailExam">${Exam.getName()}</a>
+                            </td>
                             <td>${Exam.getLevel() }</td>
                             <td>${Exam.getNumber_of_question()}</td>
                             <td>${Exam.getDuration() }</td>
                             <td>${Exam.getPass_rate() }</td>
                         </tr>
                     </c:forEach>
-
                 </table>
-                <div id="popUpDetailModal" class="modal_popUp">
-                    <div class="modal-content_popUp">
-                        <button class="close-popupDetailExam">&times;Close</button>
-                        <p id="examIdText"></p>
-                        <br/>
-                        <a href="#" id="startExamButton">Quiz Handle</a>
-                    </div>
-                </div>
                 <ul class="pagination" style="display: flex; justify-content: center;">
                     <c:if test="${page > 1}">
                         <li><a href="simulationExam?page=${page-1}">Previous</a></li>
@@ -67,15 +60,6 @@
                         <li><a href="simulationExam?page=${page+1}">Next</a></li>
                         </c:if>
                 </ul>
-            </div>
-            <div id="popUpDetailModal" class="modal_popUp">
-                <div class="modal-content_popUp">
-                    <button class="close-popupDetailExam">&times;Close</button>
-                    <h2>Exam Detail</h2>
-                    <p id="examIdText"></p>
-                    <br/>
-                    <a href="#" id="startExamButton">Quiz Handle</a>
-                </div>
             </div>
             <div class="col-md-4">
 
@@ -115,30 +99,25 @@
             </div>
         </div>
         <br/>
-
+        <div id="popUpDetailModal" class="modal_popUp">
+            <div class="modal-content_popUp">
+                <button class="close-popupDetailExam">&times;Close</button>
+                <h2>Exam Detail</h2>
+                <br/>
+                <a href="QuizHandlePage.jsp">Quiz Handle</a>
+            </div>
+        </div>
         <script>
-            var popUpDetailExams = document.getElementsByClassName("popUpDetailExam");
-            for (var i = 0; i < popUpDetailExams.length; i++) {
-                popUpDetailExams[i].addEventListener("click", function (event) {
-                    event.preventDefault();
+            document.getElementById("popUpDetailExam").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("popUpDetailModal").style.display = "block";
+            });
 
-                    var examId = this.getAttribute("data-exam-id");
+            var closeBtnDetail = document.querySelector('.close-popupDetailExam');
+            var popUpDetailExam = document.getElementById('popUpDetailExam');
 
-                    var examIdText = document.getElementById("examIdText");
-                    examIdText.textContent = "Exam ID: " + examId;
-                    // Đặt examId vào URL của nút "Start Exam"
-                    var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "startExam.jsp?examId=" + examId;
-
-                    // Hiển thị popup
-                    var popUpDetailModal = document.getElementById("popUpDetailModal");
-                    popUpDetailModal.style.display = "block";
-                });
-            }
-            var closePopupDetailExam = document.getElementsByClassName("close-popupDetailExam")[0];
-            closePopupDetailExam.addEventListener("click", function () {
-                var popUpDetailModal = document.getElementById("popUpDetailModal");
-                popUpDetailModal.style.display = "none";
+            closeBtnDetail.addEventListener('click', function () {
+                popUpDetailModal.style.display = 'none';
             });
 
             function sortTable(columnIndex, isNumeric) {
@@ -171,8 +150,6 @@
                 }
             }
         </script>
-        <%@include file="Login.jsp" %>
-
     </body>
     <%@include file="components/Footer.jsp" %>
     <script src="js/PopUp.js" type="text/javascript"></script>

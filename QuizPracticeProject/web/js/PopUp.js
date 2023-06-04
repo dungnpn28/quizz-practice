@@ -68,7 +68,7 @@ $(document).ready(function () {
             url: url,
             data: form.serialize(),
             success: function (response) {
-                $("#errorMessage2").html(response);
+                    $("#errorMessage2").html(response);
             },
             error: function () {
                 $("#errorMessage2").html("Đã xảy ra lỗi. Vui lòng thử lại.");
@@ -84,11 +84,4 @@ document.getElementById("popUpLink").addEventListener("click", function (event) 
 document.getElementById("popUpLink2").addEventListener("click", function (event) {
     event.preventDefault();
     document.getElementById("popUpModal2").style.display = "block";
-});
-
-var closeBtn = document.querySelector('.close-popup');
-var popUpModal = document.getElementById('popUpModal');
-
-closeBtn.addEventListener('click', function () {
-    popUpModal.style.display = 'none';
 });
