@@ -149,7 +149,7 @@ public class SubjectDAO extends MyDAO {
         }
         return (t);
     }
-    
+
     public int getTotalRegistedSubject() {
         xSql = "select count(id) from subject where featured = 1";
         int totalSubject = 0;
@@ -191,6 +191,46 @@ public class SubjectDAO extends MyDAO {
                 xDescription = rs.getString("description");
 
                 x = new Subject(id, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public List<Subject> getSubjectsByUserID(int userId) {
+        List<Subject> t = new ArrayList<>();
+        xSql = "SELECT s.*\n"
+                + "                FROM subject s \n"
+                + "                JOIN registration r ON s.id = r.subject_id\n"
+                + "                where r.user_id = ?\n"
+                + "                order by s.updated_date ASC";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            String xIllustration;
+            int xId;
+            int xDimesion_id;
+            String xName;
+            int xCategory_id;
+            boolean xStatus;
+            String xDescription;
+            Subject x;
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xIllustration = rs.getString("illustration");
+                xDimesion_id = rs.getInt("dimension_id");
+
+                xName = rs.getString("name");
+                xCategory_id = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+
+                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
                 t.add(x);
             }
             rs.close();

@@ -9,6 +9,9 @@
 <%@page import = "java.util.*" %>
 <%@page import= "model.User"%>
 <%@page import= "model.UserProfile"%>
+<%@page import= "model.Subject"%>
+<%@page import= "dal.SubjectDAO"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -81,9 +84,60 @@
                                                                         <p style="display: inline;">Featured subject</p>
                                                                     </c:if>
                                                                 </span>
-                                                                <span class="registerButton">
-                                                                    <button href="">Register</button>
-                                                                </span>
+                                                                <c:choose>
+                                                                    <c:when test="${empty sessionScope.user}">
+                                                                        <%-- Nếu không có user trong session --%>
+                                                                        <%-- Hiển thị nút Register --%>
+                                                                        <span class="registerButton">
+                                                                            <button href="">Register</button>
+                                                                        </span>
+
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <%-- Nếu có user trong session --%>
+                                                                        <% User user = (User) session.getAttribute("user"); %>
+                                                                        <% int userId = user.getId(); %>
+                                                                        
+                                                                        <%-- Kiểm tra xem người dùng đã tham gia subject nào hay chưa --%>
+                                                                        
+                                                                        <c:set var="subjectListByUserId" value="${requestScope.subjectListByUserId}" />
+                                                                        <%-- Kiểm tra xem subject hiện tại có trong danh sách userSubjects hay không --%>
+                                                                        <c:choose>
+                                                                            <c:when test="${subjectListByUserId != null}">
+                                                                                
+                                                                                
+                                                                                <c:set var="isRegistered" value="false" />
+                                                                                <c:forEach var="subject" items="${subjectListByUserId}">
+                                                                                    <c:if test="${subject.getId() == item.getId()}">
+                                                                                        
+                                                                                        <%-- Nếu người dùng đã tham gia môn học này --%>
+                                                                                        <%-- Hiển thị nút không bấm được --%>
+                                                                                        <span class="alreadyRegistedButton">
+                                                                                            <button disabled>Already registed</button>
+                                                                                        </span>
+                                                                                        <%-- Gán giá trị true cho biến isRegistered và thoát khỏi vòng lặp --%>
+                                                                                        <c:set var="isRegistered" value="true" />
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                                <%-- Kiểm tra biến isRegistered để hiển thị nút Register nếu không tìm thấy subject trùng khớp --%>
+                                                                                <c:if test="${!isRegistered}">
+                                                                                    
+                                                                                    <span class="registerButton">
+                                                                                        <button href="">Register</button>
+                                                                                    </span>
+                                                                                </c:if>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <%-- Nếu người dùng chưa tham gia môn học này --%>
+                                                                                <%-- Hiển thị nút Register --%>
+                                                                                <span class="registerButton">
+                                                                                    <button href="">Register</button>
+                                                                                </span>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <p>120412040124</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -134,7 +188,7 @@
                                         </form>
                                         <br/>
                                         <form action="subjectListPublic" method="get">
-                                            <input type="hidden" name="checkRegisted" value="true">
+                                            <input type="hidden" name="checkFeatured" value="true">
                                             <button type="submit">Feature Subject</button>
                                         </form>
                                     </div>

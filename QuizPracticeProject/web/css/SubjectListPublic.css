@@ -30,7 +30,19 @@
     position: absolute;
     right: 5px;
     margin: 10px;
-    background-color: greenyellow;
+    background-color: #11ab2d;
+    width: 150px;
+    height: 50px;
+}
+
+.alreadyRegistedButton button {
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #999797;
+    width: 150px;
+    height: 50px;
+    color: #ffffff;
 }
 
 .pagination {

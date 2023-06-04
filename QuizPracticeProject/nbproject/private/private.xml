@@ -11,14 +11,12 @@
         </group>
         <group>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectListPublic.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/SubjectListPublic.css</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/Home.css</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Home.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SimulationExam.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/CusHeader.jsp</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Subject.java</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SubjectListPublicController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/SubjectListPublic.css</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/Style.css</file>
         </group>
     </open-files>

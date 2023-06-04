@@ -17,6 +17,7 @@ public class Subject {
     private boolean status;
     private String description;
     private boolean featured;
+    private int user_id;
 
     public Subject() {
     }
@@ -40,6 +41,26 @@ public class Subject {
         this.status = status;
         this.description = description;
         this.featured = featured;
+    }
+
+    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description, boolean featured, int user_id) {
+        this.id = id;
+        this.illustration = illustration;
+        this.dimension_id = dimension_id;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.featured = featured;
+        this.user_id = user_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public boolean isFeatured() {

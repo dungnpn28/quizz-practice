@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Subject;
+import model.User;
 
 /**
  *
@@ -62,7 +63,7 @@ public class SubjectListPublicController extends HttpServlet {
         subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
         String checkAll = request.getParameter("checkAll");
         if (checkAll != null && checkAll.equals("true")) {
-            sessions.removeAttribute("checkRegisted");
+            sessions.removeAttribute("checkFeatured");
         }
         int totalSubject = sDAO.getTotalSubject();
 
@@ -70,18 +71,26 @@ public class SubjectListPublicController extends HttpServlet {
         if (totalSubject % PAGE_SIZE != 0) {
             totalPage += 1;
         }
-        String checkRegisted = request.getParameter("checkRegisted");
-        if (checkRegisted != null && checkRegisted.equals("true")) {
+        String checkFeatured = request.getParameter("checkFeatured");
+        if (checkFeatured != null && checkFeatured.equals("true")) {
 
-            sessions.setAttribute("checkRegisted", checkRegisted);
+            sessions.setAttribute("checkFeatured", checkFeatured);
         }
-        if (sessions.getAttribute("checkRegisted") != null) {
+        if (sessions.getAttribute("checkFeatured") != null) {
             subjectList = sDAO.getRegistedSubjectsWithPaging(page, PAGE_SIZE);
             totalSubject = sDAO.getTotalRegistedSubject();
             totalPage = totalSubject / PAGE_SIZE; //1
             if (totalSubject % PAGE_SIZE != 0) {
                 totalPage += 1;
             }
+        }
+        if(sessions.getAttribute("user") != null) {
+            User user =(User) sessions.getAttribute("user");
+            int userId = user.getId();
+            List<Subject> subjectListByUserId = sDAO.getSubjectsByUserID(userId);
+                        request.setAttribute("Dodaicailist", subjectListByUserId.size());
+
+            request.setAttribute("subjectListByUserId", subjectListByUserId);
         }
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
