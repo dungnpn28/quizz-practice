@@ -9,4 +9,11 @@ function openPopup() {
 function closePopup() {
     document.getElementById('popup').classList.remove('active');
 }
+function openPeekPopup() {
+    document.getElementById('peek-popup').classList.add('active');
+}
+
+function closePeekPopup() {
+    document.getElementById('peek-popup').classList.remove('active');
+}
 

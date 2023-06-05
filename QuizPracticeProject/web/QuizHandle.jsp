@@ -79,10 +79,19 @@
                     </div>
 
                     <div class="peek-at-answer">
-                        <button id="peek-at-answer">Peek At Answer</button>
-                        <div id="popup" class="popup-overlay">
-                            <div class="popup-content">
-                                <div class="peek-header"
+                        <button onclick="openPeekPopup()">Peek At Answer</button>
+                        <div id="peek-popup" class="peek-popup-overlay">
+                            <div class="peek-popup-content">
+                                <div class="peek-header">
+                                    <h1>Peek at answer</h1>
+                                </div>
+                                <div class="peek-content">
+                                    <h2>Question: ${question.content}</h2>
+                                    <h3>Answer: ${question.answer}</h3>
+                                </div>
+                                <div class="peek-button">                                
+                                    <button onclick="closePeekPopup()">Back to Exam</button>
+                                </div>
                             </div>
                         </div>
                     </div>
