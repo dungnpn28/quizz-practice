@@ -18,7 +18,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 html,
 body {
     height: 100%;
-    background-color: #0a8ba8;
+    background-color: #0a092d;
 }
 
 
@@ -89,6 +89,7 @@ body {
     font-size: 1.2rem;
 }
 
+
 .game-question-container {
     width: 100%;
     height: 30vh;
@@ -96,12 +97,14 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 25px;
-    background-color:#11a5c7;
-    border: white solid 2px ;
+    background-color: #2e3856;
+    filter: brightness(100%);
+
+    border: white solid 2px;
 }
 
 .game-question-container h1 {
-    font-size: 21px ;
+    font-size: 21px;
     text-align: center;
     padding: 3px;
     color: white;
@@ -120,8 +123,10 @@ body {
     width: 45%;
     height: 4rem;
     border-radius: 20px;
-    background-color:#11a5c7;
     overflow: hidden;
+    background-color: #2e3856;
+    filter: brightness(100%);
+    border: white solid 2px;
 }
 
 span label {
@@ -133,7 +138,7 @@ span label {
     cursor: pointer;
     transition: transform 0.3s;
     font-weight: 600;
-    color: rgb(22, 22, 22);
+    color: white;
 }
 
 span label:hover {
@@ -150,105 +155,9 @@ input[type="radio"] {
 
 
 input[type=radio]:checked~.option {
-    background: paleturquoise;
+    background: rgb(64, 68, 68);
 }
 
-.next-button-container {
-    width: 50%;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-}
-
-.next-button-container button {
-    width: 8rem;
-    height: 2rem;
-    border-radius: 10px;
-    background: none;
-    color: rgb(25, 25, 25);
-    font-weight: 600;
-    border: 2px solid gray;
-    cursor: pointer;
-    outline: none;
-}
-
-.next-button-container button:hover {
-    background-color: rgb(143, 93, 93);
-}
-
-.modal-container {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    -webkit-animation: fadeIn 1.2s ease-in-out;
-    animation: fadeIn 1.2s ease-in-out;
-}
-
-.modal-content-container {
-    height: 20rem;
-    width: 25rem;
-    background-color: rgb(43, 42, 42);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 25px;
-}
-
-.modal-content-container h1 {
-    font-size: 1.3rem;
-    height: 3rem;
-    color: lightgray;
-    text-align: center;
-}
-
-.grade-details {
-    width: 15rem;
-    height: 10rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.grade-details p {
-    color: white;
-    text-align: center;
-}
-
-.modal-button-container {
-    height: 2rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-button-container button {
-    width: 10rem;
-    height: 2rem;
-    background: none;
-    outline: none;
-    border: 1px solid rgb(252, 242, 241);
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 20px;
-}
-
-.modal-button-container button:hover {
-    background-color: rgb(83, 82, 82);
-}
 
 @media(min-width : 300px) and (max-width : 350px) {
     .game-quiz-container {
@@ -383,20 +292,219 @@ input[type=radio]:checked~.option {
 }
 
 .progress {
-    width: 90%;  
+    width: 90%;
+    height: 10px;
     margin: 0 auto;
 }
 
 .progress-bar {
+    height: 10px;
     background-color: red;
 }
-.under-header{
+
+.under-header {
     display: flex;
     justify-content: space-around;
-    align-items: center;    
+    align-items: center;
 }
 
-.under-header h4{
+.under-header h4 {
     font-weight: bold;
     color: lightgray;
+}
+
+.peek-at-answer {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.peek-at-answer button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: #2e3856;
+    filter: brightness(100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* .peek-at-answer button hover */
+.peek-at-answer button:hover {
+    opacity: 0.7;
+}
+
+.peek-at-answer button:active {
+    opacity: 0.4;
+}
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    margin-top: 60px;
+}
+
+.next-previous {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+}
+
+.next-previous button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: #2e3856;
+    filter: brightness(100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.next-previous button:hover {
+    opacity: 0.7;
+}
+
+.next-previous button:active {
+    opacity: 0.4;
+}
+
+.under-header-right {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.under-header-right button {
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: rgb(221, 230, 240);
+    color: #2e3856;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.under-header-right button:hover {
+    opacity: 0.7;
+}
+
+.under-header-right button:active {
+    opacity: 0.4;
+}
+
+
+.review-progress button {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: rgb(221, 230, 240);
+    color: #2e3856;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.review-progress button:hover {
+    opacity: 0.7;
+}
+
+.review-progress button:active {
+    opacity: 0.4;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+}
+
+.popup-content {
+    width: 50%;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content a {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 40px;
+    background-color: #2e3856;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content h1 {
+    font-weight: bolder;
+}
+
+.popup-content a:hover {
+    opacity: 0.7;
+}
+
+.question-navigation {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.question-filter button {
+    font-size: 12px;
+}
+
+
+.question-filter {
+    display: flex;
+    justify-content: start;
+}
+
+.review-header {
+    display: flex;
+    justify-content: center;
+}
+
+.navigate-btn {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navigate-btn .score-exam {
+    background-color: #33498a;
+    color: white;
 }

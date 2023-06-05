@@ -39,7 +39,7 @@
                         <tr>
                             <td>${Exam.getId()}</td>
                             <td>${Exam.getSubjectName()}</td>
-                            <td><a href="#" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
+                            <td><a href="quizhandle?id=${Exam.getId()}" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
                             <td>${Exam.getLevel() }</td>
                             <td>${Exam.getNumber_of_question()}</td>
                             <td>${Exam.getDuration() }</td>
@@ -128,7 +128,7 @@
                     examIdText.textContent = "Exam ID: " + examId;
                     // Đặt examId vào URL của nút "Start Exam"
                     var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "startExam.jsp?examId=" + examId;
+                    startExamButton.href = "quizhandle?id=" + examId;
 
                     // Hiển thị popup
                     var popUpDetailModal = document.getElementById("popUpDetailModal");
