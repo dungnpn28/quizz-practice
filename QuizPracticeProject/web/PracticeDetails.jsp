@@ -20,7 +20,6 @@
         <div class="practiceDetailForm">
             <form action="practiceDetails" method="POST">
                 <h2>PRACTICE DETAILS</h2>
-
                 <br>
                 Subject
                 <br>
@@ -52,7 +51,7 @@
                     </div>
                 </div>
                 <br>
-                Question group(choose one or all topic/dimension(s)
+                Question group(choose one or all topic/dimension(s))
                 <br>
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

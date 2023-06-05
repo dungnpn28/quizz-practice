@@ -14,29 +14,29 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="css/Style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/PracticeList.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Quizerro</title>
     </head>
+    <%@include file="components/CusHeader.jsp" %>
     <body>
-        <%@include file="components/CusHeader.jsp" %>
         <h1>Practice List</h1>
         <div class="button">
             <div class="left-button">
-                <select name="subjects">
-                    <option value="1">All subjects</option>
-                    <c:forEach items="${subjectList}" var="Subject">
-                        <option value="${Subject.id}">${Subject.name}</option>
-                    </c:forEach>
-                </select>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        All subjects
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <c:forEach items="${subjectList}" var="Subject">
+                            <option value="${Subject.id}">${Subject.name}</option>
+                        </c:forEach>
+                    </div>
+                </div>
             </div>
             <div class="right-buttons">
-                <button type="button">
-                    <a href="">New Practice</a>
-                </button>
-                <button type="button" >
-                    <a href="simulationExam">Simulation Exam</a>
-                </button>
+                <a href="PracticeDetails.jsp" class="btn btn-outline-primary">New Practice</a>
+                <a href="simulationExam" class="btn btn-outline-primary">Simulation Exam</a>
             </div>
         </div>
         <div class="table" >
@@ -59,6 +59,6 @@
                 </tbody>
             </table>
         </div>
-        <%@include file="components/Footer.jsp" %>
     </body>
+    <%@include file="components/Footer.jsp" %>
 </html>

@@ -32,7 +32,7 @@
                 gd = "female";
             }
         %>
-       
+
         <a href="#PopUp" class="btn btn-primary" data-toggle="modal">Profile</a>
         <a href="#">
             <div id="PopUp" class="modal fade">
@@ -65,7 +65,6 @@
                                             <input type="radio" name="radB1" value="male"  />Male
                                             <input type="radio" name="radB1" value="female" checked/>Female
                                             <% }%>
-
                                             <br/>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -79,7 +78,6 @@
                 </div>
             </div>
         </a>
-      
     </body>
     <script src="js/PreviewImage.js" type="text/javascript"></script>
 </html>

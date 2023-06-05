@@ -19,7 +19,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Simulation Exam</title>
     </head>
-
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <h1> existing exams </h1>
@@ -153,5 +152,4 @@
     </body>
     <%@include file="components/Footer.jsp" %>
     <script src="js/PopUp.js" type="text/javascript"></script>
-
 </html>
