@@ -1,0 +1,9 @@
+
+V
+java:S1854""9Remove this useless assignment to local variable "token".(ˆ¨»¦8™›Öãˆ1
+V
+java:S1854!"9Remove this useless assignment to local variable "email".(×Áâ¹8™›Öãˆ1
+G
+java:S1481!"*Remove this unused "email" local variable.(×Áâ¹8™›Öãˆ1
+G
+java:S1481""*Remove this unused "token" local variable.(ˆ¨»¦8™›Öãˆ1

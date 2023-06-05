@@ -1,0 +1,11 @@
+
+\
+java:S11920"FDefine a constant instead of duplicating this literal "Guest" 9 times.(¹û ›
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚“¶î
+œ
+java:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ü›ºÆýÿÿÿÿ
+m
+java:S3776:"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(úôàüúÿÿÿÿ
+\
+java:S1126t"AReplace this if-then-else statement by a single return statement.(±Á±Àýÿÿÿÿ

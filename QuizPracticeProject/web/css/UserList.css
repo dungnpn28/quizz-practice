@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #adacac;
+}
+
+table {
+    border-radius: 50px;
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+.header_fixed {
+    max-height: 100vh;
+    width: 100%;
+    overflow: auto;
+    border: 1px solid #dddddd;
+}
+
+.header_fixed thead th {
+    position: sticky;
+    top: 0;
+    background-color: #0578A4;
+    color: #fff;
+    font-size: 15px;
+}
+
+th,
+td {
+    padding: 10px 20px;
+    font-size: 10px;
+    background-color: #fff;
+    color: #333;
+    border: none; /* Remove border */
+}
+
+td img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+}
+
+tr:nth-child(even) {
+    background-color: #F0F4F8;
+}
+
+tr:nth-child(odd) {
+    background-color: #ECF2F7;
+}
+
+tr:hover td {
+    color: #44b478;
+    cursor: pointer;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translate(0, -2px);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+td button {
+    border: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background-color: #0578A4;
+    color: #fff;
+}
+activation1{
+    color:red;
+    font-weight: bold;
+    font-size: 15px;
+}
+activation2{
+    color:green;
+    font-weight: bold;
+    font-size: 15px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.topnav .search-container {
+    float: left;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+.a1{
+    margin-top: 13px;
+   
+    
+}
+.a1 select{
+    font-size: 17px;
+   
+    }

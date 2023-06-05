@@ -4,6 +4,9 @@
  */
 package dal;
 
+import java.util.ArrayList;
+import java.util.List;
+import model.User;
 import model.UserProfile;
 /**
  *
@@ -80,5 +83,31 @@ public class UserProfileDAO extends MyDAO {
             System.out.println("getUP:" + e.getMessage());
         }
         return u;
+    }
+    public List<UserProfile> getListUserProfile(){
+          List<UserProfile> data = new ArrayList<>();
+        try{
+            String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified from user_profile";
+            ps = con.prepareStatement(strSelect);
+            rs = ps.executeQuery();
+            UserDAO u = new UserDAO();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String avatar = rs.getString(2);
+                String full_name = rs.getString(3);
+                int gender = rs.getInt(4);
+                 String phone_number = rs.getString(5);
+                String dob = rs.getString(6);
+               
+                String created = rs.getString(7);
+                String modified = rs.getString(8);
+                User user =  u.getUserById(id);
+                UserProfile up = new UserProfile(id,avatar,full_name,gender,phone_number,dob,created,modified,user);
+                data.add(up);
+            }
+        }catch(Exception e){
+             System.out.println("getAllAccount: " + e.getMessage());
+        }
+        return data;
     }
 }

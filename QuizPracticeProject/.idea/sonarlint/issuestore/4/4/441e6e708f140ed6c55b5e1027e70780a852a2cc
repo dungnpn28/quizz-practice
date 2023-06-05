@@ -1,0 +1,53 @@
+
+^
+java:S11920"IDefine a constant instead of duplicating this literal "HH:mm:ss" 5 times.(ĞÍ–
+Ô
+java:S1192®"½Define a constant instead of duplicating this literal "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate
+" 3 times.(ê˜—v
+^
+java:S1192/"IDefine a constant instead of duplicating this literal "duration" 5 times.(¯³ğq
+e
+java:S11922"JDefine a constant instead of duplicating this literal "pass_rate" 5 times.(ÿ®£øÿÿÿÿÿ
+i
+java:S11923"SDefine a constant instead of duplicating this literal "number_of_question" 5 times.(—ò“
+\
+java:S1192."FDefine a constant instead of duplicating this literal "level" 5 times.(•Åæ±
+c
+java:S1192,"MDefine a constant instead of duplicating this literal "subject_name" 5 times.(÷ıé¾
+k	java:S117!"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êœñøÿÿÿÿ
+f	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒßŠ›
+k	java:S117O"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êœñøÿÿÿÿ
+l	java:S117¹"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êœñøÿÿÿÿ
+l	java:S117å"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êœñøÿÿÿÿ
+l	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öö†Úøÿÿÿÿ
+l	java:S117“"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êœñøÿÿÿÿ
+O
+java:S1854+"9Remove this useless assignment to local variable "xName".(»É£¹
+M
+java:S6126"2Replace this String concatenation with Text block.(ìò…ÿüÿÿÿÿ
+O
+java:S1854\"9Remove this useless assignment to local variable "xName".(»É£¹
+M
+java:S6126B"2Replace this String concatenation with Text block.(ìò…ÿüÿÿÿÿ
+P
+java:S2479G":Remove the non-escaped \u0009 character from this literal.(şÎË
+O
+java:S2479H":Remove the non-escaped \u0009 character from this literal.(‰±’
+N
+java:S6126ƒ"2Replace this String concatenation with Text block.(™­çøÿÿÿÿ
+N
+java:S6126—"2Replace this String concatenation with Text block.(™­çøÿÿÿÿ
+P
+java:S1854Ä"9Remove this useless assignment to local variable "xName".(»É£¹
+H
+java:S6126®"2Replace this String concatenation with Text block.(ê˜—v
+3
+java:S1116²"Remove this empty statement.(”Ä«ß
+H
+java:S6126Ú"2Replace this String concatenation with Text block.(ê˜—v
+H
+java:S6126†"2Replace this String concatenation with Text block.(ê˜—v
+Q
+java:S2479‹":Remove the non-escaped \u0009 character from this literal.(şÎË
+P
+java:S2479Œ":Remove the non-escaped \u0009 character from this literal.(‰±’
