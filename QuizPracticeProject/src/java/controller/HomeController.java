@@ -7,19 +7,15 @@ package controller;
 import dal.BlogDAO;
 import dal.SliderDAO;
 import dal.SubjectDAO;
-import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
 import model.Slider;
 import model.Subject;
-import model.User;
 
 /**
  *
