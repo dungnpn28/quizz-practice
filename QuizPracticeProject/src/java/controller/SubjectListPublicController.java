@@ -4,18 +4,16 @@
  */
 package controller;
 
+import dal.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.ExamDAO;
-import dal.SubjectDAO;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Exam;
 import model.Subject;
 import model.User;
 
@@ -23,7 +21,7 @@ import model.User;
  *
  * @author LENOVO
  */
-public class SimulationExamController extends HttpServlet {
+public class SubjectListPublicController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,39 +51,51 @@ public class SimulationExamController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        int PAGE_SIZE = 2;
+        HttpSession sessions = request.getSession();
+        int PAGE_SIZE = 5;
         int page = 1;
         String pageStr = request.getParameter("page");
         if (pageStr != null) {
             page = Integer.parseInt(pageStr);
         }
-        
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        User x = (User) session.getAttribute("user");
-        ExamDAO eDAO = new ExamDAO();
         SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
-        subjectList = sDAO.getSubjects();
-        List<Exam> examList = new ArrayList<>();
-//        examList = eDAO.getExamByUserID(x.getId());
-        examList = eDAO.getExamByUserIDwithPaging(x.getId(), page, PAGE_SIZE);
-        int totalExam = eDAO.getTotalExamByUserid(x.getId());
-        int totalPage = totalExam / PAGE_SIZE; //1
-        if (totalExam % PAGE_SIZE != 0) {
+        subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
+        String checkAll = request.getParameter("checkAll");
+        if (checkAll != null && checkAll.equals("true")) {
+            sessions.removeAttribute("checkFeatured");
+        }
+        int totalSubject = sDAO.getTotalSubject();
+
+        int totalPage = totalSubject / PAGE_SIZE; //1
+        if (totalSubject % PAGE_SIZE != 0) {
             totalPage += 1;
+        }
+        String checkFeatured = request.getParameter("checkFeatured");
+        if (checkFeatured != null && checkFeatured.equals("true")) {
+
+            sessions.setAttribute("checkFeatured", checkFeatured);
+        }
+        if (sessions.getAttribute("checkFeatured") != null) {
+            subjectList = sDAO.getRegistedSubjectsWithPaging(page, PAGE_SIZE);
+            totalSubject = sDAO.getTotalRegistedSubject();
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+        }
+        if(sessions.getAttribute("user") != null) {
+            User user =(User) sessions.getAttribute("user");
+            int userId = user.getId();
+            List<Subject> subjectListByUserId = sDAO.getSubjectsByUserID(userId);
+                        request.setAttribute("Dodaicailist", subjectListByUserId.size());
+
+            request.setAttribute("subjectListByUserId", subjectListByUserId);
         }
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
-        if (examList.isEmpty() || examList == null) {
-            request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
-        } else {
-
-            request.setAttribute("examList", examList);
-            request.setAttribute("subjectList", subjectList);
-            request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);
-
-        }
+        request.setAttribute("subjectList", subjectList);
+        request.getRequestDispatcher("SubjectListPublic.jsp").forward(request, response);
     }
 
     /**
@@ -100,6 +110,7 @@ public class SimulationExamController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
