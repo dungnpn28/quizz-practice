@@ -88,6 +88,10 @@
         <servlet-name>SearchPostController</servlet-name>
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <servlet-class>controller.SubjectListPublicController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>SearchPostController</servlet-name>
         <url-pattern>/searchpost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <url-pattern>/subjectListPublic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
