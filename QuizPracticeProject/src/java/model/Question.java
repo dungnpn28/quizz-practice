@@ -18,6 +18,37 @@ public class Question {
     private String optionC;
     private String optionD;
     private String answer;
+    private int questionOrder;
+    private int marksAllocated;
+
+    public int getQuestionOrder() {
+        return questionOrder;
+    }
+
+    public void setQuestionOrder(int questionOrder) {
+        this.questionOrder = questionOrder;
+    }
+
+    public int getMarksAllocated() {
+        return marksAllocated;
+    }
+
+    public void setMarksAllocated(int marksAllocated) {
+        this.marksAllocated = marksAllocated;
+    }
+
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, int marksAllocated) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.questionOrder = questionOrder;
+        this.marksAllocated = marksAllocated;
+    }
 
     public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer) {
         this.id = id;

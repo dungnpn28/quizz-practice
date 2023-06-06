@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.Exam" %>
+<%@page import = "dal.ExamQuestionDAO" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,7 +45,7 @@
                             <td>${Exam.getNumber_of_question()}</td>
                             <td>${Exam.getDuration() }</td>
                             <td>${Exam.getPass_rate() }</td>
-                        </tr>
+                        </tr>   
                     </c:forEach>
 
                 </table>
@@ -128,7 +129,7 @@
                     examIdText.textContent = "Exam ID: " + examId;
                     // Đặt examId vào URL của nút "Start Exam"
                     var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "quizhandle?id=" + examId;
+                    startExamButton.href = "startquiz?id=" + examId;
 
                     // Hiển thị popup
                     var popUpDetailModal = document.getElementById("popUpDetailModal");

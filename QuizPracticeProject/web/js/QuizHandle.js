@@ -17,3 +17,6 @@ function closePeekPopup() {
     document.getElementById('peek-popup').classList.remove('active');
 }
 
+function submit() {
+    document.getElementById("submit-btn").click();
+}

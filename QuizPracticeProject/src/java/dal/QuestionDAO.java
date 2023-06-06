@@ -5,6 +5,7 @@
 package dal;
 
 import java.util.ArrayList;
+import model.Attempt;
 import model.Question;
 import model.QuestionExam;
 
@@ -17,7 +18,7 @@ public class QuestionDAO extends MyDAO {
     public ArrayList<Question> getListQuestionByExamId(int examId, int page) {
         ArrayList<Question> questionList = new ArrayList<>();
         try {
-            String strSelect = "SELECT q.id, q.subject_id, q.content, q.option_a, q.option_b, q.option_c, q.option_d, q.answer, q.created, q.modified\n"
+            String strSelect = "SELECT q.id, q.subject_id, q.content, q.option_a, q.option_b, q.option_c, q.option_d, q.answer, qe.question_order, qe.marks_allocated, q.created, q.modified\n"
                     + "FROM question q\n"
                     + "JOIN question_exam qe ON q.id = qe.question_id\n"
                     + "WHERE qe.exam_id = ?\n"
@@ -36,11 +37,15 @@ public class QuestionDAO extends MyDAO {
                 String optionC = rs.getString(6);
                 String optionD = rs.getString(7);
                 String answer = rs.getString(8);
-                questionList.add(new Question(questionId, subjectId, content, optionA, optionB, optionC, optionD, answer));
+                int questionOrder = rs.getInt(9);
+                int marksAllocated = rs.getInt(10);
+                questionList.add(new Question(questionId, subjectId, content, optionA, optionB, optionC, optionD, answer, questionOrder, marksAllocated));
             }
         } catch (Exception e) {
             System.out.println("getListQuestionByExamId: " + e.getMessage());
         }
         return questionList;
     }
+    
+   
 }

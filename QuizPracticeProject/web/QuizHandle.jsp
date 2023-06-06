@@ -9,13 +9,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css"
               href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Quiz Handle</title>
         <link rel="stylesheet" href="css/QuizHandle.css" type="text/css" />
         <script src="js/QuizHandle.js"></script>
+
     </head>
 
     <body>
+
         <main>
 
             <div class="header-container">
@@ -37,7 +40,7 @@
             <c:forEach var="question" items="${questionL}"> 
                 <div class="under-header">
                     <div class="under-header-left">
-                        <h4>Question: <span>${question.getId()}</span>/<span>${endP}</span></h4>
+                        <h4>Question: <span>${question.questionOrder}</span>/<span>${endP}</span></h4>
                     </div>
                     <div class="under-header-right">
                         <button class="mark-question"> Mark Question</button>
@@ -46,38 +49,37 @@
                 <div class="game-quiz-container">
 
                     <div class="game-question-container">
-                        <h1 id="display-question">${question.getContent()}</h1>
+                        <h1 id="display-question">${question.content}</h1>
                     </div>
-
-                    <div class="game-options-container">
-
-
-                        <span>
-                            <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
-                            <label for="option-one" class="option" id="option-one-label">A. ${question.getOptionA()}</label>
-                        </span>
+                    <form action="quizhandle?id=${id}&page=${p}&qId=${question.id}" method="POST">
+                        <div class="game-options-container">
+                            <span>
+                                <input type="radio" id="option-one" name="option" class="radio" value="${question.optionA}" onclick="submit();" <c:if test="${attempt.userAnswer == question.optionA}">checked</c:if>/>
+                                <label for="option-one" class="option" id="option-one-label">A. ${question.optionA}</label>
+                            </span>
 
 
-                        <span>
-                            <input type="radio" id="option-two" name="option" class="radio" value="optionB" />
-                            <label for="option-two" class="option" id="option-two-label">B. ${question.getOptionB()}</label>
-                        </span>
+                            <span>
+                                <input type="radio" id="option-two" name="option" class="radio" value="${question.optionB}" onclick="submit();" <c:if test="${attempt.userAnswer == question.optionB}">checked</c:if>/>
+                                <label for="option-two" class="option" id="option-two-label">B. ${question.optionB}</label>
+                            </span>
 
 
-                        <span>
-                            <input type="radio" id="option-three" name="option" class="radio" value="optionC" />
-                            <label for="option-three" class="option" id="option-three-label">C. ${question.getOptionC()}</label>
-                        </span>
+                            <span>
+                                <input type="radio" id="option-three" name="option" class="radio" value="${question.optionC}"  onclick="submit();" <c:if test="${attempt.userAnswer == question.optionC}">checked</c:if>/>
+                                <label for="option-three" class="option" id="option-three-label">C. ${question.optionC}</label>
+                            </span>
 
 
-                        <span>
-                            <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
-                            <label for="option-four" class="option" id="option-four-label">D. ${question.getOptionD()}</label>
-                        </span>
+                            <span>
+                                <input type="radio" id="option-four" name="option" class="radio" value="${question.optionD}" onclick="submit();" <c:if test="${attempt.userAnswer == question.optionD}">checked</c:if>/>
+                                <label for="option-four" class="option" id="option-four-label">D. ${question.optionD}</label>
+                            </span>
 
 
-                    </div>
-
+                        </div>
+                        <input type="submit" id="submit-btn" value="SUBMIT" hidden="">
+                    </form>
                     <div class="peek-at-answer">
                         <button onclick="openPeekPopup()">Peek At Answer</button>
                         <div id="peek-popup" class="peek-popup-overlay">
@@ -85,7 +87,12 @@
                                 <div class="peek-header">
                                     <h1>Peek at answer</h1>
                                 </div>
+                                <div class="question-id">
+                                    <h4>Question ID: ${question.id}</h4>
+                                </div>
+
                                 <div class="peek-content">
+
                                     <h2>Question: ${question.content}</h2>
                                     <h3>Answer: ${question.answer}</h3>
                                 </div>
@@ -96,7 +103,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="footer-container">
                     <div class="review-progress">
                         <button onclick="openPopup()">Review Progress</button>
@@ -114,7 +120,7 @@
                                 </div>
                                 <div class="question-navigation">
                                     <c:forEach begin="1" end="${endP}" var="i">
-                                        <a href="quizhandle?id=${id}&page=${i}">${i}</a>
+                                        <a href="quizhandle?id=${id}&page=${i}&qId=${question.id}">${i}</a>
                                     </c:forEach>
                                 </div>
                                 <div class="navigate-btn">
@@ -127,12 +133,16 @@
 
                     </div>
                     <div class="next-previous">
-                        <div class="footer-left">
-                            <button id="previous-question">Previous Question</button>
-                        </div>
-                        <div class="footer-right">
-                            <button id="next-question">Next Question</button>
-                        </div>
+                        <c:if test = "${p > 1}">
+                            <div class="footer-left">
+                                <a href="quizhandle?id=${id}&page=${p-1}&qId=${question.id}">Previous Question</a>
+                            </div>
+                        </c:if>
+                        <c:if test = "${p < endP}">
+                            <div class="footer-right">
+                                <a href="quizhandle?id=${id}&page=${p+1}&qId=${question.id}">Next Question</a>
+                            </div>
+                        </c:if>
                     </div>
 
                 </c:forEach> 

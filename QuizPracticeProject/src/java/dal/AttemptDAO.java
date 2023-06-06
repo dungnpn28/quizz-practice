@@ -1,0 +1,103 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dal;
+
+import model.Attempt;
+
+/**
+ *
+ * @author Acer
+ */
+public class AttemptDAO extends MyDAO {
+
+    public void createAttempt(int examId, int questionId, int userId) {
+        try {
+            String strAdd = "insert into [attempt]"
+                    + "(exam_id, question_id, user_id, marked, created) "
+                    + "values(?,"
+                    + " ?,"
+                    + " ?,"
+                    + " 0,"
+                    + "GETDATE());";
+            ps = con.prepareStatement(strAdd);
+            ps.setInt(1, examId);
+            ps.setInt(2, questionId);
+            ps.setInt(3, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("createAttempt: " + e.getMessage());
+        }
+    }
+
+    public void markQuestion(boolean isUnmarked, int examId, int questionId, int userId) {
+        try {
+            String strAdd = "update [attempt]"
+                    + "set marked = ? "
+                    + "where exam_id = ? AND "
+                    + "question_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareStatement(strAdd);
+            if (isUnmarked) {
+                ps.setInt(1, 1);
+            } else {
+                ps.setInt(1, 0);
+            }
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("markQuestion: " + e.getMessage());
+        }
+    }
+
+    public void saveAnswer(String answer, int examId, int questionId, int userId) {
+        try {
+            String strAdd = "update [attempt] "
+                    + "set user_answer = ? "
+                    + "where exam_id = ? AND "
+                    + "question_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareStatement(strAdd);
+            ps.setString(1, answer);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("saveAnswer: " + e.getMessage());
+        }
+    }
+
+    public Attempt getAttempt(int examId, int questionId, int userId) {
+        Attempt a = null;
+        try {
+            String strSelect = "select * from [attempt] "
+                    + "where exam_id=? AND "
+                    + "question_id=? AND "
+                    + "user_id =? ;";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            ps.setInt(2, questionId);
+            ps.setInt(3, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                boolean marked = true;
+                if (rs.getInt(4) == 0) {
+                    marked = false;
+                }
+                String userAnswer = rs.getString(5);
+                double score = rs.getDouble(6);
+                a = new Attempt(userId, questionId, examId, marked, userAnswer, score);
+            }
+        } catch (Exception e) {
+            System.out.println("getAttempt:" + e.getMessage());
+        }
+        return a;
+    }
+}
