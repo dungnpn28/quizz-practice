@@ -12,7 +12,6 @@ import java.sql.Date;
  */
 public class Slider {
     private int id;
-    private int publisher_id;
     private String title;
     private String image;
     private String backlink;
@@ -23,9 +22,8 @@ public class Slider {
     public Slider() {
     }
 
-    public Slider(int id, int publisher_id, String title, String image, String backlink, boolean status, Date created, Date modified) {
+    public Slider(int id, String title, String image, String backlink, boolean status, Date created, Date modified) {
         this.id = id;
-        this.publisher_id = publisher_id;
         this.title = title;
         this.image = image;
         this.backlink = backlink;
@@ -40,14 +38,6 @@ public class Slider {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getPublisher_id() {
-        return publisher_id;
-    }
-
-    public void setPublisher_id(int publisher_id) {
-        this.publisher_id = publisher_id;
     }
 
     public String getTitle() {
@@ -97,6 +87,9 @@ public class Slider {
     public void setModified(Date modified) {
         this.modified = modified;
     }
+    
+    
+    
     
     
 }
