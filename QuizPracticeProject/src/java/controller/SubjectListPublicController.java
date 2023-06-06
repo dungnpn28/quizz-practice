@@ -60,10 +60,14 @@ public class SubjectListPublicController extends HttpServlet {
         }
         SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
+        //display all subject in list
         subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
         String checkAll = request.getParameter("checkAll");
         if (checkAll != null && checkAll.equals("true")) {
             sessions.removeAttribute("checkFeatured");
+            sessions.removeAttribute("checkRegisted");
+            sessions.removeAttribute("checkNotRegisted");
+
         }
         int totalSubject = sDAO.getTotalSubject();
 
@@ -71,26 +75,68 @@ public class SubjectListPublicController extends HttpServlet {
         if (totalSubject % PAGE_SIZE != 0) {
             totalPage += 1;
         }
+        List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
+        request.setAttribute("featuredSubjectList", featuredSubjectList);
+
+        //display featured subject list
         String checkFeatured = request.getParameter("checkFeatured");
         if (checkFeatured != null && checkFeatured.equals("true")) {
-
+            sessions.removeAttribute("checkRegisted");
+            sessions.removeAttribute("checkNotRegisted");
             sessions.setAttribute("checkFeatured", checkFeatured);
         }
         if (sessions.getAttribute("checkFeatured") != null) {
-            subjectList = sDAO.getRegistedSubjectsWithPaging(page, PAGE_SIZE);
-            totalSubject = sDAO.getTotalRegistedSubject();
+            subjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
+            totalSubject = sDAO.getTotalFeaturedSubject();
             totalPage = totalSubject / PAGE_SIZE; //1
             if (totalSubject % PAGE_SIZE != 0) {
                 totalPage += 1;
             }
         }
-        if(sessions.getAttribute("user") != null) {
-            User user =(User) sessions.getAttribute("user");
+
+        //lấy list subject user đã registed
+        if (sessions.getAttribute("user") != null) {
+            User user = (User) sessions.getAttribute("user");
             int userId = user.getId();
             List<Subject> subjectListByUserId = sDAO.getSubjectsByUserID(userId);
-                        request.setAttribute("Dodaicailist", subjectListByUserId.size());
-
             request.setAttribute("subjectListByUserId", subjectListByUserId);
+
+            //display registed subject
+            String checkRegisted = request.getParameter("checkRegisted");
+            if (checkRegisted != null && checkRegisted.equals("true")) {
+                sessions.removeAttribute("checkFeatured");
+                sessions.removeAttribute("checkNotRegisted");
+                sessions.setAttribute("checkRegisted", checkRegisted);
+            }
+            if (sessions.getAttribute("checkRegisted") != null) {
+                subjectList = sDAO.getSubjectsByUserIDWithPaging(userId, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalRegistedSubject(userId);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            }
+
+            //display registed subject
+            String checkNotRegisted = request.getParameter("checkNotRegisted");
+            if (checkNotRegisted != null && checkNotRegisted.equals("true")) {
+                sessions.removeAttribute("checkFeatured");
+                sessions.removeAttribute("checkRegisted");
+                sessions.setAttribute("checkNotRegisted", checkNotRegisted);
+            }
+            if (sessions.getAttribute("checkNotRegisted") != null) {
+                subjectList = sDAO.getSubjectsNotRegistedByUserIDWithPaging(userId, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalNotRegistedSubject(userId);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            }
+        }
+        //get search keyword
+        String keyword = request.getParameter("keyword");
+        if (keyword != null) {
+            
         }
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
