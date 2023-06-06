@@ -54,13 +54,27 @@
             } 
             %>
             <div id="content">
+
                 <div class="container row d-flex">
                     <div class="container row d-flex justify-content-between">
                         <div class=" col-md-8">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="gif-and-heading d-flex">
-                                        <h3 class="mb-3 mt-4">Subject List</h3>
+                                        <c:choose>
+                                            <c:when test="${not empty sessionScope.checkFeatured}">
+                                                <h3 class="mb-3 mt-4">Subject list by featured</h3>
+                                            </c:when>
+                                            <c:when test="${not empty sessionScope.checkRegisted}">
+                                                <h3 class="mb-3 mt-4">Subject list by registed</h3>
+                                            </c:when>
+                                            <c:when test="${not empty sessionScope.checkNotRegisted}">
+                                                <h3 class="mb-3 mt-4">Subject list by not registed</h3>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h3 class="mb-3 mt-4">All subject
+                                                </c:otherwise>
+                                            </c:choose>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -89,6 +103,9 @@
                                 <div class="col-12">
                                     <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
+                                            <c:if test="${subjectList == null || subjectList.size() == 0}">
+                                                Not found
+                                            </c:if>
                                             <c:forEach items="${subjectList}" var="item" varStatus="status">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
@@ -103,6 +120,12 @@
                                                                         <h5 class="card-title" onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">${item.getName()}</h5>
 
                                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
+                                                                        
+                                                                        <c:forEach items="${subjectCategoryList}" var="category">
+                                                                            <c:if test="${item.category_id == category.id}">
+                                                                                <div class="card-category">Category: ${category.name}</div>
+                                                                            </c:if>
+                                                                        </c:forEach>
                                                                     </div>
                                                                     <span class="multicolor-blink">
                                                                         <c:if test="${item.featured}">
@@ -181,16 +204,28 @@
 
                                     <div class="searchBox">
                                         <form action="subjectListPublic" method="get">
-                                            <input
-                                                value="${key}"
-                                                type="search"
-                                                placeholder="Search by exam name"
-                                                aria-label="Search"
-                                                name="keyword"
-                                                />
-                                            <button class="btn" type="submit">
-                                                Search
-                                            </button>
+                                            <div class="input-group">
+                                                <input
+                                                    class="form-control"
+                                                    value="${key}"
+                                                    type="search"
+                                                    placeholder="Search by exam name"
+                                                    aria-label="Search"
+                                                    name="keyword"
+                                                    />
+                                                <button class="btn btn-primary" type="submit">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <form action="subjectListPublic" method="get">
+                                            <select name="selectedCategory">
+                                                <option value="0">All</option>
+                                                <c:forEach items="${subjectCategoryList}" var="category">
+                                                    <option value="${category.id}">${category.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <button type="submit">Submit</button>
                                         </form>
 
                                     </div>

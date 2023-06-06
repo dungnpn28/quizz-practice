@@ -5,6 +5,7 @@
 package controller;
 
 import dal.SubjectDAO;
+import dal.Subject_CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Subject;
+import model.Subject_Category;
 import model.User;
 
 /**
@@ -136,8 +138,69 @@ public class SubjectListPublicController extends HttpServlet {
         //get search keyword
         String keyword = request.getParameter("keyword");
         if (keyword != null) {
-            
+            subjectList = sDAO.searchInAllSubject(keyword, page, PAGE_SIZE);
+            totalSubject = sDAO.getTotalSubjectWithKeyword(keyword);
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            if (sessions.getAttribute("checkFeatured") != null) {
+                subjectList = sDAO.searchInFeatturedSubject(keyword, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalFeaturedSubjectWithKeyword(keyword);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            }
+            if (sessions.getAttribute("user") != null) {
+                User user = (User) sessions.getAttribute("user");
+                int userId = user.getId();
+                if (sessions.getAttribute("checkRegisted") != null) {
+                    subjectList = sDAO.searchSubjectsByUserIDWithPaging(keyword, userId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalRegistedSubjectWithKeyword(userId, keyword);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                }
+                if (sessions.getAttribute("checkNotRegisted") != null) {
+                    subjectList = sDAO.searchSubjectsNotRegistedByUserIDWithPaging(keyword, userId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalNotRegistedSubjectWithKeyword(userId, keyword);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                }
+            }
         }
+        if (request.getParameter("selectedCategory") != null) {
+            sessions.removeAttribute("checkFeatured");
+            sessions.removeAttribute("checkRegisted");
+            sessions.removeAttribute("checkNotRegisted");
+            int selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
+            if (selectedCategoryId == 0) {
+                subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalSubject();
+
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            } else {
+                subjectList = sDAO.getSubjectsByCategoryAndPaging(selectedCategoryId, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            }
+        }
+
+        List<Subject_Category> subjectCategoryList = new ArrayList<>();
+        Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
+        subjectCategoryList = scDAO.getSubjectCategory();
+        request.setAttribute("subjectCategoryList", subjectCategoryList);
+        request.setAttribute("key", keyword);
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("subjectList", subjectList);

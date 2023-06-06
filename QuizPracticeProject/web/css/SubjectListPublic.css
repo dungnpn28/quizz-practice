@@ -55,17 +55,36 @@
 
 .subjectListButton {
     background-color: #76e3da; /* Màu nền */
-        color: white; /* Màu chữ */
-        padding: 10px 20px; /* Kích thước padding */
-        border: none; /* Không có viền */
-        border-radius: 4px; /* Bo góc */
-        text-align: center; /* Căn giữa nội dung */
-        text-decoration: none; /* Không gạch chân */
-        display: inline-block; /* Hiển thị inline */
-        font-size: 16px; /* Cỡ chữ */
-        cursor: pointer; /* Con trỏ khi hover */
+    color: white; /* Màu chữ */
+    padding: 10px 20px; /* Kích thước padding */
+    border: none; /* Không có viền */
+    border-radius: 4px; /* Bo góc */
+    text-align: center; /* Căn giữa nội dung */
+    text-decoration: none; /* Không gạch chân */
+    display: inline-block; /* Hiển thị inline */
+    font-size: 16px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ khi hover */
 }
 
 .subjectListButton:hover {
-        background-color: #459da0; /* Màu nền hover */
-    }
+    background-color: #459da0; /* Màu nền hover */
+}
+
+.searchBox {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: inline-flex;
+    max-width: 400px;
+}
+
+.form-control {
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+}
+
+.btn {
+    border-radius: 0 5px 5px 0;
+}
