@@ -57,7 +57,22 @@ public class PracticeDetailsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
+        String subject = request.getParameter("subject");
+    	String questions = request.getParameter("questions");
         
+    	String readOnlyParam = request.getParameter("readOnly");
+    	
+    	if (readOnlyParam != null && readOnlyParam.equalsIgnoreCase("true")) {
+    		// The page is read-only, redirect to Quiz Review page
+    		response.sendRedirect("QuizReview.jsp");
+    	} else {
+    		// Save practice information to database or session
+
+
+    		
+    		// Redirect to Quiz Handle page
+    		response.sendRedirect("QuizHandle.jsp");
+    	}
     }
 
     /** 

@@ -14,57 +14,55 @@
         <link href="css/PracticeDetails.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Quizerro</title>
+        <script>
+            window.onload = function () {
+                // If the page is read-only, disable input fields
+                if (document.getElementById("readOnly").value === "true") {
+                    document.getElementById("subject").disabled = true;
+                    document.getElementById("description").readOnly = true;
+                    document.getElementById("practiceBtn").value = "Practice Review";
+                }
+            };
+        </script>
     </head>
-    <%@include file="components/Header.jsp" %>
+    <%@include file="components/CusHeader.jsp" %>
     <body>
         <div class="practiceDetailForm">
+            
             <form action="practiceDetails" method="POST">
                 <h2>PRACTICE DETAILS</h2>
                 <br>
-                Subject
+                <label class="" for="subject">Subject:</label>
                 <br>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Subject name
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <select name="subject" id="subject" class="btn btn-secondary">
+                    <option value="math">Math</option>
+                    <option value="english">English</option>
+                    <option value="science">Science</option>
+                </select>
                 <br>
-                Number of practicing questions
+                <label for="questions">Number of practicing questions</label>
                 <br>
-                <input type="text" name="" value="" />
+                <input name="questions" id="questions" type="number">
                 <br>
-                Questions are selected by topic(s) or a specific dimension?
+                <label for="topic">Questions are selected by topic(s) or a specific dimension?</label>
                 <br>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        By subject topic
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <select name="topic" id=topic" class="btn btn-secondary">
+                    <option value="math">Math</option>
+                    <option value="english">English</option>
+                    <option value="science">Science</option>
+                </select>
                 <br>
-                Question group(choose one or all topic/dimension(s))
+                <label for="ques-group">Question group (choose one or all topic/dimension(s))</label>
                 <br>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        All
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <select name="ques-group" id=ques-group" class="btn btn-secondary">
+                    <option value="math">Math</option>
+                    <option value="english">English</option>
+                    <option value="science">Science</option>
+                </select>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Practice" />
+                <input type="hidden" name="readOnly" id="readOnly" value="<%= request.getParameter("readOnly") %>">
+                <br>
+                <input type="submit" value="Practice" id="practiceBtn" class="btn btn-primary">
             </form>
         </div>
     </body>

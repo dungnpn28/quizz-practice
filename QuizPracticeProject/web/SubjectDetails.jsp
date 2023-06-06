@@ -1,17 +1,161 @@
-<%-- 
-    Document   : SubjectDetails
-    Created on : May 30, 2023, 9:12:09 PM
-    Author     : dai
---%>
+<%@ page import="java.util.List" %>
+<%@page import = "model.Course" %>
+<%@page import = "java.util.*" %>
 
+<%@ page import="model.Course" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<%
+    CourseDAO u = new CourseDAO();
+  List<Course> lst = (List<Course>)request.getAttribute("lst");
+  List<String> cols = u.getColNames("Course");
+  
+%>   
+
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
+        <title>Blog Detail</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/templatemo.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- Load fonts style after rendering the layout styles -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+        <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+        <link rel="stylesheet" type="text/css" href="assets/css/coursedetail.css">
+
+
+
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@ include file = "Header.jsp" %>
+        <div class="navbar2">
+            <div class="container2">
+                <span class="navbar2-brand"><a href="Home.jsp">Home</a></span>
+                <span class="navbar2-brand-divider ">/</span>
+<!--                <span class="navbar2-brand"><a href="course">List Course</a></span>-->
+                <span class="navbar2-brand-divider ">/</span>
+
+                <span class="navbar2-brand">Blog Detail</span>
+            </div>
+        </div>
+        <div class="container container1">
+            <div class="sidebar">
+                <div class="search-box">
+                    <form action="SearchCourseName" method="POST">
+                        <input type="text" name="CourseName" placeholder="Enter course name...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+
+                <div class="widget">
+                    <h2 class="widget-title">List</h2>
+
+
+
+
+                    <form action="course" method="POST">
+                        <p>Sort by: 
+                            <select name="colName">
+                                <% for(String x: cols) { %>
+                                <option value="<%= x %>"> <%= x %> </option>
+                                <% } %>
+                            </select>
+                        <p>
+
+                        <p>Sorting type:
+                        <p>
+                            <input type="radio" name="sortType" value="ASC" checked="" /> Ascendingly
+                        <p>
+                            <input type="radio" name="sortType" value="DESC" /> Descendingly
+                        <p><input type="submit" value="Sort">
+
+                    </form>  
+
+
+
+
+
+
+                </div>
+
+                <div class="widget">
+                    <h2 class="widget-title">Rate</h2>
+                    <div class="rating">
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4stars">&#9733;</label>
+                        <input type="radio" id="star5" name="rating" value="5" checked>
+                        <label for="star5" title="5 stars">&#9733;</label>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h2 class="widget-title">Comment</h2>
+                    <ul style="list-style: none">
+                        <li>bổ ích quá</li>
+                        <li>rất thú vị cảm ơn tác giả</li>
+
+                    </ul>
+                </div>
+                <!--                <div class="widget">
+                                        <div class="last">
+                
+                                            <h2 class="widget-title"  >Last Post</h2>
+                
+                                            <div class="card-body">
+                                                <img src="${last.image}" alt="Post thumbnail">
+                                                <h2><a style=" text-decoration: none" href="detail?bid=${last.blogid}" title="View Post">${last.title}</a></h2>
+                                                <p style="font-size: 10px;">${last.briefInfor}</p>
+                                            </div>
+                
+                
+                                        </div>
+                                    </div>-->
+
+            </div>
+            <div class="post">
+                <div class="post-image">
+                    <img  src="${CourseDetail.image}" alt="blog">
+                </div>
+
+                <h1>${CourseDetail.courseName}</h1>
+                <p> <strong>Price:</strong> ${CourseDetail.coursePrice}</p>
+                <p>  <strong>Sale:</strong> $${"{:.2f}".format(CourseDetail.coursePrice * 0.95)}</p>
+
+                <p><strong> Detail:</strong></p>
+                <p>${CourseDetail.courseDescription}</p>
+                <div class="author">
+                    <p><strong>Posted on :</strong> ${CourseDetail.courseCreateDate}</p>
+                    <p><strong>Status:</strong> ${CourseDetail.status ? "Enroll" : "Unenroll" }</p>
+
+
+                </div>
+                <div style="text-align: center;">
+                    <form  method="POST" action="submit">
+                        <input type="hidden" name="courseId" value="${CourseDetail.courseId}">
+                        <button type="submit" ${CourseDetail.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to join the course?')">Activate Course</button>
+                    </form>     
+                </div>
+
+            </div>
+
+        </div>
+        <%@include file="footer.jsp" %>
+
     </body>
 </html>
