@@ -142,7 +142,7 @@
                                                                             <%-- Nếu không có user trong session --%>
                                                                             <%-- Hiển thị nút Register --%>
                                                                             <span class="registerButton">
-                                                                                <button href="">Register</button>
+                                                                                <a href="">  <button >Register</button> </a>
                                                                             </span>
 
                                                                         </c:when>
@@ -172,7 +172,7 @@
                                                                                     <c:if test="${!isRegistered}">
 
                                                                                         <span class="registerButton">
-                                                                                            <button href="">Register</button>
+                                                                                            <a href="">  <button >Register</button> </a>
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:when>
@@ -238,6 +238,7 @@
                                                 </c:otherwise>
                                             </c:choose>            
                                         </c:if>
+                                        <br/>
                                         <form action="subjectListPublic" method="get">
                                             <select name="selectedCategory">
                                                 <option value="0">All</option>
@@ -245,9 +246,17 @@
                                                     <option value="${category.id}">${category.name}</option>
                                                 </c:forEach>
                                             </select>
-                                            <button type="submit">Submit</button>
+                                            <button type="submit">Confirm</button>
                                         </form>
+                                        <br/>
+                                        <form action="subjectListPublic" method="get">
+                                            <input type="radio" id="asc" name="sort" value="asc">
+                                            <label for="asc">Price ↗</label>
 
+                                            <input type="radio" id="desc" name="sort" value="desc">
+                                            <label for="desc">Price ↘</label>
+                                            <button type="submit">Confirm</button>
+                                        </form>
                                     </div>
 
                                     <table class="table">
@@ -274,10 +283,7 @@
                                                         <br/>
                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
                                                     </td>
-
-
                                                 </tr>
-
                                             </c:forEach>
                                         </tbody>
                                     </table>
