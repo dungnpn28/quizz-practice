@@ -12,12 +12,12 @@ public class Subject_Category {
     private int id;
     private String name;
 
-    public Subject_Category() {
-    }
-
     public Subject_Category(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Subject_Category() {
     }
 
     public int getId() {
