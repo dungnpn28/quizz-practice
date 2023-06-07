@@ -12,7 +12,8 @@ import model.Subject_Category;
  *
  * @author LENOVO
  */
-public class Subject_CategoryDAO extends MyDAO{
+public class Subject_CategoryDAO extends MyDAO {
+
     public List<Subject_Category> getSubjectCategory() {
         List<Subject_Category> t = new ArrayList<>();
         xSql = "select * from subject_category";
@@ -21,7 +22,7 @@ public class Subject_CategoryDAO extends MyDAO{
             rs = ps.executeQuery();
             int xID;
             String xName;
-           
+
             Subject_Category x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -35,5 +36,25 @@ public class Subject_CategoryDAO extends MyDAO{
             e.printStackTrace();
         }
         return (t);
+    }
+
+    public String getCategoryName(int categoryId) {
+        xSql = "select name from subject_category where id = ?";
+        String xName ="";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, categoryId);
+            rs = ps.executeQuery();
+
+
+            if (rs.next()) {
+                xName = rs.getString("name");
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return xName;
     }
 }

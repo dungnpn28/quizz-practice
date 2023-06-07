@@ -72,10 +72,13 @@
                                                 <h3 class="mb-3 mt-4">Subject list by not registed</h3>
                                             </c:when>
                                             <c:otherwise>
-                                                <h3 class="mb-3 mt-4">All subject
-                                                </c:otherwise>
-                                            </c:choose>
+                                                <h3 class="mb-3 mt-4">All subject</h3>
+                                            </c:otherwise>
+                                        </c:choose>                
                                     </div>
+                                    <c:if test="${not empty sessionScope.selectedCategoryId}">
+                                        <h3>List subject by category: ${categoryName}</h3>
+                                    </c:if>
                                 </div>
                                 <div class="col-12">
                                     <div class="d-flex justify-content-between">
@@ -120,7 +123,8 @@
                                                                         <h5 class="card-title" onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">${item.getName()}</h5>
 
                                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
-                                                                        
+
+
                                                                         <c:forEach items="${subjectCategoryList}" var="category">
                                                                             <c:if test="${item.category_id == category.id}">
                                                                                 <div class="card-category">Category: ${category.name}</div>
@@ -218,6 +222,22 @@
                                                 </button>
                                             </div>
                                         </form>
+                                        <c:if test="${key!= mull}" >
+                                            <c:choose>
+                                                <c:when test="${not empty sessionScope.checkFeatured}">
+                                                    <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
+                                                </c:when>
+                                                <c:when test="${not empty sessionScope.checkRegisted}">
+                                                    <h3 class="mb-3 mt-4">Search "${key}" from registed subject</h3>
+                                                </c:when>
+                                                <c:when test="${not empty sessionScope.checkNotRegisted}">
+                                                    <h3 class="mb-3 mt-4">Search "${key}" from not registed subject</h3>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h3 class="mb-3 mt-4">Search "${key}" from all subject</h3>
+                                                </c:otherwise>
+                                            </c:choose>            
+                                        </c:if>
                                         <form action="subjectListPublic" method="get">
                                             <select name="selectedCategory">
                                                 <option value="0">All</option>

@@ -60,6 +60,11 @@ public class SubjectListPublicController extends HttpServlet {
         if (pageStr != null) {
             page = Integer.parseInt(pageStr);
         }
+
+        List<Subject_Category> subjectCategoryList = new ArrayList<>();
+        Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
+        subjectCategoryList = scDAO.getSubjectCategory();
+
         SubjectDAO sDAO = new SubjectDAO();
         List<Subject> subjectList = new ArrayList<>();
         //display all subject in list
@@ -69,7 +74,8 @@ public class SubjectListPublicController extends HttpServlet {
             sessions.removeAttribute("checkFeatured");
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
-
+            sessions.removeAttribute("keywordInSubjectList");
+            sessions.removeAttribute("selectedCategoryId");
         }
         int totalSubject = sDAO.getTotalSubject();
 
@@ -77,6 +83,11 @@ public class SubjectListPublicController extends HttpServlet {
         if (totalSubject % PAGE_SIZE != 0) {
             totalPage += 1;
         }
+        int selectedCategoryId = 0;
+        if (sessions.getAttribute("selectedCategoryId") != null) {
+            selectedCategoryId = (int) sessions.getAttribute("selectedCategoryId");
+        }
+
         List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
         request.setAttribute("featuredSubjectList", featuredSubjectList);
 
@@ -85,6 +96,7 @@ public class SubjectListPublicController extends HttpServlet {
         if (checkFeatured != null && checkFeatured.equals("true")) {
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
+            sessions.removeAttribute("keywordInSubjectList");
             sessions.setAttribute("checkFeatured", checkFeatured);
         }
         if (sessions.getAttribute("checkFeatured") != null) {
@@ -93,6 +105,16 @@ public class SubjectListPublicController extends HttpServlet {
             totalPage = totalSubject / PAGE_SIZE; //1
             if (totalSubject % PAGE_SIZE != 0) {
                 totalPage += 1;
+            }
+            if (sessions.getAttribute("selectedCategoryId") != null) {
+                subjectList = sDAO.getFeaturedSubjectsWithCategoryAndPaging(selectedCategoryId, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalFeaturedSubjectByCategory(selectedCategoryId);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+                String categoryName = scDAO.getCategoryName(selectedCategoryId);
+                request.setAttribute("categoryName", categoryName);
             }
         }
 
@@ -108,6 +130,7 @@ public class SubjectListPublicController extends HttpServlet {
             if (checkRegisted != null && checkRegisted.equals("true")) {
                 sessions.removeAttribute("checkFeatured");
                 sessions.removeAttribute("checkNotRegisted");
+                sessions.removeAttribute("keywordInSubjectList");
                 sessions.setAttribute("checkRegisted", checkRegisted);
             }
             if (sessions.getAttribute("checkRegisted") != null) {
@@ -117,13 +140,25 @@ public class SubjectListPublicController extends HttpServlet {
                 if (totalSubject % PAGE_SIZE != 0) {
                     totalPage += 1;
                 }
+                if (sessions.getAttribute("selectedCategoryId") != null) {
+                    subjectList = sDAO.getSubjectsByCategoryAndUserIDWithPaging(userId, selectedCategoryId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalRegistedSubjectWithCategory(userId, selectedCategoryId);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                    String categoryName = scDAO.getCategoryName(selectedCategoryId);
+                    request.setAttribute("categoryName", categoryName);
+
+                }
             }
 
-            //display registed subject
+            //display not registed subject
             String checkNotRegisted = request.getParameter("checkNotRegisted");
             if (checkNotRegisted != null && checkNotRegisted.equals("true")) {
                 sessions.removeAttribute("checkFeatured");
                 sessions.removeAttribute("checkRegisted");
+                sessions.removeAttribute("keywordInSubjectList");
                 sessions.setAttribute("checkNotRegisted", checkNotRegisted);
             }
             if (sessions.getAttribute("checkNotRegisted") != null) {
@@ -133,11 +168,62 @@ public class SubjectListPublicController extends HttpServlet {
                 if (totalSubject % PAGE_SIZE != 0) {
                     totalPage += 1;
                 }
+                if (sessions.getAttribute("selectedCategoryId") != null) {
+                    subjectList = sDAO.getSubjectsNotRegistedByCategoryAndUserIDWithPaging(userId, selectedCategoryId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalNotRegistedSubjectWithCategory(userId, selectedCategoryId);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                    String categoryName = scDAO.getCategoryName(selectedCategoryId);
+                    request.setAttribute("categoryName", categoryName);
+                }
+            }
+
+        }
+        if (sessions.getAttribute("keywordInSubjectList") != null) {
+            String keywordInSubjectList = (String) sessions.getAttribute("keywordInSubjectList");
+            sessions.removeAttribute("selectedCategoryId");
+            subjectList = sDAO.searchInAllSubject(keywordInSubjectList, page, PAGE_SIZE);
+            totalSubject = sDAO.getTotalSubjectWithKeyword(keywordInSubjectList);
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            if (sessions.getAttribute("checkFeatured") != null) {
+                subjectList = sDAO.searchInFeatturedSubject(keywordInSubjectList, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalFeaturedSubjectWithKeyword(keywordInSubjectList);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+            }
+            if (sessions.getAttribute("user") != null) {
+                User user = (User) sessions.getAttribute("user");
+                int userId = user.getId();
+                if (sessions.getAttribute("checkRegisted") != null) {
+                    subjectList = sDAO.searchSubjectsByUserIDWithPaging(keywordInSubjectList, userId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalRegistedSubjectWithKeyword(userId, keywordInSubjectList);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                }
+                if (sessions.getAttribute("checkNotRegisted") != null) {
+                    subjectList = sDAO.searchSubjectsNotRegistedByUserIDWithPaging(keywordInSubjectList, userId, page, PAGE_SIZE);
+                    totalSubject = sDAO.getTotalNotRegistedSubjectWithKeyword(userId, keywordInSubjectList);
+                    totalPage = totalSubject / PAGE_SIZE; //1
+                    if (totalSubject % PAGE_SIZE != 0) {
+                        totalPage += 1;
+                    }
+                }
             }
         }
         //get search keyword
         String keyword = request.getParameter("keyword");
         if (keyword != null) {
+            sessions.setAttribute("keywordInSubjectList", keyword);
+            sessions.removeAttribute("selectedCategoryId");
             subjectList = sDAO.searchInAllSubject(keyword, page, PAGE_SIZE);
             totalSubject = sDAO.getTotalSubjectWithKeyword(keyword);
             totalPage = totalSubject / PAGE_SIZE; //1
@@ -174,11 +260,14 @@ public class SubjectListPublicController extends HttpServlet {
             }
         }
         if (request.getParameter("selectedCategory") != null) {
+            selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
+            sessions.setAttribute("selectedCategoryId", selectedCategoryId);
             sessions.removeAttribute("checkFeatured");
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
-            int selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
+            sessions.removeAttribute("keywordInSubjectList");
             if (selectedCategoryId == 0) {
+                sessions.removeAttribute("selectedCategoryId");
                 subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
                 totalSubject = sDAO.getTotalSubject();
 
@@ -193,14 +282,13 @@ public class SubjectListPublicController extends HttpServlet {
                 if (totalSubject % PAGE_SIZE != 0) {
                     totalPage += 1;
                 }
+                String categoryName = scDAO.getCategoryName(selectedCategoryId);
+                request.setAttribute("categoryName", categoryName);
             }
         }
 
-        List<Subject_Category> subjectCategoryList = new ArrayList<>();
-        Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
-        subjectCategoryList = scDAO.getSubjectCategory();
-        request.setAttribute("subjectCategoryList", subjectCategoryList);
         request.setAttribute("key", keyword);
+        request.setAttribute("subjectCategoryList", subjectCategoryList);
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("subjectList", subjectList);
