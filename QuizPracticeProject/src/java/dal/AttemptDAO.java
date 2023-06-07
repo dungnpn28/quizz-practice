@@ -32,28 +32,6 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
-    public void markQuestion(boolean isUnmarked, int examId, int questionId, int userId) {
-        try {
-            String strAdd = "update [attempt]"
-                    + "set marked = ? "
-                    + "where exam_id = ? AND "
-                    + "question_id = ? AND "
-                    + "user_id = ? ;";
-            ps = con.prepareStatement(strAdd);
-            if (isUnmarked) {
-                ps.setInt(1, 1);
-            } else {
-                ps.setInt(1, 0);
-            }
-            ps.setInt(2, examId);
-            ps.setInt(3, questionId);
-            ps.setInt(4, userId);
-            ps.execute();
-
-        } catch (Exception e) {
-            System.out.println("markQuestion: " + e.getMessage());
-        }
-    }
 
     public void saveAnswer(String answer, int examId, int questionId, int userId) {
         try {
@@ -141,6 +119,37 @@ public class AttemptDAO extends MyDAO {
 
         } catch (Exception e) {
             System.out.println("markUnmarkQuestion: " + e.getMessage());
+        }
+    }
+    
+    public void scoreQuestion(double score, int examId, int questionId, int userId) {
+        try {
+            String strAdd = "update [attempt] "
+                    + "set score = ? "
+                    + "where exam_id = ? AND "
+                    + "question_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareStatement(strAdd);
+            ps.setDouble(1, score);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("scoreQuestion: " + e.getMessage());
+        }
+    }
+    
+    public void deleteExamAttempt(int examId) {
+        try {
+            String strDel = "delete from [attempt] where exam_id = ?;";
+            ps = con.prepareStatement(strDel);
+            ps.setInt(1, examId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("deleteAttempt: " + e.getMessage());
         }
     }
 }

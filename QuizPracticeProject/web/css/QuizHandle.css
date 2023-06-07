@@ -330,7 +330,7 @@ input[type=radio]:checked~.option {
 .peek-at-answer {
     display: flex;
     justify-content: right;
-    margin-right: 280px;
+    margin-right: 370px;
 }
 
 .peek-at-answer button {
@@ -575,6 +575,19 @@ input[type=radio]:checked~.option {
     font-size: 1.5rem;
     cursor: pointer;
     margin: 0 10px;
+    background-color: rgb(221, 230, 240);
+    color: #2e3856;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.exit-button a {
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
     background-color: #2e3856;
     color: rgb(221, 230, 240);
     padding: 10px 20px;
@@ -588,6 +601,14 @@ input[type=radio]:checked~.option {
 }
 
 .exit-button button:active {
+    opacity:0.5;
+}
+
+.exit-button a:hover {
+    opacity:0.7;
+}
+
+.exit-button a:active {
     opacity:0.5;
 }
 

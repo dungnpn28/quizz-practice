@@ -19,7 +19,7 @@ public class Question {
     private String optionD;
     private String answer;
     private int questionOrder;
-    private int marksAllocated;
+    private double marksAllocated;
 
     public int getQuestionOrder() {
         return questionOrder;
@@ -29,7 +29,7 @@ public class Question {
         this.questionOrder = questionOrder;
     }
 
-    public int getMarksAllocated() {
+    public double getMarksAllocated() {
         return marksAllocated;
     }
 
@@ -37,7 +37,7 @@ public class Question {
         this.marksAllocated = marksAllocated;
     }
 
-    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, int marksAllocated) {
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated) {
         this.id = id;
         this.subjectId = subjectId;
         this.content = content;
@@ -50,16 +50,6 @@ public class Question {
         this.marksAllocated = marksAllocated;
     }
 
-    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer) {
-        this.id = id;
-        this.subjectId = subjectId;
-        this.content = content;
-        this.optionA = optionA;
-        this.optionB = optionB;
-        this.optionC = optionC;
-        this.optionD = optionD;
-        this.answer = answer;
-    }
 
     public int getId() {
         return id;

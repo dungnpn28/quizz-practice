@@ -58,11 +58,20 @@ public class QuizHandleController extends HttpServlet {
 
         //save answer
         String answer = req.getParameter("option");
-        a.createAttempt(examId, questionId, u.getId());
         a.saveAnswer(answer, examId, questionId, u.getId());
         Attempt att = a.getAttempt(examId, questionId, u.getId());
         req.setAttribute("attempt", att);
 
+        //score question
+        if (att.getUserAnswer() != null) {
+            Question currentQues = q.getQuestionById(questionId);
+            if (att.getUserAnswer().equals(currentQues.getAnswer())) {
+                a.scoreQuestion(currentQues.getMarksAllocated(), examId, questionId, u.getId());
+            } else {
+                a.scoreQuestion(0, examId, questionId, u.getId());
+            }
+        }
+        
         //progress bar business
         int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
@@ -89,12 +98,17 @@ public class QuizHandleController extends HttpServlet {
         req.setAttribute("questionL", questionList);
         req.setAttribute("endP", endPage);
 
+        //create exam attempts
+        a.createAttempt(examId, questionId, examId);
+
         Attempt att = a.getAttempt(examId, questionId, u.getId());
         req.setAttribute("attempt", att);
 
         //progress bar business
         int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
+        
+        //score exam
 
         //push to QuizHandle
         req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);

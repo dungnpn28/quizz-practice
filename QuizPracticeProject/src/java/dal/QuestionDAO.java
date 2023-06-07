@@ -38,7 +38,7 @@ public class QuestionDAO extends MyDAO {
                 String optionD = rs.getString(7);
                 String answer = rs.getString(8);
                 int questionOrder = rs.getInt(9);
-                int marksAllocated = rs.getInt(10);
+                double marksAllocated = rs.getDouble(10);
                 questionList.add(new Question(questionId, subjectId, content, optionA, optionB, optionC, optionD, answer, questionOrder, marksAllocated));
             }
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class QuestionDAO extends MyDAO {
                 String optionD = rs.getString(7);
                 String answer = rs.getString(8);
                 int questionOrder = rs.getInt(9);
-                int marksAllocated = rs.getInt(10);
+                double marksAllocated = rs.getDouble(10);
                 q = new Question(questionId, subjectId, content, optionA, optionB, optionC, optionD, answer, questionOrder, marksAllocated);
             }
         } catch (Exception e) {

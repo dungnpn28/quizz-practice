@@ -40,7 +40,7 @@
                             </div>
                             <div class="exit-popup-button">                            
                                 <button onclick="closeExitPopup()">Back to Exam</button>                              
-                                <button href="simulationexam">Yes</button>
+                                <a href="endquiz?examid=${id}">Yes</a>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="navigate-btn">
                                     <button onclick="closePopup()">Back to Exam</button>
-                                    <button class="score-exam">Score the exam</button>
+                                    <button class="score-exam"">Score the exam</button>
                                 </div>
 
                             </div>

@@ -100,6 +100,10 @@
         <servlet-name>StartQuizController</servlet-name>
         <servlet-class>controller.StartQuizController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EndQuizController</servlet-name>
+        <servlet-class>controller.EndQuizController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>StartQuizController</servlet-name>
         <url-pattern>/startquiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EndQuizController</servlet-name>
+        <url-pattern>/endquiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
