@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="right-buttons">
-                <a href="PracticeDetails.jsp" class="btn btn-outline-primary">New Practice</a>
+                <a href="practiceDetails" class="btn btn-outline-primary">New Practice</a>
                 <a href="simulationExam" class="btn btn-outline-primary">Simulation Exam</a>
             </div>
         </div>

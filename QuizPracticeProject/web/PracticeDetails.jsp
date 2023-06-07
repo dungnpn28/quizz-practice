@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,16 +29,17 @@
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <div class="practiceDetailForm">
-            
+
             <form action="practiceDetails" method="POST">
                 <h2>PRACTICE DETAILS</h2>
                 <br>
                 <label class="" for="subject">Subject:</label>
                 <br>
                 <select name="subject" id="subject" class="btn btn-secondary">
-                    <option value="math">Math</option>
-                    <option value="english">English</option>
-                    <option value="science">Science</option>
+                    <option value="0">All</option>
+                    <c:forEach items="${subjectCategoryList}" var="category">
+                        <option value="${category.id}">${category.name}</option>
+                    </c:forEach>
                 </select>
                 <br>
                 <label for="questions">Number of practicing questions</label>
@@ -47,9 +49,10 @@
                 <label for="topic">Questions are selected by topic(s) or a specific dimension?</label>
                 <br>
                 <select name="topic" id=topic" class="btn btn-secondary">
-                    <option value="math">Math</option>
-                    <option value="english">English</option>
-                    <option value="science">Science</option>
+                    <option value="0">All</option>
+                    <c:forEach items="${DimensionList}" var="dimension">
+                        <option value="${dimension.id}">${dimension.name}</option>
+                    </c:forEach>
                 </select>
                 <br>
                 <input type="hidden" name="readOnly" id="readOnly" value="<%= request.getParameter("readOnly") %>">

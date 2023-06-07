@@ -2,13 +2,15 @@
 <%@page import = "model.Subject" %>
 <%@page import = "model.Price_Package" %>
 <%@page import = "java.util.*" %>
+<%@page import = "dal.*" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
-    SubjectDetailDAO u = new SubjectDetailDAO();
+    //SubjectDetailDAO u = new SubjectDetailDAO(); 
   List<Subject> lst = (List<Subject>)request.getAttribute("lst");
-  List<String> cols = u.getColNames("Subject"); 
+//  List<String> cols = u.getColNames("Subject"); 
 %>   
 
 <html>
@@ -45,10 +47,10 @@ if (session.getAttribute("user") != null) {
     <body>
         <div class="navbar2">
             <div class="container2">
-                <span class="navbar2-brand"><a href="home">Home</a></span>
+                <span class="navbar2-brand"><a href="cusHome">Home</a></span>
                 <span class="navbar2-brand-divider ">/</span>
                 <span class="navbar2-brand-divider ">/</span>
-                <span class="navbar2-brand">Blog Detail</span>
+                <span class="navbar2-brand">Subject Detail</span>
             </div>
         </div>
         <div class="container container1">
@@ -63,11 +65,7 @@ if (session.getAttribute("user") != null) {
                     <h2 class="widget-title">List</h2>
                     <form action="subject" method="POST">
                         <p>Sort by: 
-                            <select name="colName">
-                                <% for(String x: cols) { %>
-                                <option value="<%= x %>"> <%= x %> </option>
-                                <% } %>
-                            </select>
+                      
                         <p>
                         <p>Sorting type:
                         <p>
@@ -78,7 +76,7 @@ if (session.getAttribute("user") != null) {
                             <input type="submit" value="Sort">
                     </form>
                 </div>
-                <div class="widget">
+<!--                <div class="widget">
                     <h2 class="widget-title">Rate</h2>
                     <div class="rating">
                         <input type="radio" id="star1" name="rating" value="1">
@@ -99,7 +97,7 @@ if (session.getAttribute("user") != null) {
                         <li>bổ ích quá</li>
                         <li>rất thú vị cảm ơn tác giả</li>
                     </ul>
-                </div>
+                </div>-->
                 <!--                <div class="widget">
                                         <div class="last">                
                                             <h2 class="widget-title"  >Last Post</h2>                
@@ -113,12 +111,12 @@ if (session.getAttribute("user") != null) {
             </div>
             <div class="post">
                 <div class="post-image">
-                    <img src="${SubjectDetails.illustration}" alt="blog">
+                    <img src="${SubjectDetails.illustration}" alt="img">
                 </div>
 
                 <h1>${SubjectDetails.name}</h1>
                 <p> <strong>Price:</strong> ${SubjectDetails.price}</p>
-                <p>  <strong>Sale:</strong> $${"{:.2f}".format(CourseDetail.price * 0.95)}</p>
+                <p>  <strong>Sale:</strong> $${"{:.2f}".format(SubjectDetails.price * 0.95)}</p>
 
                 <p><strong> Detail:</strong></p>
                 <p>${SubjectDetails.description}</p>
@@ -135,6 +133,6 @@ if (session.getAttribute("user") != null) {
                 </div>
             </div>
         </div>
-        <%@include file="Footer.jsp" %>
+        <%@include file="components/Footer.jsp" %>
     </body>
 </html>
