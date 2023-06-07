@@ -10,11 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+        <title>Slider List</title>
+        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">-->
     </head>
     <body>
-        <%@include file="components/CusHeader.jsp"%>
+        <%--<%@include file="components/CusHeader.jsp"%>--%>
         <form id="cateForm" method="" action="">
             <select name="cateSelect" class="cateSelect">
                 <option>All</option>

@@ -76,8 +76,8 @@ public class SliderListController extends HttpServlet {
         //button DELETE
         if (request.getParameter("btnDel") != null) {
             int id = Integer.parseInt(request.getParameter("sid"));
-            List<Slider> ls = new SliderDAO().delete(id);
-            session.setAttribute("ls", ls);
+            List<Slider> listSlider = new SliderDAO().delete(id);
+            request.setAttribute("listSlider", listSlider);
             request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
         }
         //button EDIT
