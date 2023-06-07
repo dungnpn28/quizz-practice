@@ -55,7 +55,7 @@
                     <c:forEach items="${listSlider}" var="slider" varStatus="status">
                         <div class="carousel-item ${status.first ? 'active' : ''}">
                             <a href="${slider.getBacklink()}">
-                                <img src="${slider.getImage()}" class="d-block w-100 carousel-image" alt="...">
+                                <img src="${slider.getImage()}" class="d-block w-100 carousel-image " alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>${slider.getTitle()}</h5>
                                     <p>Some representative placeholder content for the first slide.</p>
@@ -86,7 +86,7 @@
                                     <img src="img/icons8-flame.gif" alt="Animated GIF">
                                     <h3 class="mb-3 mt-4">FEATURED SUBJECTS</h3>
                                 </div>
-                                <a href="#">VIEW ALL SUBJECTS</a>
+                                <a href="subjectListPublic">VIEW ALL SUBJECTS</a>
                             </div>
                             <div class="col-6 text-right">
                                 <a class="mb-3 me-1" href="#carouselExampleIndicators2" role="button" data-bs-slide="prev">

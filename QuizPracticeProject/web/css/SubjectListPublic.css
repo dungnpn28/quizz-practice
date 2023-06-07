@@ -1,0 +1,90 @@
+@keyframes multicolor-blink {
+    0% {
+        color: red;
+    }
+    25% {
+        color: green;
+    }
+    50% {
+        color: blue;
+    }
+    75% {
+        color: orange;
+    }
+    100% {
+        color: purple;
+    }
+}
+
+.multicolor-blink {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    margin: 10px;
+    color: gold;
+    animation: multicolor-blink 2s infinite;
+}
+
+.registerButton button{
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #11ab2d;
+    width: 150px;
+    height: 50px;
+}
+
+.alreadyRegistedButton button {
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #999797;
+    width: 150px;
+    height: 50px;
+    color: #ffffff;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.filterTable{
+    display: grid;
+    text-align: center
+}
+
+.subjectListButton {
+    background-color: #76e3da; /* Màu nền */
+    color: white; /* Màu chữ */
+    padding: 10px 20px; /* Kích thước padding */
+    border: none; /* Không có viền */
+    border-radius: 4px; /* Bo góc */
+    text-align: center; /* Căn giữa nội dung */
+    text-decoration: none; /* Không gạch chân */
+    display: inline-block; /* Hiển thị inline */
+    font-size: 16px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ khi hover */
+}
+
+.subjectListButton:hover {
+    background-color: #459da0; /* Màu nền hover */
+}
+
+.searchBox {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: inline-flex;
+    max-width: 400px;
+}
+
+.form-control {
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+}
+
+.btn {
+    border-radius: 0 5px 5px 0;
+}

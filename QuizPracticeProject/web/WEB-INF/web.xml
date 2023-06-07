@@ -89,6 +89,7 @@
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>controller.SliderListController</servlet-class>
     </servlet>
@@ -99,6 +100,10 @@
     <servlet>
         <servlet-name>SearchSliderController</servlet-name>
         <servlet-class>controller.SearchSliderController</servlet-class>
+=======
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <servlet-class>controller.SubjectListPublicController</servlet-class>
+>>>>>>> main
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -181,6 +186,7 @@
         <url-pattern>/searchpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/sliderList</url-pattern>
     </servlet-mapping>
@@ -191,6 +197,10 @@
     <servlet-mapping>
         <servlet-name>SearchSliderController</servlet-name>
         <url-pattern>/searchSlider</url-pattern>
+=======
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <url-pattern>/subjectListPublic</url-pattern>
+>>>>>>> main
     </servlet-mapping>
     <session-config>
         <session-timeout>

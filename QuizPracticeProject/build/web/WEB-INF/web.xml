@@ -99,6 +99,8 @@
     <servlet>
         <servlet-name>SearchSliderController</servlet-name>
         <servlet-class>controller.SearchSliderController</servlet-class>
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <servlet-class>controller.SubjectListPublicController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -191,6 +193,8 @@
     <servlet-mapping>
         <servlet-name>SearchSliderController</servlet-name>
         <url-pattern>/searchSlider</url-pattern>
+        <servlet-name>SubjectListPublicController</servlet-name>
+        <url-pattern>/subjectListPublic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

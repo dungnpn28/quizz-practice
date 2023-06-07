@@ -27,6 +27,10 @@ public class SliderDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xID;
+<<<<<<< HEAD
+=======
+//            int xPublisher_id;
+>>>>>>> main
             String xTitle;
             String xImage;
             String xBacklink;
@@ -36,13 +40,21 @@ public class SliderDAO extends MyDAO {
             Slider x;
             while (rs.next()) {
                 xID = rs.getInt("id");
+<<<<<<< HEAD
+=======
+//                xPublisher_id = rs.getInt("publisher_id");
+>>>>>>> main
                 xTitle = rs.getString("title");
                 xImage = rs.getString("image");
                 xBacklink = rs.getString("backlink");
                 xStatus = rs.getBoolean("status");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
+<<<<<<< HEAD
                 x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified);
+=======
+                x = new Slider(xID,xTitle,xImage,xBacklink,xStatus,xCreated,xModified);
+>>>>>>> main
                 s.add(x);
             }
             rs.close();
