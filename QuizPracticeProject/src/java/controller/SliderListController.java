@@ -33,6 +33,7 @@ public class SliderListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         List<Slider> listSlider = new SliderDAO().getSlider();
         request.setAttribute("listSlider", listSlider);
 
@@ -40,6 +41,7 @@ public class SliderListController extends HttpServlet {
 //        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(false);
         request.setAttribute("filterStatus", filterStatus);
         request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,6 +57,7 @@ public class SliderListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -68,6 +71,7 @@ public class SliderListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         HttpSession session = request.getSession();
         //button DELETE
         if (request.getParameter("btnDel") != null) {
@@ -78,7 +82,20 @@ public class SliderListController extends HttpServlet {
         }
         //button EDIT
         if (request.getParameter("btnEdit") != null) {
-            
+            int id = Integer.parseInt(request.getParameter("sid"));
+            Slider listSlider = new SliderDAO().getOneSlider(id);
+            request.setAttribute("listSlider", listSlider);
+            request.getRequestDispatcher("EditSlider.jsp").forward(request, response);
+        }
+
+        String keyword = request.getParameter("keyword");
+        if (keyword != null) {
+            List<Slider> listSlider = new SliderDAO().getSlider();
+            SliderDAO sDAO = new SliderDAO();
+            listSlider = sDAO.searchSlider(keyword);
+            request.setAttribute("listSlider", listSlider);
+            request.setAttribute("key", keyword);
+            request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
         }
     }
 

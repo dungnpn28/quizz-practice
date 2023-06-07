@@ -4,8 +4,7 @@
  */
 package controller;
 
-import dal.BlogDAO;
-import dal.Blog_CategoryDAO;
+import dal.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Blog;
-import model.Blog_Category;
+import model.Slider;
 
 /**
  *
  * @author ADMIN
  */
-public class SearchPostController extends HttpServlet {
+public class SearchSliderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,14 +33,7 @@ public class SearchPostController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String keyword = request.getParameter("keyword");
-            BlogDAO bDAO = new BlogDAO();
-            List<Blog> listBlog = bDAO.searchPost(keyword);
-            request.setAttribute("listBlog", listBlog);
-            List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-            request.setAttribute("listCategory", listCategory);
-            request.setAttribute("key", keyword);
-            request.getRequestDispatcher("BlogList.jsp").forward(request, response);
+            
         }
     }
 
