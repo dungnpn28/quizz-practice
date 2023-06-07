@@ -6,6 +6,7 @@ package controller;
 
 import dal.AttemptDAO;
 import dal.QuestionDAO;
+import dal.QuestionExamDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,28 +28,44 @@ public class QuizHandleController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AttemptDAO a = new AttemptDAO();
         QuestionDAO q = new QuestionDAO();
+        QuestionExamDAO eq = new QuestionExamDAO();
+
         HttpSession session = req.getSession();
-        int page = 1;
-        String pageStr = req.getParameter("page");
-        if (pageStr != null) {
-            page = Integer.parseInt(pageStr);
-        }
+        int page = Integer.parseInt(req.getParameter("page"));
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("id"));
-        int questionId = 0;
-        questionId = Integer.parseInt(req.getParameter("qId"));
-        Attempt att = a.getAttempt(examId, questionId, u.getId());
+        int questionId = eq.getQuestionIdByExamId(examId, page);
+
+        //quiz business
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
+        Question currentQuestion = q.getQuestionById(questionId);
+        req.setAttribute("currentQues", currentQuestion);
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
         req.setAttribute("questionL", questionList);
-        req.setAttribute("attempt", att);
         int endPage = 10;
         req.setAttribute("endP", endPage);
+
+        //mark question
+        if (req.getParameter("mark") != null) {
+            boolean markAction = false;
+            if (req.getParameter("mark").equals("mark")) {
+                markAction = true;
+            }
+            a.markUnmarkQuestion(markAction, examId, questionId, u.getId());
+
+        }
+
         //save answer
         String answer = req.getParameter("option");
-        System.out.println(answer + "dddddd");
+        a.createAttempt(examId, questionId, u.getId());
         a.saveAnswer(answer, examId, questionId, u.getId());
+        Attempt att = a.getAttempt(examId, questionId, u.getId());
+        req.setAttribute("attempt", att);
+
+        //progress bar business
+        int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
+        req.setAttribute("countAnsQues", countAnsweredQuestion);
         req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);
 
     }
@@ -57,28 +74,27 @@ public class QuizHandleController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         QuestionDAO q = new QuestionDAO();
         AttemptDAO a = new AttemptDAO();
+        QuestionExamDAO eq = new QuestionExamDAO();
         HttpSession session = req.getSession();
+        User u = (User) session.getAttribute("user");
 
         //pagination
-        int page = 1;
-        String pageStr = req.getParameter("page");
-        if (pageStr != null) {
-            page = Integer.parseInt(pageStr);
-        }
+        int endPage = 10;
+        int page = Integer.parseInt(req.getParameter("page"));
         int examId = Integer.parseInt(req.getParameter("id"));
-        ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
+        int questionId = eq.getQuestionIdByExamId(examId, page);
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
+        ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
         req.setAttribute("questionL", questionList);
-        int endPage = 10;
         req.setAttribute("endP", endPage);
 
-        //create attempt 
-        User u = (User) session.getAttribute("user");
-        int questionId = Integer.parseInt(req.getParameter("qId"));
         Attempt att = a.getAttempt(examId, questionId, u.getId());
         req.setAttribute("attempt", att);
-        a.createAttempt(examId, questionId, u.getId());
+
+        //progress bar business
+        int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
+        req.setAttribute("countAnsQues", countAnsweredQuestion);
 
         //push to QuizHandle
         req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);

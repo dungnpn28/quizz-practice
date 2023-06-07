@@ -298,6 +298,7 @@ input[type=radio]:checked~.option {
 }
 
 .progress-bar {
+    width: 0%;
     height: 10px;
     background-color: red;
 }
@@ -308,6 +309,19 @@ input[type=radio]:checked~.option {
     align-items: center;
 }
 
+.under-header input{
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: #2e3856;
+    filter: brightness(100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .under-header h4 {
     font-weight: bold;
     color: lightgray;
@@ -315,8 +329,8 @@ input[type=radio]:checked~.option {
 
 .peek-at-answer {
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: right;
+    margin-right: 280px;
 }
 
 .peek-at-answer button {
@@ -553,5 +567,78 @@ input[type=radio]:checked~.option {
 .question-id {
     display: flex;
     justify-content: center;
+}
+
+
+.exit-button button {
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px;
+    background-color: #2e3856;
+    color: rgb(221, 230, 240);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.exit-button button:hover {
+    opacity:0.7;
+}
+
+.exit-button button:active {
+    opacity:0.5;
+}
+
+.exit-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+}
+
+.exit-popup-content {
+    width: 50%;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.exit-popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.exit-header{
+    display: flex;
+    justify-content: center;
+}
+.exit-header h2{
+    font-weight: bolder;
+    color: black;
+}
+.exit-content {
+    display: flex;
+    justify-content: center;
+}
+
+.exit-content h4{
+    color: black;
+}
+.exit-popup-button{
+    display: flex;
+    justify-content: space-around;
 }
 

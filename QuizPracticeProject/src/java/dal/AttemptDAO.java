@@ -100,4 +100,47 @@ public class AttemptDAO extends MyDAO {
         }
         return a;
     }
+
+    public int getTotalAnsweredQuestion(int examId, int userId) {
+        try {
+            String strSlect = "SELECT COUNT(question_id) AS question_count\n"
+                    + "FROM Quiz_Practice.dbo.attempt\n"
+                    + "WHERE user_answer IS NOT NULL AND "
+                    + "exam_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareCall(strSlect);
+            ps.setInt(1, examId);
+            ps.setInt(2, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalAnsweredQuestion: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public void markUnmarkQuestion(boolean marked, int examId, int questionId, int userId) {
+        try {
+            String strAdd = "update [attempt] "
+                    + "set marked = ? "
+                    + "where exam_id = ? AND "
+                    + "question_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareStatement(strAdd);
+            if (marked) {
+                ps.setInt(1, 1);
+            } else {
+                ps.setInt(1, 0);
+            }
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("markUnmarkQuestion: " + e.getMessage());
+        }
+    }
 }
