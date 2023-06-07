@@ -116,7 +116,7 @@
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
 
-                                                                    <img src="${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
+                                                                    <img src="${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">

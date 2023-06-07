@@ -56,11 +56,6 @@ public class PracticeDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String readOnlyParam = request.getParameter("readOnly");
-        if (readOnlyParam != null && readOnlyParam.equalsIgnoreCase("true")) {
-            // The page is read-only, redirect to Quiz Review page
-            response.sendRedirect("QuizReview.jsp");
-        } else {
             PracticeDetailsDAO pdDAO = new PracticeDetailsDAO();
             List<Exam> examList = new ArrayList<>();
             examList = pdDAO.getExamByName();
@@ -68,8 +63,7 @@ public class PracticeDetailsController extends HttpServlet {
             List<Dimension> DimensionList = new ArrayList<>();
             DimensionList = pdDAO.getSubjectDimension();
             request.setAttribute("DimensionList", DimensionList);
-            request.getRequestDispatcher("PracticeDetails.jsp").forward(request, response);
-        }
+            request.getRequestDispatcher("PracticeDetails.jsp").forward(request, response);       
     }
 
     /**

@@ -15,21 +15,10 @@
         <link href="css/PracticeDetails.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Quizerro</title>
-        <script>
-            window.onload = function () {
-                // If the page is read-only, disable input fields
-                if (document.getElementById("readOnly").value === "true") {
-                    document.getElementById("subject").disabled = true;
-                    document.getElementById("description").readOnly = true;
-                    document.getElementById("practiceBtn").value = "Practice Review";
-                }
-            };
-        </script>
     </head>
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <div class="practiceDetailForm">
-
             <form action="practiceDetails" method="POST">
                 <h2>PRACTICE DETAILS</h2>
                 <br>
@@ -55,9 +44,7 @@
                     </c:forEach>
                 </select>
                 <br>
-                <input type="hidden" name="readOnly" id="readOnly" value="<%= request.getParameter("readOnly") %>">
-                <br>
-                <input type="submit" value="Practice" id="practiceBtn" class="btn btn-primary">
+                <input type="submit" value="Practice" class="btn btn-primary">
             </form>
         </div>
     </body>

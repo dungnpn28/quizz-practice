@@ -67,8 +67,8 @@ public class PracticeDetailsDAO extends MyDAO {
         xSql = "SELECT exam.id, subject.name AS subject_name, exam.name, exam.level, exam.number_of_question, exam.duration, exam.pass_rate\n"
                 + "FROM exam\n"
                 + "INNER JOIN exam_user ON exam.id = exam_user.exam_id\n"
-                + "INNER JOIN subject ON exam.subject_id = subject.id\n"
-                + "WHERE exam_user.user_id = ? and exam.name like ?";
+                + "INNER JOIN subject ON exam.subject_id = subject.id\n";
+                
         int xID;
         String xSubjectName;
         String xName;
