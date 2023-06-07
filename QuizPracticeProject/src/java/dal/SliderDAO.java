@@ -27,10 +27,6 @@ public class SliderDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xID;
-<<<<<<< HEAD
-=======
-//            int xPublisher_id;
->>>>>>> main
             String xTitle;
             String xImage;
             String xBacklink;
@@ -40,21 +36,13 @@ public class SliderDAO extends MyDAO {
             Slider x;
             while (rs.next()) {
                 xID = rs.getInt("id");
-<<<<<<< HEAD
-=======
-//                xPublisher_id = rs.getInt("publisher_id");
->>>>>>> main
                 xTitle = rs.getString("title");
                 xImage = rs.getString("image");
                 xBacklink = rs.getString("backlink");
                 xStatus = rs.getBoolean("status");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
-<<<<<<< HEAD
                 x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified);
-=======
-                x = new Slider(xID,xTitle,xImage,xBacklink,xStatus,xCreated,xModified);
->>>>>>> main
                 s.add(x);
             }
             rs.close();
@@ -95,24 +83,24 @@ public class SliderDAO extends MyDAO {
     public List<Slider> delete(int id) {
         String sql = "delete from slider where id = ?";
         List<Slider> sliders = new ArrayList<Slider>();
-        try {          
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
-            sliders = getSlider();          
+            sliders = getSlider();
         } catch (Exception e) {
         }
         return sliders;
     }
-    
-    public Slider getOneSlider(int id){
+
+    public Slider getOneSlider(int id) {
         String sql = "select id, title, image, backlink, status, created, modified from slider where id = ?";
         Slider s = new Slider();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int Id = rs.getInt(1);
                 String title = rs.getString(2);
                 String image = rs.getString(3);
@@ -126,8 +114,8 @@ public class SliderDAO extends MyDAO {
         }
         return s;
     }
-    
-    public List<Slider> updateSlider(String title, String image, int id, String backlink){
+
+    public List<Slider> updateSlider(String title, String image, int id, String backlink) {
         String sql = "update Slider set title = ?, image = ?, backlink= ? where id = ?";
         List<Slider> us = new ArrayList<Slider>();
         try {
@@ -137,13 +125,13 @@ public class SliderDAO extends MyDAO {
             ps.setString(3, backlink);
             ps.setInt(4, id);
             ps.executeUpdate();
-            us = getSlider();           
+            us = getSlider();
         } catch (Exception e) {
         }
         return us;
-     }
-    
-    public List<Slider> searchSlider(String keyword){
+    }
+
+    public List<Slider> searchSlider(String keyword) {
         List<Slider> searchs = new ArrayList<>();
         xSql = "select * from [slider] where title like ? ";
         int xId;
@@ -155,13 +143,13 @@ public class SliderDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + keyword + "%");
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 xId = rs.getInt("id");
                 xTitle = rs.getString("title");
                 xImage = rs.getString("image");
                 xBacklink = rs.getString("backlink");
-                
-                x = new Slider(xId,xTitle,xImage,xBacklink);
+
+                x = new Slider(xId, xTitle, xImage, xBacklink);
                 searchs.add(x);
             }
             rs.close();
