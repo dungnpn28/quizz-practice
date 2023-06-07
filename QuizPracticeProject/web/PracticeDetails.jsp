@@ -52,14 +52,6 @@
                     <option value="science">Science</option>
                 </select>
                 <br>
-                <label for="ques-group">Question group (choose one or all topic/dimension(s))</label>
-                <br>
-                <select name="ques-group" id=ques-group" class="btn btn-secondary">
-                    <option value="math">Math</option>
-                    <option value="english">English</option>
-                    <option value="science">Science</option>
-                </select>
-                <br>
                 <input type="hidden" name="readOnly" id="readOnly" value="<%= request.getParameter("readOnly") %>">
                 <br>
                 <input type="submit" value="Practice" id="practiceBtn" class="btn btn-primary">

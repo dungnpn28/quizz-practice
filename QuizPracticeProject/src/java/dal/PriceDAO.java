@@ -8,6 +8,6 @@ package dal;
  *
  * @author dai
  */
-public class SubjectDetailsDAO extends MyDAO{
+public class PriceDAO extends MyDAO {
     
 }

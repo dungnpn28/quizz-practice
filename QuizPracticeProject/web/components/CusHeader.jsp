@@ -32,7 +32,7 @@
             <div class="header_menu">
                 <ul>
                     <li><a href="BlogListController">Post</a></li>
-                    <li><a href="">Subject</a></li>
+                    <li><a href="SubjectDetails.jsp">Subject</a></li>
                     <li><a href="practiceList">Practice List</a></li>
                 </ul>
             </div>

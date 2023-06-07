@@ -1,22 +1,19 @@
-<%@ page import="java.util.List" %>
-<%@page import = "model.Course" %>
+<%@page import= "java.util.List" %>
+<%@page import = "model.Subject" %>
+<%@page import = "model.Price_Package" %>
 <%@page import = "java.util.*" %>
-
-<%@ page import="model.Course" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
-    CourseDAO u = new CourseDAO();
-  List<Course> lst = (List<Course>)request.getAttribute("lst");
-  List<String> cols = u.getColNames("Course");
-  
+    SubjectDetailDAO u = new SubjectDetailDAO();
+  List<Subject> lst = (List<Subject>)request.getAttribute("lst");
+  List<String> cols = u.getColNames("Subject"); 
 %>   
 
 <html>
     <head>
-
-        <title>Blog Detail</title>
+        <title>Subject Details</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,40 +28,40 @@
         <!-- Load fonts style after rendering the layout styles -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
         <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-
-        <link rel="stylesheet" type="text/css" href="assets/css/coursedetail.css">
-
-
-
     </head>
+    <%
+if (session.getAttribute("user") != null) {
+   // Nếu có user, bao gồm trang cusheader.jsp
+    %>
+    <%@ include file="components/CusHeader.jsp" %>
+    <%
+} else {
+    // Nếu không có user, bao gồm trang header.jsp
+    %>
+    <%@ include file="components/Header.jsp" %>
+    <%
+}
+    %>
     <body>
-        <%@ include file = "Header.jsp" %>
         <div class="navbar2">
             <div class="container2">
-                <span class="navbar2-brand"><a href="Home.jsp">Home</a></span>
+                <span class="navbar2-brand"><a href="home">Home</a></span>
                 <span class="navbar2-brand-divider ">/</span>
-<!--                <span class="navbar2-brand"><a href="course">List Course</a></span>-->
                 <span class="navbar2-brand-divider ">/</span>
-
                 <span class="navbar2-brand">Blog Detail</span>
             </div>
         </div>
         <div class="container container1">
             <div class="sidebar">
                 <div class="search-box">
-                    <form action="SearchCourseName" method="POST">
-                        <input type="text" name="CourseName" placeholder="Enter course name...">
+                    <form action="SearchSubjectName" method="POST">
+                        <input type="text" name="SubjectName" placeholder="Enter subject name...">
                         <button type="submit">Search</button>
                     </form>
                 </div>
-
                 <div class="widget">
                     <h2 class="widget-title">List</h2>
-
-
-
-
-                    <form action="course" method="POST">
+                    <form action="subject" method="POST">
                         <p>Sort by: 
                             <select name="colName">
                                 <% for(String x: cols) { %>
@@ -72,23 +69,15 @@
                                 <% } %>
                             </select>
                         <p>
-
                         <p>Sorting type:
                         <p>
                             <input type="radio" name="sortType" value="ASC" checked="" /> Ascendingly
                         <p>
                             <input type="radio" name="sortType" value="DESC" /> Descendingly
-                        <p><input type="submit" value="Sort">
-
-                    </form>  
-
-
-
-
-
-
+                        <p>
+                            <input type="submit" value="Sort">
+                    </form>
                 </div>
-
                 <div class="widget">
                     <h2 class="widget-title">Rate</h2>
                     <div class="rating">
@@ -109,53 +98,43 @@
                     <ul style="list-style: none">
                         <li>bổ ích quá</li>
                         <li>rất thú vị cảm ơn tác giả</li>
-
                     </ul>
                 </div>
                 <!--                <div class="widget">
-                                        <div class="last">
-                
-                                            <h2 class="widget-title"  >Last Post</h2>
-                
+                                        <div class="last">                
+                                            <h2 class="widget-title"  >Last Post</h2>                
                                             <div class="card-body">
                                                 <img src="${last.image}" alt="Post thumbnail">
                                                 <h2><a style=" text-decoration: none" href="detail?bid=${last.blogid}" title="View Post">${last.title}</a></h2>
                                                 <p style="font-size: 10px;">${last.briefInfor}</p>
-                                            </div>
-                
-                
+                                            </div>                          
                                         </div>
                                     </div>-->
-
             </div>
             <div class="post">
                 <div class="post-image">
-                    <img  src="${CourseDetail.image}" alt="blog">
+                    <img src="${SubjectDetails.illustration}" alt="blog">
                 </div>
 
-                <h1>${CourseDetail.courseName}</h1>
-                <p> <strong>Price:</strong> ${CourseDetail.coursePrice}</p>
-                <p>  <strong>Sale:</strong> $${"{:.2f}".format(CourseDetail.coursePrice * 0.95)}</p>
+                <h1>${SubjectDetails.name}</h1>
+                <p> <strong>Price:</strong> ${SubjectDetails.price}</p>
+                <p>  <strong>Sale:</strong> $${"{:.2f}".format(CourseDetail.price * 0.95)}</p>
 
                 <p><strong> Detail:</strong></p>
-                <p>${CourseDetail.courseDescription}</p>
+                <p>${SubjectDetails.description}</p>
                 <div class="author">
-                    <p><strong>Posted on :</strong> ${CourseDetail.courseCreateDate}</p>
-                    <p><strong>Status:</strong> ${CourseDetail.status ? "Enroll" : "Unenroll" }</p>
+                    <p><strong>Status:</strong> ${SubjectDetails.status ? "Enroll" : "Unenroll" }</p>
 
 
                 </div>
                 <div style="text-align: center;">
                     <form  method="POST" action="submit">
-                        <input type="hidden" name="courseId" value="${CourseDetail.courseId}">
-                        <button type="submit" ${CourseDetail.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to join the course?')">Activate Course</button>
+                        <input type="hidden" name="subjectId" value="${SubjectDetails.subjectId}">
+                        <button type="submit" ${SubjectDetails.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to enroll?')">Enroll</button>
                     </form>     
                 </div>
-
             </div>
-
         </div>
-        <%@include file="footer.jsp" %>
-
+        <%@include file="Footer.jsp" %>
     </body>
 </html>
