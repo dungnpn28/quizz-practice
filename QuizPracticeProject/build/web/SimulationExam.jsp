@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.Exam" %>
-<%@page import = "dal.ExamQuestionDAO" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -131,7 +130,7 @@
                     var startExamButton = document.getElementById("startExamButton");
                     startExamButton.href = "quizhandle?id=" + examId + "&page=1";
 
-                    // Hiển thị popup
+                    // Hiển thị popup   
                     var popUpDetailModal = document.getElementById("popUpDetailModal");
                     popUpDetailModal.style.display = "block";
                 });

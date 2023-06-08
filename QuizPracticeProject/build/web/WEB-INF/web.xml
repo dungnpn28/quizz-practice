@@ -103,6 +103,8 @@
     <servlet>
         <servlet-name>AddNewSubjectController</servlet-name>
         <servlet-class>controller.AddNewSubjectController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>QuizHandleController</servlet-name>
         <servlet-class>controller.QuizHandleController</servlet-class>
     </servlet>
@@ -209,6 +211,8 @@
     <servlet-mapping>
         <servlet-name>AddNewSubjectController</servlet-name>
         <url-pattern>/addnewsubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>QuizHandleController</servlet-name>
         <url-pattern>/quizhandle</url-pattern>
     </servlet-mapping>
