@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.ExamDAO;
+import dal.QuestionExamDAO;
 import dal.SubjectDAO;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class SimulationExamController extends HttpServlet {
         if (examList.isEmpty() || examList == null) {
             request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
         } else {
-
+            
             request.setAttribute("examList", examList);
             request.setAttribute("subjectList", subjectList);
             request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);

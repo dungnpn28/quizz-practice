@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.Exam" %>
+<%@page import = "dal.ExamQuestionDAO" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,12 +40,12 @@
                         <tr>
                             <td>${Exam.getId()}</td>
                             <td>${Exam.getSubjectName()}</td>
-                            <td><a href="#" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
+                            <td><a href="quizhandle?id=${Exam.getId()}" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
                             <td>${Exam.getLevel() }</td>
                             <td>${Exam.getNumber_of_question()}</td>
                             <td>${Exam.getDuration() }</td>
                             <td>${Exam.getPass_rate() }</td>
-                        </tr>
+                        </tr>   
                     </c:forEach>
 
                 </table>
@@ -128,7 +129,7 @@
                     examIdText.textContent = "Exam ID: " + examId;
                     // Đặt examId vào URL của nút "Start Exam"
                     var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "quizhandle?examId=" + examId;
+                    startExamButton.href = "quizhandle?id=" + examId + "&page=1";
 
                     // Hiển thị popup
                     var popUpDetailModal = document.getElementById("popUpDetailModal");

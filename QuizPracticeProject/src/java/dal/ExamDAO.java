@@ -9,6 +9,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import model.Attempt;
 import model.Exam;
 
 /**
@@ -303,5 +304,21 @@ public class ExamDAO extends MyDAO {
             e.printStackTrace();
         }
         return (examList);
+    }
+    
+    public String getExamDurationById(int examId) {
+        try {
+            String strSelect = "select * from [exam] "
+                    + "where id =? ";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(5);
+            }
+        } catch (Exception e) {
+            System.out.println("getExamDurationById:" + e.getMessage());
+        }
+        return null;
     }
 }
