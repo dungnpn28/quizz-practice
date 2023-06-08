@@ -13,32 +13,23 @@ import java.sql.Date;
 public class Subject {
     private int id;
     private String illustration;
-    private int dimension_id;
     private String name;
     private int category_id;
     private boolean status;
     private String description;
+    private int author_id;
     private Date modified;
     private boolean featured;
     private int user_id;
-
+    private double min_price;
+    private double min_sale;
     public Subject() {
     }
-
-    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description) {
+    
+    
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
         this.id = id;
         this.illustration = illustration;
-        this.dimension_id = dimension_id;
-        this.name = name;
-        this.category_id = category_id;
-        this.status = status;
-        this.description = description;
-    }
-
-    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description,Date modified, boolean featured) {
-        this.id = id;
-        this.illustration = illustration;
-        this.dimension_id = dimension_id;
         this.name = name;
         this.category_id = category_id;
         this.status = status;
@@ -47,16 +38,87 @@ public class Subject {
         this.featured = featured;
     }
 
-    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description, boolean featured, int user_id) {
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, Date modified, boolean featured) {
         this.id = id;
         this.illustration = illustration;
-        this.dimension_id = dimension_id;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.modified = modified;
+        this.featured = featured;
+    }
+
+    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+    }
+
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,Date modified, boolean featured, double min_price, double min_sale) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.modified = modified;
+        this.featured = featured;
+        this.min_price = min_price;
+        this.min_sale = min_sale;
+    }
+
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, int author_id, Date modified, boolean featured) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.author_id = author_id;
+        this.modified = modified;
+        this.featured = featured;
+    }
+
+    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description, boolean featured) {
+        this.id = id;
+        this.illustration = illustration;
         this.name = name;
         this.category_id = category_id;
         this.status = status;
         this.description = description;
         this.featured = featured;
-        this.user_id = user_id;
+    }
+
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, double min_price, double min_sale) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.min_price = min_price;
+        this.min_sale = min_sale;
+    }
+    
+
+    public double getMin_price() {
+        return min_price;
+    }
+
+    public void setMin_price(double min_price) {
+        this.min_price = min_price;
+    }
+
+    public double getMin_sale() {
+        return min_sale;
+    }
+
+    public void setMin_sale(double min_sale) {
+        this.min_sale = min_sale;
     }
 
     public Date getModified() {
@@ -65,14 +127,6 @@ public class Subject {
 
     public void setModified(Date modified) {
         this.modified = modified;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public boolean isFeatured() {
@@ -97,14 +151,6 @@ public class Subject {
 
     public void setIllustration(String illustration) {
         this.illustration = illustration;
-    }
-
-    public int getDimension_id() {
-        return dimension_id;
-    }
-
-    public void setDimension_id(int dimension_id) {
-        this.dimension_id = dimension_id;
     }
 
     public String getName() {
@@ -137,6 +183,14 @@ public class Subject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
     }
 
 }

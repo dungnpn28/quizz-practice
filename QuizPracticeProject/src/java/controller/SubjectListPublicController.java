@@ -71,6 +71,7 @@ public class SubjectListPublicController extends HttpServlet {
         subjectList = sDAO.getSubjectsWithPaging(page, PAGE_SIZE);
         String checkAll = request.getParameter("checkAll");
         if (checkAll != null && checkAll.equals("true")) {
+            sessions.removeAttribute("sortValue");
             sessions.removeAttribute("checkFeatured");
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
@@ -94,6 +95,7 @@ public class SubjectListPublicController extends HttpServlet {
         //display featured subject list
         String checkFeatured = request.getParameter("checkFeatured");
         if (checkFeatured != null && checkFeatured.equals("true")) {
+            sessions.removeAttribute("sortValue");
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
             sessions.removeAttribute("keywordInSubjectList");
@@ -128,6 +130,7 @@ public class SubjectListPublicController extends HttpServlet {
             //display registed subject
             String checkRegisted = request.getParameter("checkRegisted");
             if (checkRegisted != null && checkRegisted.equals("true")) {
+                sessions.removeAttribute("sortValue");
                 sessions.removeAttribute("checkFeatured");
                 sessions.removeAttribute("checkNotRegisted");
                 sessions.removeAttribute("keywordInSubjectList");
@@ -156,6 +159,7 @@ public class SubjectListPublicController extends HttpServlet {
             //display not registed subject
             String checkNotRegisted = request.getParameter("checkNotRegisted");
             if (checkNotRegisted != null && checkNotRegisted.equals("true")) {
+                sessions.removeAttribute("sortValue");
                 sessions.removeAttribute("checkFeatured");
                 sessions.removeAttribute("checkRegisted");
                 sessions.removeAttribute("keywordInSubjectList");
@@ -262,6 +266,7 @@ public class SubjectListPublicController extends HttpServlet {
         if (request.getParameter("selectedCategory") != null) {
             selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
             sessions.setAttribute("selectedCategoryId", selectedCategoryId);
+            sessions.removeAttribute("sortValue");
             sessions.removeAttribute("checkFeatured");
             sessions.removeAttribute("checkRegisted");
             sessions.removeAttribute("checkNotRegisted");
@@ -284,6 +289,31 @@ public class SubjectListPublicController extends HttpServlet {
                 }
                 String categoryName = scDAO.getCategoryName(selectedCategoryId);
                 request.setAttribute("categoryName", categoryName);
+            }
+        }
+        if (request.getParameter("sort") != null) {
+            String sortValue = request.getParameter("sort");
+            sessions.setAttribute("sortValue", sortValue);
+        }
+        if (sessions.getAttribute("sortValue") != null) {
+            String sortValue = (String) sessions.getAttribute("sortValue");
+            sessions.removeAttribute("checkFeatured");
+            sessions.removeAttribute("checkRegisted");
+            sessions.removeAttribute("checkNotRegisted");
+            sessions.removeAttribute("keywordInSubjectList");
+            sessions.removeAttribute("selectedCategoryId");
+            if (sortValue.equals("asc")) {
+                subjectList = sDAO.getSubjectsSortASCWithPaging(page, PAGE_SIZE);
+                request.setAttribute("checkSort", "asc");
+            } else if (sortValue.equals("desc")) {
+                subjectList = sDAO.getSubjectsSortDESCWithPaging(page, PAGE_SIZE);
+                request.setAttribute("checkSort", "desc");
+            }
+            totalSubject = sDAO.getTotalSubject();
+
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
             }
         }
 
