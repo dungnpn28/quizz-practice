@@ -67,7 +67,7 @@ public class UserProfileDAO extends MyDAO {
        
         try {
             String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified \n"
-                    + "                                        FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where id = 1";
+                    + "                                        FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where id = ?";
             ps = con.prepareStatement(strSelect);
             ps.setInt(1, userId);
             rs = ps.executeQuery();
@@ -138,6 +138,34 @@ public class UserProfileDAO extends MyDAO {
             }
         } catch (Exception e) {
             System.out.println("getAllAccount: " + e.getMessage());
+        }
+        return data;
+    }
+    public List<UserProfile> getListUserProfileByRole(int aid) {
+        List<UserProfile> data = new ArrayList<>();
+        try {
+            String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified"+
+                                                       " FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where role_id = ?";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, aid);
+            rs = ps.executeQuery();
+            UserDAO u = new UserDAO();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String avatar = rs.getString(2);
+                String full_name = rs.getString(3);
+                int gender = rs.getInt(4);
+                String phone_number = rs.getString(5);
+                String dob = rs.getString(6);
+
+                String created = rs.getString(7);
+                String modified = rs.getString(8);
+                User user = u.getUserById(id);
+                UserProfile up = new UserProfile(id, avatar, full_name, gender, phone_number, dob, created, modified, user);
+                data.add(up);
+            }
+        } catch (Exception e) {
+            System.out.println("getListUserProfileByRole " + e.getMessage());
         }
         return data;
     }

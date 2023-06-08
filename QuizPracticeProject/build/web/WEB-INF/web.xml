@@ -100,6 +100,10 @@
         <servlet-name>UserInformationController</servlet-name>
         <servlet-class>controller.UserInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewSubjectController</servlet-name>
+        <servlet-class>controller.AddNewSubjectController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>UserInformationController</servlet-name>
         <url-pattern>/userinformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewSubjectController</servlet-name>
+        <url-pattern>/addnewsubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

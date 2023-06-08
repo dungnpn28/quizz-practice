@@ -45,6 +45,7 @@
             UserProfile up = upd.getUserProfile(u.getId());
             session.setAttribute("up", up);
     %>
+    
     <%@include file="components/CusHeader.jsp"%>
     <!--    SIDEBAR-->
     <div class="wrapper">
