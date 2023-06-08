@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AttemptDAO;
+import dal.ExamDAO;
 import dal.QuestionDAO;
 import dal.QuestionExamDAO;
 import jakarta.servlet.ServletException;
@@ -38,6 +39,8 @@ public class QuizHandleController extends HttpServlet {
 
         //quiz business
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
+        ArrayList<Question> allQuestionList = q.getAllListQuestionByExamId(examId);
+        req.setAttribute("allQuestionL", allQuestionList);
         Question currentQuestion = q.getQuestionById(questionId);
         req.setAttribute("currentQues", currentQuestion);
         req.setAttribute("p", page);
@@ -71,10 +74,17 @@ public class QuizHandleController extends HttpServlet {
                 a.scoreQuestion(0, examId, questionId, u.getId());
             }
         }
-        
+
         //progress bar business
         int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
+
+        //question status
+        boolean isAnswered = false;
+        if (att.getUserAnswer() != null) {
+            isAnswered = true;
+        }
+        req.setAttribute("questionStatus", isAnswered);
         req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);
 
     }
@@ -83,6 +93,7 @@ public class QuizHandleController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         QuestionDAO q = new QuestionDAO();
         AttemptDAO a = new AttemptDAO();
+        ExamDAO e = new ExamDAO();
         QuestionExamDAO eq = new QuestionExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
@@ -96,6 +107,9 @@ public class QuizHandleController extends HttpServlet {
         req.setAttribute("id", examId);
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
         req.setAttribute("questionL", questionList);
+        ArrayList<Question> allQuestionList = q.getAllListQuestionByExamId(examId);
+        req.setAttribute("allQuestionL", allQuestionList);
+
         req.setAttribute("endP", endPage);
 
         //create exam attempts
@@ -107,12 +121,30 @@ public class QuizHandleController extends HttpServlet {
         //progress bar business
         int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
+
+        //get exam time 
+        String duration = e.getExamDurationById(examId);
+        int examDurationSecond = convertToTime(duration);
+        req.setAttribute("examDuration", examDurationSecond);
         
-        //score exam
+        //get attempt list where user_answer not null
+        ArrayList<Attempt> attemptList = a.getAttemptList(examId, questionId, u.getId());
+        req.setAttribute("attL", attemptList);
 
         //push to QuizHandle
         req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);
 
+    }
+
+    //function convert string to time
+    private int convertToTime(String time) {
+        time = time.substring(0, time.length() - 8);
+        String[] t = time.split(":");
+        int hour = Integer.parseInt(t[0]);
+        int minute = Integer.parseInt(t[1]);
+        int second = Integer.parseInt(t[2]);
+        int totalTime = hour * 3600 + minute * 60 + second;
+        return totalTime;
     }
 
 }

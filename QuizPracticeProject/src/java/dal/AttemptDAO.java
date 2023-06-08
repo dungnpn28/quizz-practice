@@ -4,7 +4,9 @@
  */
 package dal;
 
+import java.util.ArrayList;
 import model.Attempt;
+import model.Question;
 
 /**
  *
@@ -31,7 +33,6 @@ public class AttemptDAO extends MyDAO {
             System.out.println("createAttempt: " + e.getMessage());
         }
     }
-
 
     public void saveAnswer(String answer, int examId, int questionId, int userId) {
         try {
@@ -121,7 +122,7 @@ public class AttemptDAO extends MyDAO {
             System.out.println("markUnmarkQuestion: " + e.getMessage());
         }
     }
-    
+
     public void scoreQuestion(double score, int examId, int questionId, int userId) {
         try {
             String strAdd = "update [attempt] "
@@ -140,7 +141,7 @@ public class AttemptDAO extends MyDAO {
             System.out.println("scoreQuestion: " + e.getMessage());
         }
     }
-    
+
     public void deleteExamAttempt(int examId) {
         try {
             String strDel = "delete from [attempt] where exam_id = ?;";
@@ -151,5 +152,50 @@ public class AttemptDAO extends MyDAO {
         } catch (Exception e) {
             System.out.println("deleteAttempt: " + e.getMessage());
         }
+    }
+
+    public double getExamScore(int examId, int userId) {
+        try {
+            String strSl = "SELECT SUM(score) AS total_score\n"
+                    + "FROM [attempt]\n"
+                    + "WHERE exam_id = ? AND user_id = ?";
+            ps = con.prepareStatement(strSl);
+            ps.setInt(1, examId);
+            ps.setInt(2, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getExamScore: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public ArrayList<Attempt> getAttemptList(int examId, int questionId, int userId) {
+        ArrayList<Attempt> attList = new ArrayList<>();
+        try {
+            String strSelect = "select * from [attempt] "
+                    + "where exam_id=? AND "
+                    + "question_id=? AND "
+                    + "user_id =? AND user_answer IS NOT NULL";
+            ps = con.prepareCall(strSelect);
+            ps.setInt(1, examId);
+            ps.setInt(2, questionId);
+            ps.setInt(3, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                boolean marked = true;
+                if (rs.getInt(4) == 0) {
+                    marked = false;
+                }
+                String userAnswer = rs.getString(5);
+                double score = rs.getDouble(6);
+                attList.add(new Attempt(userId, questionId, examId, marked, userAnswer, score));
+            }
+        } catch (Exception e) {
+            System.out.println("getAttemptList: " + e.getMessage());
+        }
+        return attList;
     }
 }

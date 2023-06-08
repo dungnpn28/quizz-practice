@@ -28,3 +28,11 @@ function submit() {
     document.getElementById("submit-btn").click();
 }
 
+function openScorePopup() {
+    document.getElementById('score-popup').classList.add('active');
+}
+
+function closeScorePopup() {
+    document.getElementById('score-popup').classList.remove('active');
+}
+
