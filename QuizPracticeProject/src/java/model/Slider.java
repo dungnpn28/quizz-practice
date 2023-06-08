@@ -31,22 +31,7 @@ public class Slider {
         this.created = created;
         this.modified = modified;
     }
-    
-    public Slider(int id, String title, String image, String backlink){
-        this.id = id;
-        this.title = title;
-        this.image = image;
-        this.backlink = backlink;
-    }
-    
-    public Slider(int id, String title, String image, String backlink, boolean status){
-        this.id = id;
-        this.title = title;
-        this.image = image;
-        this.backlink = backlink;
-        this.status = status;
-    }
-    
+
     public int getId() {
         return id;
     }
@@ -102,9 +87,6 @@ public class Slider {
     public void setModified(Date modified) {
         this.modified = modified;
     }
-    
-    
-    
     
     
 }
