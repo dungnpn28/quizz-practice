@@ -1134,7 +1134,7 @@ public class SubjectDAO extends MyDAO {
         } catch (Exception e) {
             System.out.println("addNewSubject: " + e.getMessage());
         }
-    
+     }
     public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
         xSql = "SELECT s.*, (\n" +

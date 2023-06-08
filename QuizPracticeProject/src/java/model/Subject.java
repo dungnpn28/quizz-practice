@@ -25,6 +25,8 @@ public class Subject {
     private double min_sale;
     public Subject() {
     }
+    
+    
     public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
         this.id = id;
         this.illustration = illustration;
@@ -71,6 +73,18 @@ public class Subject {
         this.user_id = user_id;
     }
 
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, Date modified, boolean featured) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.modified = modified;
+        this.featured = featured;
+    }
+
+    
     public double getMin_price() {
         return min_price;
     }
