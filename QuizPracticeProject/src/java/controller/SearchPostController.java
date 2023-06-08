@@ -43,6 +43,7 @@ public class SearchPostController extends HttpServlet {
             request.setAttribute("listCategory", listCategory);
             request.setAttribute("key", keyword);
             request.getRequestDispatcher("BlogList.jsp").forward(request, response);
+
         }
     }
 

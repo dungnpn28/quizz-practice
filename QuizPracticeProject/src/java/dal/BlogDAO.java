@@ -135,8 +135,7 @@ public class BlogDAO extends MyDAO{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (resultPost);        
+        return (resultPost);
+        
     }
-    
-    
 }

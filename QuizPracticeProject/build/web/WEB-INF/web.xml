@@ -89,18 +89,6 @@
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SliderListController</servlet-name>
-        <servlet-class>controller.SliderListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditSliderController</servlet-name>
-        <servlet-class>controller.EditSliderController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchSliderController</servlet-name>
-        <servlet-class>controller.SearchSliderController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PracticeDetailsController</servlet-name>
         <servlet-class>controller.PracticeDetailsController</servlet-class>
     </servlet>
@@ -109,14 +97,6 @@
         <servlet-class>controller.SubjectListPublicController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SubjectListAEController</servlet-name>
-        <servlet-class>controller.SubjectListAEController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SliderPagingController</servlet-name>
-        <servlet-class>controller.SliderPagingController</servlet-class>
-        </servlet>
-        <servlet>
         <servlet-name>SubjectDetailsController</servlet-name>
         <servlet-class>controller.SubjectDetailsController</servlet-class>
     </servlet>
@@ -227,22 +207,6 @@
         <url-pattern>/searchpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SliderListController</servlet-name>
-        <url-pattern>/sliderList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditSliderController</servlet-name>
-        <url-pattern>/editSlider</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchSliderController</servlet-name>
-        <url-pattern>/searchSlider</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SubjectListPublicController</servlet-name>
-        <url-pattern>/subjectListPublic</url-pattern>
-    </servlet-mapping> 
-    <servlet-mapping>
         <servlet-name>PracticeDetailsController</servlet-name>
         <url-pattern>/practiceDetails</url-pattern>
     </servlet-mapping>
@@ -251,18 +215,12 @@
         <url-pattern>/subjectListPublic</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SubjectListAEController</servlet-name>
-        <url-pattern>/subjectListAE</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SliderPagingController</servlet-name>
-        <url-pattern>/sliderPaging</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SubjectDetailsController</servlet-name>
         <url-pattern>/subjectDetails</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
+
         <servlet-name>UserListController</servlet-name>
         <url-pattern>/userlist</url-pattern>
     </servlet-mapping>
@@ -287,6 +245,8 @@
         <url-pattern>/scorequiz</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>
+            30
+        </session-timeout>
     </session-config>
 </web-app>
