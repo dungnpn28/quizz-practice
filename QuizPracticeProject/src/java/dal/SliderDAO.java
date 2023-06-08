@@ -160,4 +160,47 @@ public class SliderDAO extends MyDAO {
         return searchs;
     }
 
+    public int getTotalSlider() {
+        xSql = "select count(*)  from slider";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int total = rs.getInt(1);
+                int countPage = 0;
+                countPage = total / 5;
+                if (total % 5 != 0) {
+                    countPage++;
+                }
+                return countPage;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Slider> getPaging(int index) {
+        String Sql = "select * from slider\n"
+                + "order by id\n"
+                + "offset ? rows\n"
+                + "fetch first 5 rows only;";
+        List<Slider> list = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(Sql);
+            ps.setInt(1, (index-1)*5);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Slider(rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getBoolean(5)));
+            }           
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }

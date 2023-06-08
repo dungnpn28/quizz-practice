@@ -34,7 +34,6 @@
                 </li>
                 <li>
                     <a href="#">Pages</a>
-
                 </li>
                 <li>
                     <a href="#">Portfolio</a>
@@ -42,6 +41,7 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
+                
             </ul>
 
             <ul class="list-unstyled CTAs">

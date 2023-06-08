@@ -89,7 +89,6 @@
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>controller.SliderListController</servlet-class>
     </servlet>
@@ -100,10 +99,18 @@
     <servlet>
         <servlet-name>SearchSliderController</servlet-name>
         <servlet-class>controller.SearchSliderController</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>SubjectListPublicController</servlet-name>
         <servlet-class>controller.SubjectListPublicController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <servlet-class>controller.SubjectListAEController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderPagingController</servlet-name>
+        <servlet-class>controller.SliderPagingController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -196,14 +203,24 @@
     <servlet-mapping>
         <servlet-name>SearchSliderController</servlet-name>
         <url-pattern>/searchSlider</url-pattern>
-
+        <servlet>
+            <servlet-name>SubjectListPublicController</servlet-name>
+            <url-pattern>/subjectListPublic</url-pattern>
+        </servlet>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SubjectListPublicController</servlet-name>
         <url-pattern>/subjectListPublic</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <url-pattern>/subjectListAE</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderPagingController</servlet-name>
+        <url-pattern>/sliderPaging</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

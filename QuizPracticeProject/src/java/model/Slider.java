@@ -38,7 +38,15 @@ public class Slider {
         this.image = image;
         this.backlink = backlink;
     }
-
+    
+    public Slider(int id, String title, String image, String backlink, boolean status){
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.backlink = backlink;
+        this.status = status;
+    }
+    
     public int getId() {
         return id;
     }
