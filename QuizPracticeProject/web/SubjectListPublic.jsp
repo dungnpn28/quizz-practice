@@ -123,6 +123,7 @@
                                                                         <h5 class="card-title" onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">${item.getName()}</h5>
 
                                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
+                                                                        <div class="card-date">List price: ${item.getMin_price()} đ - Sale price: ${item.getMin_sale()} đ</div>
 
 
                                                                         <c:forEach items="${subjectCategoryList}" var="category">
@@ -257,6 +258,12 @@
                                             <label for="desc">Price ↘</label>
                                             <button type="submit">Confirm</button>
                                         </form>
+                                        <c:if test="${checkSort == 'asc'}">
+                                            <p>Sort ascending by price</p>
+                                        </c:if>
+                                            <c:if test="${checkSort == 'desc'}">
+                                            <p>Sort descending by price</p>
+                                        </c:if>
                                     </div>
 
                                     <table class="table">

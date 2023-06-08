@@ -1119,4 +1119,120 @@ public class SubjectDAO extends MyDAO {
         }
         return (totalSubject);
     }
+    
+    public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
+        List<Subject> t = new ArrayList<>();
+        xSql = "SELECT s.*, (\n" +
+"                  SELECT MIN(price) \n" +
+"                FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                ) AS min_price,\n" +
+"                (\n" +
+"                 SELECT MIN(sale) \n" +
+"                 FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                 ) AS min_sale\n" +
+"                FROM subject s\n" +
+"                order by min_price ASC\n" +
+"                offset (?-1)*? row fetch next ? rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            rs = ps.executeQuery();
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
+            String xName;
+            int xCategory;
+            boolean xStatus;
+            String xDescription;
+            boolean xFeatured;
+            Date xModified;
+            double xPrice;
+            double xSale;
+            Subject x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
+                xName = rs.getString("name");
+                xCategory = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xFeatured = rs.getBoolean("featured");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+    
+    public List<Subject> getSubjectsSortDESCWithPaging(int page, int PAGE_SIZE) {
+        List<Subject> t = new ArrayList<>();
+        xSql = "SELECT s.*, (\n" +
+"                  SELECT MIN(price) \n" +
+"                FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                ) AS min_price,\n" +
+"                (\n" +
+"                 SELECT MIN(sale) \n" +
+"                 FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                 ) AS min_sale\n" +
+"                FROM subject s\n" +
+"                order by min_price DESC\n" +
+"                offset (?-1)*? row fetch next ? rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            rs = ps.executeQuery();
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
+            String xName;
+            int xCategory;
+            boolean xStatus;
+            String xDescription;
+            boolean xFeatured;
+            Date xModified;
+            double xPrice;
+            double xSale;
+            Subject x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
+                xName = rs.getString("name");
+                xCategory = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xFeatured = rs.getBoolean("featured");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 }

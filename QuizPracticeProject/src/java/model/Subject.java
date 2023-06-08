@@ -72,6 +72,22 @@ public class Subject {
         this.user_id = user_id;
     }
 
+    public double getMin_price() {
+        return min_price;
+    }
+
+    public void setMin_price(double min_price) {
+        this.min_price = min_price;
+    }
+
+    public double getMin_sale() {
+        return min_sale;
+    }
+
+    public void setMin_sale(double min_sale) {
+        this.min_sale = min_sale;
+    }
+
     public Date getModified() {
         return modified;
     }
