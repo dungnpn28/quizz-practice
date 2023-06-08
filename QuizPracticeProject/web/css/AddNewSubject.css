@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #adacac;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    height: fit-content;
+}
+
+.form-container .row {
+    align-items: flex-start;
+}
+
+.form-container .image-upload {
+    text-align: center;
+}
+
+.form-container .image-upload input[type="file"] {
+    display: none;
+}
+
+.form-container .image-upload label {
+    display: block;
+    cursor: pointer;
+}
+
+.form-container img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.form-container label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-container input[type="text"],
+.form-container select,
+.form-container textarea {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.2s ease-in-out;
+    width: 100%;
+}
+
+.form-container input[type="text"]:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+    border-color: #6c757d;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+}
+
+.form-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.form-container input[type="submit"],
+.form-container button.cancel-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 50%;
+}
+
+.form-container input[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.form-container button.cancel-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+}
+
+.form-container button.cancel-btn:hover {
+    background-color: #c82333;
+}

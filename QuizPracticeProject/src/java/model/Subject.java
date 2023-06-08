@@ -25,8 +25,9 @@ public class Subject {
     private double min_sale;
     public Subject() {
     }
-
-    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, Date modified, boolean featured) {
+    
+    
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
         this.id = id;
         this.illustration = illustration;
         this.name = name;

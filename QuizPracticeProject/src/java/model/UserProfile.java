@@ -17,6 +17,7 @@ public class UserProfile {
     private String dob;
     private String created;
     private String modified;
+    private User user;
 
     public UserProfile() {
     }
@@ -30,6 +31,17 @@ public class UserProfile {
         this.dob = dob;
         this.created = created;
         this.modified = modified;
+    }
+    public UserProfile(int user_id, String avatar, String full_name, int gender, String phone_number, String dob, String created, String modified,User user) {
+        this.user_id = user_id;
+        this.avatar = avatar;
+        this.full_name = full_name;
+        this.gender = gender;
+        this.phone_number = phone_number;
+        this.dob = dob;
+        this.created = created;
+        this.modified = modified;
+        this.user=user;
     }
     public UserProfile(String full_name, int gender, String phone_number, String dob) {
         this.full_name = full_name;
@@ -109,6 +121,22 @@ public class UserProfile {
 
     public void setModified(String modified) {
         this.modified = modified;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     

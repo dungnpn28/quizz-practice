@@ -1119,7 +1119,22 @@ public class SubjectDAO extends MyDAO {
         }
         return (totalSubject);
     }
-
+     public void addNewSubject( String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
+        try {
+            String strAdd = "insert into [subject] values(?,?,?,?,?,?,NULL,?)";
+            ps = con.prepareStatement(strAdd);
+            ps.setString(1, illustration);
+            ps.setString(2, name);
+            ps.setInt(3, category_id);
+            ps.setBoolean(4, status);
+            ps.setString(5, description);
+            ps.setInt(6, user_id);
+            ps.setBoolean(7, featured);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("addNewSubject: " + e.getMessage());
+        }
+     }
     public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
         xSql = "SELECT s.*, (\n"

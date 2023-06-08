@@ -4,6 +4,12 @@
  */
 package dal;
 
+import java.util.ArrayList;
+import java.util.List;
+import model.Role;
+import model.User;
+import model.UserProfile;
+
 /**
  *
  * @author Acer
@@ -24,5 +30,24 @@ public class RoleDAO extends MyDAO{
             System.out.println("Fail: " + e.getMessage());
         }
         return roleName;
+    }
+    public List<Role> getListRole(){
+           List<Role> data = new ArrayList<>();
+        try {
+            String strSelect = "select [id], name from [role]";
+            ps = con.prepareStatement(strSelect);
+      
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                Role r = new Role(id,name);
+                data.add(r);
+            }
+        } catch (Exception e) {
+            System.out.println("getListRole: " + e.getMessage());
+        }
+        return data;
     }
 }
