@@ -8,7 +8,6 @@ import dal.SubjectDAO;
 import dal.SubjectDetailsDAO;
 import dal.Subject_CategoryDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,14 +57,15 @@ public class SubjectDetailsController extends HttpServlet {
 
         List<Price_Package> pricePackageList = new ArrayList<>();
         pricePackageList = sdDAO.getPrice_Package();
-
         request.setAttribute("pricePackageList", pricePackageList);
+
         List<Subject_Category> subjectCategoryList = new ArrayList<>();
         subjectCategoryList = scDAO.getSubjectCategory();
         request.setAttribute("subjectCategoryList", subjectCategoryList);
+        
+        
         Subject s = sDAO.getSubjectById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("subject", s);
-        System.out.println(s.getName());
         request.getRequestDispatcher("SubjectDetails.jsp").forward(request, response);
     }
 

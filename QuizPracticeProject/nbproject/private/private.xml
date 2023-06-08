@@ -9,17 +9,6 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/DBContext.java</file>
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
-        <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/SubjectDetailsDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/PracticeDetailsDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/PracticeDetailsController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/components/CusHeader.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeList.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/Subject_CategoryDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/web.xml</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

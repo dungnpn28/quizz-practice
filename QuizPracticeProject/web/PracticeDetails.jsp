@@ -31,9 +31,9 @@
                     </c:forEach>
                 </select>
                 <br>
-                <label for="questions">Number of practicing questions</label>
+                <label for="ques">Number of practicing questions</label>
                 <br>
-                <input name="questions" id="questions" type="number">
+                <input name="questions" id="ques" type="number">
                 <br>
                 <label for="topic">Questions are selected by topic(s) or a specific dimension?</label>
                 <br>

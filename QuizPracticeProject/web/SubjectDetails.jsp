@@ -72,7 +72,7 @@ if (session.getAttribute("user") != null) {
                         </div>
                         <div class="widget">
                             <h2 class="widget-title">List</h2>
-                            <form action="subject" method="POST">
+                            <form action="sort" method="POST">
                                 <p>Sorting type:
                                 <p>
                                     <input type="radio" name="sortType" value="ASC" checked="" /> Ascendingly
@@ -88,7 +88,7 @@ if (session.getAttribute("user") != null) {
                                         <option value="${category.id}">${category.name}</option>
                                     </c:forEach>
                                 </select>
-                                <button type="submit">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>

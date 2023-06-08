@@ -924,21 +924,17 @@ public class SubjectDAO extends MyDAO {
             ps.setInt(1, subjectId);
             rs = ps.executeQuery();
             String xIllustration;
-            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
-
             while (rs.next()) {
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
-
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
-                x = new Subject(subjectId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
+                x = new Subject(subjectId, xIllustration, xName, xCategory_id, xStatus, xDescription);
             }
             rs.close();
             ps.close();
