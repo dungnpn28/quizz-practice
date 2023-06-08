@@ -103,6 +103,16 @@
     <servlet>
         <servlet-name>AddNewSubjectController</servlet-name>
         <servlet-class>controller.AddNewSubjectController</servlet-class>
+        <servlet-name>QuizHandleController</servlet-name>
+        <servlet-class>controller.QuizHandleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EndQuizController</servlet-name>
+        <servlet-class>controller.EndQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScoreExamController</servlet-name>
+        <servlet-class>controller.ScoreExamController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -199,6 +209,16 @@
     <servlet-mapping>
         <servlet-name>AddNewSubjectController</servlet-name>
         <url-pattern>/addnewsubject</url-pattern>
+        <servlet-name>QuizHandleController</servlet-name>
+        <url-pattern>/quizhandle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EndQuizController</servlet-name>
+        <url-pattern>/endquiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScoreExamController</servlet-name>
+        <url-pattern>/scorequiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
