@@ -34,7 +34,7 @@
 
                 <ul>                
                     <li><a href="BlogListController">Post</a></li>
-                    <li><a href="SubjectDetails.jsp">Subject</a></li>
+                    <li><a href="subjectListPublic">Subject</a></li>
                     <li><a href="#" id='popUpLink'>Login</a></li>
                     <li><a href="#" id="popUpLink2" data-toggle="modal">Register</a></li>
                 </ul>

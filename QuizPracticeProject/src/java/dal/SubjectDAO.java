@@ -23,7 +23,7 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xIllustratoin;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory;
             boolean xStatus;
@@ -34,14 +34,14 @@ public class SubjectDAO extends MyDAO {
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xIllustratoin = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
                 t.add(x);
             }
             rs.close();
@@ -54,9 +54,21 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "select * from subject"
-                + "							   order by subject.modified DESC\n"
-                + "							   offset (?-1)*? row fetch next ? rows only";
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
+                + "order by s.modified DESC\n"
+                + "offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, page);
@@ -65,25 +77,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xIllustratoin;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory;
             boolean xStatus;
             String xDescription;
             boolean xFeatured;
             Date xModified;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xIllustratoin = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -113,9 +129,21 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getFeaturedSubjectsWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "Select * from subject\n"
-                + "where featured = 1\n"
-                + "order by modified DESC\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
+                + "where s.featured = 1\n"
+                + "order by s.modified DESC\n"
                 + "offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
@@ -125,25 +153,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xIllustratoin;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xIllustratoin = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -207,34 +239,51 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsByUserID(int userId) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
-                + "                FROM subject s \n"
-                + "                JOIN registration r ON s.id = r.subject_id\n"
-                + "                where r.user_id = ?\n"
-                + "                order by s.modified DESC";
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
+                + "JOIN registration r ON s.id = r.subject_id\n"
+                + "where r.user_id = ?\n"
+                + "order by s.modified DESC";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userId);
             rs = ps.executeQuery();
-            String xIllustration;
-            int xId;
-            int xDimesion_id;
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
             String xName;
-            int xCategory_id;
+            int xCategory;
             boolean xStatus;
             String xDescription;
+            Date xModified;
+            boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
-                xId = rs.getInt("id");
-                xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
-
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
                 xName = rs.getString("name");
-                xCategory_id = rs.getInt("category_id");
+                xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
-
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription);
+                xFeatured = rs.getBoolean("featured");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -247,8 +296,19 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsByUserIDWithPaging(int userId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
-                + "FROM subject s \n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
                 + "JOIN registration r ON s.id = r.subject_id\n"
                 + "where r.user_id = ?\n"
                 + "order by s.modified DESC\n"
@@ -262,25 +322,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -315,12 +379,23 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsNotRegistedByUserIDWithPaging(int userId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
                 + "FROM subject s\n"
                 + "LEFT JOIN registration r ON s.id = r.subject_id AND r.user_id = ?\n"
-                + "WHERE r.subject_id IS NULL\n"
-                + "ORDER BY s.modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+                + "                WHERE r.subject_id IS NULL\n"
+                + "                ORDER BY s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userId);
@@ -330,18 +405,20 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
@@ -349,7 +426,9 @@ public class SubjectDAO extends MyDAO {
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
 
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -384,9 +463,21 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> searchInAllSubject(String keyword, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "select * from subject\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
                 + "where name like ?\n"
-                + "order by subject.modified DESC\n"
+                + "order by s.modified DESC\n"
                 + "offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
@@ -397,18 +488,20 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
@@ -416,7 +509,9 @@ public class SubjectDAO extends MyDAO {
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
 
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -449,9 +544,21 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> searchInFeatturedSubject(String keyword, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "select * from subject\n"
-                + "where featured = 1 and name like ?\n"
-                + "order by subject.modified DESC\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
+                + "where s.featured = 1 and s.name like ?\n"
+                + "order by s.modified DESC\n"
                 + "offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
@@ -462,18 +569,20 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
@@ -481,7 +590,9 @@ public class SubjectDAO extends MyDAO {
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
 
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -514,8 +625,19 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> searchSubjectsByUserIDWithPaging(String keyword, int userId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
-                + "FROM subject s \n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
                 + "JOIN registration r ON s.id = r.subject_id\n"
                 + "where r.user_id = ? and s.name like ?\n"
                 + "order by s.modified DESC\n"
@@ -530,25 +652,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -563,7 +689,7 @@ public class SubjectDAO extends MyDAO {
         xSql = "select count(s.id) \n"
                 + "from subject s\n"
                 + "JOIN registration r ON s.id = r.subject_id\n"
-                + "where r.user_id = ? and a.name like ?";
+                + "where r.user_id = ? and s.name like ?";
         int totalSubject = 0;
         try {
             ps = con.prepareStatement(xSql);
@@ -583,12 +709,23 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> searchSubjectsNotRegistedByUserIDWithPaging(String keyword, int userId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
                 + "FROM subject s\n"
                 + "LEFT JOIN registration r ON s.id = r.subject_id AND r.user_id = ?\n"
-                + "WHERE r.subject_id IS NULL and s.name like ?\n"
-                + "ORDER BY s.modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+                + "                WHERE r.subject_id IS NULL and s.name like ?\n"
+                + "                ORDER BY s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userId);
@@ -599,18 +736,20 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
@@ -618,7 +757,9 @@ public class SubjectDAO extends MyDAO {
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
 
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -653,10 +794,22 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsByCategoryAndPaging(int categoryId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "select * from subject\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
                 + "where category_id =?\n"
-                + "order by subject.modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+                + "                order by s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, categoryId);
@@ -666,25 +819,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xIllustratoin;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory;
             boolean xStatus;
             String xDescription;
             boolean xFeatured;
             Date xModified;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xIllustratoin = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -716,10 +873,22 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getFeaturedSubjectsWithCategoryAndPaging(int categoryId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "Select * from subject\n"
-                + "where featured = 1 and category_id = ?\n"
-                + "order by modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
+                + "where s.featured = 1 and s.category_id =?\n"
+                + "                order by s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, categoryId);
@@ -729,25 +898,30 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xIllustratoin;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
+
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xIllustratoin = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xDimesion_id, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -778,12 +952,23 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsByCategoryAndUserIDWithPaging(int userId, int categoryId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
-                + "FROM subject s \n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
+                + "FROM subject s\n"
                 + "JOIN registration r ON s.id = r.subject_id\n"
-                + "where r.user_id = ? and s.category_id = ?\n"
-                + "order by s.modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+                + "                where r.user_id = ? and s.category_id = ?\n"
+                + "                order by s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userId);
@@ -794,25 +979,30 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
+
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -847,12 +1037,23 @@ public class SubjectDAO extends MyDAO {
 
     public List<Subject> getSubjectsNotRegistedByCategoryAndUserIDWithPaging(int userId, int categoryId, int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*\n"
+        xSql = "SELECT s.*, (\n"
+                + "  SELECT MIN(price) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_price,\n"
+                + "(\n"
+                + "  SELECT MIN(sale) \n"
+                + "  FROM subject_price_package spp\n"
+                + "  JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "  WHERE spp.subject_id = s.id\n"
+                + ") AS min_sale\n"
                 + "FROM subject s\n"
                 + "LEFT JOIN registration r ON s.id = r.subject_id AND r.user_id = ?\n"
-                + "WHERE r.subject_id IS NULL and s.category_id = ?\n"
-                + "ORDER BY s.modified DESC\n"
-                + "offset (?-1)*? row fetch next ? rows only";
+                + "                WHERE r.subject_id IS NULL and s.category_id = ?\n"
+                + "                ORDER BY s.modified DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, userId);
@@ -863,26 +1064,29 @@ public class SubjectDAO extends MyDAO {
             rs = ps.executeQuery();
             String xIllustration;
             int xId;
-            int xDimesion_id;
+//            int xDimesion_id;
             String xName;
             int xCategory_id;
             boolean xStatus;
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            double xPrice;
+            double xSale;
             Subject x;
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xIllustration = rs.getString("illustration");
-                xDimesion_id = rs.getInt("dimension_id");
+//                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
                 xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-
-                x = new Subject(xId, xIllustration, xDimesion_id, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured);
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xId, xIllustration, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
                 t.add(x);
             }
             rs.close();
@@ -892,8 +1096,8 @@ public class SubjectDAO extends MyDAO {
         }
         return (t);
     }
-    
-     public int getTotalNotRegistedSubjectWithCategory(int userId, int categoryId) {
+
+    public int getTotalNotRegistedSubjectWithCategory(int userId, int categoryId) {
         xSql = "select count(s.id) \n"
                 + "from subject s\n"
                 + "LEFT JOIN registration r ON s.id = r.subject_id AND r.user_id = ?\n"
@@ -915,32 +1119,120 @@ public class SubjectDAO extends MyDAO {
         }
         return (totalSubject);
     }
-     
-     public Subject getSubjectById(int subjectId) {
-        Subject x = null;
-        xSql = "select * from subject where id = ?";
+    
+    public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
+        List<Subject> t = new ArrayList<>();
+        xSql = "SELECT s.*, (\n" +
+"                  SELECT MIN(price) \n" +
+"                FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                ) AS min_price,\n" +
+"                (\n" +
+"                 SELECT MIN(sale) \n" +
+"                 FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                 ) AS min_sale\n" +
+"                FROM subject s\n" +
+"                order by min_price ASC\n" +
+"                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, subjectId);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
             rs = ps.executeQuery();
-            String xIllustration;
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
             String xName;
-            int xCategory_id;
+            int xCategory;
             boolean xStatus;
             String xDescription;
+            boolean xFeatured;
+            Date xModified;
+            double xPrice;
+            double xSale;
+            Subject x;
             while (rs.next()) {
-                xIllustration = rs.getString("illustration");
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
                 xName = rs.getString("name");
-                xCategory_id = rs.getInt("category_id");
+                xCategory = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
-                x = new Subject(subjectId, xIllustration, xName, xCategory_id, xStatus, xDescription);
+                xFeatured = rs.getBoolean("featured");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
+                t.add(x);
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return x;
+        return (t);
+    }
+    
+    public List<Subject> getSubjectsSortDESCWithPaging(int page, int PAGE_SIZE) {
+        List<Subject> t = new ArrayList<>();
+        xSql = "SELECT s.*, (\n" +
+"                  SELECT MIN(price) \n" +
+"                FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                ) AS min_price,\n" +
+"                (\n" +
+"                 SELECT MIN(sale) \n" +
+"                 FROM subject_price_package spp\n" +
+"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
+"                 WHERE spp.subject_id = s.id\n" +
+"                 ) AS min_sale\n" +
+"                FROM subject s\n" +
+"                order by min_price DESC\n" +
+"                offset (?-1)*? row fetch next ? rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            rs = ps.executeQuery();
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
+            String xName;
+            int xCategory;
+            boolean xStatus;
+            String xDescription;
+            boolean xFeatured;
+            Date xModified;
+            double xPrice;
+            double xSale;
+            Subject x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
+                xName = rs.getString("name");
+                xCategory = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xFeatured = rs.getBoolean("featured");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xPrice, xSale);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
 }
