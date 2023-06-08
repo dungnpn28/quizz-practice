@@ -21,7 +21,8 @@ public class Subject {
     private Date modified;
     private boolean featured;
     private int user_id;
-
+    private double min_price;
+    private double min_sale;
     public Subject() {
     }
     public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
@@ -31,9 +32,10 @@ public class Subject {
         this.category_id = category_id;
         this.status = status;
         this.description = description;
-        this.featured=featured;
-        this.user_id=user_id;
+        this.modified = modified;
+        this.featured = featured;
     }
+
     public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description) {
         this.id = id;
         this.illustration = illustration;
@@ -44,16 +46,17 @@ public class Subject {
         this.description = description;
     }
 
-    public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description,Date modified, boolean featured) {
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,Date modified, boolean featured, double min_price, double min_sale) {
         this.id = id;
         this.illustration = illustration;
-        this.dimension_id = dimension_id;
         this.name = name;
         this.category_id = category_id;
         this.status = status;
         this.description = description;
         this.modified = modified;
         this.featured = featured;
+        this.min_price = min_price;
+        this.min_sale = min_sale;
     }
 
     public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description, boolean featured, int user_id) {
@@ -66,6 +69,22 @@ public class Subject {
         this.description = description;
         this.featured = featured;
         this.user_id = user_id;
+    }
+
+    public double getMin_price() {
+        return min_price;
+    }
+
+    public void setMin_price(double min_price) {
+        this.min_price = min_price;
+    }
+
+    public double getMin_sale() {
+        return min_sale;
+    }
+
+    public void setMin_sale(double min_sale) {
+        this.min_sale = min_sale;
     }
 
     public Date getModified() {
