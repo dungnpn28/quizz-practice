@@ -1,16 +1,0 @@
-
-l
-java:S1104	"OMake con a static final constant or non-public and provide accessors if needed.(’Ôıÿ8µİôâˆ1
-j
-java:S1104
-"NMake ps a static final constant or non-public and provide accessors if needed.(Íòét8»İôâˆ1
-p
-java:S1104"NMake rs a static final constant or non-public and provide accessors if needed.(û˜Î¬şÿÿÿÿ8»İôâˆ1
-m
-java:S1104"PMake xSql a static final constant or non-public and provide accessors if needed.(“ø‡á8»İôâˆ1
-e
-java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(­§óùÿÿÿÿ
-H
-java:S1113"-Do not override the Object.finalize() method.(­§óùÿÿÿÿ
-A
-java:S1174"&Make this finalize() method protected.(­§óùÿÿÿÿ

@@ -1,14 +1,0 @@
-
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñü¡Ü
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñü¡Ü
-k	java:S117*"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍÌê–þÿÿÿÿ
-k	java:S117*"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍÌê–þÿÿÿÿ
-k	java:S117H"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ž–™²ýÿÿÿÿ
-f	java:S117X"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(žÖúí
-p	java:S116"TRename this field "author_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìóµÓ8Ì¢ìáˆ1
-w	java:S116"VRename this field "category_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖÀ–Öýÿÿÿÿ8Ì¢ìáˆ1
-W	java:S107"BConstructor has 10 parameters, which is greater than 7 authorized.(ñü¡Ü
-c	java:S100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óô ™
-h	java:S100H"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ž–™²ýÿÿÿÿ
-c	java:S100T"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÐÝ¨‚
-c	java:S100X"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(žÖúí
