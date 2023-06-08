@@ -116,13 +116,14 @@
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
 
-                                                                    <img src="${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
+                                                                    <img src="uploads/${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title" onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">${item.getName()}</h5>
+                                                                        <h5 class="card-title" onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">${item.getName()}</h5>
 
                                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
+                                                                        <div class="card-date">List price: ${item.getMin_price()} đ - Sale price: ${item.getMin_sale()} đ</div>
 
 
                                                                         <c:forEach items="${subjectCategoryList}" var="category">
@@ -142,7 +143,7 @@
                                                                             <%-- Nếu không có user trong session --%>
                                                                             <%-- Hiển thị nút Register --%>
                                                                             <span class="registerButton">
-                                                                                <button href="">Register</button>
+                                                                                <a href="">  <button >Register</button> </a>
                                                                             </span>
 
                                                                         </c:when>
@@ -172,7 +173,7 @@
                                                                                     <c:if test="${!isRegistered}">
 
                                                                                         <span class="registerButton">
-                                                                                            <button href="">Register</button>
+                                                                                            <a href="">  <button >Register</button> </a>
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:when>
@@ -238,6 +239,7 @@
                                                 </c:otherwise>
                                             </c:choose>            
                                         </c:if>
+                                        <br/>
                                         <form action="subjectListPublic" method="get">
                                             <select name="selectedCategory">
                                                 <option value="0">All</option>
@@ -245,9 +247,23 @@
                                                     <option value="${category.id}">${category.name}</option>
                                                 </c:forEach>
                                             </select>
-                                            <button type="submit">Submit</button>
+                                            <button type="submit">Confirm</button>
                                         </form>
+                                        <br/>
+                                        <form action="subjectListPublic" method="get">
+                                            <input type="radio" id="asc" name="sort" value="asc">
+                                            <label for="asc">Price ↗</label>
 
+                                            <input type="radio" id="desc" name="sort" value="desc">
+                                            <label for="desc">Price ↘</label>
+                                            <button type="submit">Confirm</button>
+                                        </form>
+                                        <c:if test="${checkSort == 'asc'}">
+                                            <p>Sort ascending by price</p>
+                                        </c:if>
+                                            <c:if test="${checkSort == 'desc'}">
+                                            <p>Sort descending by price</p>
+                                        </c:if>
                                     </div>
 
                                     <table class="table">
@@ -264,20 +280,17 @@
                                             </tr>
                                             <c:forEach var="item" items="${featuredSubjectList}" begin="0" end="2">
 
-                                                <tr onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
+                                                <tr onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                     <td>
                                                         <div class="table-image">
-                                                            <img src="${item.getIllustration()}" alt="Image">
+                                                            <img src="uploads/${item.getIllustration()}" alt="Image">
                                                         </div>
                                                     </td>
                                                     <td class="card-title">${item.getName()}
                                                         <br/>
                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
                                                     </td>
-
-
                                                 </tr>
-
                                             </c:forEach>
                                         </tbody>
                                     </table>

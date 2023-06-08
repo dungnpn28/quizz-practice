@@ -19,7 +19,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Simulation Exam</title>
     </head>
-
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <h1> existing exams </h1>
@@ -39,12 +38,12 @@
                         <tr>
                             <td>${Exam.getId()}</td>
                             <td>${Exam.getSubjectName()}</td>
-                            <td><a href="#" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
+                            <td><a href="quizhandle?id=${Exam.getId()}" class="popUpDetailExam" data-exam-id="${Exam.getId()}">${Exam.getName()}</a></td>
                             <td>${Exam.getLevel() }</td>
                             <td>${Exam.getNumber_of_question()}</td>
                             <td>${Exam.getDuration() }</td>
                             <td>${Exam.getPass_rate() }</td>
-                        </tr>
+                        </tr>   
                     </c:forEach>
 
                 </table>
@@ -128,9 +127,9 @@
                     examIdText.textContent = "Exam ID: " + examId;
                     // Đặt examId vào URL của nút "Start Exam"
                     var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "quizhandle?examId=" + examId;
+                    startExamButton.href = "quizhandle?id=" + examId + "&page=1";
 
-                    // Hiển thị popup
+                    // Hiển thị popup   
                     var popUpDetailModal = document.getElementById("popUpDetailModal");
                     popUpDetailModal.style.display = "block";
                 });
@@ -176,5 +175,4 @@
     </body>
     <%@include file="components/Footer.jsp" %>
     <script src="js/PopUp.js" type="text/javascript"></script>
-
 </html>

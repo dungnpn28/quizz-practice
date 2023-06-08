@@ -37,7 +37,8 @@ public class UserDAO extends MyDAO {
                 return new User(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4));
+                        rs.getInt(4),
+                        rs.getInt(5));
 
             }
         } catch (Exception e) {
@@ -50,7 +51,7 @@ public class UserDAO extends MyDAO {
         try {
             String strSelect = "select * from [user] \n"
                     + "                     where account = ? and \n"
-                    + "                     [password] = ?";
+                    + "                     [password] = ? and status =1";
             ps = con.prepareStatement(strSelect);
             ps.setString(1, account);
             ps.setString(2, password);
@@ -59,7 +60,8 @@ public class UserDAO extends MyDAO {
                 return new User(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4));
+                        rs.getInt(4),
+                        rs.getInt(5));
 
             }
         } catch (Exception e) {
@@ -81,5 +83,26 @@ public class UserDAO extends MyDAO {
             System.out.println("updatePassword: " + e.getMessage());
         }
     }
+     public User getUserById(int id) {
+        try {
+            String strSelect = "select id,account,[password],[role_id],[status] from [user] where id = ?";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5));
+
+            }
+        } catch (Exception e) {
+            System.out.println("getUserById: " + e.getMessage());
+        }
+        return null;
+
+    }
+    
 
 }

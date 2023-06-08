@@ -80,7 +80,7 @@ public class SimulationExamController extends HttpServlet {
         if (examList.isEmpty() || examList == null) {
             request.getRequestDispatcher("SimulationExam.jsp").include(request, response);
         } else {
-
+            
             request.setAttribute("examList", examList);
             request.setAttribute("subjectList", subjectList);
             request.getRequestDispatcher("SimulationExam.jsp").forward(request, response);
