@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Your score: ${examscore}</h1>
+        <a href="simulationExam"><button>Back to Simulation Exam</button></a>
     </body>
 </html>

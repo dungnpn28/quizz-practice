@@ -100,9 +100,7 @@
         <servlet-name>SubjectDetailsController</servlet-name>
         <servlet-class>controller.SubjectDetailsController</servlet-class>
     </servlet>
-
     <servlet>
-
         <servlet-name>UserListController</servlet-name>
         <servlet-class>controller.UserListController</servlet-class>
     </servlet>
@@ -125,6 +123,14 @@
     <servlet>
         <servlet-name>ScoreExamController</servlet-name>
         <servlet-class>controller.ScoreExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderListController</servlet-name>
+        <servlet-class>controller.SliderListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSliderController</servlet-name>
+        <servlet-class>controller.EditSliderController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -218,9 +224,7 @@
         <servlet-name>SubjectDetailsController</servlet-name>
         <url-pattern>/subjectDetails</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
-
         <servlet-name>UserListController</servlet-name>
         <url-pattern>/userlist</url-pattern>
     </servlet-mapping>
@@ -243,6 +247,14 @@
     <servlet-mapping>
         <servlet-name>ScoreExamController</servlet-name>
         <url-pattern>/scorequiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/sliderList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSliderController</servlet-name>
+        <url-pattern>/editSlider</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
