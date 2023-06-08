@@ -10,12 +10,22 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
         <group>
+<<<<<<< HEAD
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/QuizHandleController.java</file>
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/Home.jsp</file>
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/QuizHandle.jsp</file>
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/css/QuizHandle.css</file>
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/css/Home.css</file>
             <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/dal/QuizHandleDAO.java</file>
+=======
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Exam.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectListPublic.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Subject_Category.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SubjectListPublicController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Subject.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/SubjectListPublic.css</file>
+>>>>>>> 098c8d9883038a78f5ea4b92335a1af78de249c6
         </group>
     </open-files>
 </project-private>

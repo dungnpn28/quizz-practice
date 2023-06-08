@@ -128,7 +128,7 @@
                     examIdText.textContent = "Exam ID: " + examId;
                     // Đặt examId vào URL của nút "Start Exam"
                     var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "startExam.jsp?examId=" + examId;
+                    startExamButton.href = "quizhandle?examId=" + examId;
 
                     // Hiển thị popup
                     var popUpDetailModal = document.getElementById("popUpDetailModal");
