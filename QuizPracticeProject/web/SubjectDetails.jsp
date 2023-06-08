@@ -48,7 +48,7 @@ if (session.getAttribute("user") != null) {
 
                     <div class="col-md-6 post">
                         <div class="post-image">
-                            <img src="${subject.getIllustration()}" alt="img" class="img-fluid">
+                            <img src="uploads/${subject.getIllustration()}" alt="img" class="img-fluid">
                         </div>
                         <h1>${subject.name}</h1>
                         <p> <strong>Price: ${subject.min_price} </strong></p>
@@ -137,7 +137,7 @@ if (session.getAttribute("user") != null) {
                                     <tr onclick="window.location.href = 'subjectDetailS?id=${item.getId()}'">
                                         <td>
                                             <div class="table-image">
-                                                <img src="${item.getIllustration()}" alt="Image">
+                                                <img src="uploads/${item.getIllustration()}" alt="Image">
                                             </div>
                                         </td>
                                         <td class="card-title">${item.getName()}
