@@ -93,6 +93,18 @@
         <servlet-class>controller.SubjectListPublicController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UserListController</servlet-name>
+        <servlet-class>controller.UserListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserInformationController</servlet-name>
+        <servlet-class>controller.UserInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewSubjectController</servlet-name>
+        <servlet-class>controller.AddNewSubjectController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>QuizHandleController</servlet-name>
         <servlet-class>controller.QuizHandleController</servlet-class>
     </servlet>
@@ -187,6 +199,18 @@
     <servlet-mapping>
         <servlet-name>SubjectListPublicController</servlet-name>
         <url-pattern>/subjectListPublic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListController</servlet-name>
+        <url-pattern>/userlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserInformationController</servlet-name>
+        <url-pattern>/userinformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewSubjectController</servlet-name>
+        <url-pattern>/addnewsubject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuizHandleController</servlet-name>

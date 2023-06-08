@@ -116,7 +116,7 @@
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
 
-                                                                    <img src="${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
+                                                                    <img src="uploads/${item.getIllustration()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="..." onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
@@ -283,7 +283,7 @@
                                                 <tr onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
                                                     <td>
                                                         <div class="table-image">
-                                                            <img src="${item.getIllustration()}" alt="Image">
+                                                            <img src="uploads/${item.getIllustration()}" alt="Image">
                                                         </div>
                                                     </td>
                                                     <td class="card-title">${item.getName()}

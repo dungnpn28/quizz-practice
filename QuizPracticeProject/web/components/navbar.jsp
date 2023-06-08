@@ -4,6 +4,7 @@
     Author     : Dell
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,33 +26,125 @@
             </div>
 
             <ul class="list-unstyled components">
+                <c:choose>
+                    <c:when test="${sessionScope.user.getRole_id() == 1}">
+                        <li>
+                            
+                            <a href="#">HOME</a>                  
+                        </li>
+                        <li>
+                            
+                            <a href="#">POST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">PRACTICE LIST</a>
 
-                <li>
-                    <a href="#">Home</a>                  
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Pages</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">SUBJECT</a>
+                        </li>
 
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
+                    </c:when>
+                    <c:when test="${sessionScope.user.getRole_id() == 2}">
+                        <li>
+                            
+                            <a href="#">HOME</a>                  
+                        </li>
+                        <li>
+                            
+                            <a href="#">POST LIST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">SLIDER LIST</a>
+
+                        </li>                      
+
+                    </c:when>
+                    <c:when test="${sessionScope.user.getRole_id() == 3}">
+                        <li>
+                            
+                            <a href="#">HOME</a>                  
+                        </li>
+                       
+                        <li>
+                            
+                            <a href="#">SALE LIST</a>
+
+                        </li>
+                        
+
+                    </c:when>
+                    <c:when test="${sessionScope.user.getRole_id() == 4}">
+                        <li>
+                            
+                            <a href="#">HOME</a>                  
+                        </li>
+                        <li>
+                            
+                            <a href="#">SUBJECT LIST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">QUESTION LIST</a>
+
+                        </li>     
+                        <li>
+                            
+                            <a href="#">EXAM LIST</a>
+
+                        </li>    
+
+                    </c:when>
+                    <c:otherwise>
+
+                        <li>
+                            
+                            <a href="#">HOME</a>                  
+                        </li>
+                        <li>
+                            
+                            <a href="#">DASHBOARD</a>
+                        </li>
+                        <li>
+                       
+                            <a href="userlist">USER LIST</a>
+
+                        </li>
+                        <li>
+                            
+                            <a href="#">SUBJECT LIST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">POST LIST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">SlIDER LIST</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">QUESTION BANKS</a>
+                        </li>
+                        <li>
+                            
+                            <a href="#">SETTING LIST</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
+            <!--            <ul class="list-unstyled CTAs">
+                            <li>
+                                <a href="#" class="download">Download source</a>
+                            </li>
+                            <li>
+                                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                            </li>
+                        </ul>-->
         </nav>
 
     </body>
