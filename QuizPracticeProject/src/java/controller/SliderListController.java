@@ -4,23 +4,22 @@
  */
 package controller;
 
-import dal.BlogDAO;
-import dal.Blog_CategoryDAO;
+import dal.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Blog;
-import model.Blog_Category;
+import model.Slider;
 
 /**
  *
  * @author ADMIN
  */
-public class SearchPostController extends HttpServlet {
+public class SliderListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +33,15 @@ public class SearchPostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            String keyword = request.getParameter("keyword");
-            BlogDAO bDAO = new BlogDAO();
-            List<Blog> listBlog = bDAO.searchPost(keyword);
-            request.setAttribute("listBlog", listBlog);
-            List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-            request.setAttribute("listCategory", listCategory);
-            request.setAttribute("key", keyword);
-            request.getRequestDispatcher("BlogList.jsp").forward(request, response);
-        }
+
+        List<Slider> listSlider = new SliderDAO().getSlider();
+        request.setAttribute("listSlider", listSlider);
+
+        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(true);
+//        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(false);
+        request.setAttribute("filterStatus", filterStatus);
+        request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,6 +57,7 @@ public class SearchPostController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -72,7 +71,32 @@ public class SearchPostController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        HttpSession session = request.getSession();
+        //button DELETE
+        if (request.getParameter("btnDel") != null) {
+            int id = Integer.parseInt(request.getParameter("sid"));
+            List<Slider> listSlider = new SliderDAO().delete(id);
+            request.setAttribute("listSlider", listSlider);
+            request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+        }
+        //button EDIT
+        if (request.getParameter("btnEdit") != null) {
+            int id = Integer.parseInt(request.getParameter("sid"));
+            Slider listSlider = new SliderDAO().getOneSlider(id);
+            request.setAttribute("listSlider", listSlider);
+            request.getRequestDispatcher("EditSlider.jsp").forward(request, response);
+        }
+
+        String keyword = request.getParameter("keyword");
+        if (keyword != null) {
+            List<Slider> listSlider = new SliderDAO().getSlider();
+            SliderDAO sDAO = new SliderDAO();
+            listSlider = sDAO.searchSlider(keyword);
+            request.setAttribute("listSlider", listSlider);
+            request.setAttribute("key", keyword);
+            request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+        }
     }
 
     /**
