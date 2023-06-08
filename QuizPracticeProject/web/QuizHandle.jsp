@@ -30,6 +30,40 @@
                     <h1>
                         <div id="time"></div>
                     </h1>
+                    <script>
+                        var interval;
+                        let minutes = 1;
+                        let currentTime = localStorage.getItem('currentTime');
+                        let targetTime = localStorage.getItem('targetTime');
+                        if (targetTime == null && currentTime == null) {
+                            currentTime = new Date();
+                            targetTime = new Date(currentTime.getTime() + (minutes * 60000));
+                            localStorage.setItem('currentTime', currentTime);
+                            localStorage.setItem('targetTime', targetTime);
+                        } else {
+                            currentTime = new Date(currentTime);
+                            targetTime = new Date(targetTime);
+                        }
+
+                        if (!checkComplete()) {
+                            interval = setInterval(checkComplete, 1000);
+                        }
+
+                        function checkComplete() {
+                            if (currentTime > targetTime) {
+                                clearInterval(interval);
+                                alert("Time is up");
+                            } else {
+                                currentTime = new Date();
+                                document.write(
+                                        "\n <font color=\"white\"> Seconds Remaining:" + ((targetTime - currentTime) / 1000) + "</font>");
+                            }
+                        }
+
+                        document.onbeforeunload = function () {
+                            localStorage.setItem('currentTime', currentTime);
+                        }
+                    </script>
 
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">
@@ -166,7 +200,7 @@
                                 </div>
                                 <div class="question-navigation">
                                     <c:forEach var="question" items="${allQuestionL}">
-                                            <a href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>    
+                                        <a href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>    
                                     </c:forEach> 
 
 

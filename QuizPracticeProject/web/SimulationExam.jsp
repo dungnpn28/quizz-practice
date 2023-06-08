@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "java.util.*" %>
 <%@page import = "model.Exam" %>
-<%@page import = "dal.ExamQuestionDAO" %>
 <!DOCTYPE html>
 <html>
     <head>
