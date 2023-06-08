@@ -25,6 +25,10 @@
     animation: multicolor-blink 2s infinite;
 }
 
+.registerButton a {
+    text-decoration: none;
+    color: black;
+}
 .registerButton button{
     position: absolute;
     right: 5px;
