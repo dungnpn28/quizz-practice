@@ -4,28 +4,25 @@
  */
 package controller;
 
-import dal.UserProfileDAO;
+import dal.SubjectDAO;
+import dal.SubjectDetailsDAO;
+import dal.Subject_CategoryDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import model.User;
-import model.UserProfile;
+import java.util.ArrayList;
+import java.util.List;
+import model.Price_Package;
+import model.Subject;
+import model.Subject_Category;
 
 /**
  *
  * @author dai
  */
-@MultipartConfig
-public class ChangeUserProfileController extends HttpServlet {
+public class SubjectDetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +36,6 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,6 +51,26 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        SubjectDetailsDAO sdDAO = new SubjectDetailsDAO();
+        Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
+        SubjectDAO sDAO = new SubjectDAO();
+
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = sdDAO.getPrice_Package();
+        request.setAttribute("pricePackageList", pricePackageList);
+
+        List<Subject_Category> subjectCategoryList = new ArrayList<>();
+        subjectCategoryList = scDAO.getSubjectCategory();
+        request.setAttribute("subjectCategoryList", subjectCategoryList);
+        
+        
+        Subject s = sDAO.getSubjectById(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("subject", s);
+        int page =1;
+        int PAGE_SIZE = 5;
+        List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
+        request.setAttribute("featuredSubjectList", featuredSubjectList);
+        request.getRequestDispatcher("SubjectDetails.jsp").forward(request, response);
     }
 
     /**
@@ -69,43 +85,7 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int xUser_id = user.getId();
-        int genderValue = 0;
-        Part file = request.getPart("avatar");
-        String xAvatar = file.getSubmittedFileName();
-        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
-        try {
-        FileOutputStream fos = new FileOutputStream(uploadPath);
-        InputStream is = file.getInputStream();
-        byte[] data = new byte[is.available()];
-        is.read(data);
-        fos.write(data);
-        fos.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        String xFull_name = request.getParameter("fullname");
-        String xPhone_number = request.getParameter("phonenum");
-        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
-        String input = xPhone_number;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        if (!matcher.matches()) {
-            request.setAttribute("tbao", "Invalid phone number");
-            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
-        } else {
-            String xDob = request.getParameter("dob");
-            String xGender = request.getParameter("radB1");
-            if (xGender.equals("male")) {
-                genderValue = 1;
-            }
-            UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
-            UserProfileDAO u = new UserProfileDAO();
-            u.update(up);
-            response.sendRedirect("cusHome");
-        }
+        response.sendRedirect("cusHome");
     }
 
     /**

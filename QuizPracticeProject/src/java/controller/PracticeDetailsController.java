@@ -4,28 +4,29 @@
  */
 package controller;
 
-import dal.UserProfileDAO;
+import dal.PracticeDetailsDAO;
+import dal.Subject_CategoryDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import model.User;
-import model.UserProfile;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+import model.Dimension;
+import model.Exam;
+import model.Subject_Category;
 
 /**
  *
  * @author dai
  */
-@MultipartConfig
-public class ChangeUserProfileController extends HttpServlet {
+public class PracticeDetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +56,14 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+            PracticeDetailsDAO pdDAO = new PracticeDetailsDAO();
+            List<Exam> examList = new ArrayList<>();
+            examList = pdDAO.getExamByName();
+            request.setAttribute("examList", examList);
+            List<Dimension> DimensionList = new ArrayList<>();
+            DimensionList = pdDAO.getSubjectDimension();
+            request.setAttribute("DimensionList", DimensionList);
+            request.getRequestDispatcher("PracticeDetails.jsp").forward(request, response);       
     }
 
     /**
@@ -69,43 +78,18 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int xUser_id = user.getId();
-        int genderValue = 0;
-        Part file = request.getPart("avatar");
-        String xAvatar = file.getSubmittedFileName();
-        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
-        try {
-        FileOutputStream fos = new FileOutputStream(uploadPath);
-        InputStream is = file.getInputStream();
-        byte[] data = new byte[is.available()];
-        is.read(data);
-        fos.write(data);
-        fos.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        String xFull_name = request.getParameter("fullname");
-        String xPhone_number = request.getParameter("phonenum");
-        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
-        String input = xPhone_number;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        if (!matcher.matches()) {
-            request.setAttribute("tbao", "Invalid phone number");
-            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
-        } else {
-            String xDob = request.getParameter("dob");
-            String xGender = request.getParameter("radB1");
-            if (xGender.equals("male")) {
-                genderValue = 1;
-            }
-            UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
-            UserProfileDAO u = new UserProfileDAO();
-            u.update(up);
-            response.sendRedirect("cusHome");
-        }
+        String subject = request.getParameter("subject");
+         int numRows = 0;
+        Scanner scanner = new Scanner(System.in);
+        String questions = request.getParameter("questions");
+        int numQuestions = scanner.nextInt();
+        Random rand = new Random();
+      Set<Integer> randomNums = new HashSet<>();
+      while(randomNums.size() < numQuestions) {
+         randomNums.add(rand.nextInt(numRows) + 1);
+      }
+        String topic = request.getParameter("topic");
+        request.getRequestDispatcher("QuizHandle.jsp").forward(request, response);
     }
 
     /**

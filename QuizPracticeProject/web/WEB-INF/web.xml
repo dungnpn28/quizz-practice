@@ -89,10 +89,20 @@
         <servlet-class>controller.SearchPostController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PracticeDetailsController</servlet-name>
+        <servlet-class>controller.PracticeDetailsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SubjectListPublicController</servlet-name>
         <servlet-class>controller.SubjectListPublicController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SubjectDetailsController</servlet-name>
+        <servlet-class>controller.SubjectDetailsController</servlet-class>
+    </servlet>
+
+    <servlet>
+
         <servlet-name>UserListController</servlet-name>
         <servlet-class>controller.UserListController</servlet-class>
     </servlet>
@@ -197,10 +207,20 @@
         <url-pattern>/searchpost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PracticeDetailsController</servlet-name>
+        <url-pattern>/practiceDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SubjectListPublicController</servlet-name>
         <url-pattern>/subjectListPublic</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SubjectDetailsController</servlet-name>
+        <url-pattern>/subjectDetails</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+
         <servlet-name>UserListController</servlet-name>
         <url-pattern>/userlist</url-pattern>
     </servlet-mapping>
