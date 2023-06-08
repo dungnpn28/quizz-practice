@@ -120,7 +120,7 @@
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title" onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">${item.getName()}</h5>
+                                                                        <h5 class="card-title" onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">${item.getName()}</h5>
 
                                                                         <div class="card-date">Updated date: ${item.getModified()}</div>
                                                                         <div class="card-date">List price: ${item.getMin_price()} đ - Sale price: ${item.getMin_sale()} đ</div>
@@ -280,7 +280,7 @@
                                             </tr>
                                             <c:forEach var="item" items="${featuredSubjectList}" begin="0" end="2">
 
-                                                <tr onclick="window.location.href = 'subjectDetail?id=${item.getId()}'">
+                                                <tr onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                     <td>
                                                         <div class="table-image">
                                                             <img src="${item.getIllustration()}" alt="Image">

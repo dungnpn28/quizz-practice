@@ -66,6 +66,10 @@ public class SubjectDetailsController extends HttpServlet {
         
         Subject s = sDAO.getSubjectById(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("subject", s);
+        int page =1;
+        int PAGE_SIZE = 5;
+        List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
+        request.setAttribute("featuredSubjectList", featuredSubjectList);
         request.getRequestDispatcher("SubjectDetails.jsp").forward(request, response);
     }
 
@@ -81,6 +85,7 @@ public class SubjectDetailsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.sendRedirect("cusHome");
     }
 
     /**

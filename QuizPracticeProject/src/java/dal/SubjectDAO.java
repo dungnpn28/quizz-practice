@@ -1119,24 +1119,24 @@ public class SubjectDAO extends MyDAO {
         }
         return (totalSubject);
     }
-    
+
     public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*, (\n" +
-"                  SELECT MIN(price) \n" +
-"                FROM subject_price_package spp\n" +
-"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
-"                 WHERE spp.subject_id = s.id\n" +
-"                ) AS min_price,\n" +
-"                (\n" +
-"                 SELECT MIN(sale) \n" +
-"                 FROM subject_price_package spp\n" +
-"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
-"                 WHERE spp.subject_id = s.id\n" +
-"                 ) AS min_sale\n" +
-"                FROM subject s\n" +
-"                order by min_price ASC\n" +
-"                offset (?-1)*? row fetch next ? rows only";
+        xSql = "SELECT s.*, (\n"
+                + "                  SELECT MIN(price) \n"
+                + "                FROM subject_price_package spp\n"
+                + "                 JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "                 WHERE spp.subject_id = s.id\n"
+                + "                ) AS min_price,\n"
+                + "                (\n"
+                + "                 SELECT MIN(sale) \n"
+                + "                 FROM subject_price_package spp\n"
+                + "                 JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "                 WHERE spp.subject_id = s.id\n"
+                + "                 ) AS min_sale\n"
+                + "                FROM subject s\n"
+                + "                order by min_price ASC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, page);
@@ -1177,24 +1177,24 @@ public class SubjectDAO extends MyDAO {
         }
         return (t);
     }
-    
+
     public List<Subject> getSubjectsSortDESCWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
-        xSql = "SELECT s.*, (\n" +
-"                  SELECT MIN(price) \n" +
-"                FROM subject_price_package spp\n" +
-"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
-"                 WHERE spp.subject_id = s.id\n" +
-"                ) AS min_price,\n" +
-"                (\n" +
-"                 SELECT MIN(sale) \n" +
-"                 FROM subject_price_package spp\n" +
-"                 JOIN price_package p ON spp.price_package_id = p.id\n" +
-"                 WHERE spp.subject_id = s.id\n" +
-"                 ) AS min_sale\n" +
-"                FROM subject s\n" +
-"                order by min_price DESC\n" +
-"                offset (?-1)*? row fetch next ? rows only";
+        xSql = "SELECT s.*, (\n"
+                + "                  SELECT MIN(price) \n"
+                + "                FROM subject_price_package spp\n"
+                + "                 JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "                 WHERE spp.subject_id = s.id\n"
+                + "                ) AS min_price,\n"
+                + "                (\n"
+                + "                 SELECT MIN(sale) \n"
+                + "                 FROM subject_price_package spp\n"
+                + "                 JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "                 WHERE spp.subject_id = s.id\n"
+                + "                 ) AS min_sale\n"
+                + "                FROM subject s\n"
+                + "                order by min_price DESC\n"
+                + "                offset (?-1)*? row fetch next ? rows only";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, page);
@@ -1234,5 +1234,50 @@ public class SubjectDAO extends MyDAO {
             e.printStackTrace();
         }
         return (t);
+    }
+
+    public Subject getSubjectById(int subjectId) {
+        Subject x = null;
+        xSql = "SELECT s.*, (\n"
+                + "SELECT MIN(price) \n"
+                + "FROM subject_price_package spp\n"
+                + "JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "WHERE spp.subject_id = s.id\n"
+                + "                              ) AS min_price,\n"
+                + "                               (\n"
+                + "                                SELECT MIN(sale) \n"
+                + "                                FROM subject_price_package spp\n"
+                + "                                 JOIN price_package p ON spp.price_package_id = p.id\n"
+                + "                                WHERE spp.subject_id = s.id\n"
+                + "                               ) AS min_sale\n"
+                + "                                FROM subject s\n"
+                + "								where s.id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            rs = ps.executeQuery();
+            String xIllustration;
+            String xName;
+            int xCategory_id;
+            boolean xStatus;
+            String xDescription;
+            double xPrice;
+            double xSale;
+            while (rs.next()) {
+                xIllustration = rs.getString("illustration");
+                xName = rs.getString("name");
+                xCategory_id = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xPrice = rs.getDouble("min_price");
+                xSale = rs.getDouble("min_sale");
+                x = new Subject(subjectId, xIllustration, xName, xCategory_id, xStatus, xDescription, xPrice, xSale);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
     }
 }
