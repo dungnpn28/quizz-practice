@@ -71,7 +71,7 @@ public class RegisterController extends HttpServlet {
 
                     String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                             + "To finish registration please go to the following page:<br>"
-                            + "<a href=\"http://localhost:9999/QuizPracticeProject/registerverified?name64=" + name64
+                            + "<a href=\"http://localhost:8080/QuizPracticeProject/registerverified?name64=" + name64
                             + "&email64=" + email64 + "&phone_number64=" + phone_number64 + "&gender64=" + gender64
                             + "&pass64=" + pass64 + "&dob64=" + dob64 + "&expirationDate=" + expirationDate + "\">Click here</a><br>"
                             + "If you do not wish to register, ignore this message, it will expire in 30 minutes"
