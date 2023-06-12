@@ -34,7 +34,8 @@ public class Subject {
         this.category_id = category_id;
         this.status = status;
         this.description = description;
-        this.modified = modified;
+        this.user_id=user_id;
+      
         this.featured = featured;
     }
 
