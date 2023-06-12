@@ -37,7 +37,7 @@
         <div class="blog_list">
 
             <div class="col-md-7">
-                <img src = "${blog.thumbnail}" alt="Can't display image" class="center">        
+                <img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:250px; width:750px">        
                 <h2 class="left">
                     Updated date: <c:choose>
                         <c:when test="${blog.modified == null }">

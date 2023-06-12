@@ -18,7 +18,7 @@ public class Blog {
     private String title;
     private int category_id;
     private String flag;
-    private String status;
+    private boolean status;
     private String content;
     private Date created;
     private Date modified;
@@ -26,7 +26,7 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, String status, String content, Date created, Date modified) {
+    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, boolean status, String content, Date created, Date modified) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.author_id = author_id;
@@ -97,11 +97,11 @@ public class Blog {
         this.flag = flag;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
