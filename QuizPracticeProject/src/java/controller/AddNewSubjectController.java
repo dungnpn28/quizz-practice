@@ -50,7 +50,7 @@ public class AddNewSubjectController extends HttpServlet {
         sj.addNewSubject(thumbnail, name, category_id, status, description, featuredValue, owner_id);
        
         
-        String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads/" + thumbnail;
+        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + thumbnail;
         try {
         FileOutputStream fos = new FileOutputStream(uploadPath);
         InputStream is = file.getInputStream();
@@ -61,7 +61,8 @@ public class AddNewSubjectController extends HttpServlet {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        resp.sendRedirect("cusHome");
+        req.setAttribute("mess", "success add");
+        req.getRequestDispatcher("SubjectListAE.jsp").forward(req, resp);
     }
 
     @Override

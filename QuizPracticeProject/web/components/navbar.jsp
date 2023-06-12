@@ -30,35 +30,35 @@
                     <c:when test="${sessionScope.user.getRole_id() == 1}">
                         <li>
                             
-                            <a href="#">HOME</a>                  
+                            <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
                             
-                            <a href="#">POST</a>
+                            <a href="blogList">POST</a>
                         </li>
                         <li>
                             
-                            <a href="#">PRACTICE LIST</a>
+                            <a href="practiceList">PRACTICE LIST</a>
 
                         </li>
                         <li>
                             
-                            <a href="#">SUBJECT</a>
+                            <a href="subjectListPublic">SUBJECT</a>
                         </li>
 
                     </c:when>
                     <c:when test="${sessionScope.user.getRole_id() == 2}">
                         <li>
                             
-                            <a href="#">HOME</a>                  
+                            <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
                             
-                            <a href="#">POST LIST</a>
+                            <a href="blogList">POST LIST</a>
                         </li>
                         <li>
                             
-                            <a href="#">SLIDER LIST</a>
+                            <a href="sliderList">SLIDER LIST</a>
 
                         </li>                      
 
@@ -66,7 +66,7 @@
                     <c:when test="${sessionScope.user.getRole_id() == 3}">
                         <li>
                             
-                            <a href="#">HOME</a>                  
+                            <a href="cusHome">HOME</a>                  
                         </li>
                        
                         <li>
@@ -80,11 +80,11 @@
                     <c:when test="${sessionScope.user.getRole_id() == 4}">
                         <li>
                             
-                            <a href="#">HOME</a>                  
+                            <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
                             
-                            <a href="#">SUBJECT LIST</a>
+                            <a href="SubjectListAE.jsp">SUBJECT LIST</a>
                         </li>
                         <li>
                             
@@ -115,7 +115,7 @@
                         </li>
                         <li>
                             
-                            <a href="#">SUBJECT LIST</a>
+                            <a href="SubjectListAE.jsp">SUBJECT LIST</a>
                         </li>
                         <li>
                             
