@@ -113,7 +113,7 @@
                                                     </c:if>
                                                     <div class="col-md-4">
                                                         <div class="card">
-                                                            <img src="${item.getIllustration()}" class="card-img-top zoom-image" alt="...">
+                                                            <img src="uploads/${item.getIllustration()}" class="card-img-top zoom-image" alt="...">
                                                             <div class="card-body">
                                                                 <h5 class="card-title">${item.getName()}</h5>
                                                                 <p class="card-text">${item.getDescription()}</p>

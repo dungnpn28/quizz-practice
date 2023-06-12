@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-import dal.DBContext;
-import dal.MyDAO;
 import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +40,8 @@ public class RegisterDAO extends MyDAO{
                 return new User(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4));
+                        rs.getInt(4),
+                        rs.getInt(5));
             }
         }catch (Exception e){
         }

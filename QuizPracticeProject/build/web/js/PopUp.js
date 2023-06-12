@@ -68,7 +68,7 @@ $(document).ready(function () {
             url: url,
             data: form.serialize(),
             success: function (response) {
-                    $("#errorMessage2").html(response);
+                $("#errorMessage2").html(response);
             },
             error: function () {
                 $("#errorMessage2").html("Đã xảy ra lỗi. Vui lòng thử lại.");
@@ -76,6 +76,51 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    // Event listener for clicking the user info link
+    $(".user-info-link").click(function (e) {
+        e.preventDefault();
+
+        // Get the user ID from the data attribute
+        var userId = $(this).data("user-id");
+
+        // Build the URL with the user ID
+        var url = "userinformation?userId=" + userId;
+
+        // Call the showUserInfo function with the URL
+        showUserInfo(url);
+    });
+
+    // Function to show user information in the modal
+    function showUserInfo(url) {
+        // Make an AJAX request to fetch user data based on the URL
+        $.ajax({
+            type: "GET",
+            url: url,
+           
+            success: function (response) {
+                // Update the modal body with the user information
+                $("#userInfoModalBody").html(response);
+
+                // Show the modal window
+                $("#userInfoModal").modal("show");
+            },
+            error: function () {
+                console.log("An error occurred while fetching user information.");
+            }
+        });
+    }
+    
+});
+
+
+           
+
+
+               
+// Show the modal window
+
+
 
 document.getElementById("popUpLink").addEventListener("click", function (event) {
     event.preventDefault();
