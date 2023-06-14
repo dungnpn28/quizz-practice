@@ -26,14 +26,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>QuizPractice</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link href="css/Style.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>
-
+        <%@include file="components/CusHeader.jsp"%>
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <%@include file="components/CusHeader.jsp"%>
+
                 <h1 style="font-size:35px">USER LIST</h1>
                 <div class="topnav">
 
@@ -279,8 +280,9 @@
                         </c:forEach>
                     </div>
 
-
                 </div>
+                <%@include file = "Login.jsp"%>  
+
             </div>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

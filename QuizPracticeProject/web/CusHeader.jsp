@@ -29,7 +29,7 @@
 
             <div class="action">
                 <div class="profile" >
-                    <img src="uploads\<%=a.getAvatar()%>" onclick="toggleMenu()">
+                    <img src="uploads/<%=a.getAvatar()%>" onclick="toggleMenu()">
                 </div>
                 <div class="menu" id="submenu">
                     <ul>

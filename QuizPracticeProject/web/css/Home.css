@@ -174,15 +174,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
 }
 
-/*.post_Container{
-    display: grid;
-    width: 40px;
-    height: 40px;
-    grid-template-columns: repeat(1, 1fr);  Chia thành 1 cột  
-    grid-template-rows: repeat(2, 1fr);  Chia thành 2 hàng có chiều cao bằng nhau 
-    border: solid aqua 3px;
-    margin: 20px;  Khoảng cách giữa các ô
-}*/
 
 .post_box{
     /*display: flex;*/
@@ -325,8 +316,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     max-height: calc(100vh - 20px); /* Set the maximum height to fill the viewport minus the top distance */
     overflow: hidden;
 }
-table a{
-
+/*table a{
     position:relative;
     display:inline-block;
     padding:10px 30px;
@@ -340,13 +330,12 @@ table a{
     background: linear-gradient(90deg,#755bea,#ff72c0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 
-
 }
 table a:hover{
     background: green;
     text-decoration: none;
     color:white;
-}
+}*/
 
 .container{
     display: flex;
