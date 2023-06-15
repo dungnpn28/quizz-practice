@@ -36,6 +36,12 @@
     %>
 
     <body>
+        <%
+        if (session.getAttribute("user") != null) {
+        // Nếu có user, bao gồm trang cusheader.jsp
+            session.getAttribute("up");  
+        %>
+        <% } %>
         <div class="blog_list">
             <div class="boxContainer col-md-7">
                 <c:forEach items="${listBlog}" var="Blog">

@@ -40,7 +40,7 @@
 
             </form>
         </div>
-        <br/><button class="custom-button mb-3"><a href="sliderList" style="text-decoration: none">< Back to Slider list</a></button>
+        <br/><button class="custom-button mb-3"><a href="sliderList" style="text-decoration: none"> < Back to Slider list</a></button>
 
     </body>
     <%@include file="components/Footer.jsp" %>

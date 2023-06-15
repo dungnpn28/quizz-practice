@@ -12,13 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Slider List</title>
         <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">-->
-                <link href="css/SliderListAd.css" rel="stylesheet" type="text/css"/>
+        <link href="css/SliderListAd.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <%@ include file="components/CusHeader.jsp" %>
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
-            
+
             <table border="1">          
                 <tbody>
                     <tr>
@@ -62,26 +62,33 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="col">
-                                    <form action="sliderList" method="post">
-                                        <button type="submit" name="btnEdit">EDIT</button>
-                                        <button type="submit" name="btnDel">DELETE</button>
-                                        <input hidden name="sid" value="${listSlider.getId()}">
-                                    </form>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="sliderDetail?sliderId=${listSlider.getId()}" style="color: black"><button>VIEW DETAIL</button></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col">
+                                            <form action="sliderList" method="post">
+                                                <button type="submit" name="btnEdit">EDIT</button>
+                                                <button type="submit" name="btnDel">DELETE</button>
+                                                <input hidden name="sid" value="${listSlider.getId()}">
+                                            </form>
+                                        </div>  
+                                    </div>
                                 </div>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
-                
+
             </table>
             <nav aria-label="...">
-                    <ul class="pagination">
-                        <c:forEach begin="1" end="${listS}" var="i">
-                            <li class="page-item"><a class="page-link" href="sliderPaging?index=${i}">${i}</a></li>
-                            </c:forEach>
-                    </ul>
-                </nav>
+                <ul class="pagination">
+                    <c:forEach begin="1" end="${listS}" var="i">
+                        <li class="page-item"><a class="page-link" href="sliderPaging?index=${i}">${i}</a></li>
+                        </c:forEach>
+                </ul>
+            </nav>
             <div>
                 <form id="cateForm" method="" action="">
                     <select name="cateSelect" class="cateSelect">
