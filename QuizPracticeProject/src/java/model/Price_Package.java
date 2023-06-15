@@ -9,6 +9,7 @@ package model;
  * @author dai
  */
 public class Price_Package {
+    private String name;
     private int id;
     private int duration;
     private int price;
@@ -24,6 +25,23 @@ public class Price_Package {
         this.price = price;
         this.sale = sale;
         this.status = status;
+    }
+
+    public Price_Package(String name, int id, int duration, int price, double sale, boolean status) {
+        this.name = name;
+        this.id = id;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {

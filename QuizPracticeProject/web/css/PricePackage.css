@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 13, 2023, 9:03:04 PM
+    Author     : dai
+*/
+form{
+    background-color: white;
+    border: 2px solid black;
+    padding: 20px;
+    margin: auto; /* to center the form horizontally */
+    width: 800px;
+    height: 500px;
+    font-size: 20px;
+}
+
+.table-content{
+    background:linear-gradient(to right, #5CE1E6,#0079A7);
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-menu{
+    
+}

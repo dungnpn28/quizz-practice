@@ -10,19 +10,10 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
         <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Subject.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/EmailResetPasswordController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/CusHome.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectListPublic.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/DBContext.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SimulationExamController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SubjectListPublicController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Exam.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SubjectDetailsController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/PricePackageController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PricePackage.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/css/PricePackage.css</file>
         </group>
     </open-files>
 </project-private>

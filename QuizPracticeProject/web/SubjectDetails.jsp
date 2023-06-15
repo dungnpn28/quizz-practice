@@ -100,16 +100,6 @@ if (session.getAttribute("user") != null) {
                                         </c:if>
                                     </div>
                         <div class="widget">
-<!--                            <h2 class="widget-title">List</h2>
-                            <form action="sort" method="POST">
-                                <p>Sorting type:
-                                <p>
-                                    <input type="radio" name="sortType" value="ASC" checked="" /> Ascendingly
-                                <p>
-                                    <input type="radio" name="sortType" value="DESC" /> Descendingly
-                                <p>
-                                    <input type="submit" class="btn btn-success" value="Sort">
-                            </form>-->
                             <form action="subjectListPublic" method="get">
                                 <select name="selectedCategory">
                                     <option value="0">All</option>
@@ -134,7 +124,7 @@ if (session.getAttribute("user") != null) {
                                 </tr>
                                 <c:forEach var="item" items="${featuredSubjectList}" begin="0" end="2">
 
-                                    <tr onclick="window.location.href = 'subjectDetailS?id=${item.getId()}'">
+                                    <tr onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                         <td>
                                             <div class="table-image">
                                                 <img src="uploads/${item.getIllustration()}" alt="Image">

@@ -132,6 +132,10 @@
         <servlet-name>EditSliderController</servlet-name>
         <servlet-class>controller.EditSliderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PricePackageController</servlet-name>
+        <servlet-class>controller.PricePackageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>EditSliderController</servlet-name>
         <url-pattern>/editSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PricePackageController</servlet-name>
+        <url-pattern>/pricePackage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
