@@ -10,17 +10,14 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
         <group>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/SliderListAd.css</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogDetails.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SliderDetailController.java</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/EditSlider.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/BlogDAO.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Blog.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/HomeController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectListPublic.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectDetails.jsp</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SliderListController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/Subject.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/Header.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/CusHeader.jsp</file>
             <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SliderListAd.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SliderDetail.jsp</file>
         </group>
     </open-files>
 </project-private>
