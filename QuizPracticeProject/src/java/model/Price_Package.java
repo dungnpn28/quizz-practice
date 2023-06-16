@@ -12,14 +12,14 @@ public class Price_Package {
     private String name;
     private int id;
     private int duration;
-    private int price;
+    private String price;
     private double sale;
-    private boolean status;
+    private int status;
 
     public Price_Package() {
     }
 
-    public Price_Package(int id, int duration, int price, double sale, boolean status) {
+    public Price_Package(int id, int duration, String price, double sale, int status) {
         this.id = id;
         this.duration = duration;
         this.price = price;
@@ -27,7 +27,7 @@ public class Price_Package {
         this.status = status;
     }
 
-    public Price_Package(String name, int id, int duration, int price, double sale, boolean status) {
+    public Price_Package(int id,String name, int duration, String price, double sale, int status) {
         this.name = name;
         this.id = id;
         this.duration = duration;
@@ -60,11 +60,11 @@ public class Price_Package {
         this.duration = duration;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -76,11 +76,11 @@ public class Price_Package {
         this.sale = sale;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

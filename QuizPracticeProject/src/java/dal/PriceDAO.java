@@ -20,18 +20,20 @@ public class PriceDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xID;
+            String xName;
             int xDuration;
-            int xPrice;
+            String xPrice;
             double xSale;
-            boolean xStatus;
+            int xStatus;
             Price_Package x;
             while (rs.next()) {
                 xID = rs.getInt("id");
+                xName = rs.getString("name");
                 xDuration = rs.getInt("duration");
-                xPrice = rs.getInt("price");
+                xPrice = rs.getString("price");
                 xSale = rs.getDouble("sale");
-                xStatus = rs.getBoolean("status");
-                x = new Price_Package(xID, xDuration, xPrice, xSale, xStatus);
+                xStatus = rs.getInt("status");
+                x = new Price_Package(xID, xName, xDuration, xPrice, xSale, xStatus);
                 t.add(x);
             }
             rs.close();
@@ -59,5 +61,29 @@ public class PriceDAO extends MyDAO {
             e.printStackTrace();
         }
         return xPrice;
+    }
+    
+    public void update(Price_Package x) {
+        xSql = "UPDATE [dbo].[price_package]\n"
+                + "   SET \n"
+                + "      [name]= ?\n"
+                + "      ,[duration]= ?\n"
+                + "      ,[price] = ? \n"
+                + "      ,[sale] = ? \n"
+                + "      ,[status] = ? \n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());
+            ps.setInt(2, x.getDuration());
+            ps.setString(3, x.getPrice());
+            ps.setDouble(4, x.getSale());
+            ps.setInt(5, x.getStatus());
+            ps.setInt(6, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
     }
 }

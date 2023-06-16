@@ -13,7 +13,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="css/SubjectDetails.css" rel="stylesheet" type="text/css"/>
-        <link href="css/Style.css" rel="stylesheet" type="text/css"/>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Subject Details</title>
@@ -57,48 +56,48 @@ if (session.getAttribute("user") != null) {
 <!--                        <p><strong>Status:</strong> ${subject.status ? "Enrolled" : "Unenroll" }</p>-->
                         <c:if test="${subject.status}">
                             <div>
-                            <form  method="POST" action="subjectDetails">
-                                <input type="hidden" name="subjectId" value="${SubjectDetails.subjectId}">
-                                <button class="btn btn-primary" type="submit" ${SubjectDetails.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to enroll?')">Enroll</button>
-                            </form>     
-                        </div>
+                                <form  method="POST" action="subjectDetails">
+                                    <input type="hidden" name="subjectId" value="${SubjectDetails.subjectId}">
+                                    <button class="btn btn-primary" type="submit" ${SubjectDetails.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to enroll?')">Enroll</button>
+                                </form>     
+                            </div>
                         </c:if> 
-                        
+
                     </div>
                     <div class="col-md-6 sidebar">
                         <div class="searchBox">
-                                        <form action="subjectListPublic" method="get">
-                                            <div class="input-group">
-                                                <input
-                                                    class="form-control"
-                                                    value="${key}"
-                                                    type="search"
-                                                    placeholder="Search by exam name"
-                                                    aria-label="Search"
-                                                    name="keyword"
-                                                    />
-                                                <button class="btn btn-primary" type="submit">
-                                                    Search
-                                                </button>
-                                            </div>
-                                        </form>
-                                        <c:if test="${key!= mull}" >
-                                            <c:choose>
-                                                <c:when test="${not empty sessionScope.checkFeatured}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
-                                                </c:when>
-                                                <c:when test="${not empty sessionScope.checkRegisted}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from registed subject</h3>
-                                                </c:when>
-                                                <c:when test="${not empty sessionScope.checkNotRegisted}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from not registed subject</h3>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from all subject</h3>
-                                                </c:otherwise>
-                                            </c:choose>            
-                                        </c:if>
-                                    </div>
+                            <form action="subjectListPublic" method="get">
+                                <div class="input-group">
+                                    <input
+                                        class="form-control"
+                                        value="${key}"
+                                        type="search"
+                                        placeholder="Search by exam name"
+                                        aria-label="Search"
+                                        name="keyword"
+                                        />
+                                    <button class="btn btn-primary" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
+                            <c:if test="${key!= mull}" >
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.checkFeatured}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.checkRegisted}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from registed subject</h3>
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.checkNotRegisted}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from not registed subject</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3 class="mb-3 mt-4">Search "${key}" from all subject</h3>
+                                    </c:otherwise>
+                                </c:choose>            
+                            </c:if>
+                        </div>
                         <div class="widget">
                             <form action="subjectListPublic" method="get">
                                 <select name="selectedCategory">
@@ -146,9 +145,9 @@ if (session.getAttribute("user") != null) {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-                                                    $(document).ready(function () {
-                                                        $('#carouselExampleIndicators2').carousel();
-                                                    });
+                                        $(document).ready(function () {
+                                            $('#carouselExampleIndicators2').carousel();
+                                        });
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
