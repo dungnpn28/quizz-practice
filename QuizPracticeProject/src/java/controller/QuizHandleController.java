@@ -29,6 +29,7 @@ public class QuizHandleController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AttemptDAO a = new AttemptDAO();
         QuestionDAO q = new QuestionDAO();
+        ExamDAO e = new ExamDAO();  
         QuestionExamDAO eq = new QuestionExamDAO();
 
         HttpSession session = req.getSession();
@@ -36,6 +37,11 @@ public class QuizHandleController extends HttpServlet {
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("id"));
         int questionId = eq.getQuestionIdByExamId(examId, page);
+
+        //get exam time 
+        String duration = e.getExamDurationById(examId);
+        int examDurationSecond = convertToTime(duration);
+        req.setAttribute("examDuration", examDurationSecond);
 
         //quiz business
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
@@ -126,7 +132,7 @@ public class QuizHandleController extends HttpServlet {
         String duration = e.getExamDurationById(examId);
         int examDurationSecond = convertToTime(duration);
         req.setAttribute("examDuration", examDurationSecond);
-        
+
         //get attempt list where user_answer not null
         ArrayList<Attempt> attemptList = a.getAttemptList(examId, questionId, u.getId());
         req.setAttribute("attL", attemptList);

@@ -30,40 +30,64 @@
                     <h1>
                         <div id="time"></div>
                     </h1>
+
                     <script>
-                        var interval;
-                        let minutes = 1;
-                        let currentTime = localStorage.getItem('currentTime');
-                        let targetTime = localStorage.getItem('targetTime');
-                        if (targetTime == null && currentTime == null) {
-                            currentTime = new Date();
-                            targetTime = new Date(currentTime.getTime() + (minutes * 60000));
-                            localStorage.setItem('currentTime', currentTime);
-                            localStorage.setItem('targetTime', targetTime);
-                        } else {
-                            currentTime = new Date(currentTime);
-                            targetTime = new Date(targetTime);
-                        }
+                        var examDuration = ${examDuration};
+                        var timerElement = document.getElementById("time");
 
-                        if (!checkComplete()) {
-                            interval = setInterval(checkComplete, 1000);
-                        }
+                        var startTime = localStorage.getItem("startTime");
+                        var currentTime = Math.floor(Date.now() / 1000);
 
-                        function checkComplete() {
-                            if (currentTime > targetTime) {
-                                clearInterval(interval);
-                                alert("Time is up");
-                            } else {
-                                currentTime = new Date();
-                                document.write(
-                                        "\n <font color=\"white\"> Seconds Remaining:" + ((targetTime - currentTime) / 1000) + "</font>");
+                        var remainingTime = examDuration;
+                        if (startTime) {
+                            remainingTime = examDuration - (currentTime - startTime);
+                            if (remainingTime < 0) {
+                                remainingTime = 0;
                             }
+                        } else {
+                            startTime = currentTime;
+                            localStorage.setItem("startTime", startTime);
                         }
 
-                        document.onbeforeunload = function () {
-                            localStorage.setItem('currentTime', currentTime);
+                        var timer = setInterval(function () {   
+                            var hours = Math.floor(remainingTime / 3600);
+                            var minutes = Math.floor((remainingTime % 3600) / 60);
+                            var seconds = remainingTime % 60;
+
+                            var displayHours = hours < 10 ? "0" + hours : hours;
+                            var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+                            var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+                            timerElement.innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+
+                            remainingTime--;
+
+                            if (remainingTime < 0) {
+                                clearInterval(timer);
+                                timerElement.innerHTML = "00:00:00";
+                                localStorage.removeItem("startTime");
+
+                            }
+                        }, 1000);
+
+                        //if onclick id="exit-immediate" then remove localStorage
+                        if (document.getElementById("exit-immediate")) {
+                            document.getElementById("exit-immediate").addEventListener("click", function () {
+                                localStorage.removeItem("startTime");
+                            });
                         }
+
+                        //if onclick id="score-immediate" then remove localStorage
+                        if (document.getElementById("score-immediate")) {
+                            document.getElementById("score-immediate").addEventListener("click", function () {
+                                localStorage.removeItem("startTime");
+                            });
+                        }
+
+
+
                     </script>
+
 
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">
@@ -200,8 +224,9 @@
                                 </div>
                                 <div class="question-navigation">
                                     <c:forEach var="question" items="${allQuestionL}">
-                                        <a href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>    
-                                    </c:forEach> 
+                                        <a
+                                            href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>
+                                    </c:forEach>
 
 
 
@@ -222,7 +247,7 @@
                                             </div>
                                             <div class="score-popup-button">
                                                 <button onclick="closeScorePopup()">Back to Exam</button>
-                                                <a href="scorequiz?examid=${id}">Yes</a>
+                                                <a id="score-immediate" href="scorequiz?examid=${id}">Yes</a>
                                             </div>
                                         </div>
                                     </div>

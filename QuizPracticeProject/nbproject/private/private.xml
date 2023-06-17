@@ -2,27 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="SE1714">
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogDetails.jsp</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/controller/BlogListController.java</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/model/Blog_Category.java</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/src/java/dal/DBContext.java</file>
-            <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
-        </group>
         <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/ExamDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Subject.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/PracticeDetails.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/EmailResetPasswordController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/CusHome.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectListPublic.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/dal/DBContext.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SimulationExamController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SubjectListPublicController.java</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/model/Exam.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/QuizHandleController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/QuizHandle.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/WEB-INF/web.xml</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/dal/DBContext.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/Result.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/SimulationExam.jsp</file>
         </group>
     </open-files>
 </project-private>
