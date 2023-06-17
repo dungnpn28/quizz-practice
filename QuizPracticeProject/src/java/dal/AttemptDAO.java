@@ -14,19 +14,21 @@ import model.Question;
  */
 public class AttemptDAO extends MyDAO {
 
-    public void createAttempt(int examId, int questionId, int userId) {
+    public void createAttempt(int attemptId, int examId, int questionId, int userId) {
         try {
             String strAdd = "insert into [attempt]"
-                    + "(exam_id, question_id, user_id, marked, created) "
+                    + "(attempt_id, exam_id, question_id, user_id, marked, created) "
                     + "values(?,"
+                    + " ?,"
                     + " ?,"
                     + " ?,"
                     + " 0,"
                     + "GETDATE());";
             ps = con.prepareStatement(strAdd);
-            ps.setInt(1, examId);
-            ps.setInt(2, questionId);
-            ps.setInt(3, userId);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
             ps.execute();
 
         } catch (Exception e) {
@@ -34,18 +36,20 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
-    public void saveAnswer(String answer, int examId, int questionId, int userId) {
+    public void saveAnswer(String answer, int attemptId, int examId, int questionId, int userId) {
         try {
             String strAdd = "update [attempt] "
                     + "set user_answer = ? "
-                    + "where exam_id = ? AND "
+                    + "where attempt_id = ? AND "
+                    + "exam_id = ? AND "
                     + "question_id = ? AND "
                     + "user_id = ? ;";
             ps = con.prepareStatement(strAdd);
             ps.setString(1, answer);
-            ps.setInt(2, examId);
-            ps.setInt(3, questionId);
-            ps.setInt(4, userId);
+            ps.setInt(2, attemptId);
+            ps.setInt(3, examId);
+            ps.setInt(4, questionId);
+            ps.setInt(5, userId);
             ps.execute();
 
         } catch (Exception e) {
@@ -53,26 +57,28 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
-    public Attempt getAttempt(int examId, int questionId, int userId) {
+    public Attempt getAttempt(int attemptId, int examId, int questionId, int userId) {
         Attempt a = null;
         try {
             String strSelect = "select * from [attempt] "
-                    + "where exam_id=? AND "
+                    + "where attempt_id=? AND "
+                    + "exam_id=? AND "
                     + "question_id=? AND "
                     + "user_id =? ;";
             ps = con.prepareStatement(strSelect);
-            ps.setInt(1, examId);
-            ps.setInt(2, questionId);
-            ps.setInt(3, userId);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 boolean marked = true;
-                if (rs.getInt(4) == 0) {
+                if (rs.getInt(5) == 0) {
                     marked = false;
                 }
-                String userAnswer = rs.getString(5);
-                double score = rs.getDouble(6);
-                a = new Attempt(userId, questionId, examId, marked, userAnswer, score);
+                String userAnswer = rs.getString(6);
+                double score = rs.getDouble(7);
+                a = new Attempt(attemptId, userId, questionId, examId, marked, userAnswer, score);
             }
         } catch (Exception e) {
             System.out.println("getAttempt:" + e.getMessage());
@@ -80,16 +86,18 @@ public class AttemptDAO extends MyDAO {
         return a;
     }
 
-    public int getTotalAnsweredQuestion(int examId, int userId) {
+    public int getTotalAnsweredQuestion(int attemptId, int examId, int userId) {
         try {
             String strSlect = "SELECT COUNT(question_id) AS question_count\n"
                     + "FROM Quiz_Practice.dbo.attempt\n"
                     + "WHERE user_answer IS NOT NULL AND "
+                    + "attempt_id = ? AND "
                     + "exam_id = ? AND "
                     + "user_id = ? ;";
             ps = con.prepareCall(strSlect);
-            ps.setInt(1, examId);
-            ps.setInt(2, userId);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -100,11 +108,12 @@ public class AttemptDAO extends MyDAO {
         return 0;
     }
 
-    public void markUnmarkQuestion(boolean marked, int examId, int questionId, int userId) {
+    public void markUnmarkQuestion(boolean marked, int attemptId, int examId, int questionId, int userId) {
         try {
             String strAdd = "update [attempt] "
                     + "set marked = ? "
-                    + "where exam_id = ? AND "
+                    + "where attempt_id = ? AND "
+                    + "exam_id = ? AND "
                     + "question_id = ? AND "
                     + "user_id = ? ;";
             ps = con.prepareStatement(strAdd);
@@ -113,9 +122,10 @@ public class AttemptDAO extends MyDAO {
             } else {
                 ps.setInt(1, 0);
             }
-            ps.setInt(2, examId);
-            ps.setInt(3, questionId);
-            ps.setInt(4, userId);
+            ps.setInt(2, attemptId);
+            ps.setInt(3, examId);
+            ps.setInt(4, questionId);
+            ps.setInt(5, userId);
             ps.execute();
 
         } catch (Exception e) {
@@ -123,18 +133,20 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
-    public void scoreQuestion(double score, int examId, int questionId, int userId) {
+    public void scoreQuestion(double score, int attemptId, int examId, int questionId, int userId) {
         try {
             String strAdd = "update [attempt] "
                     + "set score = ? "
-                    + "where exam_id = ? AND "
+                    + "where attempt_id = ? AND "
+                    + "exam_id = ? AND "
                     + "question_id = ? AND "
                     + "user_id = ? ;";
             ps = con.prepareStatement(strAdd);
             ps.setDouble(1, score);
-            ps.setInt(2, examId);
-            ps.setInt(3, questionId);
-            ps.setInt(4, userId);
+            ps.setInt(2, attemptId);
+            ps.setInt(3, examId);
+            ps.setInt(4, questionId);
+            ps.setInt(5, userId);
             ps.execute();
 
         } catch (Exception e) {
@@ -154,14 +166,15 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
-    public double getExamScore(int examId, int userId) {
+    public double getExamScore(int attemptId, int examId, int userId) {
         try {
             String strSl = "SELECT SUM(score) AS total_score\n"
                     + "FROM [attempt]\n"
-                    + "WHERE exam_id = ? AND user_id = ?";
+                    + "WHERE attempt_id = ? AND exam_id = ? AND user_id = ?";
             ps = con.prepareStatement(strSl);
-            ps.setInt(1, examId);
-            ps.setInt(2, userId);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getDouble(1);
@@ -172,30 +185,71 @@ public class AttemptDAO extends MyDAO {
         return 0;
     }
 
-    public ArrayList<Attempt> getAttemptList(int examId, int questionId, int userId) {
+    public ArrayList<Attempt> getAttemptList(int attemptId, int examId, int questionId, int userId) {
         ArrayList<Attempt> attList = new ArrayList<>();
         try {
             String strSelect = "select * from [attempt] "
-                    + "where exam_id=? AND "
+                    + "where attempt_id = ? AND "
+                    + "exam_id=? AND "
                     + "question_id=? AND "
                     + "user_id =? AND user_answer IS NOT NULL";
             ps = con.prepareCall(strSelect);
-            ps.setInt(1, examId);
-            ps.setInt(2, questionId);
-            ps.setInt(3, userId);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 boolean marked = true;
-                if (rs.getInt(4) == 0) {
+                if (rs.getInt(5) == 0) {
                     marked = false;
                 }
-                String userAnswer = rs.getString(5);
-                double score = rs.getDouble(6);
-                attList.add(new Attempt(userId, questionId, examId, marked, userAnswer, score));
+                String userAnswer = rs.getString(6);
+                double score = rs.getDouble(7);
+                attList.add(new Attempt(attemptId, userId, questionId, examId, marked, userAnswer, score));
             }
         } catch (Exception e) {
             System.out.println("getAttemptList: " + e.getMessage());
         }
         return attList;
     }
+
+    public int countExamAttempt(int examId, int userId) {
+        try {
+            String strSlect = "SELECT COUNT(DISTINCT attempt_id) AS unique_attempt_count\n"
+                    + "FROM [attempt] "
+                    + "where exam_id = ? AND "
+                    + "user_id = ? ;";
+            ps = con.prepareCall(strSlect);
+            ps.setInt(1, examId);
+            ps.setInt(2, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("countExamAttempt: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public int countMadeAttempt(int attemptId, int examId, int userId) {
+        try {
+            String strSlect = "SELECT COUNT(attempt_id) AS attempt_count\n"
+                    + "FROM [attempt]\n"
+                    + "WHERE attempt_id = ? AND exam_id = ? AND user_id = ?";
+            ps = con.prepareCall(strSlect);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("countMadeAttempt: " + e.getMessage());
+        }
+        return 0;
+    }
+
 }

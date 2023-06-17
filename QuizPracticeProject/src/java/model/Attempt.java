@@ -9,6 +9,7 @@ package model;
  * @author Acer
  */
 public class Attempt {
+    private int attemptId;
     private int userId;
     private int questionId;
     private int exam_id;
@@ -16,7 +17,8 @@ public class Attempt {
     private String userAnswer;
     private double score;
 
-    public Attempt(int userId, int questionId, int exam_id, boolean marked, String userAnswer, double score) {
+    public Attempt(int attemptId, int userId, int questionId, int exam_id, boolean marked, String userAnswer, double score) {
+        this.attemptId = attemptId;
         this.userId = userId;
         this.questionId = questionId;
         this.exam_id = exam_id;

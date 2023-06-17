@@ -49,7 +49,7 @@
                             localStorage.setItem("startTime", startTime);
                         }
 
-                        var timer = setInterval(function () {   
+                        var timer = setInterval(function () {
                             var hours = Math.floor(remainingTime / 3600);
                             var minutes = Math.floor((remainingTime % 3600) / 60);
                             var seconds = remainingTime % 60;

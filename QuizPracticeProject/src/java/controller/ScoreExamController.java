@@ -29,7 +29,9 @@ public class ScoreExamController extends HttpServlet {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("examid"));
-        double score = a.getExamScore(examId, u.getId());
+        //get number of attempts
+        int attemptId = 1;
+        double score = a.getExamScore(attemptId, examId, u.getId());
         req.setAttribute("examscore", score);
         req.getRequestDispatcher("Result.jsp").forward(req, resp);
     }
