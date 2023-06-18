@@ -9,8 +9,9 @@ package model;
  * @author dai
  */
 public class Price_Package {
-    private String name;
     private int id;
+    private String name;
+    private String description;
     private int duration;
     private double price;
     private double sale;
@@ -44,6 +45,25 @@ public class Price_Package {
         this.status = status;
     }
 
+    public Price_Package(int id, String name, String description, int duration, double price, double sale, int status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public Price_Package(String name, String description, int duration, double price, double sale, int status) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
     public String getName() {
         return name;
     }
@@ -58,6 +78,14 @@ public class Price_Package {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getDuration() {

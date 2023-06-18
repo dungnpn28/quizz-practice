@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.Price_Package;
+import model.User;
 
 /**
  *
@@ -82,6 +83,18 @@ public class PricePackageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int xId = Integer.parseInt(request.getParameter("id"));
+        String xName = request.getParameter("name");
+        String xDescription = request.getParameter("description");
+        int xDuration = Integer.parseInt(request.getParameter("duration"));
+        Double xPrice = Double.parseDouble(request.getParameter("price"));
+        Double xSale = Double.parseDouble(request.getParameter("sale"));
+        int xStatus = Integer.parseInt(request.getParameter("status"));
+        PriceDAO pd = new PriceDAO();
+        Price_Package pp = new Price_Package(xId,xName,xDescription,xDuration,xPrice,xSale,xStatus);
+        pd.update(pp);
+        response.sendRedirect("pricePackage");
+        
         
     }
 

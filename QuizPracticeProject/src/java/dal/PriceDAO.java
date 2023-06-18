@@ -22,6 +22,7 @@ public class PriceDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xName;
+            String xDescription;
             int xDuration;
             double xPrice;
             double xSale;
@@ -30,11 +31,12 @@ public class PriceDAO extends MyDAO {
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xName = rs.getString("name");
+                xDescription = rs.getString("description");
                 xDuration = rs.getInt("duration");
                 xPrice = rs.getDouble("price");
                 xSale = rs.getDouble("sale");
                 xStatus = rs.getInt("status");
-                x = new Price_Package(xID, xName, xDuration, xPrice, xSale, xStatus);
+                x = new Price_Package(xID, xName,xDescription, xDuration, xPrice, xSale, xStatus);
                 t.add(x);
             }
             rs.close();
@@ -58,6 +60,7 @@ public class PriceDAO extends MyDAO {
             rs = ps.executeQuery();
             int xID;
             String xName;
+            String xDescription;
             int xDuration;
             double xPrice;
             double xSale;
@@ -66,11 +69,12 @@ public class PriceDAO extends MyDAO {
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xName = rs.getString("name");
+                xDescription = rs.getString("description");
                 xDuration = rs.getInt("duration");
                 xPrice = rs.getDouble("price");
                 xSale = rs.getDouble("sale");
                 xStatus = rs.getInt("status");
-                x = new Price_Package(xID, xName, xDuration, xPrice, xSale, xStatus);
+                x = new Price_Package(xID, xName,xDescription, xDuration, xPrice, xSale, xStatus);
                 t.add(x);
             }
             rs.close();
@@ -103,8 +107,9 @@ public class PriceDAO extends MyDAO {
     public void update(Price_Package x) {
         xSql = "UPDATE [dbo].[price_package]\n"
                 + "   SET \n"
-                + "      [name]= ?\n"
-                + "      ,[duration]= ?\n"
+                + "      [name] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[duration] = ?\n"
                 + "      ,[price] = ? \n"
                 + "      ,[sale] = ? \n"
                 + "      ,[status] = ? \n"
@@ -112,11 +117,12 @@ public class PriceDAO extends MyDAO {
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getName());
-            ps.setInt(2, x.getDuration());
-            ps.setDouble(3, x.getPrice());
-            ps.setDouble(4, x.getSale());
-            ps.setInt(5, x.getStatus());
-            ps.setInt(6, x.getId());
+            ps.setString(2, x.getDescription());
+            ps.setInt(3, x.getDuration());
+            ps.setDouble(4, x.getPrice());
+            ps.setDouble(5, x.getSale());
+            ps.setInt(6, x.getStatus());
+            ps.setInt(7, x.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -125,14 +131,15 @@ public class PriceDAO extends MyDAO {
     }
 
     public void insert(Price_Package x) {
-        xSql = "insert into [dbo].[price_package] ([name], duration, price, sale, [status]) values(?,?,?,?,?)";
+        xSql = "insert into [dbo].[price_package] ([name],[description], duration, price, sale, [status]) values(?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getName());
-            ps.setInt(2, x.getDuration());
-            ps.setDouble(3, x.getPrice());
-            ps.setDouble(4, x.getSale());
-            ps.setInt(5, x.getStatus());
+            ps.setString(2, x.getDescription());
+            ps.setInt(3, x.getDuration());
+            ps.setDouble(4, x.getPrice());
+            ps.setDouble(5, x.getSale());
+            ps.setInt(6, x.getStatus());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -156,5 +163,9 @@ public class PriceDAO extends MyDAO {
         }
         return (totalPricePackage);
     }
-
+    public static void main(String[] args) {
+        PriceDAO pd = new PriceDAO();
+        Price_Package x = new Price_Package(6, "Unlimited", "life access", 0, 11111, 100000, 0);
+        pd.update(x);
+    }
 }

@@ -21,6 +21,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Quizerro</title>
     </head>
+    <%
+        String str = "";
+        User u = (User) request.getSession().getAttribute("user");
+        if(u.getRole_id() != 4 && u.getRole_id() != 5){
+            response.sendRedirect("AccessDenied.jsp");
+        } else {
+            if(u.getRole_id() == 4){
+                str = "view-Only";
+            }
+        }
+    %>
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <div class="wrapper">
@@ -35,7 +46,9 @@
                                 <button onclick="closeAddForm()" class="btn btn-danger">x</button>
                             </div>
                             <form action="addnewpricePackage" method="POST">
-                                Package's Name: <input name="name" type="text">
+                                Package's Name: <input name="name" type="text" id="input-field" onchange="validateInput()">
+                                <br>
+                                Description: <input name="description" type="text">
                                 <br>
                                 Duration(months): <input name="duration" type="text">
                                 <br>
@@ -50,22 +63,24 @@
                             </form>
                         </div>
                     </div>
-                    <div class="table-view">
-                        <button class="btn btn-primary" onclick="openAddForm()">Add New</button>
+                    <div class="table-view">                        
+                        <button class="btn btn-primary" onclick="openAddForm()" id="<%=str%>">Add New</button>
                         <table class="table table-hover">                   
                             <tr class="table-menu">
                                 <th scope="col">#</th>
                                 <th scope="col">Package</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Duration</th>
-                                <th scope="col">Sale Price</th>
                                 <th scope="col">List Price</th>
+                                <th scope="col">Sale Price</th>                
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" id="<%=str%>">Action</th>
                             </tr>
                             <c:forEach items="${pricePackageList}" var="pricePackage">
                                 <tr class="table-info">
                                     <th scope="row">${pricePackage.getId()}</th>
                                     <td>${pricePackage.getName()}</td>
+                                    <td>${pricePackage.getDescription()}</td>
                                     <c:if test="${pricePackage.getDuration() == 0}">
                                         <td></td>
                                     </c:if>
@@ -80,15 +95,19 @@
                                     <c:if test="${pricePackage.getStatus() == 0}">
                                         <td><div class="deactive-button">Deactive</div></td>
                                     </c:if>
-                                    <td><a href="#edit-pricePackage-${pricePackage.getId()}">  <button class="btn btn-primary" onclick="openEditForm(${pricePackage.getId()})">Edit</button></a></td>
+                                    <td id="<%=str%>"><a href="#edit-pricePackage-${pricePackage.getId()}">  <button class="btn btn-primary" onclick="openEditForm(${pricePackage.getId()})" >Edit</button></a></td>
                                 </tr>
                                 <div class="edit-pricePackage" id="edit-pricePackage-${pricePackage.getId()}">
                                     <div class="edit-content">
                                         <div class="button-close">
                                             <button onclick="closeEditForm(${pricePackage.getId()})" class="btn btn-danger">x</button>
                                         </div>
-                                        <form action="pricePackage" method="post">
-                                            Package's Name: <input name="name" type="text" value="${pricePackage.getName()}">
+                                        <form action="pricePackage" method="post" >
+                                            ID: <input name="id" type="text" value="${pricePackage.getId()}" readonly>
+                                            <br>
+                                            Package's Name: <input name="name" type="text" value="${pricePackage.getName()}" id="input-field" onchange="validateInput()">
+                                            <br>
+                                            Description: <input name="description" type="text" value="${pricePackage.getDescription()}">
                                             <br>
                                             Duration(months): <input name="duration" type="text" value="${pricePackage.getDuration()}">
                                             <br>
@@ -100,7 +119,7 @@
                                             <input type="radio" name="status" value="1" ${pricePackage.getStatus() == 1?"checked":""} >Active
                                             <input type="radio" name="status" value="0" ${pricePackage.getStatus() == 0?"checked":""} > Deactive
                                             <br>
-                                            <input type="submit" value="Update" class="btn btn-primary">
+                                            <input type="submit" value="Update" class="btn btn-primary" onclick ="return confirm('Are you sure you want to update?')">
                                         </form>    
                                     </div>
                                 </div>
@@ -138,6 +157,7 @@
                     </script>
                     <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="js/Validation.js"></script>
                 </div>
             </div>
         </div>

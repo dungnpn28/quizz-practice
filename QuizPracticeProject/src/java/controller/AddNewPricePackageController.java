@@ -58,12 +58,13 @@ public class AddNewPricePackageController extends HttpServlet {
     throws ServletException, IOException {
         processRequest(request, response);       
         String xName = request.getParameter("name");
+        String xDescription = request.getParameter("description");
         int xDuration = Integer.parseInt(request.getParameter("duration"));
         Double xPrice = Double.parseDouble(request.getParameter("price"));
         Double xSale = Double.parseDouble(request.getParameter("sale"));
         int xStatus = Integer.parseInt(request.getParameter("status"));
         PriceDAO pd = new PriceDAO();
-        Price_Package pp = new Price_Package(xName,xDuration,xPrice,xSale,xStatus);
+        Price_Package pp = new Price_Package(xName, xDescription,xDuration,xPrice,xSale,xStatus);
         pd.insert(pp);
         response.sendRedirect("pricePackage");
     }

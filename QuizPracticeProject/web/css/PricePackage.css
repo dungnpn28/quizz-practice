@@ -79,3 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     color: red;
     font-weight: bold;
 }
+
+#view-Only{
+    display: none;
+}
