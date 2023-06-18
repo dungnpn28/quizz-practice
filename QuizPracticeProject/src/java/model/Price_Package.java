@@ -12,14 +12,14 @@ public class Price_Package {
     private String name;
     private int id;
     private int duration;
-    private String price;
+    private double price;
     private double sale;
     private int status;
 
     public Price_Package() {
     }
 
-    public Price_Package(int id, int duration, String price, double sale, int status) {
+    public Price_Package(int id, int duration, double price, double sale, int status) {
         this.id = id;
         this.duration = duration;
         this.price = price;
@@ -27,9 +27,17 @@ public class Price_Package {
         this.status = status;
     }
 
-    public Price_Package(int id,String name, int duration, String price, double sale, int status) {
+    public Price_Package(int id,String name, int duration, double price, double sale, int status) {
         this.name = name;
         this.id = id;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public Price_Package(String name, int duration, double price, double sale, int status) {
+        this.name = name;
         this.duration = duration;
         this.price = price;
         this.sale = sale;
@@ -60,11 +68,11 @@ public class Price_Package {
         this.duration = duration;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

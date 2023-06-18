@@ -9,3 +9,11 @@ function openAddForm() {
 function closeAddForm() {
     document.getElementById("add-pricePackage").style.display = "none";
 }
+
+function openEditForm(editForm) {
+    document.getElementById("edit-pricePackage-" + editForm ).style.display = "block";
+}
+
+function closeEditForm(editForm) {
+    document.getElementById("edit-pricePackage-" + editForm).style.display = "none";
+}

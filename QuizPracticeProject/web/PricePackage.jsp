@@ -23,123 +23,124 @@
     </head>
     <%@include file="components/CusHeader.jsp" %>
     <body>
-        <%
-            User u = null;
-            PriceDAO pd = new PriceDAO();
-            Price_Package pp = pd.getPrice(u.getId());
-            String st = "";
-            int status = pp.getStatus();
-            if (status == 1) {
-                st = "Active";
-            } else {
-                st = "Deactive";
-            }
-        %>
-        <div class="table-content">
-            <%
-            if (session.getAttribute("user") != null) {
-            %>
+        <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
-            <%
-            } 
-            %>
-            <div class="add-pricePackage" id="add-pricePackage">
-                <div class="add-content">
-                    <div class="button-close">
-                        <button onclick="closeAddForm()" class="btn btn-danger">x</button>
-                    </div>
-                    <form action="addnewpricePackage" method="POST" enctype="multipart/form-data">
-                        Package's Name: <input name="name" type="text">
-                        <br>
-                        Duration(months): <input name="duration" type="text">
-                        <br>
-                        List Price: <input name="price" type="text">
-                        <br>
-                        Sale Price: <input name="sale" type="text">
-                        <br>
-                        Status: <input type="radio" name="status" value="true"> Active
-                        <input type="radio" name="status" value="false"> Deactive
-                        <br>
-                        <input type="submit" value="Add New" class="btn btn-primary">
-                    </form>
+            <div id="content">
+                <h1>Price Package</h1>
+                <div class="table-content">
 
+                    <div class="add-pricePackage" id="add-pricePackage">
+                        <div class="add-content">
+                            <div class="button-close">
+                                <button onclick="closeAddForm()" class="btn btn-danger">x</button>
+                            </div>
+                            <form action="addnewpricePackage" method="POST">
+                                Package's Name: <input name="name" type="text">
+                                <br>
+                                Duration(months): <input name="duration" type="text">
+                                <br>
+                                List Price: <input name="price" type="text">
+                                <br>
+                                Sale Price: <input name="sale" type="text">
+                                <br>
+                                Status: <input type="radio" name="status" value="1"> Active
+                                <input type="radio" name="status" value="0"> Deactive
+                                <br>
+                                <input type="submit" value="Add New" class="btn btn-primary" onclick ="return confirm('Are you sure you want to add?')">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-view">
+                        <button class="btn btn-primary" onclick="openAddForm()">Add New</button>
+                        <table class="table table-hover">                   
+                            <tr class="table-menu">
+                                <th scope="col">#</th>
+                                <th scope="col">Package</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Sale Price</th>
+                                <th scope="col">List Price</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            <c:forEach items="${pricePackageList}" var="pricePackage">
+                                <tr class="table-info">
+                                    <th scope="row">${pricePackage.getId()}</th>
+                                    <td>${pricePackage.getName()}</td>
+                                    <c:if test="${pricePackage.getDuration() == 0}">
+                                        <td></td>
+                                    </c:if>
+                                    <c:if test="${pricePackage.getDuration() != 0}">
+                                        <td>${pricePackage.getDuration()}</td>
+                                    </c:if>
+                                    <td>${pricePackage.getPrice()}</td>
+                                    <td>${pricePackage.getSale()}</td>
+                                    <c:if test="${pricePackage.getStatus() == 1}">
+                                        <td><div class="active-button">Active</div></td>
+                                    </c:if>
+                                    <c:if test="${pricePackage.getStatus() == 0}">
+                                        <td><div class="deactive-button">Deactive</div></td>
+                                    </c:if>
+                                    <td><a href="#edit-pricePackage-${pricePackage.getId()}">  <button class="btn btn-primary" onclick="openEditForm(${pricePackage.getId()})">Edit</button></a></td>
+                                </tr>
+                                <div class="edit-pricePackage" id="edit-pricePackage-${pricePackage.getId()}">
+                                    <div class="edit-content">
+                                        <div class="button-close">
+                                            <button onclick="closeEditForm(${pricePackage.getId()})" class="btn btn-danger">x</button>
+                                        </div>
+                                        <form action="pricePackage" method="post">
+                                            Package's Name: <input name="name" type="text" value="${pricePackage.getName()}">
+                                            <br>
+                                            Duration(months): <input name="duration" type="text" value="${pricePackage.getDuration()}">
+                                            <br>
+                                            List Price: <input name="price" type="text" value="${pricePackage.getPrice()}">
+                                            <br>
+                                            Sale Price: <input name="sale" type="text" value="${pricePackage.getSale()}">
+                                            <br>
+                                            Status:                 
+                                            <input type="radio" name="status" value="1" ${pricePackage.getStatus() == 1?"checked":""} >Active
+                                            <input type="radio" name="status" value="0" ${pricePackage.getStatus() == 0?"checked":""} > Deactive
+                                            <br>
+                                            <input type="submit" value="Update" class="btn btn-primary">
+                                        </form>    
+                                    </div>
+                                </div>
+                            </c:forEach>                   
+                        </table>
+                        <ul class="pagination" style="display: flex; justify-content: center;">
+                            <c:if test="${page > 1}">
+                                <li><a href="pricePackage?page=${page-1}">Previous</a></li>
+                                </c:if>
+                                <c:forEach begin="1" end="${totalPage}" var="i">
+                                <li><a href="pricePackage?page=${i}">${i}</a></li>
+                                </c:forEach>
+                                <c:if test="${page < totalPage}">
+                                <li><a href="pricePackage?page=${page+1}">Next</a></li>
+                                </c:if>
+                        </ul>
+                    </div>
+
+
+
+                    <script src="js/PricePackage.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <script>
+                                                $(document).ready(function () {
+                                                    $('#carouselExampleIndicators2').carousel();
+                                                });
+                    </script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#sidebarCollapse').on('click', function () {
+                                $('#sidebar').toggleClass('active');
+                            });
+                        });
+                    </script>
+                    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                 </div>
             </div>
-            <div class="table-view">
-                <button class="btn btn-primary" onclick="openAddForm()">Add New</button>
-                <table class="table table-hover">                   
-                    <tr class="table-menu">
-                        <th scope="col">#</th>
-                        <th scope="col">Package</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">List Price</th>
-                        <th scope="col">Sale Price</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    <c:forEach items="${pricePackageList}" var="pricePackage">
-                        <tr class="table-info">
-                            <th scope="row">${pricePackage.getId()}</th>
-                            <td>${pricePackage.getName()}</td>
-                            <c:if test="${pricePackage.getDuration() == 0}">
-                                <td></td>
-                            </c:if>
-                            <c:if test="${pricePackage.getDuration() != 0}">
-                                <td>${pricePackage.getDuration()}</td>
-                            </c:if>
-                            <td>${pricePackage.getPrice()}</td>
-                            <td>${pricePackage.getSale()}</td>
-                            <c:if test="${pricePackage.isStatus() == true}">
-                                <td>Active</td>
-                            </c:if>
-                            <c:if test="${pricePackage.isStatus() == false}">
-                                <td>Deactive</td>
-                            </c:if>
-                            <td><button class="btn btn-primary" onclick="openAddForm()">Edit</button></td>
-                        </tr>
-                    </c:forEach>                   
-                </table>
-            </div>
-            <div class="add-pricePackage" id="add-pricePackage">
-            <form action="pricePackage" method="post">
-                Package's Name: <input name="name" type="text" value="${pricePackage.getName()}">
-                <br>
-                Duration(months): <input name="duration" type="text" value="${pricePackage.getDuration()}">
-                <br>
-                List Price: <input name="price" type="text" value="${pricePackage.getPrice()}">
-                <br>
-                Sale Price: <input name="sale" type="text" value="${pricePackage.getSale()}">
-                <br>
-                Status: 
-                <%if (status == 1) {%>
-                <input type="radio" name="status" value="true" checked> Active
-                <input type="radio" name="status" value="false"> Deactive
-                <% }else {   %>
-                <input type="radio" name="status" value="true"> Active
-                <input type="radio" name="status" value="false" checked> Deactive
-                <% }%>
-                <br>
-                <input type="submit" value="Update" class="btn btn-primary">
-            </form>     
-            </div>
         </div>
-        <script src="js/PricePackage.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-                    $(document).ready(function () {
-                        $('#carouselExampleIndicators2').carousel();
-                    });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-            });
-        </script>
-        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
-    <%@include file="components/Footer.jsp" %>
+
 </html>

@@ -5,12 +5,13 @@
 
 package controller;
 
+import dal.PriceDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Price_Package;
 
 /**
  *
@@ -55,7 +56,16 @@ public class AddNewPricePackageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response);       
+        String xName = request.getParameter("name");
+        int xDuration = Integer.parseInt(request.getParameter("duration"));
+        Double xPrice = Double.parseDouble(request.getParameter("price"));
+        Double xSale = Double.parseDouble(request.getParameter("sale"));
+        int xStatus = Integer.parseInt(request.getParameter("status"));
+        PriceDAO pd = new PriceDAO();
+        Price_Package pp = new Price_Package(xName,xDuration,xPrice,xSale,xStatus);
+        pd.insert(pp);
+        response.sendRedirect("pricePackage");
     }
 
     /** 

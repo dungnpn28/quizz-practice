@@ -13,6 +13,7 @@ import model.Price_Package;
  * @author dai
  */
 public class PriceDAO extends MyDAO {
+
     public List<Price_Package> getPrice_Package() {
         List<Price_Package> t = new ArrayList<>();
         xSql = "select * from price_package";
@@ -22,7 +23,7 @@ public class PriceDAO extends MyDAO {
             int xID;
             String xName;
             int xDuration;
-            String xPrice;
+            double xPrice;
             double xSale;
             int xStatus;
             Price_Package x;
@@ -30,7 +31,43 @@ public class PriceDAO extends MyDAO {
                 xID = rs.getInt("id");
                 xName = rs.getString("name");
                 xDuration = rs.getInt("duration");
-                xPrice = rs.getString("price");
+                xPrice = rs.getDouble("price");
+                xSale = rs.getDouble("sale");
+                xStatus = rs.getInt("status");
+                x = new Price_Package(xID, xName, xDuration, xPrice, xSale, xStatus);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public List<Price_Package> getPrice_PackageWithPaging(int page, int page_size) {
+        List<Price_Package> t = new ArrayList<>();
+        xSql = "select * from price_package\n"
+                + "order by id\n"
+                + "offset (?-1)* ? row fetch next ? rows only";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1,page);
+            ps.setInt(2,page_size);
+            ps.setInt(3,page_size);
+            rs = ps.executeQuery();
+            int xID;
+            String xName;
+            int xDuration;
+            double xPrice;
+            double xSale;
+            int xStatus;
+            Price_Package x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xName = rs.getString("name");
+                xDuration = rs.getInt("duration");
+                xPrice = rs.getDouble("price");
                 xSale = rs.getDouble("sale");
                 xStatus = rs.getInt("status");
                 x = new Price_Package(xID, xName, xDuration, xPrice, xSale, xStatus);
@@ -62,7 +99,7 @@ public class PriceDAO extends MyDAO {
         }
         return xPrice;
     }
-    
+
     public void update(Price_Package x) {
         xSql = "UPDATE [dbo].[price_package]\n"
                 + "   SET \n"
@@ -76,7 +113,7 @@ public class PriceDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, x.getName());
             ps.setInt(2, x.getDuration());
-            ps.setString(3, x.getPrice());
+            ps.setDouble(3, x.getPrice());
             ps.setDouble(4, x.getSale());
             ps.setInt(5, x.getStatus());
             ps.setInt(6, x.getId());
@@ -86,4 +123,38 @@ public class PriceDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
+
+    public void insert(Price_Package x) {
+        xSql = "insert into [dbo].[price_package] ([name], duration, price, sale, [status]) values(?,?,?,?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());
+            ps.setInt(2, x.getDuration());
+            ps.setDouble(3, x.getPrice());
+            ps.setDouble(4, x.getSale());
+            ps.setInt(5, x.getStatus());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insert:" + e.getMessage());
+        }
+    }
+    
+    public int getTotalPricePackage() {
+        xSql = "select count(id)  from price_package \n";
+        int totalPricePackage = 0;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (totalPricePackage);
+    }
+
 }
