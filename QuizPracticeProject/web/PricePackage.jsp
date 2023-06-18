@@ -45,8 +45,8 @@
                             <div class="button-close">
                                 <button onclick="closeAddForm()" class="btn btn-danger">x</button>
                             </div>
-                            <form action="addnewpricePackage" method="POST">
-                                Package's Name: <input name="name" type="text" id="input-field" onchange="validateInput()">
+                            <form id="addForm" name="addForm" action="addnewpricePackage" method="POST" onsubmit="return validateForm()">
+                                Package's Name: <input name="name" type="text">
                                 <br>
                                 Description: <input name="description" type="text">
                                 <br>
@@ -56,7 +56,7 @@
                                 <br>
                                 Sale Price: <input name="sale" type="text">
                                 <br>
-                                Status: <input type="radio" name="status" value="1"> Active
+                                Status: <input type="radio" name="status" value="1" checked=""> Active
                                 <input type="radio" name="status" value="0"> Deactive
                                 <br>
                                 <input type="submit" value="Add New" class="btn btn-primary" onclick ="return confirm('Are you sure you want to add?')">
@@ -102,10 +102,10 @@
                                         <div class="button-close">
                                             <button onclick="closeEditForm(${pricePackage.getId()})" class="btn btn-danger">x</button>
                                         </div>
-                                        <form action="pricePackage" method="post" >
+                                        <form action="pricePackage" method="post" onsubmit="return validateForm1(${pricePackage.getId()})" name="editForm-${pricePackage.getId()}" >
                                             ID: <input name="id" type="text" value="${pricePackage.getId()}" readonly>
                                             <br>
-                                            Package's Name: <input name="name" type="text" value="${pricePackage.getName()}" id="input-field" onchange="validateInput()">
+                                            Package's Name: <input name="name" type="text" value="${pricePackage.getName()}">
                                             <br>
                                             Description: <input name="description" type="text" value="${pricePackage.getDescription()}">
                                             <br>
