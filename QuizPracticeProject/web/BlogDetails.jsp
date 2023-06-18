@@ -20,7 +20,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
-                <link href="css/BlogDetail.css" rel="stylesheet" type="text/css"/>
+        <link href="css/BlogDetail.css" rel="stylesheet" type="text/css"/>
 
     </head>
 
@@ -52,17 +52,34 @@
             <div id="content">
                 <div class="container row d-flex">
                     <div class="container row d-flex justify-content-between">
-                        <h3 class="mb-3 mt-4">
-                            Details
-                        </h3>
-                        <div class=" col-md-9">
-                            <div class="row">
-                                <div class="col-12">
+                        <div class="header-container">
+                            <h1><a href="BlogListController">Blog list </a></h1>  
+                            <h1> / </h1>
+                            <h1><a href="blogDetail?id=${id}">Details </a></h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <c:if test="${sessionScope.user.getRole_id() == 2}">
+                                    <a href="changeBlogDetail?id=${id}" class="btn btn-primary mb-3 mt-4 custom-button">
+                                        Change detail
+                                    </a>
+                                </c:if>
+                                <p></p>
+                                <c:if test="${blog.flag eq '1'}">
+                                    <img src="img/icons8-flame.gif" alt="Animated GIF">
+                                    <h3 style="display: inline;">Featured</h3>
+                                </c:if>
+                                <img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">        
 
-                                    <p></p>
-                                    <img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">        
-                                    <h2 class="left">
-                                        Updated date: <c:choose>
+                                <div class ="header-container">
+                                    <h2>Author </h2>
+                                    <h2>:    <c:out value="${author}"/></h2><br/>
+                                </div>
+                                <div class ="header-container">
+
+                                    <h2>Updated date:</h2> 
+                                    <h2>
+                                        <c:choose>
                                             <c:when test="${blog.modified == null }">
                                                 <c:out value="${blog.created}"/>
                                             </c:when>
@@ -70,17 +87,28 @@
                                                 <c:out value="${blog.modified}"/>
                                             </c:otherwise>
                                         </c:choose>
-                                        Category: <c:out value="${category}"/>
-                                        <br>    
-                                        Author: <c:out value="${author}"/>
                                     </h2>
-                                    <h3><p class="content" style="text-align: justify">
-                                            <c:out value="${blog.content}"/>
-                                        </p>
-                                    </h3>
                                 </div>
+                                <div class ="header-container">
+                                    <h2>Category:</h2>
+                                    <h2>  <c:out value="${category}"/></h2>
+                                </div>
+                                <div class ="header-container">
+                                    <h2>Brief information: </h2>
+                                </div>
+                                <h3>  <c:out value="${blog.brief_info}"/></h3>
+                                <div class ="header-container">
+                                    <h2>Content: </h2>
+                                </div>
+                                <h3>
+                                    <p class="content" style="text-align: justify">
+                                        <c:out value="${blog.content}"/>
+                                    </p>
+                                </h3>
                             </div>
                         </div>
+
+
 
                     </div>
                     <%@include file = "Login.jsp"%> 

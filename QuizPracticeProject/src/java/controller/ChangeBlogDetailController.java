@@ -1,28 +1,29 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller;
 
 import dal.BlogDAO;
 import dal.Blog_CategoryDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 import model.Blog;
 import model.Blog_Category;
 
 /**
  *
- * @author ACER
+ * @author LENOVO
  */
-@WebServlet(name = "BlogDetailController", urlPatterns = {"/blogDetail"})
-public class BlogDetailController extends HttpServlet {
+public class ChangeBlogDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,27 +37,17 @@ public class BlogDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         String id = request.getParameter("id");
         request.setAttribute("id", id);
         BlogDAO dao = new BlogDAO();
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
-        
-        int author_id = blog.getAuthor_id();
-        String author = dao.getAuthor(author_id);
-        request.setAttribute("author", author);
-        
-        int category_id = blog.getCategory_id();
-        String category = dao.getCategoryName(category_id);
-        request.setAttribute("category", category);
-        
+
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-        request.setAttribute("listCategory",listCategory);
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-        
-        request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
+        request.setAttribute("listCategory", listCategory);
+
+        request.getRequestDispatcher("ChangeBlogDetail.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,7 +76,40 @@ public class BlogDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        Part file = request.getPart("thumbnail");
+
+        String originalFileName = file.getSubmittedFileName();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String thumbnail = System.currentTimeMillis() + fileExtension;
+
+        String title = request.getParameter("title");
+        int category_id = Integer.parseInt(request.getParameter("category"));
+        String brief_info = request.getParameter("brief_info");
+        String content = request.getParameter("content");
+        String featured = request.getParameter("flag");
+        String flag;
+        if (featured != null && featured.equals("on")) {
+            flag = "1";
+        } else {
+            flag = "0";
+        }
+        String statuss = request.getParameter("status");
+        boolean status = true;
+        if (statuss.equals("0")) {
+            status = false;
+        }
+        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
+        try {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = file.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

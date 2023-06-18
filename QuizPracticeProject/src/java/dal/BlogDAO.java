@@ -38,6 +38,7 @@ public class BlogDAO extends MyDAO {
         String xContent;
         Date xCreated;
         Date xModified;
+        String xBrief_info;
         Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -54,8 +55,8 @@ public class BlogDAO extends MyDAO {
                 xContent = rs.getString("content");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
-
-                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified);
+                xBrief_info = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief_info);
             }
         } catch (Exception e) {
         }

@@ -128,10 +128,10 @@
     cursor: pointer;
     font-size: 16px;
     transition-duration: 0.4s;
-  }
+}
 
-  .custom-button:hover {
+.custom-button:hover {
     background-color: #0645a1;
     color: #ffffff;
     text-decoration: none;
-  }
+}
