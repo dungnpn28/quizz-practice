@@ -117,10 +117,6 @@
         <servlet-class>controller.QuizHandleController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EndQuizController</servlet-name>
-        <servlet-class>controller.EndQuizController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ScoreExamController</servlet-name>
         <servlet-class>controller.ScoreExamController</servlet-class>
     </servlet>
@@ -131,6 +127,10 @@
     <servlet>
         <servlet-name>EditSliderController</servlet-name>
         <servlet-class>controller.EditSliderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewQuizController</servlet-name>
+        <servlet-class>controller.ReviewQuizController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -241,10 +241,6 @@
         <url-pattern>/quizhandle</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EndQuizController</servlet-name>
-        <url-pattern>/endquiz</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ScoreExamController</servlet-name>
         <url-pattern>/scorequiz</url-pattern>
     </servlet-mapping>
@@ -255,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>EditSliderController</servlet-name>
         <url-pattern>/editSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewQuizController</servlet-name>
+        <url-pattern>/reviewquiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

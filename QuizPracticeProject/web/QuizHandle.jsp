@@ -31,64 +31,6 @@
                         <div id="time"></div>
                     </h1>
 
-                    <script>
-                        var examDuration = ${examDuration};
-                        var timerElement = document.getElementById("time");
-
-                        var startTime = localStorage.getItem("startTime");
-                        var currentTime = Math.floor(Date.now() / 1000);
-
-                        var remainingTime = examDuration;
-                        if (startTime) {
-                            remainingTime = examDuration - (currentTime - startTime);
-                            if (remainingTime < 0) {
-                                remainingTime = 0;
-                            }
-                        } else {
-                            startTime = currentTime;
-                            localStorage.setItem("startTime", startTime);
-                        }
-
-                        var timer = setInterval(function () {
-                            var hours = Math.floor(remainingTime / 3600);
-                            var minutes = Math.floor((remainingTime % 3600) / 60);
-                            var seconds = remainingTime % 60;
-
-                            var displayHours = hours < 10 ? "0" + hours : hours;
-                            var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-                            var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
-
-                            timerElement.innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
-
-                            remainingTime--;
-
-                            if (remainingTime < 0) {
-                                clearInterval(timer);
-                                timerElement.innerHTML = "00:00:00";
-                                localStorage.removeItem("startTime");
-
-                            }
-                        }, 1000);
-
-                        //if onclick id="exit-immediate" then remove localStorage
-                        if (document.getElementById("exit-immediate")) {
-                            document.getElementById("exit-immediate").addEventListener("click", function () {
-                                localStorage.removeItem("startTime");
-                            });
-                        }
-
-                        //if onclick id="score-immediate" then remove localStorage
-                        if (document.getElementById("score-immediate")) {
-                            document.getElementById("score-immediate").addEventListener("click", function () {
-                                localStorage.removeItem("startTime");
-                            });
-                        }
-
-
-
-                    </script>
-
-
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">
                     <button onclick="openExitPopup()">X</button>
@@ -98,11 +40,12 @@
                                 <h2>Want to exit the exam?</h2>
                             </div>
                             <div class="exit-content">
-                                <h4>All your progress will not be saved! Wish to continue?</h4>
+                                <h4>You answered ${countAnsQues} out of ${endP} questions. Your attempt will be scored immediately! Wish
+                                    to continue?</h4>
                             </div>
                             <div class="exit-popup-button">
                                 <button onclick="closeExitPopup()">Back to Exam</button>
-                                <a id="exit-immediate" href="endquiz?examid=${id}">Yes</a>
+                                <a id="exit-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
                             </div>
                         </div>
                     </div>
@@ -227,10 +170,6 @@
                                         <a
                                             href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>
                                     </c:forEach>
-
-
-
-
                                 </div>
                                 <div class="navigate-btn">
                                     <button onclick="closePopup()">Back to Exam</button>
@@ -239,7 +178,7 @@
                                     <div id="score-popup" class="score-popup-overlay">
                                         <div class="score-popup-content">
                                             <div class="score-header">
-                                                <h2>Want to exit the exam?</h2>
+                                                <h2>Want to score the exam?</h2>
                                             </div>
                                             <div class="score-content">
                                                 <h4>You answered ${countAnsQues} out of ${endP} questions. Wish
@@ -247,7 +186,7 @@
                                             </div>
                                             <div class="score-popup-button">
                                                 <button onclick="closeScorePopup()">Back to Exam</button>
-                                                <a id="score-immediate" href="scorequiz?examid=${id}">Yes</a>
+                                                <a id="score-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
                                             </div>
                                         </div>
                                     </div>

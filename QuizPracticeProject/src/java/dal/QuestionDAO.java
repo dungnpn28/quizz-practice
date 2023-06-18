@@ -47,6 +47,36 @@ public class QuestionDAO extends MyDAO {
         return questionList;
     }
     
+    public ArrayList<Question> getListQuestionByExamIdNonPaging(int examId) {
+        ArrayList<Question> questionList = new ArrayList<>();
+        try {
+            String strSelect = "SELECT q.id, q.subject_id, q.content, q.option_a, q.option_b, q.option_c, q.option_d, q.answer, qe.question_order, qe.marks_allocated, q.created, q.modified\n"
+                    + "FROM question q\n"
+                    + "JOIN question_exam qe ON q.id = qe.question_id\n"
+                    + "WHERE qe.exam_id = ?\n"
+                    + "ORDER BY qe.question_order;";
+            ps = con.prepareCall(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int questionId = rs.getInt(1);
+                int subjectId = rs.getInt(2);
+                String content = rs.getString(3);
+                String optionA = rs.getString(4);
+                String optionB = rs.getString(5);
+                String optionC = rs.getString(6);
+                String optionD = rs.getString(7);
+                String answer = rs.getString(8);
+                int questionOrder = rs.getInt(9);
+                double marksAllocated = rs.getDouble(10);
+                questionList.add(new Question(questionId, subjectId, content, optionA, optionB, optionC, optionD, answer, questionOrder, marksAllocated));
+            }
+        } catch (Exception e) {
+            System.out.println("getListQuestionByExamIdNonPaging: " + e.getMessage());
+        }
+        return questionList;
+    }
+    
     public Question getQuestionById(int questionId) {
         Question q = null;
         try {

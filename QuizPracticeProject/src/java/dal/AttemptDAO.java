@@ -252,4 +252,28 @@ public class AttemptDAO extends MyDAO {
         return 0;
     }
 
+    public boolean checkAttemptExist(int attemptId, int examId, int userId) {
+        Attempt a = null;
+        try {
+            String strSelect = "select * from [attempt] "
+                    + "where attempt_id=? AND "
+                    + "exam_id=? AND "
+                    + "user_id =?;";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                a = new Attempt(attemptId, userId, examId);
+            }
+        } catch (Exception e) {
+            System.out.println("checkAttemptExist:" + e.getMessage());
+        }
+        if (a == null) {
+            return false;
+        }
+        return true;
+    }
+
 }

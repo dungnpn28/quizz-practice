@@ -17,6 +17,12 @@ public class Attempt {
     private String userAnswer;
     private double score;
 
+    public Attempt(int attemptId, int userId, int exam_id) {
+        this.attemptId = attemptId;
+        this.userId = userId;
+        this.exam_id = exam_id;
+    }
+
     public Attempt(int attemptId, int userId, int questionId, int exam_id, boolean marked, String userAnswer, double score) {
         this.attemptId = attemptId;
         this.userId = userId;

@@ -27,4 +27,21 @@ public class QuestionExamDAO extends MyDAO {
         return 0;
     }
 
+    public int countExamQuestion(int examId) {
+        try {
+            String strCount = "SELECT COUNT(*) AS question_count\n"
+                    + "FROM question_exam\n"
+                    + "WHERE exam_id = ?";
+            ps = con.prepareCall(strCount);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("countExamQuestion: " + e.getMessage());
+        }
+        return 0;
+    }
+
 }

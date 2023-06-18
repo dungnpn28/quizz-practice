@@ -30,13 +30,13 @@ public class QuizHandleController extends HttpServlet {
         AttemptDAO a = new AttemptDAO();
         QuestionDAO q = new QuestionDAO();
         ExamDAO e = new ExamDAO();
-        QuestionExamDAO eq = new QuestionExamDAO();
+        QuestionExamDAO qe = new QuestionExamDAO();
 
         HttpSession session = req.getSession();
         int page = Integer.parseInt(req.getParameter("page"));
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("id"));
-        int questionId = eq.getQuestionIdByExamId(examId, page);
+        int questionId = qe.getQuestionIdByExamId(examId, page);
 
         //get exam time 
         String duration = e.getExamDurationById(examId);
@@ -45,11 +45,8 @@ public class QuizHandleController extends HttpServlet {
 
         //get attempt id
         int countAttempt = a.countExamAttempt(examId, u.getId());
-        int attemptId = countAttempt + 1;
-        if (a.countMadeAttempt(attemptId - 1, examId, u.getId()) > 0) {
-            attemptId -= 1;
-        }
-        System.out.println(attemptId);
+        int attemptId = countAttempt;
+        req.setAttribute("attId", attemptId);
 
         //quiz business
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
@@ -60,7 +57,7 @@ public class QuizHandleController extends HttpServlet {
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
         req.setAttribute("questionL", questionList);
-        int endPage = 10;
+        int endPage = qe.countExamQuestion(examId);
         req.setAttribute("endP", endPage);
 
         //mark question
@@ -107,15 +104,15 @@ public class QuizHandleController extends HttpServlet {
         QuestionDAO q = new QuestionDAO();
         AttemptDAO a = new AttemptDAO();
         ExamDAO e = new ExamDAO();
-        QuestionExamDAO eq = new QuestionExamDAO();
+        QuestionExamDAO qe = new QuestionExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
 
         //pagination
-        int endPage = 10;
         int page = Integer.parseInt(req.getParameter("page"));
         int examId = Integer.parseInt(req.getParameter("id"));
-        int questionId = eq.getQuestionIdByExamId(examId, page);
+        int endPage = qe.countExamQuestion(examId);
+        int questionId = qe.getQuestionIdByExamId(examId, page);
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
@@ -127,9 +124,10 @@ public class QuizHandleController extends HttpServlet {
         //get attempt id
         int countAttempt = a.countExamAttempt(examId, u.getId());
         int attemptId = countAttempt + 1;
-        if (a.countMadeAttempt(attemptId, examId, u.getId()) > 0) {//bugggg
-            attemptId -= 1; //phan nay dang bug
+        if (page > 1) {
+            attemptId--;
         }
+        System.out.println(attemptId);
 
         //create exam attempts
         a.createAttempt(attemptId, examId, questionId, u.getId());
