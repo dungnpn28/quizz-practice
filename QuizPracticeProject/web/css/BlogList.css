@@ -58,18 +58,6 @@
     justify-content: center;
 }
 
-/* .thumbnail_container{
-    background-color: #ccc;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    width: 35%;
-    height: 0;
-    padding-bottom: 35%;
-    border: solid 3px;
-    border-color: #333;
-    border-radius: 5px;
-} */
-
 .tn1{
     margin-left: 40px;
     display: flex;
@@ -108,3 +96,42 @@
     flex: 1;  Chiếm 50% chiều rộng
     flex-basis: 70%;
 } */
+
+.searchBox {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: inline-flex;
+    max-width: 400px;
+}
+
+.form-control {
+    flex: 1;
+    border-radius: 5px 0 0 5px;
+}
+
+.btn {
+    border-radius: 0 5px 5px 0;
+}
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0B5ED7;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition-duration: 0.4s;
+  }
+
+  .custom-button:hover {
+    background-color: #0645a1;
+    color: #ffffff;
+    text-decoration: none;
+  }

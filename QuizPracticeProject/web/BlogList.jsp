@@ -14,26 +14,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/BlogList.css" />
+        <link rel="stylesheet" href="css/Home.css" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-
-    <%
-    if (session.getAttribute("user") != null) {
-       // Nếu có user, bao gồm trang cusheader.jsp
-    %>
-    <%@ include file="components/CusHeader.jsp" %>
-    <%
-} else {
-    // Nếu không có user, bao gồm trang header.jsp
-    %>
-    <%@ include file="components/Header.jsp" %>
-    <%
-}
-    %>
 
     <body>
         <%
@@ -41,59 +31,117 @@
         // Nếu có user, bao gồm trang cusheader.jsp
             session.getAttribute("up");  
         %>
-        <% } %>
-        <div class="blog_list">
-            <div class="boxContainer col-md-7">
-                <c:forEach items="${listBlog}" var="Blog">
-                    <div class="box">
-                        <div class="video">
-                            <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
-                        </div>
-                        <div class="content">
-                            <h4>${Blog.getTitle()}</h4>
-                            <p>${Blog.getContent()}</p>
-                        </div>
+        <%@ include file="components/CusHeader.jsp" %>
 
-                    </div>
-                </c:forEach>
-            </div>
 
-            <div class="search">
-                <form action="searchpost">
-                    <input
-                        value="${key}"
-                        type="search"
-                        placeholder="Search by exam name"
-                        aria-label="Search"
-                        name="keyword"
-                        />
-                    <button class="btn" type="submit">
-                        Search
-                    </button>
-                    <select>
-                        <c:forEach items="${listCategory}" var="Blog_Category">
-                            <option>${Blog_Category.getName()}</option>
-                        </c:forEach>
-                    </select>
-                    <div class="thumbnail_container">
-                        <c:forEach varStatus="loop" items="${listBlog}" var="Blog">
-                            <c:if test="${loop.index < 2}">
-                                <div class="tn1"> 
-                                    ${Blog.getTitle()}
-                                    <div class="video">
-                                        <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+        <%
+        } else {
+        // Nếu không có user, bao gồm trang header.jsp
+        %>
+        <%@ include file="components/Header.jsp" %>
+        <%
+        }
+        %>
+
+        <div class="wrapper">
+            <%
+            if (session.getAttribute("user") != null) {
+            %>
+            <%@include file="components/navbar.jsp" %>
+            <%
+            } 
+            %>
+            <div id="content">
+                <div class="container row d-flex">
+                    <div class="container row d-flex justify-content-between">
+                        <div class=" col-md-9">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="BlogListController" class="mb-3 mt-4 custom-button">
+                                        All Blog
+                                    </a>
+                                    <p></p>
+                                    <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <c:if test="${listBlog == null || listBlog.size() == 0}">
+                                                Not found
+                                            </c:if>
+                                            <c:forEach items="${listBlog}" var="Blog" varStatus="status">
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
+                                                            <div class="row g-0">
+                                                                <div class="col-md-4">
+
+                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">${Blog.getTitle()}</h5>
+                                                                        <div class="card-date"> ${Blog.getBrief_info()}</div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
                                     </div>
+                                    <ul class="pagination" style="display: flex; justify-content: center;">
+                                        <c:if test="${page > 1}">
+                                            <li><a href="subjectListPublic?page=${page-1}">Previous</a></li>
+                                            </c:if>
+                                            <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li><a href="subjectListPublic?page=${i}">${i}</a></li>
+                                            </c:forEach>
+                                            <c:if test="${page < totalPage}">
+                                            <li><a href="subjectListPublic?page=${page+1}">Next</a></li>
+                                            </c:if>
+                                    </ul>
                                 </div>
-                            </c:if>
-                        </c:forEach>
-                        <div class="contact">
-                            <h3>Static<br><span>contacts/links</span></h3>
+                            </div>
                         </div>
-                    </div>          
-                </form>
+                        <div class="col-md-3">
+                            <div class="sticky-table-container">
+                                <div class="row d-flex justify-content-center">
+
+                                    <div class="searchBox">
+                                        <form action="searchpost">
+                                            <div class="input-group">
+                                                <input
+                                                    class="form-control"
+                                                    value="${key}"
+                                                    type="search"
+                                                    placeholder="Search by exam name"
+                                                    aria-label="Search"
+                                                    name="keyword"
+                                                    />
+                                                <button class="btn btn-primary" type="submit">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <c:if test="${key!= mull}" >
+                                            <h3 class="mb-3 mt-4">Search for "${key}"</h3>
+                                        </c:if>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%@include file = "Login.jsp"%> 
+
+                </div>
             </div>
         </div>
-        <%@include file = "Login.jsp"%>  
+        <script src="js/navBar.js"></script>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>

@@ -27,7 +27,7 @@ public class BlogDAO extends MyDAO {
     public Blog getBlogDetail(String id) {
         xSql = "select * from [blog]\n"
                 + "where id = ?";
-        
+
         int xId;
         String xThumbnail;
         int xAuthor_id;
@@ -75,6 +75,7 @@ public class BlogDAO extends MyDAO {
         String xContent;
         Date xCreated;
         Date xModified;
+        String xBrief;
         Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -90,8 +91,8 @@ public class BlogDAO extends MyDAO {
                 xContent = rs.getString("content");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
-
-                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified);
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
                 t.add(x);
             }
         } catch (Exception e) {
@@ -131,14 +132,18 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> searchPost(String keyword) {
         List<Blog> resultPost = new ArrayList<>();
-        xSql = "select * from [blog] where content like ?";
+        xSql = "select * from [blog] where title like ?";
         int xId;
         String xThumbnail;
-        int xAuthorId;
+        int xAuthor_id;
         String xTitle;
-        int xCategory_id;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
         String xContent;
         Date xCreated;
+        Date xModified;
+        String xBrief;
         Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -147,13 +152,16 @@ public class BlogDAO extends MyDAO {
             while (rs.next()) {
                 xId = rs.getInt("id");
                 xThumbnail = rs.getString("thumbnail");
-                xAuthorId = rs.getInt("author_id");
+                xAuthor_id = rs.getInt("author_id");
                 xTitle = rs.getString("title");
-                xCategory_id = rs.getInt("category_id");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
                 xContent = rs.getString("content");
                 xCreated = rs.getDate("created");
-
-                x = new Blog(xId, xThumbnail, xAuthorId, xTitle, xCategory_id, xContent, xCreated);
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
                 resultPost.add(x);
             }
             rs.close();
