@@ -45,11 +45,11 @@ public class SliderDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sliderId = Integer.parseInt(request.getParameter("sliderId"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
         SliderDAO sDAO = new SliderDAO();
-        Slider x = sDAO.getOneSlider(sliderId);
+        Slider x = sDAO.getOneSlider(sid);
         request.setAttribute("slider", x);
-        request.setAttribute("sliderId", sliderId);
+        request.setAttribute("sid", sid);
         request.getRequestDispatcher("SliderDetail.jsp").forward(request, response);
     }
 

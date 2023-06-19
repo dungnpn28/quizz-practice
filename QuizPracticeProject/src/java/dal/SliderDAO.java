@@ -110,20 +110,35 @@ public class SliderDAO extends MyDAO {
         return s;
     }
 
-    public List<Slider> updateSlider(String title, String image, int id, String backlink) {
-        String sql = "update Slider set title = ?, image = ?, backlink= ? where id = ?";
-        List<Slider> us = new ArrayList<Slider>();
+    public void updateSliderWithImage(String title, String image, int id, String backlink, boolean status) {
+        String sql = "update Slider set [title] = ?, [image] = ?, [backlink]= ?, [status] = ?, [modified] = GETDATE() where id = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, title);
             ps.setString(2, image);
             ps.setString(3, backlink);
-            ps.setInt(4, id);
+            ps.setBoolean(4, status);
+            ps.setInt(5, id);
             ps.executeUpdate();
-            us = getSlider();
+
         } catch (Exception e) {
         }
-        return us;
+    }
+
+    public void updateSliderWithoutImage(String title, int id, String backlink, boolean status) {
+        String sql = "update Slider set [title] = ?, [backlink] = ?, [status] = ?, [modified] = GETDATE() where id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, backlink);
+            ps.setBoolean(3, status);
+            ps.setInt(4, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
     }
 
     public List<Slider> searchSlider(String keyword) {

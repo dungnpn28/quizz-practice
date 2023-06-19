@@ -140,6 +140,10 @@
         <servlet-name>ChangeBlogDetailController</servlet-name>
         <servlet-class>controller.ChangeBlogDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeSliderDetailController</servlet-name>
+        <servlet-class>controller.ChangeSliderDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>ChangeBlogDetailController</servlet-name>
         <url-pattern>/changeBlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSliderDetailController</servlet-name>
+        <url-pattern>/changeSliderDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

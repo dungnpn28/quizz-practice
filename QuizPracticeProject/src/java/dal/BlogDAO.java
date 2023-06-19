@@ -27,7 +27,6 @@ public class BlogDAO extends MyDAO {
     public Blog getBlogDetail(String id) {
         xSql = "select * from [blog]\n"
                 + "where id = ?";
-
         int xId;
         String xThumbnail;
         int xAuthor_id;

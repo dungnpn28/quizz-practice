@@ -42,3 +42,11 @@ img {
 .custom-button:hover {
     background-color: #ddd;
 }
+.image-upload input[type="file"] {
+    display: none;
+}
+
+.image-upload label {
+    display: block;
+    cursor: pointer;
+}

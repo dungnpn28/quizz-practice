@@ -50,11 +50,11 @@
                                 <c:if test="${not empty notificationMessage}">
                                     <div id="notification">${notificationMessage}</div>
                                 </c:if>
-                                <c:if test="${sessionScope.user.getRole_id() == 2}">
-                                    <a href="changeBlogDetail?id=${id}" class="btn btn-primary mb-3 mt-4 custom-button">
-                                        Change detail
-                                    </a>
-                                </c:if>
+
+                                <form action="sliderList" method="post">
+                                    <button type="submit" name="btnEdit" class="btn btn-primary mb-3 mt-4 custom-button">EDIT</button>
+                                    <input hidden name="sid" value="${sid}">
+                                </form>
                                 <p></p>
 
                                 <h1 style="font-weight: bold">${slider.title}</h1>
@@ -84,19 +84,15 @@
                                     <h2><a href="${slider.backlink}">${slider.backlink}</a></h2>
                                     <p> </p>
                                 </div>
-                                    <div class ="header-container">
+                                <div class ="header-container">
                                     <h2>Notes:  </h2>
                                     <h2></h2>
                                     <p> </p>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                     <%@include file = "Login.jsp"%> 
-
                 </div>
             </div>
         </div>

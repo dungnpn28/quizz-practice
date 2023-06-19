@@ -19,6 +19,7 @@
     <head>
 
         <link rel="stylesheet" href="css/UserList.css" type="text/css"/>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta charset="UTF-8">
 
@@ -38,10 +39,11 @@
             session.getAttribute("up");  
         %>
         <% } %>
-        <%@include file="components/CusHeader.jsp"%>
+        
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
-            <div id="content">                                          
+            <div id="content">               
+                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">USER LIST</h1>
                 <div class="topnav">
 
@@ -291,15 +293,8 @@
                 <%@include file = "Login.jsp"%>  
 
             </div>
+        </div>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    $('#sidebarCollapse').on('click', function () {
-                                        $('#sidebar').toggleClass('active');
-                                    });
-                                });
-            </script>
             <script>
                 function applyFilters() {
                     var genderSelect = document.getElementById("gender");
@@ -346,6 +341,7 @@
 
             </script>
             <script src="js/PopUp.js"></script>
+            <script src="js/navBar.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 

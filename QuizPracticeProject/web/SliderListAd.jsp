@@ -64,7 +64,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <a href="sliderDetail?sliderId=${listSlider.getId()}" style="color: black"><button>VIEW DETAIL</button></a>
+                                        <a href="sliderDetail?sid=${listSlider.getId()}" style="color: black"><button>VIEW DETAIL</button></a>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="col">
