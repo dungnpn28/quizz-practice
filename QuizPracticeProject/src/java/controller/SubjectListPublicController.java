@@ -54,7 +54,7 @@ public class SubjectListPublicController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         HttpSession sessions = request.getSession();
-        int PAGE_SIZE = 5;
+        int PAGE_SIZE = 3;
         int page = 1;
         String pageStr = request.getParameter("page");
         if (pageStr != null) {
@@ -89,6 +89,20 @@ public class SubjectListPublicController extends HttpServlet {
             selectedCategoryId = (int) sessions.getAttribute("selectedCategoryId");
         }
 
+        if(sessions.getAttribute("selectedCategoryId") != null && sessions.getAttribute("checkFeatured") == null && 
+                sessions.getAttribute("checkRegisted") == null && sessions.getAttribute("checkNotRegisted") == null && 
+                sessions.getAttribute("sortValue") == null && sessions.getAttribute("keywordInSubjectList") == null) {
+            selectedCategoryId = Integer.parseInt(sessions.getAttribute("selectedCategoryId").toString());
+            subjectList = sDAO.getSubjectsByCategoryAndPaging(selectedCategoryId, page, PAGE_SIZE);
+                totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
+                totalPage = totalSubject / PAGE_SIZE; //1
+                if (totalSubject % PAGE_SIZE != 0) {
+                    totalPage += 1;
+                }
+                String categoryName = scDAO.getCategoryName(selectedCategoryId);
+                request.setAttribute("categoryName", categoryName);
+        }
+        
         List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
         request.setAttribute("featuredSubjectList", featuredSubjectList);
 
@@ -263,7 +277,8 @@ public class SubjectListPublicController extends HttpServlet {
                 }
             }
         }
-        if (request.getParameter("selectedCategory") != null) {
+        
+        if (request.getParameter("selectedCategory") != null ) {
             selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
             sessions.setAttribute("selectedCategoryId", selectedCategoryId);
             sessions.removeAttribute("sortValue");
