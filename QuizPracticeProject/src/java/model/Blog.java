@@ -63,6 +63,27 @@ public class Blog {
         this.created = created;
     }
 
+    public Blog(int id, String title, int category_id, String flag, boolean status, String content, String brief_info) {
+        this.id = id;
+        this.title = title;
+        this.category_id = category_id;
+        this.flag = flag;
+        this.status = status;
+        this.content = content;
+        this.brief_info = brief_info;
+    }
+
+    public Blog(int id, String thumbnail, String title, int category_id, String flag, boolean status, String content, String brief_info) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.category_id = category_id;
+        this.flag = flag;
+        this.status = status;
+        this.content = content;
+        this.brief_info = brief_info;
+    }
+
     public String getBrief_info() {
         return brief_info;
     }

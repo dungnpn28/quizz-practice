@@ -6,6 +6,7 @@ package controller;
 
 import dal.BlogDAO;
 import dal.Blog_CategoryDAO;
+import jakarta.servlet.annotation.MultipartConfig;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,6 +24,7 @@ import model.Blog_Category;
  *
  * @author LENOVO
  */
+@MultipartConfig
 public class ChangeBlogDetailController extends HttpServlet {
 
     /**
@@ -77,12 +79,7 @@ public class ChangeBlogDetailController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Part file = request.getPart("thumbnail");
-
-        String originalFileName = file.getSubmittedFileName();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String thumbnail = System.currentTimeMillis() + fileExtension;
-
+        int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int category_id = Integer.parseInt(request.getParameter("category"));
         String brief_info = request.getParameter("brief_info");
@@ -99,17 +96,36 @@ public class ChangeBlogDetailController extends HttpServlet {
         if (statuss.equals("0")) {
             status = false;
         }
-        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
-        try {
-            FileOutputStream fos = new FileOutputStream(uploadPath);
-            InputStream is = file.getInputStream();
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            fos.write(data);
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        Blog x = null;
+        BlogDAO bDAO = new BlogDAO();
+
+        String thumbnail = null;
+        Part file = request.getPart("thumbnail");
+
+        if (file != null && file.getSize() > 0) {
+            String originalFileName = file.getSubmittedFileName();
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            thumbnail = System.currentTimeMillis() + fileExtension;
+
+            String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
+            try {
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            x = new Blog(id, thumbnail, title, category_id, flag, status, content, brief_info);
+            bDAO.updateBlogWithThumbnail(x);
         }
+        x = new Blog(id, title, category_id, flag, status, content, brief_info);
+        bDAO.updateBlogWithoutThumbnail(x);
+
+        request.setAttribute("notificationMessage", "Update successfully !!!");
+        request.getRequestDispatcher("/blogDetail?id=" + id).forward(request, response);
     }
 
     /**

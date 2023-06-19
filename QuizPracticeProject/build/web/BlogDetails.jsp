@@ -59,6 +59,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <c:if test="${not empty notificationMessage}">
+                                    <div id="notification">${notificationMessage}</div>
+                                </c:if>
                                 <c:if test="${sessionScope.user.getRole_id() == 2}">
                                     <a href="changeBlogDetail?id=${id}" class="btn btn-primary mb-3 mt-4 custom-button">
                                         Change detail
@@ -69,42 +72,46 @@
                                     <img src="img/icons8-flame.gif" alt="Animated GIF">
                                     <h3 style="display: inline;">Featured</h3>
                                 </c:if>
-                                <img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">        
-
-                                <div class ="header-container">
-                                    <h2>Author </h2>
-                                    <h2>:    <c:out value="${author}"/></h2><br/>
-                                </div>
-                                <div class ="header-container">
-
-                                    <h2>Updated date:</h2> 
-                                    <h2>
-                                        <c:choose>
-                                            <c:when test="${blog.modified == null }">
-                                                <c:out value="${blog.created}"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:out value="${blog.modified}"/>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </h2>
-                                </div>
+                                <h1 style="font-weight: bold">${blog.title}</h1>
                                 <div class ="header-container">
                                     <h2>Category:</h2>
                                     <h2>  <c:out value="${category}"/></h2>
-                                </div>
-                                <div class ="header-container">
-                                    <h2>Brief information: </h2>
-                                </div>
-                                <h3>  <c:out value="${blog.brief_info}"/></h3>
-                                <div class ="header-container">
-                                    <h2>Content: </h2>
+                                    <p> </p>
                                 </div>
                                 <h3>
-                                    <p class="content" style="text-align: justify">
+                                    <p class="content"> 
+                                        <c:out value="${blog.brief_info}"/>
+                                    </p>
+                                </h3>
+                                <img src = "uploads/${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">        
+
+                                <div class ="header-container">
+                                    <h2></h2>
+                                </div>
+                                <h3>
+                                    <p class="content">
                                         <c:out value="${blog.content}"/>
                                     </p>
                                 </h3>
+                                <div class ="header-container-right">
+                                    <div class="author-value-container">
+                                        <h2 class="author-value">Author: <c:out value="${author}"/></h2>
+                                    </div>
+                                </div>
+                                <div class ="header-container-right">
+                                    <div class="author-value-container">
+                                        <h2 class="author-value"> Updated date:
+                                            <c:choose>
+                                                <c:when test="${blog.modified == null }">
+                                                    <c:out value="${blog.created}"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:out value="${blog.modified}"/>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h2>
+                                    </div>         
+                                </div>
                             </div>
                         </div>
 
@@ -117,7 +124,15 @@
             </div>
         </div>
         <script src="js/navBar.js"></script>
+        <script>
+            // Hiển thị thông báo
+            document.getElementById("notification").style.display = "block";
 
+            // Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                document.getElementById("notification").style.display = "none";
+            }, 5000);
+        </script>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>

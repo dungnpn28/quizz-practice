@@ -171,6 +171,59 @@ public class BlogDAO extends MyDAO {
             e.printStackTrace();
         }
         return (resultPost);
-
     }
+
+    public void updateBlogWithThumbnail(Blog x) {
+        xSql = "UPDATE [dbo].[blog]\n"
+                + "   SET [thumbnail] = ?\n"
+                + "      ,[title] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + "      ,[flag] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[brief_info] = ?\n"
+                + "      ,[content] = ?\n"
+                + "      ,[modified] = GETDATE()\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getThumbnail());
+            ps.setString(2, x.getTitle());
+            ps.setInt(3, x.getCategory_id());
+            ps.setString(4, x.getFlag());
+            ps.setBoolean(5, x.getStatus());
+            ps.setString(6, x.getBrief_info());
+            ps.setString(7, x.getContent());
+            ps.setInt(8, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+    public void updateBlogWithoutThumbnail(Blog x) {
+        xSql = "UPDATE [dbo].[blog]\n"
+                + "   SET [title] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + "      ,[flag] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[brief_info] = ?\n"
+                + "      ,[content] = ?\n"
+                + "      ,[modified] = GETDATE()\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getTitle());
+            ps.setInt(2, x.getCategory_id());
+            ps.setString(3, x.getFlag());
+            ps.setBoolean(4, x.getStatus());
+            ps.setString(5, x.getBrief_info());
+            ps.setString(6, x.getContent());
+            ps.setInt(7, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
 }

@@ -43,6 +43,7 @@ h3 {
 }
 
 .content{
+    text-indent: 2em;
     text-align: justify;
 }
 
@@ -83,4 +84,16 @@ h3 {
 .header-container h2:first-child {
     margin-right: 10px;
     font-weight: bold;
+}
+
+.header-container-right{
+    display: flex;
+    /*align-items: center;*/
+}
+.author-value-container {
+    margin-left: auto;
+}
+
+.author-label, .author-value {
+    margin-bottom: 0;
 }

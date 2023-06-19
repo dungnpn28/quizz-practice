@@ -44,15 +44,16 @@
                             <h1><a href="blogDetail?id=${id}">Details </a></h1>
                         </div>
                         <p></p>
-                        <img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">        
-                        <div class="image-upload">
-                            <input type="file" name="thumbnail" id="imageUpload" accept="image/*"  onchange="loadFile(event)">
-                            <label for="imageUpload">
-                                <img id="imagePreview" src="uploads/" class="img-fluid">
-                                <span class="btn btn-primary">Upload Image</span>
-                            </label>
-                        </div>
-                        <form action="changeBlogDetail" method="post">                
+                        <!--<img src = "${blog.thumbnail}" alt="Can't display image" class="center" style="height:350px; width:750px">-->        
+
+                        <form action="changeBlogDetail" method="post" enctype="multipart/form-data" id="changeDetailForm">          
+                            <div class="image-upload">
+                                <input type="file" name="thumbnail" id="imageUpload" accept="image/*"  onchange="loadFile(event)">
+                                <label for="imageUpload">
+                                    <img id="imagePreview" src="uploads/" class="img-fluid">
+                                    <span class="btn btn-primary">Upload Image</span>
+                                </label>
+                            </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Title</label>
                                 <input name="title" value="${blog.title}" class="form-control" id="" aria-describedby="">
@@ -91,6 +92,7 @@
                                     <label class="form-check-label" for="status2">Inactive</label>
                                 </div>
                             </div>
+                            <input type="hidden" name="id" value="${id}">
                             <button type="submit" class="btn btn-primary">Update</button><br/>
                         </form>
                     </div>
@@ -99,8 +101,26 @@
 
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/navBar.js"></script>
-
+        <script>
+                                    var loadFile = function (event) {
+                                        var output = document.getElementById('imagePreview');
+                                        output.src = URL.createObjectURL(event.target.files[0]);
+                                        output.onload = function () {
+                                            URL.revokeObjectURL(output.src) // free memory
+                                        }
+                                    };
+        </script>
+        <script>
+            // Gắn sự kiện "submit" vào form khi người dùng ấn submit
+            var formElement = document.getElementById("changeDetailForm"); 
+            formElement.addEventListener("submit", function (event) {
+                if (!confirm("Are you sure you want to submit?")) {
+                    event.preventDefault(); // Hủy sự kiện submit nếu người dùng không đồng ý
+                }
+            });
+        </script>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>
