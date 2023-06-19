@@ -4,12 +4,14 @@
  */
 package controller;
 
+import dal.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Slider;
 
 /**
  *
@@ -44,6 +46,9 @@ public class SliderDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int sliderId = Integer.parseInt(request.getParameter("sliderId"));
+        SliderDAO sDAO = new SliderDAO();
+        Slider x = sDAO.getOneSlider(sliderId);
+        request.setAttribute("slider", x);
         request.setAttribute("sliderId", sliderId);
         request.getRequestDispatcher("SliderDetail.jsp").forward(request, response);
     }

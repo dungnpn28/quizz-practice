@@ -10,10 +10,96 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Slider detail Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <link href="css/Style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/BlogDetail.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
-        <h1>SliderId: + ${sliderId}</h1>
-        
+        <%
+        if (session.getAttribute("user") != null) {
+        // Nếu có user, bao gồm trang cusheader.jsp
+            session.getAttribute("up");  
+        %>
+        <%@ include file="components/CusHeader.jsp" %>
+        <%
+        } 
+        %>
+        <div class="wrapper">
+            <%
+            if (session.getAttribute("user") != null) {
+            %>
+            <%@include file="components/navbar.jsp" %>
+            <%
+            } 
+            %>
+            <div id="content">
+                <div class="container row d-flex">
+                    <div class="container row d-flex justify-content-between">
+                        <div class="header-container">
+                            <h1><a href="sliderList">Slider list </a></h1>  
+                            <h1> / </h1>
+                            <h1><a href="sliderDetail?sliderId=${sliderId}">Details </a></h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <c:if test="${not empty notificationMessage}">
+                                    <div id="notification">${notificationMessage}</div>
+                                </c:if>
+                                <c:if test="${sessionScope.user.getRole_id() == 2}">
+                                    <a href="changeBlogDetail?id=${id}" class="btn btn-primary mb-3 mt-4 custom-button">
+                                        Change detail
+                                    </a>
+                                </c:if>
+                                <p></p>
+
+                                <h1 style="font-weight: bold">${slider.title}</h1>
+
+
+                                <img src = "${slider.image}" alt="Can't display image" class="center" style="height:350px; width:750px">        
+
+                                <div class ="header-container">
+                                    <h2></h2>
+                                </div>
+                                <div class ="header-container-right">
+                                    <div class="author-value-container">
+                                        <h2 class="author-value"> Updated date:
+                                            <c:choose>
+                                                <c:when test="${blog.modified == null }">
+                                                    <c:out value="${slider.created}"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:out value="${slider.modified}"/>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h2>
+                                    </div>         
+                                </div>
+                                <div class ="header-container">
+                                    <h2>Backlink: </h2>
+                                    <h2><a href="${slider.backlink}">${slider.backlink}</a></h2>
+                                    <p> </p>
+                                </div>
+                                    <div class ="header-container">
+                                    <h2>Notes:  </h2>
+                                    <h2></h2>
+                                    <p> </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <%@include file = "Login.jsp"%> 
+
+                </div>
+            </div>
+        </div>
+        <script src="js/navBar.js"></script>
     </body>
 </html>
