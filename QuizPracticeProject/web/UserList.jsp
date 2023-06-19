@@ -39,7 +39,7 @@
             session.getAttribute("up");  
         %>
         <% } %>
-        
+
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
@@ -294,56 +294,56 @@
 
             </div>
         </div>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                function applyFilters() {
-                    var genderSelect = document.getElementById("gender");
-                    var roleSelect = document.getElementById("role");
-                    var statusSelect = document.getElementById("status");
-                    var searchInput = document.getElementById("searchInput");
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                                function applyFilters() {
+                                    var genderSelect = document.getElementById("gender");
+                                    var roleSelect = document.getElementById("role");
+                                    var statusSelect = document.getElementById("status");
+                                    var searchInput = document.getElementById("searchInput");
 
-                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
-                    var role = roleSelect.options[roleSelect.selectedIndex].value;
-                    var status = statusSelect.options[statusSelect.selectedIndex].value;
-                    var search = searchInput.value;
-
-
-
-
-                    // Build your base URL
-                    var baseUrl = "userlist?";
-
-                    if (gender !== "all") {
-                        baseUrl += "gender=" + gender + "&";
-                    }
-                    if (role !== "all") {
-                        baseUrl += "role=" + role + "&";
-                    }
-                    if (status !== "all") {
-                        baseUrl += "status=" + status + "&";
-                    }
-                    if (search.trim() !== "") {
-                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
-                    }
-
-                    baseUrl = baseUrl.slice(0, -1);
-                    localStorage.setItem("gender", gender);
-                    localStorage.setItem("role", role);
-                    localStorage.setItem("status", status);
-                    localStorage.setItem("search", search);
+                                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
+                                    var role = roleSelect.options[roleSelect.selectedIndex].value;
+                                    var status = statusSelect.options[statusSelect.selectedIndex].value;
+                                    var search = searchInput.value;
 
 
 
-                    // Redirect to the filtered URL
-                    window.location.href = baseUrl;
-                }
+
+                                    // Build your base URL
+                                    var baseUrl = "userlist?";
+
+                                    if (gender !== "all") {
+                                        baseUrl += "gender=" + gender + "&";
+                                    }
+                                    if (role !== "all") {
+                                        baseUrl += "role=" + role + "&";
+                                    }
+                                    if (status !== "all") {
+                                        baseUrl += "status=" + status + "&";
+                                    }
+                                    if (search.trim() !== "") {
+                                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
+                                    }
+
+                                    baseUrl = baseUrl.slice(0, -1);
+                                    localStorage.setItem("gender", gender);
+                                    localStorage.setItem("role", role);
+                                    localStorage.setItem("status", status);
+                                    localStorage.setItem("search", search);
 
 
-            </script>
-            <script src="js/PopUp.js"></script>
-            <script src="js/navBar.js"></script>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+                                    // Redirect to the filtered URL
+                                    window.location.href = baseUrl;
+                                }
+
+
+        </script>
+        <script src="js/PopUp.js"></script>
+        <script src="js/navBar.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 
     </body>
