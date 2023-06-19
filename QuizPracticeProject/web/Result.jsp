@@ -14,6 +14,6 @@
     <body>
         <h1>Your score: ${examscore}</h1>
         <a href="simulationExam"> Simulation Exam </a>
-        <a href="reviewquiz?examId=${examId}&attId=${attId}"> Review attempt </a>
+        <a href="reviewquiz?examId=${examId}&attId=${attId}&page=1"> Review attempt </a>
     </body>
 </html>

@@ -14,7 +14,7 @@
         <title>Quiz Handle</title>
         <link rel="stylesheet" href="css/QuizHandle.css" type="text/css" />
         <script src="js/QuizHandle.js"></script>
-
+        
     </head>
 
     <body>
@@ -121,7 +121,6 @@
                                        ${question.optionD}</label>
                             </span>
 
-
                         </div>
                         <input type="submit" id="submit-btn" value="SUBMIT" hidden>
 
@@ -166,9 +165,8 @@
 
                                 </div>
                                 <div class="question-navigation">
-                                    <c:forEach var="question" items="${allQuestionL}">
-                                        <a
-                                            href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>
+                                    <c:forEach var="question" begin="1" end="${endP}">
+                                        <a href="quizhandle?id=${id}&page=${question}">${question}</a>
                                     </c:forEach>
                                 </div>
                                 <div class="navigate-btn">

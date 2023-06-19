@@ -82,7 +82,6 @@ public class QuizHandleController extends HttpServlet {
             } else {
                 a.scoreQuestion(0, attemptId, examId, questionId, u.getId());
             }
-            System.out.println(currentQues.getAnswer());
         }
 
         //progress bar business
@@ -127,7 +126,7 @@ public class QuizHandleController extends HttpServlet {
         if (page > 1) {
             attemptId--;
         }
-        System.out.println(attemptId);
+        req.setAttribute("attId", attemptId);
 
         //create exam attempts
         a.createAttempt(attemptId, examId, questionId, u.getId());

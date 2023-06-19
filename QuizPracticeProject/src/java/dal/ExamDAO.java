@@ -305,7 +305,7 @@ public class ExamDAO extends MyDAO {
         }
         return (examList);
     }
-    
+
     public String getExamDurationById(int examId) {
         try {
             String strSelect = "select * from [exam] "
@@ -318,6 +318,22 @@ public class ExamDAO extends MyDAO {
             }
         } catch (Exception e) {
             System.out.println("getExamDurationById:" + e.getMessage());
+        }
+        return null;
+    }
+
+    public String getExamNameById(int examId) {
+        try {
+            String strSelect = "select name from [exam] "
+                    + "where id=?;";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getExamNameById:" + e.getMessage());
         }
         return null;
     }
