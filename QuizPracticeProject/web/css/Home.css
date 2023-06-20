@@ -174,15 +174,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
 }
 
-/*.post_Container{
-    display: grid;
-    width: 40px;
-    height: 40px;
-    grid-template-columns: repeat(1, 1fr);  Chia thành 1 cột  
-    grid-template-rows: repeat(2, 1fr);  Chia thành 2 hàng có chiều cao bằng nhau 
-    border: solid aqua 3px;
-    margin: 20px;  Khoảng cách giữa các ô
-}*/
 
 .post_box{
     /*display: flex;*/
@@ -326,7 +317,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     overflow: hidden;
 }
 /*table a{
-
     position:relative;
     display:inline-block;
     padding:10px 30px;
@@ -339,7 +329,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border-radius:40px;
     background: linear-gradient(90deg,#755bea,#ff72c0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-
 
 }
 table a:hover{

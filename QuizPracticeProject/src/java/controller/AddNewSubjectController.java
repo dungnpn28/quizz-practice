@@ -31,8 +31,11 @@ public class AddNewSubjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part file = req.getPart("thumbnail");
-        String thumbnail = file.getSubmittedFileName();
-       
+
+        String originalFileName = file.getSubmittedFileName();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String thumbnail = System.currentTimeMillis() + fileExtension;
+        
         String name = req.getParameter("name");
         String category_idd = req.getParameter("category");
         int category_id = Integer.parseInt(category_idd);
@@ -48,17 +51,16 @@ public class AddNewSubjectController extends HttpServlet {
         boolean featuredValue = (featured != null && featured.equals("on")) ? true : false;
         SubjectDAO sj = new SubjectDAO();
         sj.addNewSubject(thumbnail, name, category_id, status, description, featuredValue, owner_id);
-       
-        
-        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + thumbnail;
+
+        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
         try {
-        FileOutputStream fos = new FileOutputStream(uploadPath);
-        InputStream is = file.getInputStream();
-        byte[] data = new byte[is.available()];
-        is.read(data);
-        fos.write(data);
-        fos.close();
-        } catch(Exception e) {
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = file.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         req.setAttribute("mess", "success add");

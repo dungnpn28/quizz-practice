@@ -82,8 +82,9 @@ public class SliderListController extends HttpServlet {
         }
         //button EDIT
         if (request.getParameter("btnEdit") != null) {
-            int id = Integer.parseInt(request.getParameter("sid"));
-            Slider listSlider = new SliderDAO().getOneSlider(id);
+            int sid = Integer.parseInt(request.getParameter("sid"));
+            Slider listSlider = new SliderDAO().getOneSlider(sid);
+            request.setAttribute("sid", sid);
             request.setAttribute("listSlider", listSlider);
             request.getRequestDispatcher("EditSlider.jsp").forward(request, response);
         }

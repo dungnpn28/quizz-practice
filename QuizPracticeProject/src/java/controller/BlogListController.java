@@ -54,9 +54,6 @@ public class BlogListController extends HttpServlet {
         List<Blog> listBlog = new BlogDAO().getBlogList();
         req.setAttribute("listBlog", listBlog);
         req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
-        
-        
-        
     } 
 
     /** 
