@@ -74,19 +74,22 @@
                         <br>
                         <div class="mb-3">
                             <label for="content" class="form-label">HTML Content</label>                 
-                            <br>
-                            <textarea name="editor" rows="10" cols="50" style="overflow-y:scroll;" class="form-control" id="editor"></textarea>
+
+                            <!--<textarea name="editor" rows="10" cols="50" style="overflow-y:scroll;" class="form-control" id="editor"></textarea>-->
+                            <input name="htmlContent" type="text" class="form-control" id="htmlContent" >
+
                         </div>
                         <br>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <input type="radio" name="status" value="1" checked=""> Active
+                            <input type="radio" name="status" value="0"> Deactive       
+                        </div>
+                        <input type="hidden" name="subjectId" value="${subjectId}">
+
                         <input type="submit" class="btn btn-primary" value="Submit">
                     </form>
-                    <script>
-                        ClassicEditor
-                                .create(document.querySelector('#editor'))
-                                .catch(error => {
-                                    console.error(error);
-                                });
-                    </script>
+                    
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                     <script>

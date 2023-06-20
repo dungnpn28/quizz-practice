@@ -6,13 +6,13 @@ package controller;
 
 import dal.LessonDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Lesson;
 import model.Lesson_Topic;
 import model.Lesson_Type;
 
@@ -34,6 +34,7 @@ public class AddNewLessonDetailsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
 
         LessonDAO lDAO = new LessonDAO();
         List<Lesson_Topic> lessonTopicList = new ArrayList<>();
@@ -42,7 +43,7 @@ public class AddNewLessonDetailsController extends HttpServlet {
         lessonTopicList = lDAO.getLessonTopic();
         request.setAttribute("lessonTopicList", lessonTopicList);
         request.setAttribute("lessonTypeList", lessonTypeList);
-
+        request.setAttribute("subjectId", subjectId);
         request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
 
     }
@@ -75,7 +76,22 @@ public class AddNewLessonDetailsController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
 
+        String xName = request.getParameter("name");
+        int xType = Integer.parseInt(request.getParameter("selectedType"));
+        int xTopic = Integer.parseInt(request.getParameter("selectedTopic"));
+        int xOrder = Integer.parseInt(request.getParameter("order"));
+        String xLink = request.getParameter("link");
+        String xContent = request.getParameter("htmlContent");
+        String xStatus = request.getParameter("status");
+        boolean status = true;
+        if (xStatus.equals("0")) {
+            status = false;
+        }
+        LessonDAO lDAO = new LessonDAO();
+        lDAO.insert(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status);
+        request.getRequestDispatcher("/subjectLessons?subjectId="+subjectId).forward(request, response);
     }
 
     /**

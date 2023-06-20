@@ -17,15 +17,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="">Add lesson</a>
+        <a href="addNewLessonDetails?subjectId=${subjectId}">Add lesson</a>
         <table border="1">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Lesson</th>
                     <th>Order</th>
-                    <th>Type</th>
-                    
+                    <th>Type</th>                   
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -43,7 +42,7 @@
                         <c:if test="${lesson.isStatus() == false}">
                             <td><div class="deactive-button">Deactive</div></td>
                         </c:if>
-                        <td><a href="">Edit</a></td>
+                        <td><a href="editLessonDetails?lessonId=${lesson.getId()}">Edit</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

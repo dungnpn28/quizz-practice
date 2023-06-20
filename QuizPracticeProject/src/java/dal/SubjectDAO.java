@@ -25,9 +25,10 @@ public class SubjectDAO extends MyDAO {
             String xIllustratoin;
 //            int xDimesion_id;
             String xName;
-            int xCategory;
+            int xCategory_id;
             boolean xStatus;
             String xDescription;
+            int xAuthor_id;
             Date xModified;
             boolean xFeatured;
             Subject x;
@@ -37,11 +38,13 @@ public class SubjectDAO extends MyDAO {
 //                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
-                xCategory = rs.getInt("category_id");
+                xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
+                xAuthor_id = rs.getInt("author_id");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                
+                x = new Subject(xID, xIllustratoin, xName, xCategory_id, xStatus, xDescription,xAuthor_id, xModified, xFeatured);
                 t.add(x);
             }
             rs.close();
