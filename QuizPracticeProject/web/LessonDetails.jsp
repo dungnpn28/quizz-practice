@@ -4,7 +4,13 @@
     Author     : dai
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.util.*" %>
+<%@page import= "model.*"%>
+<%@page import= "dal.*"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,11 +24,12 @@
         <title>Quizerro</title>
     </head>
     <%
-        String str = "";
-        User u = (User) request.getSession().getAttribute("user");
-        if(u.getRole_id() != 4 && u.getRole_id() != 5){
-            response.sendRedirect("AccessDenied.jsp");
-        }
+            if (session.getAttribute("user") != null) {
+            // Nếu có user, bao gồm trang cusheader.jsp
+                session.getAttribute("up");  
+    %>
+    <%
+    } 
     %>
     <%@include file="components/CusHeader.jsp" %>
     <body>
@@ -31,7 +38,7 @@
             <div id="content">
                 <h2>Lesson Details</h2>
                 <div class="lesson-detail">
-                    <form class="form-wrapper">
+                    <form class="form-wrapper" id="addLesson" name="addLesson" action="addNewLessonDetails" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input name="name" type="text" class="form-control" id="name">
@@ -39,19 +46,19 @@
                         <br>
                         <div class="mb-3">
                             <label for="type" class="form-label">Type</label>
-                            <select class="form-control" id="type" name="type">
-                                <option>Subject topic</option>
-                                <option>Lesson</option>
-                                <option>Quiz</option>
+                            <select name="selectedType">
+                                <c:forEach items="${lessonTypeList}" var="type">
+                                    <option value="${type.id}">${type.name}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <br>
                         <div class="mb-3">
                             <label for="topic" class="form-label">Topic</label>
-                            <select class="form-control" id="topic" name="topic" >
-                                <option>Subject topic</option>
-                                <option>Lesson</option>
-                                <option>Quiz</option>
+                            <select name="selectedTopic">
+                                <c:forEach items="${lessonTopicList}" var="topic">
+                                    <option value="${topic.id}">${topic.name}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <br>
@@ -72,7 +79,6 @@
                         </div>
                         <br>
                         <input type="submit" class="btn btn-primary" value="Submit">
-
                     </form>
                     <script>
                         ClassicEditor
