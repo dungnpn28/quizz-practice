@@ -20,6 +20,74 @@ public class Question {
     private String answer;
     private int questionOrder;
     private double marksAllocated;
+    private String explaination;
+    private boolean marked;
+    private String userAnswer;
+    private double score;
+
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated, String explaination, boolean marked, String userAnswer, double score) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.questionOrder = questionOrder;
+        this.marksAllocated = marksAllocated;
+        this.explaination = explaination;
+        this.marked = marked;
+        this.userAnswer = userAnswer;
+        this.score = score;
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+    
+
+    public String getExplaination() {
+        return explaination;
+    }
+
+    public void setExplaination(String explaination) {
+        this.explaination = explaination;
+    }
+
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated, String explaination) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.questionOrder = questionOrder;
+        this.marksAllocated = marksAllocated;
+        this.explaination = explaination;
+    }
 
     public int getQuestionOrder() {
         return questionOrder;

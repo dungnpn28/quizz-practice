@@ -276,4 +276,27 @@ public class AttemptDAO extends MyDAO {
         return true;
     }
 
+    public void createNullAttempt(int attemptId, int examId, int questionId, int userId) {
+        try {
+            String strAdd = "insert into [attempt]"
+                    + "(attempt_id, exam_id, question_id, user_id, marked, created, user_answer) "
+                    + "values(?,"
+                    + " ?,"
+                    + " ?,"
+                    + " ?,"
+                    + " 0,"
+                    + "GETDATE(),"
+                    + "null);";
+            ps = con.prepareStatement(strAdd);
+            ps.setInt(1, attemptId);
+            ps.setInt(2, examId);
+            ps.setInt(3, questionId);
+            ps.setInt(4, userId);
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("createNullAttempt: " + e.getMessage());
+        }
+    }
+
 }

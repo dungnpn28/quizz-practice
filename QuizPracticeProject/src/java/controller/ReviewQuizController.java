@@ -50,7 +50,7 @@ public class ReviewQuizController extends HttpServlet {
         req.setAttribute("examscore", score);
 
         //get question list by exam id - non paging
-        ArrayList<Question> allQuestionList = q.getListQuestionByExamIdNonPaging(examId);
+        ArrayList<Question> allQuestionList = q.getQuestionListByExamAttempt(examId, attemptId, u.getId());
         req.setAttribute("allQuestionL", allQuestionList);
         req.setAttribute("attId", attemptId);
         req.setAttribute("examId", examId);
