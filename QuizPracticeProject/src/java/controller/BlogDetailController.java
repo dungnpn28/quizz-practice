@@ -40,15 +40,19 @@ public class BlogDetailController extends HttpServlet {
         String id = request.getParameter("id");
         request.setAttribute("id", id);
         BlogDAO dao = new BlogDAO();
+        List<Blog> updatedBlogList = dao.getBlogListOrderByUpdated();
+        request.setAttribute("updatedBlogList", updatedBlogList);
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
         
         int author_id = blog.getAuthor_id();
         String author = dao.getAuthor(author_id);
+        request.setAttribute("authorId", author_id);
         request.setAttribute("author", author);
         
         int category_id = blog.getCategory_id();
         String category = dao.getCategoryName(category_id);
+        request.setAttribute("categoryId", category_id);
         request.setAttribute("category", category);
         
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();

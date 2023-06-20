@@ -19,7 +19,7 @@ public class SliderDAO extends MyDAO {
     public List<Slider> getSlider() {
         List<Slider> s = new ArrayList<>();
         try {
-            xSql = "select * from slider";
+            xSql = "select * from slider where status = 1";
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             int xID;

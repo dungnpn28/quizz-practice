@@ -38,7 +38,7 @@ public class EditSliderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,7 +107,11 @@ public class EditSliderController extends HttpServlet {
 
         List<Slider> filterStatus = new SliderDAO().getSliderByStatus(true);
         request.setAttribute("filterStatus", filterStatus);
-
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
     }
 

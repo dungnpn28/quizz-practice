@@ -60,6 +60,15 @@
                                     <a href="BlogListController" class="mb-3 mt-4 custom-button">
                                         All Blog
                                     </a>
+
+                                    <p></p>
+                                    <c:if test="${not empty categoryName}">
+                                        <h3>List Blog by category: ${categoryName}</h3>
+                                    </c:if>
+                                    <p></p>
+                                    <c:if test="${not empty authorId}">
+                                        <h3>List Blog by author: ${authorName}</h3>
+                                    </c:if>
                                     <p></p>
                                     <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
@@ -73,7 +82,7 @@
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
 
-                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
 
                                                                 </div>
                                                                 <div class="col-md-8">
@@ -127,7 +136,15 @@
                                         <c:if test="${key!= mull}" >
                                             <h3 class="mb-3 mt-4">Search for "${key}"</h3>
                                         </c:if>
-
+                                        <form action="BlogListController" method="get">
+                                            <select name="selectedCategory">
+                                                <option value="0">All</option>
+                                                <c:forEach items="${listCategory}" var="category">
+                                                    <option value="${category.id}">${category.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <button type="submit">Confirm</button>
+                                        </form>
 
                                     </div>
 

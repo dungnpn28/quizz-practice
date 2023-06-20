@@ -97,3 +97,8 @@ h3 {
 .author-label, .author-value {
     margin-bottom: 0;
 }
+
+.blogAtribute{
+    text-decoration: none;
+    font-style: italic;
+}

@@ -99,7 +99,122 @@ public class BlogDAO extends MyDAO {
         }
         return t;
     }
+    public List<Blog> getBlogListOrderByUpdated() {
+        List<Blog> t = new ArrayList<>();
+        xSql = "select * from [blog] order by [modified] DESC";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief;
+        Blog x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
 
+    public List<Blog> getBlogListByCategory(int category_id) {
+        List<Blog> t = new ArrayList<>();
+        xSql = "select * from [blog] where category_id = ?";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief;
+        Blog x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, category_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+    
+    public List<Blog> getBlogListByAuthor(int author_id) {
+        List<Blog> t = new ArrayList<>();
+        xSql = "select * from [blog] where author_id = ?";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief;
+        Blog x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, author_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+    
     public String getAuthor(int id) {
         xSql = "select full_name from [user_profile]\n"
                 + "where user_id = ?";

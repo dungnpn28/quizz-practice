@@ -109,6 +109,7 @@ public class ChangeBlogDetailController extends HttpServlet {
 
             String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
             try {
+
                 FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = file.getInputStream();
                 byte[] data = new byte[is.available()];
@@ -125,6 +126,11 @@ public class ChangeBlogDetailController extends HttpServlet {
         bDAO.updateBlogWithoutThumbnail(x);
 
         request.setAttribute("notificationMessage", "Update successfully !!!");
+        try {
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("/blogDetail?id=" + id).forward(request, response);
     }
 
