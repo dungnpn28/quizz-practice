@@ -60,8 +60,7 @@ public class BlogDAO extends MyDAO {
         } catch (Exception e) {
         }
         return x;
-    }
-
+    }    
     public List<Blog> getBlogList() {
         List<Blog> t = new ArrayList<>();
         xSql = "select * from [blog]";

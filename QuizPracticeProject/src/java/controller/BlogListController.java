@@ -72,7 +72,6 @@ public class BlogListController extends HttpServlet {
         if (req.getParameter("selectedCategory") != null) {
             selectedCategoryId = Integer.parseInt(req.getParameter("selectedCategory"));
             if (selectedCategoryId == 0) {
-
                 listBlog = bDAO.getBlogList();
             } else {
                 listBlog = bDAO.getBlogListByCategory(selectedCategoryId);

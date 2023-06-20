@@ -4,7 +4,6 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import dal.BlogDAO;
 import dal.Blog_CategoryDAO;
 import jakarta.servlet.ServletException;
@@ -36,30 +35,30 @@ public class BlogDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String id = request.getParameter("id");
         request.setAttribute("id", id);
-        BlogDAO dao = new BlogDAO();
-        List<Blog> updatedBlogList = dao.getBlogListOrderByUpdated();
+        BlogDAO bDAO = new BlogDAO();
+        List<Blog> updatedBlogList = bDAO.getBlogListOrderByUpdated();
         request.setAttribute("updatedBlogList", updatedBlogList);
-        Blog blog = dao.getBlogDetail(id);
+        Blog blog = bDAO.getBlogDetail(id);
         request.setAttribute("blog", blog);
-        
+
         int author_id = blog.getAuthor_id();
-        String author = dao.getAuthor(author_id);
+        String author = bDAO.getAuthor(author_id);
         request.setAttribute("authorId", author_id);
         request.setAttribute("author", author);
-        
+
         int category_id = blog.getCategory_id();
-        String category = dao.getCategoryName(category_id);
+        String category = bDAO.getCategoryName(category_id);
         request.setAttribute("categoryId", category_id);
         request.setAttribute("category", category);
-        
+
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-        request.setAttribute("listCategory",listCategory);
-        List<Blog> listBlog = new BlogDAO().getBlogList();
+        request.setAttribute("listCategory", listCategory);
+        List<Blog> listBlog = bDAO.getBlogList();
         request.setAttribute("listBlog", listBlog);
-        
+
         request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
     }
 

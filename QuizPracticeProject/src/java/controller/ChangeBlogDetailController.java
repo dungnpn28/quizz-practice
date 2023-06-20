@@ -44,12 +44,12 @@ public class ChangeBlogDetailController extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
-
+        request.setAttribute("categoryName", dao.getCategoryName(blog.getId()));
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
         request.setAttribute("listCategory", listCategory);
-
+        
         request.getRequestDispatcher("ChangeBlogDetail.jsp").forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,7 +78,7 @@ public class ChangeBlogDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String notificationMessage = "You did not change anything";
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int category_id = Integer.parseInt(request.getParameter("category"));
@@ -98,18 +98,18 @@ public class ChangeBlogDetailController extends HttpServlet {
         }
         Blog x = null;
         BlogDAO bDAO = new BlogDAO();
-
+        
         String thumbnail = null;
         Part file = request.getPart("thumbnail");
-
+        
         if (file != null && file.getSize() > 0) {
             String originalFileName = file.getSubmittedFileName();
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             thumbnail = System.currentTimeMillis() + fileExtension;
-
+            
             String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
             try {
-
+                
                 FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = file.getInputStream();
                 byte[] data = new byte[is.available()];
@@ -120,12 +120,15 @@ public class ChangeBlogDetailController extends HttpServlet {
                 e.printStackTrace();
             }
             x = new Blog(id, thumbnail, title, category_id, flag, status, content, brief_info);
-            bDAO.updateBlogWithThumbnail(x);
+            
         }
         x = new Blog(id, title, category_id, flag, status, content, brief_info);
+        if (x != null) {
+            bDAO.updateBlogWithThumbnail(x);
+            notificationMessage = "Update successfully !!!";
+        }
         bDAO.updateBlogWithoutThumbnail(x);
-
-        request.setAttribute("notificationMessage", "Update successfully !!!");
+        request.setAttribute("notificationMessage", notificationMessage);
         try {
             Thread.sleep(1500);
         } catch (Exception e) {

@@ -50,7 +50,7 @@
                             <div class="image-upload">
                                 <input type="file" name="thumbnail" id="imageUpload" accept="image/*"  onchange="loadFile(event)">
                                 <label for="imageUpload">
-                                    <img id="imagePreview" src="uploads/" class="img-fluid">
+                                    <img id="imagePreview" src="uploads/${blog.thumbnail}" class="img-fluid">
                                     <span class="btn btn-primary">Upload Image</span>
                                 </label>
                             </div>
@@ -61,10 +61,12 @@
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
                                 <select class="form-select" id="category" name="category" required>
-                                    <option value="" hidden>Select a category</option>
+                                    <option value="${blog.category_id}" hidden>${categoryName}</option>
                                     <c:forEach var="category" items="${listCategory}">
+                                        <c:if test="${category.getId() != blog.category_id}">
+                                            <option value="${category.getId()}">${category.getName()}</option>
+                                        </c:if>
 
-                                        <option value="${category.getId()}">${category.getName()}</option>
 
                                     </c:forEach>
                                 </select>
@@ -114,7 +116,7 @@
         </script>
         <script>
             // Gắn sự kiện "submit" vào form khi người dùng ấn submit
-            var formElement = document.getElementById("changeDetailForm"); 
+            var formElement = document.getElementById("changeDetailForm");
             formElement.addEventListener("submit", function (event) {
                 if (!confirm("Are you sure you want to submit?")) {
                     event.preventDefault(); // Hủy sự kiện submit nếu người dùng không đồng ý

@@ -78,7 +78,28 @@
                                             <c:forEach items="${listBlog}" var="Blog" varStatus="status">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
-                                                        <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
+                                                        <c:if test="${sessionScope.user.getRole_id() == 2}">
+                                                            <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
+                                                            <div class="row g-0">
+                                                                <div class="col-md-4">
+
+                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">${Blog.getTitle()}</h5>
+                                                                        <div class="card-date"> ${Blog.getBrief_info()}</div>
+                                                                        <p><p>
+                                                                        <h4 class="card-date">Status: ${Blog.status?"Active":"Inactive"}</h4>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </c:if>
+                                                        <c:if test="${(sessionScope.user.getRole_id() == 1 || empty sessionScope.user) && Blog.status}">
+                                                            <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
 
@@ -94,6 +115,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        </c:if>
                                                     </div>
                                                 </div>
                                             </c:forEach>
