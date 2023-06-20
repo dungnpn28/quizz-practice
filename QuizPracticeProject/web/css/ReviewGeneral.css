@@ -26,14 +26,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 html,
 body {
-    width: 100%;    
+    width: 100%;
     height: 100%;
     background-color: #0a092d;
 }
 
 main {
     width: 100%;
-    height:auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -113,7 +113,7 @@ body {
     align-items: start;
 }
 
-.review-sidebar h3{
+.review-sidebar h3 {
     font-weight: bold;
     font-style: italic;
 }
@@ -122,7 +122,8 @@ body {
     width: 100%;
 }
 
-.review-sidebar table th, td {
+.review-sidebar table th,
+td {
     padding: 22px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -198,7 +199,7 @@ body {
 
 }
 
-.game-options-container span input{
+.game-options-container span input {
     display: inline-block;
     appearance: none;
     margin-left: 30px;
@@ -212,7 +213,7 @@ body {
     cursor: pointer;
 }
 
-.game-options-container span input:checked{
+.game-options-container span input:checked {
     background-color: white;
 }
 
@@ -379,7 +380,7 @@ span label {
     align-items: center;
 }
 
-.under-header input{
+.under-header input {
     font-size: 1.5rem;
     cursor: pointer;
     margin: 0 10px;
@@ -553,6 +554,12 @@ span label {
     transition: background-color 0.3s ease;
 }
 
+.popup-content .temp {
+    width: 60px;
+    height: 60px;
+    visibility:hidden;
+}
+
 .popup-content h1 {
     font-weight: bolder;
 }
@@ -567,8 +574,50 @@ span label {
     justify-content: space-between;
 }
 
+
+.question-navigation .incorrect {
+    background-color: rgb(181, 10, 15);
+}
+
+.question-navigation .correct {
+    background-color: rgb(55, 171, 55);
+}
+
+.question-navigation #marked::before {
+    position: absolute;
+    content: "";
+    top: -10px;
+    right: -10px;
+    background-image: url('/QuizPracticeProject/img/yellowflag.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    z-index: 10;
+}
+
+.question-navigation #marked {
+    position: relative;
+}
+
+
 .question-filter button {
     font-size: 12px;
+}
+
+.question-filter .correct-question {
+    background-color: rgb(55, 171, 55);
+    color: white;
+}
+
+.question-filter .incorrect-question {
+    background-color: rgb(181, 10, 15);
+    color: white;
+}
+
+.question-filter .marked-question {
+    background-color: yellow;
 }
 
 
@@ -623,17 +672,20 @@ span label {
     opacity: 1;
 }
 
-.peek-header{
+.peek-header {
     display: flex;
     justify-content: center;
 }
-.peek-header h1{
+
+.peek-header h1 {
     font-weight: bolder;
 }
+
 .peek-button {
     display: flex;
     justify-content: center;
 }
+
 .question-id {
     display: flex;
     justify-content: center;
@@ -667,19 +719,19 @@ span label {
 }
 
 .exit-button button:hover {
-    opacity:0.7;
+    opacity: 0.7;
 }
 
 .exit-button button:active {
-    opacity:0.5;
+    opacity: 0.5;
 }
 
 .exit-button a:hover {
-    opacity:0.7;
+    opacity: 0.7;
 }
 
 .exit-button a:active {
-    opacity:0.5;
+    opacity: 0.5;
 }
 
 .exit-popup-overlay {
@@ -712,23 +764,26 @@ span label {
     opacity: 1;
 }
 
-.exit-header{
+.exit-header {
     display: flex;
     justify-content: center;
 }
-.exit-header h2{
+
+.exit-header h2 {
     font-weight: bolder;
     color: black;
 }
+
 .exit-content {
     display: flex;
     justify-content: center;
 }
 
-.exit-content h4{
+.exit-content h4 {
     color: black;
 }
-.exit-popup-button{
+
+.exit-popup-button {
     display: flex;
     justify-content: space-around;
 }
@@ -762,24 +817,27 @@ span label {
     visibility: visible;
     opacity: 1;
 }
-.score-header{
+
+.score-header {
     display: flex;
     justify-content: center;
 }
-.score-header h2{
+
+.score-header h2 {
     font-weight: bolder;
     color: black;
 }
+
 .score-content {
     display: flex;
     justify-content: center;
 }
 
-.score-content h4{
+.score-content h4 {
     color: black;
 }
-.score-popup-button{
+
+.score-popup-button {
     display: flex;
     justify-content: space-around;
 }
-

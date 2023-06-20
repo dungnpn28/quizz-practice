@@ -12,7 +12,8 @@
         <link rel="stylesheet" type="text/css"
               href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
         <link rel="stylesheet" href="css/ReviewGeneral.css" type="text/css" />
-        <script src="js/QuizHandle.js"></script>
+        <script src="js/QuizReview.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     </head>
 
     <body>
@@ -166,18 +167,17 @@
                     <div id="popup" class="popup-overlay">
                         <div class="popup-content">
                             <div class="review-header">
-                                <h1>Review Progress</h1>
+                                <h1>Review Result</h1>
                             </div>
                             <div class="question-filter">
-                                <button>All Questions</button>
-                                <button class="marked-question">Correct Answer</button>
-                                <button class="unanswered-question">Incorrect Answer</button>
-                                <button class="answered-question">Marked Question</button>
-
+                                <button onclick="displayAllQuestion();">All Questions</button>
+                                <button onclick="filterCorrectAnswer();" class="correct-question">Correct Answer</button>
+                                <button onclick="filterIncorrectAnswer()" class="incorrect-question">Incorrect Answer</button>
+                                <button onclick="filterMarkedAnswer()" class="marked-question">Marked Question</button>
                             </div>
                             <div class="question-navigation">
                                     <c:forEach var="q" items="${allQuestionL}">
-                                        <a class="${q.}" href="reviewquiz?examId=${examId}&attId=${attId}&page=${q.questionOrder}">${q.questionOrder}</a>
+                                        <a class="${q.userAnswer ne q.answer ? 'incorrect' : 'correct'}" id="${q.marked ? 'marked' : 'unmarked'}" href="reviewquiz?examId=${examId}&attId=${attId}&page=${q.questionOrder}">${q.questionOrder}</a>
                                     </c:forEach>
                             </div>
                             <div class="navigate-btn">
