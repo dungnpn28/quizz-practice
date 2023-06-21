@@ -11,10 +11,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import model.Blog;
 import model.Blog_Category;
+import model.User;
 
 /**
  *
@@ -37,10 +39,18 @@ public class BlogDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String id = request.getParameter("id");
+        int blogId = Integer.parseInt(id);
         request.setAttribute("id", id);
         BlogDAO bDAO = new BlogDAO();
+        int view = bDAO.getView(blogId);
+        bDAO.updateView(blogId, view);
+
         List<Blog> updatedBlogList = bDAO.getBlogListOrderByUpdated();
+        List<Blog> mostViewBlogList = bDAO.getBlogListOrderByView();
+
         request.setAttribute("updatedBlogList", updatedBlogList);
+        request.setAttribute("mostViewBlogList", mostViewBlogList);
+
         Blog blog = bDAO.getBlogDetail(id);
         request.setAttribute("blog", blog);
 

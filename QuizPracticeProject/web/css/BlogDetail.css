@@ -102,3 +102,11 @@ h3 {
     text-decoration: none;
     font-style: italic;
 }
+
+.updated-blog-list {
+    display: block;
+}
+
+.most-view-blog-list {
+    display: none;
+}

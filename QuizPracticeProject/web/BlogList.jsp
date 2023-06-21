@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
 
     <body>
@@ -80,41 +81,51 @@
                                                     <div class="col-md-12 mb-3">
                                                         <c:if test="${sessionScope.user.getRole_id() == 2}">
                                                             <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
-                                                            <div class="row g-0">
-                                                                <div class="col-md-4">
+                                                                <div class="row g-0">
+                                                                    <div class="col-md-4">
 
-                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                                                                        <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
 
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">${Blog.getTitle()}</h5>
-                                                                        <div class="card-date"> ${Blog.getBrief_info()}</div>
-                                                                        <p><p>
-                                                                        <h4 class="card-date">Status: ${Blog.status?"Active":"Inactive"}</h4>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">${Blog.getTitle()}</h5>
+                                                                            <c:if test="${Blog.flag eq '1'}">
+                                                                                <img src="img/icons8-flame.gif" alt="Animated GIF">
+                                                                                <h3 style="display: inline;">Featured</h3>
+                                                                            </c:if> 
+                                                                            <i class="fas fa-eye"></i>${Blog.view}
+                                                                            <div class="card-date">${Blog.getBrief_info()}</div>
+                                                                            <p><p>
+                                                                            <h4 class="card-date">Status: ${Blog.status?"Active":"Inactive"}</h4>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         </c:if>
                                                         <c:if test="${(sessionScope.user.getRole_id() == 1 || empty sessionScope.user) && Blog.status}">
                                                             <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
-                                                            <div class="row g-0">
-                                                                <div class="col-md-4">
+                                                                <div class="row g-0">
+                                                                    <div class="col-md-4">
 
-                                                                    <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
+                                                                        <a href="blogDetail?id=${Blog.getId()}"><img src="uploads/${Blog.getThumbnail()}" width="100%" height="100%" alt="Ảnh"></a>
 
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">${Blog.getTitle()}</h5>
-                                                                        <div class="card-date"> ${Blog.getBrief_info()}</div>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title" >${Blog.getTitle()}</h5>
+                                                                            <c:if test="${Blog.flag eq '1'}">
+                                                                                <img src="img/icons8-flame.gif" alt="Animated GIF">
+                                                                                <h4 style="display: inline;">Featured</h4>
+                                                                            </c:if> 
+                                                                            <i class="fas fa-eye"></i>${Blog.view}
+                                                                            <div class="card-date" style="font-size: 13px"> ${Blog.getBrief_info()}</div>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         </c:if>
                                                     </div>
                                                 </div>

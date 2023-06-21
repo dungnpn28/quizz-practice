@@ -22,6 +22,7 @@
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
         <link href="css/BlogDetail.css" rel="stylesheet" type="text/css"/>
         <link href="css/Home.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     </head>
 
@@ -74,6 +75,7 @@
                                         <img src="img/icons8-flame.gif" alt="Animated GIF">
                                         <h3 style="display: inline;">Featured</h3>
                                     </c:if>
+                                    <i class="fas fa-eye"></i>${blog.view}
                                     <h1 style="font-weight: bold">${blog.title}</h1>
                                     <div class ="header-container">
                                         <h2>Category:</h2>
@@ -101,7 +103,7 @@
                                         <div class="author-value-container">
                                             <h2 class="author-value">Author:
                                                 <a class="blogAtribute" href="BlogListController?authorId=${authorId}">  <c:out value="${author}"/></a>
-                                                </h2>
+                                            </h2>
                                         </div>
                                     </div>
                                     <div class ="header-container-right">
@@ -127,14 +129,11 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Updated blog</th>
-                                                    
                                                 </tr>
-
                                             </thead>
                                             <tbody>
 
                                                 <c:forEach var="blog" items="${updatedBlogList}" begin="0" end="2">
-
                                                     <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
                                                         <td>
                                                             <div class="table-image">
@@ -144,12 +143,38 @@
                                                         <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
                                                             <br/>
                                                             <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                            <i class="fas fa-eye"></i>${blog.view}
+
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Most view blog</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="blog" items="${mostViewBlogList}" begin="0" end="2">
+                                                    <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                        <td>
+                                                            <div class="table-image">
+                                                                <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                            </div>
+                                                        </td>
+                                                        <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                            <br/>
+                                                            <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                            <i class="fas fa-eye"></i>${blog.view}
+
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
@@ -163,15 +188,8 @@
             </div>
         </div>
         <script src="js/navBar.js"></script>
-        <script>
-                                                        // Hiển thị thông báo
-                                                        document.getElementById("notification").style.display = "block";
+        <script src="js/blogDetails.js"></script>
 
-                                                        // Ẩn thông báo sau 5 giây
-                                                        setTimeout(function () {
-                                                            document.getElementById("notification").style.display = "none";
-                                                        }, 5000);
-        </script>
     </body>
     <%@include file="components/Footer.jsp" %>
 </html>
