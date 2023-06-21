@@ -64,7 +64,7 @@ public class UserProfileDAO extends MyDAO {
     }
 
     public UserProfile getUserProfilefull(int userId) {
-       
+
         try {
             String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified \n"
                     + "                                        FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where id = ?";
@@ -141,11 +141,12 @@ public class UserProfileDAO extends MyDAO {
         }
         return data;
     }
+
     public List<UserProfile> getListUserProfileByRole(int aid) {
         List<UserProfile> data = new ArrayList<>();
         try {
-            String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified"+
-                                                       " FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where role_id = ?";
+            String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified\n"
+                    + " FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where role_id = ?";
             ps = con.prepareStatement(strSelect);
             ps.setInt(1, aid);
             rs = ps.executeQuery();
@@ -333,13 +334,12 @@ public class UserProfileDAO extends MyDAO {
 
         return 0;
     }
-    
-     public void changeUser(int id) {
+
+    public void changeUser(int id) {
         try {
             String strAdd = "update [user_profile] set [modified] = GETDATE() where user_id = ?";
             ps = con.prepareStatement(strAdd);
-            
-           
+
             ps.setInt(1, id);
 
             ps.executeUpdate();
