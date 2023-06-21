@@ -73,9 +73,12 @@ public class ChangeUserProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int xUser_id = user.getId();
         int genderValue = 0;
+            
         Part file = request.getPart("avatar");
-        String xAvatar = file.getSubmittedFileName();
-        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + xAvatar;
+         String originalFileName = file.getSubmittedFileName();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String xAvatar = System.currentTimeMillis() + fileExtension;
+        String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads/" + xAvatar;      
         try {
         FileOutputStream fos = new FileOutputStream(uploadPath);
         InputStream is = file.getInputStream();
@@ -86,6 +89,7 @@ public class ChangeUserProfileController extends HttpServlet {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        
         String xFull_name = request.getParameter("fullname");
         String xPhone_number = request.getParameter("phonenum");
         String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";

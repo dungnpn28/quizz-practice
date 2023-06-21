@@ -61,7 +61,8 @@ public class RegisterVerifiedController extends HttpServlet {
             String pass64 = request.getParameter("pass64");
             String dob64 = request.getParameter("dob64");
             String expirationDate = request.getParameter("expirationDate");
-            
+            String role64 = request.getParameter("role64");
+            String status64= request.getParameter("status64");
             String now = LocalDateTime.now().toString();
             if(expirationDate.compareTo(now) >= 0){
             
@@ -77,11 +78,14 @@ public class RegisterVerifiedController extends HttpServlet {
             String pass = new String(decodedBytes, StandardCharsets.UTF_8);
             decodedBytes = Base64.getDecoder().decode(dob64);
             String dob = new String(decodedBytes, StandardCharsets.UTF_8);
-                        
+            decodedBytes = Base64.getDecoder().decode(status64);
+            String status = new String(decodedBytes, StandardCharsets.UTF_8);  
+            decodedBytes = Base64.getDecoder().decode(role64);
+            String role = new String(decodedBytes, StandardCharsets.UTF_8);
             RegisterDAO dao = new RegisterDAO();
             User existUser = dao.checkUserExist(email);
             if (existUser == null) {
-                dao.registerUser(email, pass);
+                dao.registerUser(email, pass,Integer.parseInt(role),Integer.parseInt(status));
                 int id = dao.getID(email);
                 dao.registerProfile(id, name, Integer.parseInt(gender), dob, phone_number);
                 response.sendRedirect("home");

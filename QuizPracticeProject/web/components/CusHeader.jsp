@@ -38,7 +38,7 @@
             </div>
             <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="uploads\<%=a.getAvatar()%>" width="60" height="60" alt="Avatar">
+                    <img src="uploads/<%=a.getAvatar()%>" width="60" height="60" alt="Avatar">
                 </button>
 
                 <ul class="dropdown-menu dropdown-menu-lg" aria-labelledby="dropdownMenuButton">
