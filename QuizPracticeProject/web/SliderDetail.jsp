@@ -60,6 +60,24 @@
                                 </form>
                                 <p></p>
 
+
+                                <div class ="header-container">
+                                    <h3>Last updated date: </h3>
+
+                                    <c:if test="${slider.modified != null}">
+                                        <h3>${slider.modified}</h3>
+                                    </c:if>
+
+                                    <p> </p>
+                                </div>
+                                <div class ="header-container">
+                                    <h3>Status: </h3>
+                                    <h3>
+                                        ${slider.status?"Active":"Inactive"}
+                                    </h3>
+                                    <p> </p>
+                                </div>
+
                                 <h1 style="font-weight: bold">${slider.title}</h1>
 
 

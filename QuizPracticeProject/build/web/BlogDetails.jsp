@@ -71,6 +71,27 @@
                                         </a>
                                     </c:if>
                                     <p></p>
+                                    <c:if test="${sessionScope.user.getRole_id() == 2}">
+
+                                        <div class ="header-container">
+                                            <h3>Last updated date: </h3>
+
+                                            <c:if test="${blog.modified != null}">
+                                                <h3>${blog.modified}</h3>
+                                            </c:if>
+
+
+                                            <p> </p>
+                                        </div>
+                                        <div class ="header-container">
+                                            <h3>Status: </h3>
+                                            <h3>
+                                                ${blog.status?"Active":"Inactive"}
+                                            </h3>
+                                            <p> </p>
+                                        </div>
+                                    </c:if>
+
                                     <c:if test="${blog.flag eq '1'}">
                                         <img src="img/icons8-flame.gif" alt="Animated GIF">
                                         <h3 style="display: inline;">Featured</h3>
@@ -126,8 +147,8 @@
                                         <c:forEach var="listBlog" items="${listBlog}" >
                                             <c:if test="${listBlog.author_id == authorId && listBlog.id != id}">
                                                 <li><a href="blogDetail?id=${listBlog.getId()}" style="color: gray">${listBlog.title}</a></li>
-                                            </c:if>
-                                        </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </div>
                             </div>
