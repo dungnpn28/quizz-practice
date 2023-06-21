@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.ExamDAO;
 import dal.LessonDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Exam;
 import model.Lesson;
 import model.Lesson_Topic;
 import model.Lesson_Type;
@@ -52,6 +54,7 @@ public class EditLessonDetailsController extends HttpServlet {
         processRequest(request, response);
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         LessonDAO lDAO = new LessonDAO();
+        ExamDAO eDAO = new ExamDAO();
         String lessonId = request.getParameter("lessonId");
         request.setAttribute("lessonId", lessonId);
         Lesson lesson = lDAO.getLessonById(lessonId);
@@ -60,10 +63,12 @@ public class EditLessonDetailsController extends HttpServlet {
 
         List<Lesson_Topic> lessonTopicList = new ArrayList<>();
         List<Lesson_Type> lessonTypeList = new ArrayList<>();
+        List<Exam> lExam = eDAO.getAllExam();
         lessonTypeList = lDAO.getLessonType();
         lessonTopicList = lDAO.getLessonTopic();
         request.setAttribute("lessonTopicList", lessonTopicList);
         request.setAttribute("lessonTypeList", lessonTypeList);
+        request.setAttribute("lExam", lExam);
         request.setAttribute("subjectId", subjectId);
         request.getRequestDispatcher("EditLessonDetails.jsp").forward(request, response);
     }
@@ -88,14 +93,27 @@ public class EditLessonDetailsController extends HttpServlet {
         int xTopic = Integer.parseInt(request.getParameter("selectedTopic"));
         int xOrder = Integer.parseInt(request.getParameter("order"));
         String xLink = request.getParameter("link");
+        if (xLink == null) {
+            xLink = "";
+        }
         String xContent = request.getParameter("htmlContent");
+        if (xContent == null) {
+            xContent = "";
+        }
         String xStatus = request.getParameter("status");
         boolean status = true;
         if (xStatus.equals("0")) {
             status = false;
         }
+        
         LessonDAO lDAO = new LessonDAO();
-        lDAO.update(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status, lessonId);
+        if (xType == 3) {
+           int xQuiz = Integer.parseInt(request.getParameter("selectedQuiz"));
+            lDAO.updateQuizlesson(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status, xQuiz, lessonId);
+        } else{
+            lDAO.update(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status, lessonId);
+        }
+
         response.sendRedirect("subjectLessons?subjectId=" + subjectId);
 
     }

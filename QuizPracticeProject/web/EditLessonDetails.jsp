@@ -25,7 +25,7 @@
         <title>Quizerro</title>
     </head>
     <%
-        String str = "edit";
+        String str = "";
         User u = (User) request.getSession().getAttribute("user");
         if(u.getRole_id() != 4 && u.getRole_id() != 5){
             response.sendRedirect("AccessDenied.jsp");
@@ -38,7 +38,7 @@
             <div id="content">
                 <h2>Edit Lesson Details</h2>
                 <div class="lesson-detail">
-                    <form class="form-wrapper" id="editLesson" name="editLesson" action="editLessonDetails" method="post" onsubmit="return ValidateLessonDetail(<%=str%>)">
+                    <form class="form-wrapper" id="editLesson" name="editLesson" action="editLessonDetails" method="post" onsubmit="return ValidateLessonDetail(${lesson.type_id})">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input name="name" type="text" class="form-control" id="name" value="${lesson.name}"> 
@@ -46,7 +46,7 @@
                         <br>
                         <div class="mb-3">
                             <label for="type" class="form-label">Type</label>
-                            <select name="selectedType">
+                            <select name="selectedType" >
                                 <c:forEach items="${lessonTypeList}" var="type">
                                     <option value="${type.id}" <c:if test="${lesson.type_id == type.id}">selected</c:if>>${type.name}</option>
                                 </c:forEach>
@@ -67,19 +67,29 @@
                             <input name="order" type="text" class="form-control" id="order" value="${lesson.order}">
                         </div>
                         <br>
-                        <c:if test="${lesson.type_id != 1}">
-                            <c:if test="${lesson.type_id != 3}">
-                                <div class="mb-3 linkInput">
+                        
+                            
+                                <div class="mb-3" id="linkInput">
                                     <label for="link" class="form-label">Link</label>
                                     <input name="link" type="text" value="${lesson.video_link}" class="form-control" id="link">
                                 </div>
                                 <br>
-                            </c:if>
-                            <div class="mb-3 contentInput">
+                            
+                            
+                                <div class="mb-3" id="quizInput">
+                                    <label for="quiz" class="form-label">Quiz</label>
+                                    <select name="selectedQuiz">
+                                        <c:forEach items="${lExam}" var="quiz">
+                                            <option value="${quiz.id}" <c:if test="${lesson.getExam_id() == quiz.id}">selected</c:if>>${quiz.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            
+                            <div class="mb-3" id="contentInput">
                                 <label for="editor" class="form-label">HTML Content</label>   
                                 <textarea name="htmlContent" id="editor" class="form-control" rows="10" cols="80">${lesson.html_content}</textarea>
                             </div>
-                        </c:if>
+                        
                         <br>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
@@ -88,9 +98,10 @@
                         </div>
                         <input type="hidden" name="subjectId" value="${subjectId}">
                         <input type="hidden" name="lessonId" value="${lessonId}">
-
-                        <input type="submit" class="btn btn-primary" value="Submit" onclick ="return confirm('Are you sure you want to update?')">
-                        <a href="javascript:history.go(-1)" class="btn btn-danger">Back</a>
+                        <div class="button-group">
+                            <input type="submit" class="btn btn-primary" value="Submit" onclick ="return confirm('Are you sure you want to update?')">
+                            <a href="javascript:history.go(-1)" class="btn btn-danger">Back</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -99,9 +110,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-            $(document).ready(function () {
-                $('#carouselExampleIndicators2').carousel();
-            });
+                                $(document).ready(function () {
+                                    $('#carouselExampleIndicators2').carousel();
+                                });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {

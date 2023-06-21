@@ -316,4 +316,79 @@ public class LessonDAO extends MyDAO {
         }
         return (x);
     }
+    
+    public void insertQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status,int exam_id) {
+        xSql = "INSERT INTO [dbo].[lesson]\n"
+                + "           ([subject_id]\n"
+                + "           ,[topic_id]\n"
+                + "           ,[name]\n"
+                + "           ,[type_id]\n"
+                + "           ,[order]\n"
+                + "           ,[video_link]\n"
+                + "           ,[html_content]\n"
+                + "           ,[status]\n"
+                + "           ,[exam_id])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setInt(1, subjectId);
+            ps.setInt(2, topicId);
+            ps.setString(3, name);
+            ps.setInt(4, type_id);
+            ps.setInt(5, order);
+            ps.setString(6, video_link);
+            ps.setString(7, htmlContent);
+            ps.setBoolean(8, Status);
+            ps.setInt(9, exam_id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insert:" + e.getMessage());
+        }
+    }
+    
+    public void updateQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status,int examId, int lessonId) {
+        xSql = "UPDATE [dbo].[lesson]\n"
+                + "   SET [subject_id] = ?\n"
+                + "      ,[topic_id] = ?\n"
+                + "      ,[name] = ?\n"
+                + "      ,[type_id] = ?\n"
+                + "      ,[order] = ?\n"
+                + "      ,[video_link] = ?\n"
+                + "      ,[html_content] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[exam_id] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, topicId);
+            ps.setString(3, name);
+            ps.setInt(4, type_id);
+            ps.setInt(5, order);
+            ps.setString(6, video_link);
+            ps.setString(7, htmlContent);
+            ps.setBoolean(8, Status);
+            ps.setInt(9, examId);
+            ps.setInt(10, lessonId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+//    public static void main(String[] args) {
+//        LessonDAO lDAO = new LessonDAO();
+//        lDAO.updateQuizlesson(2, 2, "asdasd", 2, 2, "https://www.youtube.com/", "lewlew", true, 2, 2);
+//    }
 }

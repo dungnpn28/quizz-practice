@@ -305,7 +305,7 @@ public class ExamDAO extends MyDAO {
         }
         return (examList);
     }
-    
+
     public String getExamDurationById(int examId) {
         try {
             String strSelect = "select * from [exam] "
@@ -321,4 +321,52 @@ public class ExamDAO extends MyDAO {
         }
         return null;
     }
+
+    public List<Exam> getAllExam() {
+        List<Exam> examList = new ArrayList<>();
+        xSql = "SELECT * from exam";
+        int xID;
+        String xName;
+        int xSubject_id;
+        int xLevel;
+        Time xDuration;
+        double xPass_rate;
+        int xNumQue;
+        String xDescription;
+        Date xCreated;
+        int xMode;
+        Exam x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xName = rs.getString("name");
+                xSubject_id = rs.getInt("subject_id");
+                xLevel = rs.getInt("level");
+                xDuration = rs.getTime("duration");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                xPass_rate = rs.getDouble("pass_rate");
+                xNumQue = rs.getInt("number_of_question");
+                xDescription = rs.getString("description");
+                xCreated = rs.getDate("created");
+                xMode = rs.getInt("mode");
+                x = new Exam(xID, xName, xSubject_id, xID, xLevel, xDescription, xPass_rate, xNumQue, xCreated);
+                examList.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (examList);
+    }
+    
+//    public static void main(String[] args) {
+//        ExamDAO eDAO = new ExamDAO();
+//        List<Exam> lExam = eDAO.getAllExam();
+//        for (Exam exam : lExam) {
+//            System.out.println(exam.getName());
+//        }
+//    }
 }
