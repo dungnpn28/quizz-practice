@@ -18,15 +18,31 @@ public class Blog {
     private String title;
     private int category_id;
     private String flag;
-    private String status;
+    private boolean status;
     private String content;
     private Date created;
     private Date modified;
-
+    private String brief_info;
+    private int view;
     public Blog() {
     }
 
-    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, String status, String content, Date created, Date modified) {
+    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, boolean status, String content, Date created, Date modified, String brief_info, int view) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.author_id = author_id;
+        this.title = title;
+        this.category_id = category_id;
+        this.flag = flag;
+        this.status = status;
+        this.content = content;
+        this.created = created;
+        this.modified = modified;
+        this.brief_info = brief_info;
+        this.view = view;
+    }
+
+    public Blog(int id, String thumbnail, int author_id, String title, int category_id, String flag, boolean status, String content, Date created, Date modified) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.author_id = author_id;
@@ -47,6 +63,43 @@ public class Blog {
         this.category_id = category_id;
         this.content = content;
         this.created = created;
+    }
+
+    public Blog(int id, String title, int category_id, String flag, boolean status, String content, String brief_info) {
+        this.id = id;
+        this.title = title;
+        this.category_id = category_id;
+        this.flag = flag;
+        this.status = status;
+        this.content = content;
+        this.brief_info = brief_info;
+    }
+
+    public Blog(int id, String thumbnail, String title, int category_id, String flag, boolean status, String content, String brief_info) {
+        this.id = id;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.category_id = category_id;
+        this.flag = flag;
+        this.status = status;
+        this.content = content;
+        this.brief_info = brief_info;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
+    public String getBrief_info() {
+        return brief_info;
+    }
+
+    public void setBrief_info(String brief_info) {
+        this.brief_info = brief_info;
     }
     
     public int getId() {
@@ -97,11 +150,11 @@ public class Blog {
         this.flag = flag;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

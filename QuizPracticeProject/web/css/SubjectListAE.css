@@ -1,92 +1,641 @@
-/* Thẻ body */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #adacac;
 }
 
-/* Phần wrapper */
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Bảng */
 table {
-  border-collapse: collapse;
-  width: 100%;
+    border-radius: 50px;
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm đoạn mã này để tạo hiệu ứng mờ nhẹ */
+
 }
 
-td,
-th {
-  border: 1px solid #dee2e6;
-  padding: 0.75rem;
-  text-align: center;
+.header_fixed {
+    max-height: 100vh;
+    width: 100%;
+    overflow: auto;
+    border: 1px solid #dddddd;
 }
 
-th {
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: #f8f9fa;
+.header_fixed thead th {
+    position: sticky;
+    top: 0;
+    background-color: #0578A4;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
 }
 
-/* Form */
-form {
+
+td {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #fff;
+    color: #333;
+    border: none; /* Remove border */
+    text-align: center;
+
+}
+
+td img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+}
+
+tr:nth-child(even) {
+    background-color: #F0F4F8;
+}
+
+tr:nth-child(odd) {
+    background-color: #ECF2F7;
+}
+
+tr:hover td {
+    color: #44b478;
+    cursor: pointer;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translate(0, -2px);
+    transition: box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Thêm đoạn mã này để tạo điểm nhấn khi di chuột vào hàng */
+
+}
+
+td button {
+    border: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background-color: #0578A4;
+    color: #fff;
+}
+activation1{
+    color:red;
+    font-weight: bold;
+    font-size: 15px;
+}
+activation2{
+    color:green;
+    font-weight: bold;
+    font-size: 15px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+/*.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.topnav .search-container {
+    float: left;
+}
+.topnav .search-container3{
+
+    float: right;
+}
+
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}*/
+.a1{
+    margin-top: 13px;
+
+
+}
+.a1 select{
+    font-size: 17px;
+
+}
+/* Pagination links */
+.pagination a {
+    color: black;
+    float: left;
+    border-radius: 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+
+}
+
+/* Style the active/current link */
+.pagination a.active {
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+.pagination{
+    display: flex;
+    justify-content: center
+}
+.search-container2 button{
+    background: #0578A4;
+    border-radius: 20px;
+
+
+}
+.search-container2 button:hover{
+    background:red;
+}
+.search-container2 a:hover{
+    background:red;
+    color:white;
+
+}
+.search-container2 a{
+    color:white;
+    font-size: 7px;
+    font-weight: bold;
+    border-radius: 20px
+}
+.dialog{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index: 10;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity:0;
+    transition: opacity linear 0.2s;
+}
+.dialog:target{
+    visibility: visible;
+    opacity: 1;
+}
+.overlay{
+    background-color: rgba(0,0,0,0.3);
+}
+.dialog-close-btn{
+    position: absolute;
+    top:2px;
+    right:6px;
+    text-decoration: none;
+    color:#333;
+}
+.overlay-close{
+    position: absolute;
+    width:100%;
+    height:100%;
+    cursor: default;
+}
+
+.dialog-body{
+    height:650px;
+    width:650px;
+    position: absolute;
+    padding:16px;
+    background-color: #fff;
+}
+.dialog-body img{
+    width:50px;
+    height:50px;
+}
+.form-label{
+    font-size: 15px;
+}
+select{
+
+    height: 40px;
+
+}
+select option{
+    font-size: 15px;
+}
+.dialog-body button{
+
+    position:relative;
+    display:inline-block;
+    padding:10px 20px;
+    margin:10px 0;
+    color:#fff;
+    text-decoration:none;
+    text-transform: uppercase;
+    font-size:18px;
+    letter-spacing: 2px;
+    border-radius:40px;
+    background: linear-gradient(90deg,#755bea,#ff72c0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+
+}
+.dialog-body button:hover{
+    background: green;
+}
+td img{
+    transition:transform 0.3s ease;
+    border: 2px solid #000; /* Adjust the border width and color as per your preference */
+
+}
+td img:hover {
+    transform: scale(1.1); /* Adjust the scale factor as per your preference */
+}
+/* styles.css */
+.activation1 {
+    color: red; /* Adjust the color for "Deactive" */
+    font-weight: bold; /* Adjust the font weight for "Deactive" */
+}
+
+.activation2 {
+    color: green; /* Adjust the color for "Active" */
+    font-weight: bold; /* Adjust the font weight for "Active" */
+}
+input[readonly] {
+    background-color: #f1f1f1; /* Example background color for readonly input */
+    color: #999999; /* Example text color for readonly input */
+    /* Add any other styles you want to apply */
+}
+table a{
+
+    position:relative;
+    display:inline-block;
+    padding:10px 30px;
+    margin:10px 0;
+    color:#fff;
+    text-decoration:none;
+    text-transform: uppercase;
+    font-size:10px;
+    letter-spacing: 2px;
+    border-radius:40px;
+    background: linear-gradient(90deg,#755bea,#ff72c0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+
+}
+table a:hover{
+    background: green;
+    text-decoration: none;
+    color:white;
+}
+.col-md-4 {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the image within the container */
+    align-items: center; /* Vertically center the image within the container */
+}
+
+.image-container img {
+    width: 130px;
+    height: auto;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    margin: 15% auto; /* Adjust the percentage to position the dialog vertically */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    max-width: 30%;
+    text-align: center;
+    position: relative; /* Add relative positioning */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+}
+
+.close:hover {
+    color: #555;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #45a049;
+}
+
+.buttons button + button {
+    margin-left: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #0578A4;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+td {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+td img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+tr:nth-child(even) {
+    background-color: #F0F4F8;
+}
+
+tr:nth-child(odd) {
+    background-color: #ECF2F7;
+}
+
+tr:hover td {
+    color: #44b478;
+    cursor: pointer;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translate(0, -2px);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+td button {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: #0578A4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.activation1 {
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.activation2 {
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    border-radius: 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 130px;
+    height: auto;
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    max-width: 30%;
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+}
+.topnav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  padding: 10px;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-select,
-input[type="search"] {
-  border: none;
-  border-bottom: 1px solid #ced4da;
-  padding: 0.5rem;
-  font-size: 1rem;
-  font-weight: 400;
+.left-container {
+  display: flex;
+  align-items: center;
 }
 
-button[type="submit"] {
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-button[type="submit"]:hover {
-  background-color: #003172;
-}
-
-/* Hình thu nhỏ */
-.img-thumbnail {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  padding: 0.25rem;
+.search-bar-container {
+  display: flex;
+  align-items: center;
   background-color: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
+  border-radius: 4px;
+  padding: 4px;
 }
 
-/* Các nút hành động */
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
+#search-bar {
+  width: 200px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
-  color: #fff;
+#search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 50%;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.btn-danger {
-  background-color: #dc3545;
+#search-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #333;
+}
+
+#search-icon:hover {
+  background-color: #e5e5e5;
+}
+
+#filter1,
+#filter2 {
+  margin-left: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+#filter1 {
+  width: 120px;
+}
+
+#filter2 {
+  width: 120px;
+}
+
+#add-button {
+  padding: 10px 16px;
+  background-color: #4CAF50;
   color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#add-button:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.clear-filter {
+  padding: 10px 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-filter:hover {
+  background-color: #45a049;
 }

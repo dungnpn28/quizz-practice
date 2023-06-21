@@ -14,7 +14,69 @@ import model.Subject;
  * @author LENOVO
  */
 public class SubjectDAO extends MyDAO {
+      public List<Subject> getSubjectsWithPaging(int index,String category,String status,String search) {
+        List<Subject> t = new ArrayList<>();
+         xSql = "select id,illustration,name,category_id,[status],[description],author_id,[modified],[featured] from subject WHERE 1=1";
 
+            if (!category.equals("all")) {
+                xSql += " and [category_id]= ?";
+            }
+            if (!status.equals("all")) {
+                xSql += " and [status]= ?";
+            }
+          
+            xSql += " and [name] like ? ";
+            xSql += " order by [modified] desc offset ? rows fetch next 5 rows only";
+       
+        try {
+            ps = con.prepareStatement(xSql);
+             int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+           
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+            i++;         
+            ps.setInt(i, (index - 1) * 5);
+           
+            rs = ps.executeQuery();
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
+            String xName;
+            int xCategory;
+            boolean xStatus;
+            String xDescription;
+            Date xModified;
+            boolean xFeatured;
+            int xAuthor_id;
+            Subject x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
+                xName = rs.getString("name");
+                xCategory = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xFeatured = rs.getBoolean("featured");
+                xAuthor_id= rs.getInt("author_id");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
     public List<Subject> getSubjects() {
         List<Subject> t = new ArrayList<>();
         xSql = "select * from subject";
@@ -30,6 +92,7 @@ public class SubjectDAO extends MyDAO {
             String xDescription;
             Date xModified;
             boolean xFeatured;
+            int xAuthor_id;
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -41,7 +104,8 @@ public class SubjectDAO extends MyDAO {
                 xStatus = rs.getBoolean("status");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured);
+                xAuthor_id= rs.getInt("author_id");
+                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
                 t.add(x);
             }
             rs.close();
@@ -51,7 +115,44 @@ public class SubjectDAO extends MyDAO {
         }
         return (t);
     }
+    
+    public int getTotalSubjectFilter(String category,String status,String search){
+         try {
+            String strSelect = "select count(*) from subject  WHERE 1=1 ";
+            if (!category.equals("all")) {
+                strSelect += " and [category_id]= ?";
+            }
+          
+            if (!status.equals("all")) {
+                strSelect += " and [status]= ?";
 
+            }
+            strSelect += " and [name] like ? ";
+
+            ps = con.prepareStatement(strSelect);
+            int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+            
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+           
+           rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalSubjectFilter: " + e.getMessage());
+        }
+
+        return 0;
+        
+    }
     public List<Subject> getSubjectsWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
         xSql = "SELECT s.*, (\n"
@@ -1121,7 +1222,7 @@ public class SubjectDAO extends MyDAO {
     }
      public void addNewSubject( String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
         try {
-            String strAdd = "insert into [subject] values(?,?,?,?,?,?,NULL,?)";
+            String strAdd = "insert into [subject] values(?,?,?,?,?,?,GETDATE(),?)";
             ps = con.prepareStatement(strAdd);
             ps.setString(1, illustration);
             ps.setString(2, name);

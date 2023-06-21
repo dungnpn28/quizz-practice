@@ -32,7 +32,6 @@ a{
 
 h1 {
     color: black;
-    text-align: center;
 }
 
 h2 {
@@ -41,16 +40,68 @@ h2 {
 
 h3 {
     color: black;
-    text-align: justify;
 }
 
 .content{
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    text-indent: 2em;
+    text-align: justify;
 }
 
 *{
     font-family: 'Montserrat', sans-serif;
 }
 
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0B5ED7;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition-duration: 0.4s;
+}
+
+.custom-button:hover {
+    background-color: #0645a1;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container h1 {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.header-container h2:first-child {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.header-container-right{
+    display: flex;
+    /*align-items: center;*/
+}
+.author-value-container {
+    margin-left: auto;
+}
+
+.author-label, .author-value {
+    margin-bottom: 0;
+}
+
+.blogAtribute{
+    text-decoration: none;
+    font-style: italic;
+}
+.eye-icon {
+    color: red;
+}

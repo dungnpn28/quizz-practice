@@ -29,6 +29,7 @@ public class SliderDAO extends MyDAO {
             boolean xStatus;
             Date xCreated;
             Date xModified;
+            String xNote;
             Slider x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -38,7 +39,8 @@ public class SliderDAO extends MyDAO {
                 xStatus = rs.getBoolean("status");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
-                x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified);
+                xNote = rs.getString("note");
+                x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified, xNote);
                 s.add(x);
             }
             rs.close();
@@ -50,12 +52,12 @@ public class SliderDAO extends MyDAO {
         return (s);
     }
 
-    public List<Slider> getSliderByStatus(boolean status) {
+    public List<Slider> getSliderByStatus(int status) {
         List<Slider> sliders = new ArrayList<>();
         try {
             String query = "SELECT * FROM slider WHERE status = ?";
             ps = con.prepareStatement(query);
-            ps.setBoolean(1, status);
+            ps.setInt(1, status);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -65,7 +67,8 @@ public class SliderDAO extends MyDAO {
                 boolean xStatus = rs.getBoolean("status");
                 Date created = rs.getDate("created");
                 Date modified = rs.getDate("modified");
-                Slider slider = new Slider(id, title, image, backlink, xStatus, created, modified);
+                String note = rs.getString("note");
+                Slider slider = new Slider(id, title, image, backlink, xStatus, created, modified, note);
                 sliders.add(slider);
             }
             rs.close();
@@ -90,41 +93,58 @@ public class SliderDAO extends MyDAO {
     }
 
     public Slider getOneSlider(int id) {
-        String sql = "select id, title, image, backlink, status, created, modified from slider where id = ?";
+        String sql = "select * from slider where id = ?";
         Slider s = new Slider();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int Id = rs.getInt(1);
-                String title = rs.getString(2);
-                String image = rs.getString(3);
-                String backlink = rs.getString(4);
-                boolean status = rs.getBoolean(5);
-                Date created = rs.getDate(6);
-                Date modified = rs.getDate(7);
-                s = new Slider(Id, title, image, backlink, status, created, modified);
+                String title = rs.getString("title");
+                String image = rs.getString("image");
+                String backlink = rs.getString("backlink");
+                boolean xStatus = rs.getBoolean("status");
+                Date created = rs.getDate("created");
+                Date modified = rs.getDate("modified");
+                String note = rs.getString("note");
+                s = new Slider(id, title, image, backlink, xStatus, created, modified, note);
             }
         } catch (Exception e) {
         }
         return s;
     }
 
-    public List<Slider> updateSlider(String title, String image, int id, String backlink) {
-        String sql = "update Slider set title = ?, image = ?, backlink= ? where id = ?";
-        List<Slider> us = new ArrayList<Slider>();
+    public void updateSliderWithImage(String title, String image, int id, String backlink, boolean status, String note) {
+        String sql = "update Slider set [title] = ?, [image] = ?, [backlink]= ?, [status] = ?, [modified] = GETDATE(), [note] = ? where id = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, title);
             ps.setString(2, image);
             ps.setString(3, backlink);
-            ps.setInt(4, id);
+            ps.setBoolean(4, status);
+            ps.setString(5, note);
+            ps.setInt(6, id);
             ps.executeUpdate();
-            us = getSlider();
+
         } catch (Exception e) {
         }
-        return us;
+    }
+
+    public void updateSliderWithoutImage(String title, int id, String backlink, boolean status, String note) {
+        String sql = "update Slider set [title] = ?, [backlink] = ?, [status] = ?, [modified] = GETDATE(), [note] = ? where id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, title);
+            ps.setString(2, backlink);
+            ps.setBoolean(3, status);
+            ps.setString(4, note);
+            ps.setInt(5, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
     }
 
     public List<Slider> searchSlider(String keyword) {
@@ -186,15 +206,15 @@ public class SliderDAO extends MyDAO {
         List<Slider> list = new ArrayList<>();
         try {
             ps = con.prepareStatement(Sql);
-            ps.setInt(1, (index-1)*5);
+            ps.setInt(1, (index - 1) * 5);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(new Slider(rs.getInt(1),
-                rs.getString(2),
-                rs.getString(3),
-                rs.getString(4),
-                rs.getBoolean(5)));
-            }           
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getBoolean(5)));
+            }
         } catch (Exception e) {
         }
         return list;

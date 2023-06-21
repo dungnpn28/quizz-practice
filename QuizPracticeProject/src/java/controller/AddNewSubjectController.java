@@ -52,7 +52,7 @@ public class AddNewSubjectController extends HttpServlet {
         SubjectDAO sj = new SubjectDAO();
         sj.addNewSubject(thumbnail, name, category_id, status, description, featuredValue, owner_id);
 
-        String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads/" + thumbnail;
+        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
         try {
             FileOutputStream fos = new FileOutputStream(uploadPath);
             InputStream is = file.getInputStream();
@@ -63,8 +63,8 @@ public class AddNewSubjectController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        req.setAttribute("mess", "success add");
-        req.getRequestDispatcher("SubjectListAE.jsp").forward(req, resp);
+      
+        resp.sendRedirect("subjectlistae");
     }
 
     @Override

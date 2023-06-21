@@ -24,6 +24,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
         <link href="css/SubjectListPublic.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Home.css" rel="stylesheet" type="text/css"/>
 
 
     </head>
@@ -261,7 +262,7 @@
                                         <c:if test="${checkSort == 'asc'}">
                                             <p>Sort ascending by price</p>
                                         </c:if>
-                                            <c:if test="${checkSort == 'desc'}">
+                                        <c:if test="${checkSort == 'desc'}">
                                             <p>Sort descending by price</p>
                                         </c:if>
                                     </div>
@@ -302,22 +303,7 @@
                 </div>
             </div>    
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-                                                    $(document).ready(function () {
-                                                        $('#carouselExampleIndicators2').carousel();
-                                                    });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-            });
-        </script>
-        <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/navBar.js"></script>
     </body>
     <%@include file="components/Footer.jsp" %>
 
