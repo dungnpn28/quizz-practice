@@ -59,6 +59,7 @@
                                 Status: <input type="radio" name="status" value="1" checked=""> Active
                                 <input type="radio" name="status" value="0"> Deactive
                                 <br>
+                                <input type="hidden" name="subjectId" value="${subjectId}">
                                 <input type="submit" value="Add New" class="btn btn-primary" onclick ="return confirm('Are you sure you want to add?')">
                             </form>
                         </div>
@@ -119,6 +120,8 @@
                                             <input type="radio" name="status" value="1" ${pricePackage.getStatus() == 1?"checked":""} >Active
                                             <input type="radio" name="status" value="0" ${pricePackage.getStatus() == 0?"checked":""} > Deactive
                                             <br>
+                                            <input type="hidden" name="subjectId" value="${subjectId}">
+
                                             <input type="submit" value="Update" class="btn btn-primary" onclick ="return confirm('Are you sure you want to update?')">
                                         </form>    
                                     </div>

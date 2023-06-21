@@ -20,16 +20,16 @@
         <link href="css/LessonDetails.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="ckeditor/ckeditor.js"></script>
+        <script src="ckfinder/ckfinder.js"></script>
 
         <title>Quizerro</title>
     </head>
     <%
-            if (session.getAttribute("user") != null) {
-            // Nếu có user, bao gồm trang cusheader.jsp
-                session.getAttribute("up");  
-    %>
-    <%
-    } 
+        String str = "add";
+        User u = (User) request.getSession().getAttribute("user");
+        if(u.getRole_id() != 4 && u.getRole_id() != 5){
+            response.sendRedirect("AccessDenied.jsp");
+        }
     %>
     <%@include file="components/CusHeader.jsp" %>
     <body>
@@ -38,7 +38,7 @@
             <div id="content">
                 <h2>Lesson Details</h2>
                 <div class="lesson-detail">
-                    <form class="form-wrapper" id="addLesson" name="addLesson" action="addNewLessonDetails" method="post">
+                    <form class="form-wrapper" id="addLesson" name="addLesson" action="addNewLessonDetails" method="post" onsubmit="return ValidateLessonDetail(<%=str%>)">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input name="name" type="text" class="form-control" id="name">
@@ -73,11 +73,8 @@
                         </div>
                         <br>
                         <div class="mb-3">
-                            <label for="content" class="form-label">HTML Content</label>                 
-
-                            <!--<textarea name="editor" rows="10" cols="50" style="overflow-y:scroll;" class="form-control" id="editor"></textarea>-->
-                            <input name="htmlContent" type="text" class="form-control" id="htmlContent" >
-
+                            <label for="editor" class="form-label">HTML Content</label>
+                            <textarea name="editor" id="editor" class="form-control" rows="10" cols="80"></textarea>
                         </div>
                         <br>
                         <div class="mb-3">
@@ -87,28 +84,29 @@
                         </div>
                         <input type="hidden" name="subjectId" value="${subjectId}">
 
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="submit" class="btn btn-primary" value="Submit" onclick ="return confirm('Are you sure you want to add new?')">
+                        <a href="javascript:history.go(-1)" class="btn btn-danger">Back</a>
                     </form>
-                    
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-                    <script>
-                        $(document).ready(function () {
-                            $('#carouselExampleIndicators2').carousel();
-                        });
-                    </script>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#sidebarCollapse').on('click', function () {
-                                $('#sidebar').toggleClass('active');
-                            });
-                        });
-                    </script>
-                    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
                 </div>
             </div>
         </div>
     </body>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('#carouselExampleIndicators2').carousel();
+            });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/Validation.js"></script>
+    <script src="js/CKeditor.js"></script>
 </html>

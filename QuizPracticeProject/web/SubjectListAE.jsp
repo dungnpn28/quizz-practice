@@ -69,7 +69,7 @@
                         <td>${item.description}</td>
                         <td>${item.status}</td>
                         <td>
-                            <a href="">View detail</a> <br/>
+                            <a href="pricePackage?subjectId=${item.getId()}">View detail</a> <br/>
                             <a href="subjectLessons?subjectId=${item.getId()}">View lessons</a>
 
                         </td>

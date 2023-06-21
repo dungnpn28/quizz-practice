@@ -158,7 +158,7 @@ public class LessonDAO extends MyDAO {
         return (t);
     }
 
-    public void insert(int subjectId, int topicId, String name, int type_id, int order, String video_link,String htmlContent, boolean Status ) {
+    public void insert(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status) {
         xSql = "INSERT INTO [dbo].[lesson]\n"
                 + "           ([subject_id]\n"
                 + "           ,[topic_id]\n"
@@ -219,5 +219,101 @@ public class LessonDAO extends MyDAO {
         } catch (Exception e) {
             System.out.println("insert:" + e.getMessage());
         }
+    }
+
+    public void update(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status, int lessonId) {
+        xSql = "UPDATE [dbo].[lesson]\n"
+                + "   SET [subject_id] = ?\n"
+                + "      ,[topic_id] = ?\n"
+                + "      ,[name] = ?\n"
+                + "      ,[type_id] = ?\n"
+                + "      ,[order] = ?\n"
+                + "      ,[video_link] = ?\n"
+                + "      ,[html_content] = ?\n"
+                + "      ,[status] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, topicId);
+            ps.setString(3, name);
+            ps.setInt(4, type_id);
+            ps.setInt(5, order);
+            ps.setString(6, video_link);
+            ps.setString(7, htmlContent);
+            ps.setBoolean(8, Status);
+            ps.setInt(9, lessonId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
+    public void updateType(Lesson_Type x) {
+        xSql = "UPDATE [dbo].[lesson_type]\n"
+                + "   SET [name] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());;
+            ps.setInt(2, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
+    public void updateTopic(Lesson_Topic x) {
+        xSql = "UPDATE [dbo].[lesson_topic]\n"
+                + "   SET [name] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());;
+            ps.setInt(2, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
+    public Lesson getLessonById(String lessonId) {
+        xSql = "select * from lesson where id = ?";
+        int xID;
+        int xSubject_id;
+        int xTopic_id;
+        String xName;
+        int xType_id;
+        int xOrder;
+        String xVideo_link;
+        String xHtml_content;
+
+        boolean xStatus;
+        Lesson x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, lessonId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xStatus = rs.getBoolean("status");
+                x = new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content, xStatus);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return (x);
     }
 }

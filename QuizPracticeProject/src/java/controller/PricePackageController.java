@@ -91,11 +91,10 @@ public class PricePackageController extends HttpServlet {
         Double xSale = Double.parseDouble(request.getParameter("sale"));
         int xStatus = Integer.parseInt(request.getParameter("status"));
         PriceDAO pd = new PriceDAO();
-        Price_Package pp = new Price_Package(xId,xName,xDescription,xDuration,xPrice,xSale,xStatus);
+        Price_Package pp = new Price_Package(xId, xName, xDescription, xDuration, xPrice, xSale, xStatus);
         pd.update(pp);
         response.sendRedirect("pricePackage");
-        
-        
+
     }
 
     /**

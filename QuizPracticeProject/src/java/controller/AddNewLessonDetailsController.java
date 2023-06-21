@@ -75,7 +75,6 @@ public class AddNewLessonDetailsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
 
         String xName = request.getParameter("name");
@@ -91,7 +90,7 @@ public class AddNewLessonDetailsController extends HttpServlet {
         }
         LessonDAO lDAO = new LessonDAO();
         lDAO.insert(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status);
-        request.getRequestDispatcher("/subjectLessons?subjectId="+subjectId).forward(request, response);
+        response.sendRedirect("subjectLessons?subjectId=" + subjectId);
     }
 
     /**

@@ -61,3 +61,35 @@ function validateForm1(id) {
     }
     alert("Bạn đã sửa gói học thành công!");
 }
+
+function ValidateLessonDetail(str) {
+    var nameInput = document.getElementById("name");
+    var nameValue = nameInput.value.trim();
+
+    if (nameValue === "") {
+        // Trường "name" không được để trống
+        alert("Tên không được để trống");
+        return false;
+    }
+    var orderInput = document.getElementById("order");
+    var orderValue = orderInput.value;
+
+    if (!/^\d+$/.test(orderValue) || parseInt(orderValue) <= 0) {
+        // Trường "order" không phải là số nguyên dương
+        alert("Số thứ tự phải là số nguyên dương");
+        return false;
+    }
+    var linkInput = document.getElementById("link");
+    var linkValue = linkInput.value.trim();
+
+    if (!/^https?:\/\/.+/.test(linkValue)) {
+        // Trường "link" không phải là URL hợp lệ
+        alert("Link phải là URL hợp lệ");
+        return false;
+    }
+    if (str === "edit") {
+        alert("Bạn đã sửa lesson thành công!");
+    } else {
+        alert("Bạn đã thêm lesson thành công!");
+    }
+}

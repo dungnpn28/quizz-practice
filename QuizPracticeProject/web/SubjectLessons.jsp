@@ -42,7 +42,7 @@
                         <c:if test="${lesson.isStatus() == false}">
                             <td><div class="deactive-button">Deactive</div></td>
                         </c:if>
-                        <td><a href="editLessonDetails?lessonId=${lesson.getId()}">Edit</a></td>
+                        <td><a href="editLessonDetails?lessonId=${lesson.getId()}&subjectId=${subjectId}">Edit</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
