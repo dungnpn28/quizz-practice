@@ -56,7 +56,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Title</label>
-                                <input name="title" value="${blog.title}" class="form-control" id="" aria-describedby="">
+                                <input name="title" value="${blog.title}" class="form-control" id="" aria-describedby="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
@@ -73,11 +73,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Brief Information</label>
-                                <textarea name="brief_info" class="form-control" id="" aria-describedby="">${blog.brief_info}</textarea>
+                                <textarea name="brief_info" class="form-control" id="" aria-describedby="" required>${blog.brief_info}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Content</label>
-                                <textarea name="content" class="form-control" id="" aria-describedby="">${blog.content}</textarea>
+                                <textarea name="content" class="form-control" id="" aria-describedby="" required>${blog.content}</textarea>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="featured" name="flag" ${blog.flag == '1' ? 'checked' : ''}>

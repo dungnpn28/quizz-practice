@@ -25,7 +25,7 @@
             <form action="editSlider" method="post" enctype="multipart/form-data" id="changeDetailForm">                
                 <div class="mb-3">
                     <label for="" class="form-label">Title</label>
-                    <input name="title" value="${listSlider.title}" class="form-control" id="" aria-describedby="">
+                    <input name="title" value="${listSlider.title}" class="form-control" id="" aria-describedby="" required>
                 </div>
 
                 <div class="image-upload">
@@ -38,7 +38,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Backlink</label>
-                    <input name="backlink" value="${listSlider.backlink}" class="form-control" id="">
+                    <input name="backlink" value="${listSlider.backlink}" class="form-control" id="" required>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Notes</label>
