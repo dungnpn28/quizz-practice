@@ -124,7 +124,7 @@ public class QuizHandleController extends HttpServlet {
         int countAttempt = a.countExamAttempt(examId, u.getId());
         int attemptId = countAttempt + 1;
         if (page > 1) {
-            attemptId--;
+            attemptId = countAttempt;
         }
         req.setAttribute("attId", attemptId);
 

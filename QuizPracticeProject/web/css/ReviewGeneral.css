@@ -227,6 +227,10 @@ span label {
     margin-left: 5px;
 }
 
+span label:hover{
+    cursor: text;
+}
+
 
 
 

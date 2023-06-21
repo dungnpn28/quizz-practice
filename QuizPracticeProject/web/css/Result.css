@@ -1,0 +1,47 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 21, 2023, 6:46:43 PM
+    Author     : Acer
+*/
+/* Apply styles to the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Style the table header cells */
+th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Style the table data cells */
+td {
+    padding: 8px;
+}
+
+/* Apply alternating background color to table rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Style the links */
+a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+}
+
+a:hover {
+    background-color: #ddd;
+}
+

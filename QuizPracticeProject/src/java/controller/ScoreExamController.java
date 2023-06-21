@@ -36,13 +36,15 @@ public class ScoreExamController extends HttpServlet {
         int attemptId = Integer.parseInt(req.getParameter("attId"));
         ArrayList<Question> allQuestionList = q.getAllListQuestionByExamId(examId);
         for (Question question : allQuestionList) {
-            a.createNullAttempt(attemptId, examId, question.getId(), u.getId());
-            
+            a.createNullAttempt(attemptId, examId, question.getId(), u.getId());  
         }
         double score = a.getExamScore(attemptId, examId, u.getId());
         req.setAttribute("examscore", score);
         req.setAttribute("examId", examId);
         req.setAttribute("attId", attemptId);
+        
+        ArrayList<Question> allQuestionAnsweredList = q.getQuestionListByExamAttempt(examId, attemptId, u.getId());
+        req.setAttribute("allQuestionL", allQuestionAnsweredList);
         req.getRequestDispatcher("Result.jsp").forward(req, resp);
     }
 
