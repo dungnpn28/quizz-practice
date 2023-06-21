@@ -52,12 +52,12 @@ public class SliderDAO extends MyDAO {
         return (s);
     }
 
-    public List<Slider> getSliderByStatus(boolean status) {
+    public List<Slider> getSliderByStatus(int status) {
         List<Slider> sliders = new ArrayList<>();
         try {
             String query = "SELECT * FROM slider WHERE status = ?";
             ps = con.prepareStatement(query);
-            ps.setBoolean(1, status);
+            ps.setInt(1, status);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

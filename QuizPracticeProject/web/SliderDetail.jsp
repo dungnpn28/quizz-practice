@@ -45,6 +45,9 @@
                             <h1> / </h1>
                             <h1><a href="sliderDetail?sliderId=${sliderId}">Details </a></h1>
                         </div>
+                        <c:if test="${not empty mess}">
+                            <p id="notification"> ${mess}</p>
+                        </c:if>
                         <div class="row">
                             <div class="col-12">
                                 <c:if test="${not empty notificationMessage}">
@@ -97,5 +100,14 @@
             </div>
         </div>
         <script src="js/navBar.js"></script>
+        <script>
+            document.getElementById("notification").style.display = "block";
+
+// Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                document.getElementById("notification").style.display = "none";
+            }, 5000);
+
+        </script>
     </body>
 </html>

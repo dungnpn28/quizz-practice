@@ -37,7 +37,7 @@ public class SliderListController extends HttpServlet {
         List<Slider> listSlider = new SliderDAO().getSlider();
         request.setAttribute("listSlider", listSlider);
 
-        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(true);
+        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(1);
 //        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(false);
         request.setAttribute("filterStatus", filterStatus);
         request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);

@@ -30,7 +30,12 @@ public class SliderDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        SliderDAO sDAO = new SliderDAO();
+        Slider x = sDAO.getOneSlider(sid);
+        request.setAttribute("slider", x);
+        request.setAttribute("sid", sid);
+        request.getRequestDispatcher("SliderDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,12 +50,8 @@ public class SliderDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sid = Integer.parseInt(request.getParameter("sid"));
-        SliderDAO sDAO = new SliderDAO();
-        Slider x = sDAO.getOneSlider(sid);
-        request.setAttribute("slider", x);
-        request.setAttribute("sid", sid);
-        request.getRequestDispatcher("SliderDetail.jsp").forward(request, response);
+        processRequest(request, response);
+
     }
 
     /**

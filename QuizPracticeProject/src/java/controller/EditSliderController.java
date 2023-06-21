@@ -67,7 +67,7 @@ public class EditSliderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
         HttpSession session = request.getSession();
         int sid = Integer.parseInt(request.getParameter("sid"));
         String title = request.getParameter("title");
@@ -107,14 +107,15 @@ public class EditSliderController extends HttpServlet {
         List<Slider> listSlider = sDAO.getSlider();
         request.setAttribute("listSlider", listSlider);
 
-        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(true);
+        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(1);
         request.setAttribute("filterStatus", filterStatus);
         try {
             Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+        request.setAttribute("mess", "Update successfully !!!");
+        request.getRequestDispatcher("/sliderDetail?sid=" + sid).forward(request, response);
     }
 
     /**
