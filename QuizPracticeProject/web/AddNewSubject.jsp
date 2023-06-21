@@ -24,7 +24,7 @@
                 <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">NEW SUBJECT</h1>
 
-                
+
                 <div class="container">
                     <div class="form-container">
                         <div class="row">
@@ -33,13 +33,16 @@
                                     <div class="image-upload">
                                         <input type="file" name="thumbnail" id="imageUpload" accept="image/*"  onchange="loadFile(event)">
                                         <label for="imageUpload">
-                                            <img id="imagePreview" src="uploads/" class="img-fluid">
+                                            <div id="imagePreviewContainer">
+                                                <img id="imagePreview" src="uploads/" class="img-fluid">
+                                                <div id="imagePreviewText" class="preview-text">No image selected</div>
+                                            </div>
                                             <span class="btn btn-primary">Upload Image</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                 
+
                                     <div class="mb-3">
                                         <label for="subjectName" class="form-label">Subject Name</label>
                                         <input type="text" class="form-control" id="subjectName" name="name" required>
@@ -116,6 +119,10 @@
                 output.onload = function () {
                     URL.revokeObjectURL(output.src) // free memory
                 }
+                var imagePreviewText = document.getElementById('imagePreviewText');
+                imagePreviewText.innerHTML = 'Add image successfully';
+                imagePreviewText.classList.add('hidden');
+
             };
         </script>
         <script type="text/javascript">

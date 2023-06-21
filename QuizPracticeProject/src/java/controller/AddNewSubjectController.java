@@ -63,8 +63,8 @@ public class AddNewSubjectController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        req.setAttribute("mess", "success add");
-        req.getRequestDispatcher("SubjectListAE.jsp").forward(req, resp);
+      
+        resp.sendRedirect("subjectlistae");
     }
 
     @Override

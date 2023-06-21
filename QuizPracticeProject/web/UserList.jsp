@@ -25,6 +25,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>QuizPractice</title>
+
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     </head>
@@ -88,45 +90,60 @@
                     <div class="search-container3">
                         <button><a class="dialog-btn" href="#my-dialog">ADD NEW</a></button>
                         <div class="dialog overlay" id="my-dialog">
-                            <!--                            <a href="#" class="overlay-close"></a>-->
                             <div class="dialog-body">
                                 <a class="dialog-close-btn" href="">&times;</a>
                                 <div class="container">
                                     <br>
-                                    <form action="addnew" method="post">
+                                    <form id="addnew" action="addnewuser" method="post" onsubmit="return validateForm()">
                                         <div class="add row">
                                             <label class="form-label">Email</label>
+                                            <input name="email" id="emailInput" type="text" placeholder="Email" required oninput="validateEmail()">
+                                            <div id="emailError" class="text-danger"> </div>
 
+                                            <label class="form-label">Name</label>
+                                            <input name="name" id="nameInput" type="text" placeholder="Name" required oninput="validateName()">
+                                            <div id="nameError" class="text-danger"></div>
 
-                                            <input type="text" placeholder="Email" required="">
-
-                                            <label class="form-label">name</label>
-                                            <input type="text" placeholder="Name" required="">
+                                            <label class="form-label">Gender</label>
                                             <div>
-                                                <label class="form-label">Gender</label> &nbsp&nbsp
-                                                <input type="radio" name="gender" value="0">Female &nbsp&nbsp
-                                                <input type="radio" name="gender" value="0">Male
+                                                <input id="femaleInput" type="radio" name="gender" value="0" required onchange="validateGender()">Female &nbsp;&nbsp;
+                                                <input id="maleInput" type="radio" name="gender" value="1" required onchange="validateGender()">Male
                                             </div>
+                                            <div id="genderError" class="text-danger"></div>
+
                                             <label class="form-label">Phone</label>
-                                            <input type="text" placeholder="Phone number" required="">
+                                            <input id="phoneInput" name="phone" type="text" placeholder="Phone number" required oninput="validatePhone()">
+                                            <div id="phoneError" class="text-danger"></div>
+                                            <label>DOB</label>
+                                            <input id="dobInput" type="date" name="dob"required oninput ="validateDob()">
+                                            <div id="DobError" class="text-danger"></div>
+
                                             <label class="form-label">Role</label>
-                                            <select class="select">                                               
+                                            <select id="roleSelect" class="select" name="role">
                                                 <c:forEach var="list_role" items="${list_role}">
                                                     <option value="${list_role.getId()}">${list_role.name}</option>
                                                 </c:forEach>
                                             </select>
+
                                             <label class="form-label">Status</label>
-                                            <select name="status" id="status" >
-
-                                                <option value="0" >Deative</option>
+                                            <select name="status" id="statusSelect">
+                                                <option value="0">Deactive</option>
                                                 <option value="1">Active</option>
-
                                             </select>
                                         </div>
                                         <br>
-                                        <button type="submit" name="submit">CREATE</button>
+                                        <button type="button" onclick="openConfirmationDialog1()">CREATE</button>
 
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="confirmation-dialog" class="modal">
+                            <div class="modal-content">
+                                <p>Are you sure?</p>
+                                <div class="buttons">
+                                    <button id="confirm-yes">Yes</button>
+                                    <button id="confirm-no" onclick="modalCloseHandler(event)">No</button>
                                 </div>
                             </div>
                         </div>
@@ -163,6 +180,8 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Role</th>
+                                    <th>Created</th>
+                                    <<th>Modified</th>
                                     <th>Status</th>
                                     <th>Action</th>
 
@@ -207,7 +226,8 @@
                                             </c:otherwise>
 
                                         </c:choose>
-
+                                        <td>${userprofile.getCreated()}</td>
+                                        <td>${userprofile.getModified()}</td>
                                         <c:choose>
                                             <c:when test="${userprofile.getUser().getStatus() == 0}">
                                                 <td><div class="activation1">Deactive</div></td>
@@ -218,9 +238,14 @@
                                         </c:choose>
 
 
-
-                                        <td><a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a></td>
-
+                                        <c:choose>
+                                            <c:when test="${userprofile.getUser().getId() == sessionScope.user.getId()}">
+                                                <td>THIS IS ME</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a></td>
+                                                    </c:otherwise>
+                                                </c:choose>
 
                                     </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
@@ -229,24 +254,44 @@
                                         <a class="dialog-close-btn" href="">&times;</a>
                                         <div class="container">
                                             <br>
-                                            <form action="addnew" method="post">
+                                            <form id="changeuser-${userprofile.getUser().getId()}" action="changeuserprofileadmin" method="post">
                                                 <div class="add row">
-                                                    <label class="form-label">Email</label>
-
-
-                                                    <input type="text" value="${userprofile.getUser().getAccount()}" readonly>
-
-                                                    <label class="form-label">name</label>
-                                                    <input type="text" value="${userprofile.getFull_name()}"readonly>
-                                                    <div>
-                                                        <label class="form-label">Gender</label> &nbsp&nbsp
-                                                        <input type="radio" name="gender" value="0" ${userprofile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
-                                                        <input type="radio" name="gender" value="1" ${userprofile.getGender() == 1 ? "checked":""} disabled >Male
+                                                    <div class="col-md-4">
+                                                        <c:choose>
+                                                            <c:when test="${userprofile.getAvatar()== null}">
+                                                                <div class="image-container">
+                                                                    <img src="uploads/avatar-mac-dinh-1.png" alt="User Avatar">
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="image-container">
+                                                                    <img src="uploads/${userprofile.getAvatar()}" alt="User Avatar">
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </div>
-                                                    <label class="form-label">Phone</label>
-                                                    <input type="text" value="${userprofile.phone_number()}" readonly>
+                                                    <div class="col-md-8">
+                                                        <label class="form-label">ID</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="text" value="${userprofile.getUser().getId()}" name="id" readonly>
+                                                        <br>
+                                                        <label class="form-label">Email</label>
+
+
+                                                        <input type="text" value="${userprofile.getUser().getAccount()}" readonly>
+                                                        <br>
+                                                        <label class="form-label">Name</label>
+                                                        <input type="text" name="name" value="${userprofile.getFull_name()}"readonly>
+                                                        <div>
+                                                            <label class="form-label">Gender</label> &nbsp&nbsp
+                                                            <input type="radio" name="gender" value="0" ${userprofile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
+                                                            <input type="radio" name="gender" value="1" ${userprofile.getGender() == 1 ? "checked":""} disabled >Male
+                                                        </div>
+                                                        <label class="form-label">Phone</label>
+                                                        <input type="text" name="phone" value="${userprofile.phone_number()}" readonly>
+                                                    </div>
+
                                                     <label class="form-label">Role</label>
-                                                    <select class="select">                                               
+                                                    <select class="select" name="role">                                               
                                                         <c:forEach var="list_role" items="${list_role}">
                                                             <option value="${list_role.getId()}" ${userprofile.getUser().getRole_id() == list_role.getId() ? "selected" : ""}>${list_role.name}</option>
                                                         </c:forEach>
@@ -259,9 +304,21 @@
                                                     </select>
 
                                                     <br><br><br>
-                                                    <button>Change update</button>
+                                                    <!--                                                    <button type="submit">Change Update</button>-->
+                                                    <button type="button" onclick="openConfirmationDialog(${userprofile.getUser().getId()})">Change update</button>
+                                                    <div id="confirmation-dialog-${userprofile.getUser().getId()}" class="modal">
+                                                        <div class="modal-content">
+                                                            <p>Are you sure?</p>
+                                                            <div class="buttons">
+                                                                <button id="confirm-yes-${userprofile.getUser().getId()}">Yes</button>
+                                                                <button id="confirm-no-${userprofile.getUser().getId()}" onclick="modalCloseHandler(event)">No</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -269,74 +326,28 @@
 
 
                             </tbody>
+
                         </table>
 
 
                     </div>
+
                     <div class="pagination">
                         <c:forEach begin="1" end="${endP}" var="i">
                             <a class="${tag == i?"active":""}" href="userlist?index=${i}&status=${status}&role=${role}&gender=${gender}&search=${search}">${i}</a>
                         </c:forEach>
                     </div>
 
-
                 </div>
+                <%@include file="Login.jsp"%>
+
             </div>
+
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="js/PopUp.js" type="text/javascript"></script>
+            <script src="js/userList.js" type="text/javascript"></script>      
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    $('#sidebarCollapse').on('click', function () {
-                                        $('#sidebar').toggleClass('active');
-                                    });
-                                });
-            </script>
-            <script>
-                function applyFilters() {
-                    var genderSelect = document.getElementById("gender");
-                    var roleSelect = document.getElementById("role");
-                    var statusSelect = document.getElementById("status");
-                    var searchInput = document.getElementById("searchInput");
-
-                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
-                    var role = roleSelect.options[roleSelect.selectedIndex].value;
-                    var status = statusSelect.options[statusSelect.selectedIndex].value;
-                    var search = searchInput.value;
-
-
-
-
-                    // Build your base URL
-                    var baseUrl = "userlist?";
-
-                    if (gender !== "all") {
-                        baseUrl += "gender=" + gender + "&";
-                    }
-                    if (role !== "all") {
-                        baseUrl += "role=" + role + "&";
-                    }
-                    if (status !== "all") {
-                        baseUrl += "status=" + status + "&";
-                    }
-                    if (search.trim() !== "") {
-                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
-                    }
-
-                    baseUrl = baseUrl.slice(0, -1);
-                    localStorage.setItem("gender", gender);
-                    localStorage.setItem("role", role);
-                    localStorage.setItem("status", status);
-                    localStorage.setItem("search", search);
-
-
-
-                    // Redirect to the filtered URL
-                    window.location.href = baseUrl;
-                }
-
-
-            </script>
-            <script src="js/PopUp.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 

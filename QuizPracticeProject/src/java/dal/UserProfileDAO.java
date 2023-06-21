@@ -333,4 +333,18 @@ public class UserProfileDAO extends MyDAO {
 
         return 0;
     }
+    
+     public void changeUser(int id) {
+        try {
+            String strAdd = "update [user_profile] set [modified] = GETDATE() where user_id = ?";
+            ps = con.prepareStatement(strAdd);
+            
+           
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("changeUser: " + e.getMessage());
+        }
+    }
 }

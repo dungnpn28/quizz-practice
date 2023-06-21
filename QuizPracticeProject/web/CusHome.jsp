@@ -49,6 +49,7 @@
     <%@include file="components/CusHeader.jsp"%>
     <!--    SIDEBAR-->
     <div class="wrapper">
+        <div>${email}</div>
         <%@include file="components/navbar.jsp" %>
         <div id="content">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">

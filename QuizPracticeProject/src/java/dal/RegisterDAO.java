@@ -15,15 +15,45 @@ import java.util.Date;
  * @author ACER
  */
 public class RegisterDAO extends MyDAO{
-    
-    public void registerUser(String email, String pass) throws SQLException {
+    public void addUser(String email, String pass,int role,int status) throws SQLException {
         xSql = "insert into [user]\n"
-                + "values(?,?,1)";
+                + "values(?,?,?,?)";
         try {
             con = new DBContext().connection;
             ps = con.prepareStatement(xSql);
             ps.setString(1, email);
             ps.setString(2, pass);
+            ps.setInt(3, role);
+            ps.setInt(4, status);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("addUser:"+ e.getMessage());
+        }
+    }//id, name, Integer.parseInt(gender), dob, phone_number
+    public void addUserProfile(int id, String name, int gender, String dob, String mobile) throws SQLException {
+        xSql = "insert into [user_profile]\n"
+                + "values(?,NULL,?,?,?,?,GETDATE(),GETDATE())";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, id);
+            ps.setString(2, name);
+            ps.setInt(3, gender);
+            ps.setString(4, dob);
+            ps.setString(5, mobile);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public void registerUser(String email, String pass,int role,int status) throws SQLException {
+        xSql = "insert into [user]\n"
+                + "values(?,?,?,?)";
+        try {
+            con = new DBContext().connection;
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, email);
+            ps.setString(2, pass);
+            ps.setInt(3, role);
+            ps.setInt(4, status);
             ps.executeUpdate();
         } catch (Exception e) {
         }
