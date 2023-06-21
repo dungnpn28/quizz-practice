@@ -10,20 +10,10 @@
             <file>file:/D:/SWP/summer2023-swp391.se1714-g4/QuizPracticeProject/web/BlogList.jsp</file>
         </group>
         <group>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/css/UserList.css</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/AddNewSubject.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/AddNewUserController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/UserProfileDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/UserListController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/js/subjectList.js</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/SubjectListAEController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/UserList.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/UserProfile.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/css/SubjectListAE.css</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/js/userList.js</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/AddNewSubjectController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/SubjectListAE.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SliderListAd.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/SliderDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogDetails.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/EditSliderController.java</file>
         </group>
     </open-files>
 </project-private>

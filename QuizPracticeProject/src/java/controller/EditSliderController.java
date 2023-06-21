@@ -38,7 +38,7 @@ public class EditSliderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,10 +67,11 @@ public class EditSliderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
         HttpSession session = request.getSession();
         int sid = Integer.parseInt(request.getParameter("sid"));
         String title = request.getParameter("title");
+        String note = request.getParameter("note");
         String statuss = request.getParameter("status");
         boolean status = true;
         if (statuss.equals("0")) {
@@ -99,16 +100,22 @@ public class EditSliderController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            sDAO.updateSliderWithImage(title, thumbnail, sid, backlink, status);
+            sDAO.updateSliderWithImage(title, thumbnail, sid, backlink, status, note);
+        } else {
+            sDAO.updateSliderWithoutImage(title, sid, backlink, status, note);
         }
-        sDAO.updateSliderWithoutImage(title, sid, backlink, status);
         List<Slider> listSlider = sDAO.getSlider();
         request.setAttribute("listSlider", listSlider);
 
-        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(true);
+        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(1);
         request.setAttribute("filterStatus", filterStatus);
-
-        request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("mess", "Update successfully !!!");
+        request.getRequestDispatcher("/sliderDetail?sid=" + sid).forward(request, response);
     }
 
     /**

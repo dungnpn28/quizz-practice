@@ -44,7 +44,7 @@ public class ChangeBlogDetailController extends HttpServlet {
         BlogDAO dao = new BlogDAO();
         Blog blog = dao.getBlogDetail(id);
         request.setAttribute("blog", blog);
-
+        request.setAttribute("categoryName", dao.getCategoryName(blog.getId()));
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
         request.setAttribute("listCategory", listCategory);
 
@@ -78,7 +78,7 @@ public class ChangeBlogDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String notificationMessage = "You did not change anything";
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int category_id = Integer.parseInt(request.getParameter("category"));
@@ -109,6 +109,7 @@ public class ChangeBlogDetailController extends HttpServlet {
 
             String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
             try {
+
                 FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = file.getInputStream();
                 byte[] data = new byte[is.available()];
@@ -120,11 +121,18 @@ public class ChangeBlogDetailController extends HttpServlet {
             }
             x = new Blog(id, thumbnail, title, category_id, flag, status, content, brief_info);
             bDAO.updateBlogWithThumbnail(x);
-        }
-        x = new Blog(id, title, category_id, flag, status, content, brief_info);
-        bDAO.updateBlogWithoutThumbnail(x);
+        } else {
+            x = new Blog(id, title, category_id, flag, status, content, brief_info);
+            bDAO.updateBlogWithoutThumbnail(x);
 
-        request.setAttribute("notificationMessage", "Update successfully !!!");
+        }
+        notificationMessage = "Update successfully !!!";
+        request.setAttribute("notificationMessage", notificationMessage);
+        try {
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher("/blogDetail?id=" + id).forward(request, response);
     }
 

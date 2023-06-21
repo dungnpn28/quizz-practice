@@ -29,6 +29,7 @@ public class SliderDAO extends MyDAO {
             boolean xStatus;
             Date xCreated;
             Date xModified;
+            String xNote;
             Slider x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -38,7 +39,8 @@ public class SliderDAO extends MyDAO {
                 xStatus = rs.getBoolean("status");
                 xCreated = rs.getDate("created");
                 xModified = rs.getDate("modified");
-                x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified);
+                xNote = rs.getString("note");
+                x = new Slider(xID, xTitle, xImage, xBacklink, xStatus, xCreated, xModified, xNote);
                 s.add(x);
             }
             rs.close();
@@ -50,12 +52,12 @@ public class SliderDAO extends MyDAO {
         return (s);
     }
 
-    public List<Slider> getSliderByStatus(boolean status) {
+    public List<Slider> getSliderByStatus(int status) {
         List<Slider> sliders = new ArrayList<>();
         try {
             String query = "SELECT * FROM slider WHERE status = ?";
             ps = con.prepareStatement(query);
-            ps.setBoolean(1, status);
+            ps.setInt(1, status);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -65,7 +67,8 @@ public class SliderDAO extends MyDAO {
                 boolean xStatus = rs.getBoolean("status");
                 Date created = rs.getDate("created");
                 Date modified = rs.getDate("modified");
-                Slider slider = new Slider(id, title, image, backlink, xStatus, created, modified);
+                String note = rs.getString("note");
+                Slider slider = new Slider(id, title, image, backlink, xStatus, created, modified, note);
                 sliders.add(slider);
             }
             rs.close();
@@ -103,15 +106,16 @@ public class SliderDAO extends MyDAO {
                 boolean xStatus = rs.getBoolean("status");
                 Date created = rs.getDate("created");
                 Date modified = rs.getDate("modified");
-                s = new Slider(id, title, image, backlink, xStatus, created, modified);
+                String note = rs.getString("note");
+                s = new Slider(id, title, image, backlink, xStatus, created, modified, note);
             }
         } catch (Exception e) {
         }
         return s;
     }
 
-    public void updateSliderWithImage(String title, String image, int id, String backlink, boolean status) {
-        String sql = "update Slider set [title] = ?, [image] = ?, [backlink]= ?, [status] = ?, [modified] = GETDATE() where id = ?";
+    public void updateSliderWithImage(String title, String image, int id, String backlink, boolean status, String note) {
+        String sql = "update Slider set [title] = ?, [image] = ?, [backlink]= ?, [status] = ?, [modified] = GETDATE(), [note] = ? where id = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -119,22 +123,24 @@ public class SliderDAO extends MyDAO {
             ps.setString(2, image);
             ps.setString(3, backlink);
             ps.setBoolean(4, status);
-            ps.setInt(5, id);
+            ps.setString(5, note);
+            ps.setInt(6, id);
             ps.executeUpdate();
 
         } catch (Exception e) {
         }
     }
 
-    public void updateSliderWithoutImage(String title, int id, String backlink, boolean status) {
-        String sql = "update Slider set [title] = ?, [backlink] = ?, [status] = ?, [modified] = GETDATE() where id = ?";
+    public void updateSliderWithoutImage(String title, int id, String backlink, boolean status, String note) {
+        String sql = "update Slider set [title] = ?, [backlink] = ?, [status] = ?, [modified] = GETDATE(), [note] = ? where id = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, title);
             ps.setString(2, backlink);
             ps.setBoolean(3, status);
-            ps.setInt(4, id);
+            ps.setString(4, note);
+            ps.setInt(5, id);
             ps.executeUpdate();
 
         } catch (Exception e) {

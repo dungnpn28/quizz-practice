@@ -57,7 +57,7 @@ public class HomeController extends HttpServlet {
         List<Blog> listBlog = new BlogDAO().getBlogList();
         request.setAttribute("listBlog", listBlog);
 
-        List<Slider> listSlider = new SliderDAO().getSlider();
+        List<Slider> listSlider = new SliderDAO().getSliderByStatus(1);
         request.setAttribute("listSlider", listSlider);
         
         List<Subject> listSubject = new SubjectDAO().getSubjects();

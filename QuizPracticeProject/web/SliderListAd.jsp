@@ -57,7 +57,7 @@
                                         Active
                                     </c:if>
                                     <c:if test="${listSlider.status == false}">
-                                        Active
+                                        Inactive
                                     </c:if>
                                 </div>
                             </td>
@@ -70,8 +70,12 @@
                                         <div class="col">
                                             <form action="sliderList" method="post">
                                                 <button type="submit" name="btnEdit">EDIT</button>
-                                                <button type="submit" name="btnDel">DELETE</button>
+
+                                                <input hidden name="sid" value="${listSlider.id}">
+                                            </form>
+                                            <form action="sliderList" method="post" id="deleteForm">
                                                 <input hidden name="sid" value="${listSlider.getId()}">
+                                                <button type="submit" name="btnDel">DELETE</button>
                                             </form>
                                         </div>  
                                     </div>
@@ -111,6 +115,15 @@
                 $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').toggleClass('active');
                 });
+            });
+        </script>
+        <script>
+            // Gắn sự kiện "submit" vào form khi người dùng ấn submit
+            var formElement = document.getElementById("deleteForm");
+            formElement.addEventListener("submit", function (event) {
+                if (!confirm("Are you sure you want to delete?")) {
+                    event.preventDefault(); // Hủy sự kiện submit nếu người dùng không đồng ý
+                }
             });
         </script>
     </body>
