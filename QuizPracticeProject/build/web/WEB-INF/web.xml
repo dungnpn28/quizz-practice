@@ -151,6 +151,18 @@
     <servlet>
         <servlet-name>SubjectListAEController</servlet-name>
         <servlet-class>controller.SubjectListAEController</servlet-class>
+   </servlet>
+    <servlet>
+        <servlet-name>SliderDetailController</servlet-name>
+        <servlet-class>controller.SliderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeBlogDetailController</servlet-name>
+        <servlet-class>controller.ChangeBlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeSliderDetailController</servlet-name>
+        <servlet-class>controller.ChangeSliderDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -295,6 +307,18 @@
     <servlet-mapping>
         <servlet-name>QuestionListController</servlet-name>
         <url-pattern>/questionList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderDetailController</servlet-name>
+        <url-pattern>/sliderDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeBlogDetailController</servlet-name>
+        <url-pattern>/changeBlogDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeSliderDetailController</servlet-name>
+        <url-pattern>/changeSliderDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

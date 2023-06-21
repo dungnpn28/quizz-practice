@@ -22,55 +22,82 @@ import model.User;
  *
  * @author ACER
  */
-public class BlogDAO extends MyDAO{
+public class BlogDAO extends MyDAO {
 
     public Blog getBlogDetail(String id) {
         xSql = "select * from [blog]\n"
                 + "where id = ?";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief_info;
+        Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                return new Blog(rs.getInt(1),//id
-                        rs.getString(2),//thumbnail
-                        rs.getInt(3),//author id
-                        rs.getString(4),//title
-                        rs.getInt(5),//category
-                        rs.getString(6),//flag
-                        rs.getString(7),//status
-                        rs.getString(8),//content
-                        rs.getDate(9),//created
-                        rs.getDate(10)//modified
-                );
+            if (rs.next()) {
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief_info = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief_info);
             }
         } catch (Exception e) {
         }
-        return null;
+        return x;
     }
-    
+
     public List<Blog> getBlogList() {
-        List<Blog> list = new ArrayList<>();
+        List<Blog> t = new ArrayList<>();
         xSql = "select * from [blog]";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief;
+        Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Blog(rs.getInt(1),//id
-                        rs.getString(2),//thumbnail
-                        rs.getInt(3),//author id
-                        rs.getString(4),//title
-                        rs.getInt(5),//category
-                        rs.getString(6),//flag
-                        rs.getString(7),//status
-                        rs.getString(8),//content
-                        rs.getDate(9),//created
-                        rs.getDate(10)//modified
-                ));
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
+                t.add(x);
             }
         } catch (Exception e) {
         }
-        return list;
+        return t;
     }
 
     public String getAuthor(int id) {
@@ -87,8 +114,8 @@ public class BlogDAO extends MyDAO{
         }
         return null;
     }
-    
-    public String getCategoryName(int id){
+
+    public String getCategoryName(int id) {
         xSql = "select name from [blog_category]\n"
                 + "where id = ?";
         try {
@@ -102,32 +129,39 @@ public class BlogDAO extends MyDAO{
         }
         return null;
     }
-    
-    public List<Blog> searchPost(String keyword){
+
+    public List<Blog> searchPost(String keyword) {
         List<Blog> resultPost = new ArrayList<>();
-        xSql = "select * from [blog] where content like ?";
+        xSql = "select * from [blog] where title like ?";
         int xId;
         String xThumbnail;
-        int xAuthorId;
+        int xAuthor_id;
         String xTitle;
-        int xCategory_id;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
         String xContent;
         Date xCreated;
+        Date xModified;
+        String xBrief;
         Blog x = null;
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + keyword + "%");
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 xId = rs.getInt("id");
                 xThumbnail = rs.getString("thumbnail");
-                xAuthorId = rs.getInt("author_id");
+                xAuthor_id = rs.getInt("author_id");
                 xTitle = rs.getString("title");
-                xCategory_id = rs.getInt("category_id");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
                 xContent = rs.getString("content");
                 xCreated = rs.getDate("created");
-                
-                x = new Blog(xId,xThumbnail,xAuthorId,xTitle,xCategory_id,xContent,xCreated);
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief);
                 resultPost.add(x);
             }
             rs.close();
@@ -136,6 +170,59 @@ public class BlogDAO extends MyDAO{
             e.printStackTrace();
         }
         return (resultPost);
-        
     }
+
+    public void updateBlogWithThumbnail(Blog x) {
+        xSql = "UPDATE [dbo].[blog]\n"
+                + "   SET [thumbnail] = ?\n"
+                + "      ,[title] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + "      ,[flag] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[brief_info] = ?\n"
+                + "      ,[content] = ?\n"
+                + "      ,[modified] = GETDATE()\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getThumbnail());
+            ps.setString(2, x.getTitle());
+            ps.setInt(3, x.getCategory_id());
+            ps.setString(4, x.getFlag());
+            ps.setBoolean(5, x.getStatus());
+            ps.setString(6, x.getBrief_info());
+            ps.setString(7, x.getContent());
+            ps.setInt(8, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+    public void updateBlogWithoutThumbnail(Blog x) {
+        xSql = "UPDATE [dbo].[blog]\n"
+                + "   SET [title] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + "      ,[flag] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[brief_info] = ?\n"
+                + "      ,[content] = ?\n"
+                + "      ,[modified] = GETDATE()\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getTitle());
+            ps.setInt(2, x.getCategory_id());
+            ps.setString(3, x.getFlag());
+            ps.setBoolean(4, x.getStatus());
+            ps.setString(5, x.getBrief_info());
+            ps.setString(6, x.getContent());
+            ps.setInt(7, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
 }

@@ -34,7 +34,7 @@
                         </li>
                         <li>
                             
-                            <a href="blogList">POST</a>
+                            <a href="BlogListController">POST</a>
                         </li>
                         <li>
                             
@@ -54,7 +54,7 @@
                         </li>
                         <li>
                             
-                            <a href="blogList">POST LIST</a>
+                            <a href="BlogListController">POST LIST</a>
                         </li>
                         <li>
                             

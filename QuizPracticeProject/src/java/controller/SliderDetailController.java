@@ -1,28 +1,23 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller;
 
-import dal.BlogDAO;
-import dal.Blog_CategoryDAO;
+import dal.SliderDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
-import model.Blog;
-import model.Blog_Category;
+import model.Slider;
 
 /**
  *
- * @author ACER
+ * @author LENOVO
  */
-@WebServlet(name = "BlogDetailController", urlPatterns = {"/blogDetail"})
-public class BlogDetailController extends HttpServlet {
+public class SliderDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,28 +30,7 @@ public class BlogDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        String id = request.getParameter("id");
-        request.setAttribute("id", id);
-        BlogDAO dao = new BlogDAO();
-        Blog blog = dao.getBlogDetail(id);
-        request.setAttribute("blog", blog);
-        
-        int author_id = blog.getAuthor_id();
-        String author = dao.getAuthor(author_id);
-        request.setAttribute("author", author);
-        
-        int category_id = blog.getCategory_id();
-        String category = dao.getCategoryName(category_id);
-        request.setAttribute("category", category);
-        
-        List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
-        request.setAttribute("listCategory",listCategory);
-        List<Blog> listBlog = new BlogDAO().getBlogList();
-        request.setAttribute("listBlog", listBlog);
-        
-        request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +45,12 @@ public class BlogDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        SliderDAO sDAO = new SliderDAO();
+        Slider x = sDAO.getOneSlider(sid);
+        request.setAttribute("slider", x);
+        request.setAttribute("sid", sid);
+        request.getRequestDispatcher("SliderDetail.jsp").forward(request, response);
     }
 
     /**
