@@ -104,7 +104,7 @@
 
 
                                 <div class="d-flex align-items-center justify-content-center pb-4">
-                                     <div id="errorMessage2" class="error-message text-danger"></div>
+                                    <div id="errorMessage2" class="error-message text-danger"></div><br>
                                     <p class="mb-0 me-2">Already have an account?</p>
                                     <button type="button"  onclick="location.href = 'Login.jsp'" class="btn btn-outline-danger">Login</button>
                                 </div>

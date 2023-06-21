@@ -133,6 +133,26 @@
         <servlet-class>controller.EditSliderController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ChangeUserProfileAdminController</servlet-name>
+        <servlet-class>controller.ChangeUserProfileAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewUserController</servlet-name>
+        <servlet-class>controller.AddNewUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyAddNewUserController</servlet-name>
+        <servlet-class>controller.VerifyAddNewUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionListController</servlet-name>
+        <servlet-class>controller.QuestionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <servlet-class>controller.SubjectListAEController</servlet-class>
+   </servlet>
+    <servlet>
         <servlet-name>SliderDetailController</servlet-name>
         <servlet-class>controller.SliderDetailController</servlet-class>
     </servlet>
@@ -267,6 +287,26 @@
     <servlet-mapping>
         <servlet-name>EditSliderController</servlet-name>
         <url-pattern>/editSlider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUserProfileAdminController</servlet-name>
+        <url-pattern>/changeuserprofileadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewUserController</servlet-name>
+        <url-pattern>/addnewuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAddNewUserController</servlet-name>
+        <url-pattern>/verifyaddnewuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <url-pattern>/subjectlistae</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionListController</servlet-name>
+        <url-pattern>/questionList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SliderDetailController</servlet-name>

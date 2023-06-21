@@ -103,6 +103,22 @@ public class UserDAO extends MyDAO {
         return null;
 
     }
+      public void changeUser(int id,int role,int status) {
+        try {
+            String strAdd = "update [user] set role_id = ?,[status] = ? where id = ?";
+            ps = con.prepareStatement(strAdd);
+            
+            ps.setInt(1, role);
+            ps.setInt(2, status);
+            ps.setInt(3, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("changeUser: " + e.getMessage());
+            
+        }
+    }
+     
     
 
 }

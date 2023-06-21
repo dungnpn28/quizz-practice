@@ -115,7 +115,7 @@
                         </li>
                         <li>
                             
-                            <a href="SubjectListAE.jsp">SUBJECT LIST</a>
+                            <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
                             
@@ -127,7 +127,7 @@
                         </li>
                         <li>
                             
-                            <a href="#">QUESTION BANKS</a>
+                            <a href="questionList">QUESTION BANKS</a>
                         </li>
                         <li>
                             

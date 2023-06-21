@@ -49,6 +49,18 @@ public class Subject {
         this.modified = modified;
         this.featured = featured;
     }
+    
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description, Date modified, boolean featured, int author_id) {
+        this.id = id;
+        this.illustration = illustration;
+        this.name = name;
+        this.category_id = category_id;
+        this.status = status;
+        this.description = description;
+        this.modified = modified;
+        this.featured = featured;
+        this.author_id = author_id;
+    }
 
     public Subject(int id, String illustration, int dimension_id, String name, int category_id, boolean status, String description) {
         this.id = id;

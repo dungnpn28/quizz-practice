@@ -112,9 +112,34 @@ $(document).ready(function () {
     }
     
 });
+$(document).ready(function () {
+    $("#addnew").submit(
+        function (event) {
+        event.preventDefault(); // Ngăn chặn việc gửi form mặc định
 
+        var form = $(this);
+        var url = form.attr("action");
 
-           
+        $.ajax({
+            type: "post",
+            url: url,
+            data: form.serialize(),
+            success: function (response) {
+                if (response.trim() === "") {
+                    // Không có lỗi, chuyển về trang Home.jsp
+                    window.location.href = "userlist";
+                } else {
+                    // Có lỗi, hiển thị thông báo lỗi trên popup
+                    $("#emailError").html(response);
+                }
+            },
+            error: function () {
+                $("#emailError").html("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
+        });
+    });
+});
+       
 
 
                
