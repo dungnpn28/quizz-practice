@@ -71,6 +71,7 @@ public class EditSliderController extends HttpServlet {
         HttpSession session = request.getSession();
         int sid = Integer.parseInt(request.getParameter("sid"));
         String title = request.getParameter("title");
+        String note = request.getParameter("note");
         String statuss = request.getParameter("status");
         boolean status = true;
         if (statuss.equals("0")) {
@@ -99,9 +100,10 @@ public class EditSliderController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            sDAO.updateSliderWithImage(title, thumbnail, sid, backlink, status);
+            sDAO.updateSliderWithImage(title, thumbnail, sid, backlink, status, note);
+        } else {
+            sDAO.updateSliderWithoutImage(title, sid, backlink, status, note);
         }
-        sDAO.updateSliderWithoutImage(title, sid, backlink, status);
         List<Slider> listSlider = sDAO.getSlider();
         request.setAttribute("listSlider", listSlider);
 

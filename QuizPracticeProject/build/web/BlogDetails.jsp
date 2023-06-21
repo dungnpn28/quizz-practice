@@ -120,6 +120,15 @@
                                             </h2>
                                         </div>         
                                     </div>
+                                    <hr/>
+                                    <h2>Other Blog from author <a class="blogAtribute" href="BlogListController?authorId=${authorId}">  <c:out value="${author}"/></a> : </h2> 
+                                    <ul>
+                                        <c:forEach var="listBlog" items="${listBlog}" >
+                                            <c:if test="${listBlog.author_id == authorId && listBlog.id != id}">
+                                                <li><a href="blogDetail?id=${listBlog.getId()}" style="color: gray">${listBlog.title}</a></li>
+                                            </c:if>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -142,7 +151,7 @@
                                                         </td>
                                                         <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
                                                             <br/>
-                                                            <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                            <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
                                                             <i class="fas fa-eye"></i>${blog.view}
 
                                                         </td>
@@ -168,7 +177,7 @@
                                                         <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
                                                             <br/>
                                                             <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
-                                                            <i class="fas fa-eye"></i>${blog.view}
+                                                            <i class="fas fa-eye eye-icon">${blog.view}</i>
 
                                                         </td>
                                                     </tr>

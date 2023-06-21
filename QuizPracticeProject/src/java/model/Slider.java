@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author ADMIN
  */
 public class Slider {
+
     private int id;
     private String title;
     private String image;
@@ -18,11 +19,12 @@ public class Slider {
     private boolean status;
     private Date created;
     private Date modified;
+    private String note;
 
     public Slider() {
     }
 
-    public Slider(int id, String title, String image, String backlink, boolean status, Date created, Date modified) {
+    public Slider(int id, String title, String image, String backlink, boolean status, Date created, Date modified, String note) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -30,23 +32,32 @@ public class Slider {
         this.status = status;
         this.created = created;
         this.modified = modified;
+        this.note = note;
     }
-    
-    public Slider(int id, String title, String image, String backlink){
+
+    public Slider(int id, String title, String image, String backlink) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.backlink = backlink;
     }
-    
-    public Slider(int id, String title, String image, String backlink, boolean status){
+
+    public Slider(int id, String title, String image, String backlink, boolean status) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.backlink = backlink;
         this.status = status;
     }
-    
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public int getId() {
         return id;
     }
@@ -102,9 +113,5 @@ public class Slider {
     public void setModified(Date modified) {
         this.modified = modified;
     }
-    
-    
-    
-    
-    
+
 }

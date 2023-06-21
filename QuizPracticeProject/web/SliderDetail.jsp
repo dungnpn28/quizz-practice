@@ -86,7 +86,7 @@
                                 </div>
                                 <div class ="header-container">
                                     <h2>Notes:  </h2>
-                                    <h2></h2>
+                                    <h2>${slider.note}</h2>
                                     <p> </p>
                                 </div>
                             </div>
