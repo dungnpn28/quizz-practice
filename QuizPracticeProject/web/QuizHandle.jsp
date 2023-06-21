@@ -14,7 +14,7 @@
         <title>Quiz Handle</title>
         <link rel="stylesheet" href="css/QuizHandle.css" type="text/css" />
         <script src="js/QuizHandle.js"></script>
-
+        
     </head>
 
     <body>
@@ -40,11 +40,12 @@
                                 <h2>Want to exit the exam?</h2>
                             </div>
                             <div class="exit-content">
-                                <h4>All your progress will not be saved! Wish to continue?</h4>
+                                <h4>You answered ${countAnsQues} out of ${endP} questions. Your attempt will be scored immediately! Wish
+                                    to continue?</h4>
                             </div>
                             <div class="exit-popup-button">
                                 <button onclick="closeExitPopup()">Back to Exam</button>
-                                <a id="exit-immediate" href="endquiz?examid=${id}">Yes</a>
+                                <a id="exit-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +121,6 @@
                                        ${question.optionD}</label>
                             </span>
 
-
                         </div>
                         <input type="submit" id="submit-btn" value="SUBMIT" hidden>
 
@@ -165,13 +165,9 @@
 
                                 </div>
                                 <div class="question-navigation">
-                                    <c:forEach var="question" items="${allQuestionL}">
-                                            <a href="quizhandle?id=${id}&page=${question.questionOrder}">${question.questionOrder}</a>    
-                                    </c:forEach> 
-
-
-
-
+                                    <c:forEach var="question" begin="1" end="${endP}">
+                                        <a href="quizhandle?id=${id}&page=${question}">${question}</a>
+                                    </c:forEach>
                                 </div>
                                 <div class="navigate-btn">
                                     <button onclick="closePopup()">Back to Exam</button>
@@ -180,7 +176,7 @@
                                     <div id="score-popup" class="score-popup-overlay">
                                         <div class="score-popup-content">
                                             <div class="score-header">
-                                                <h2>Want to exit the exam?</h2>
+                                                <h2>Want to score the exam?</h2>
                                             </div>
                                             <div class="score-content">
                                                 <h4>You answered ${countAnsQues} out of ${endP} questions. Wish
@@ -188,12 +184,11 @@
                                             </div>
                                             <div class="score-popup-button">
                                                 <button onclick="closeScorePopup()">Back to Exam</button>
-                                                <a href="scorequiz?examid=${id}">Yes</a>
+                                                <a id="score-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 

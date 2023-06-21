@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1460ce2-7825-47e7-80e5-078b752800c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/QuizPracticeProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/QuizPracticeProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/PracticeDetailsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/PracticeDetailsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/SubjectDetails.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/SubjectDetails.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/css/Result.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/css/Result.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +27,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;new__nmdai&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dungnpn&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -48,6 +48,9 @@
       <updated>1686143306989</updated>
       <workItem from="1686143307942" duration="6000000" />
       <workItem from="1686155446893" duration="605000" />
+      <workItem from="1687361116309" duration="162000" />
+      <workItem from="1687361306554" duration="383000" />
+      <workItem from="1687361836028" duration="626000" />
     </task>
     <servers />
   </component>
