@@ -21,16 +21,16 @@ public class SubjectDetailsDAO extends MyDAO{
             rs = ps.executeQuery();
             int xID;
             int xDuration;
-            int xPrice;
+            double xPrice;
             double xSale;
-            boolean xStatus;
+            int xStatus;
             Price_Package x;
             while (rs.next()) {
                 xID = rs.getInt("id");
                 xDuration = rs.getInt("duration");
-                xPrice = rs.getInt("price");
+                xPrice = rs.getDouble("price");
                 xSale = rs.getDouble("sale");
-                xStatus = rs.getBoolean("status");
+                xStatus = rs.getInt("status");
                 x = new Price_Package(xID, xDuration, xPrice, xSale, xStatus);
                 t.add(x);
             }
