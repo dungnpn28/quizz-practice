@@ -16,6 +16,9 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="ckeditor/ckeditor.js"></script>
+        <script src="ckfinder/ckfinder.js"></script>
+
     </head>
     <body>
         <%
@@ -75,10 +78,11 @@
                                 <label for="" class="form-label">Brief Information</label>
                                 <textarea name="brief_info" class="form-control" id="" aria-describedby="" required>${blog.brief_info}</textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Content</label>
-                                <textarea name="content" class="form-control" id="" aria-describedby="" required>${blog.content}</textarea>
+                            <div class="mb-3" id="contentInput">
+                                <label for="editor" class="form-label"> Content</label>
+                                <textarea name="htmlContent" id="editor" class="form-control" rows="10" cols="80" required> ${blog.content}</textarea>
                             </div>
+
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="featured" name="flag" ${blog.flag == '1' ? 'checked' : ''}>
                                 <label class="form-check-label" for="featured">Featured</label>
@@ -105,6 +109,7 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/navBar.js"></script>
+        <script src="js/CKeditor.js"></script>
         <script>
                                     var loadFile = function (event) {
                                         var output = document.getElementById('imagePreview');

@@ -42,7 +42,7 @@
     <%@include file="components/Header.jsp"%>
     <!--    SIDEBAR-->
     <div class="wrapper">
-        
+
         <div id="content">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
 
@@ -141,7 +141,7 @@
                                     <h3 class="mb-3 mt-4">HOT POSTS</h3>
                                 </div>
 
-                                <a href="#">VIEW ALL POST</a>
+                                <a href="BlogListController">VIEW ALL POST</a>
                             </div>
                             <div class="col-6 text-right">
                                 <a class="mb-3 me-1" href="#carouselExampleIndicators3" role="button" data-bs-slide="prev">
@@ -165,22 +165,25 @@
                                                 <div class="carousel-item${status.first ? ' active' : ''}">
                                                     <div class="row">
                                                     </c:if>
-                                                    <div class="col-md-12 mb-3">
-                                                        <div class="card" style="height:200px">
-                                                            <div class="row g-0">
-                                                                <div class="col-md-4">
-                                                                    <img src="${item.getThumbnail()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">${item.getTitle()}</h5>
-                                                                        <p class="card-text">${item.getContent()}</p>
-                                                                        <div class="card-date">${item.getCreated()}</div>
+                                                    <c:if test="${item.status}">
+                                                        <div class="col-md-12 mb-3">
+                                                            <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${item.getId()}'">
+                                                                <div class="row g-0">
+                                                                    <div class="col-md-4">
+                                                                        <img src="${item.getThumbnail()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">${item.getTitle()}</h5>
+                                                                            <p class="card-text">${item.getContent()}</p>
+                                                                            <div class="card-date">${item.getCreated()}</div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </c:if>
+
                                                     <c:if test="${status.index % 3 == 2 || status.last}">
                                                     </div>
                                                 </div>
@@ -188,7 +191,8 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                            </div>                        </div>
+                            </div>                      
+                        </div>
 
                     </div>
                 </div>
@@ -207,6 +211,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="item" items="${listBlog}">
+                                        
                                             <tr>
                                                 <td>
                                                     <div class="table-image">
@@ -215,10 +220,11 @@
                                                 </td>
                                                 <td>
                                                     <p style="font-weight: bold">${item.getTitle()}</p>
-                                                    <a href="#"> Read more</a>
+                                                    <a href="blogDetail?id=${item.getId()}"> Read more</a>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
+                                        
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -239,9 +245,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#carouselExampleIndicators2').carousel();
-    });
+                                            $(document).ready(function () {
+                                                $('#carouselExampleIndicators2').carousel();
+                                            });
 </script>
 <!--<script>
     $(document).ready(function () {
