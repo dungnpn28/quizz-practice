@@ -10,20 +10,66 @@ package model;
  */
 public class Price_Package {
     private int id;
+    private String name;
+    private String description;
     private int duration;
-    private int price;
+    private double price;
     private double sale;
-    private boolean status;
+    private int status;
 
     public Price_Package() {
     }
 
-    public Price_Package(int id, int duration, int price, double sale, boolean status) {
+    public Price_Package(int id, int duration, double price, double sale, int status) {
         this.id = id;
         this.duration = duration;
         this.price = price;
         this.sale = sale;
         this.status = status;
+    }
+
+    public Price_Package(int id,String name, int duration, double price, double sale, int status) {
+        this.name = name;
+        this.id = id;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public Price_Package(String name, int duration, double price, double sale, int status) {
+        this.name = name;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public Price_Package(int id, String name, String description, int duration, double price, double sale, int status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public Price_Package(String name, String description, int duration, double price, double sale, int status) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.price = price;
+        this.sale = sale;
+        this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -34,6 +80,14 @@ public class Price_Package {
         this.id = id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getDuration() {
         return duration;
     }
@@ -42,11 +96,11 @@ public class Price_Package {
         this.duration = duration;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -58,11 +112,11 @@ public class Price_Package {
         this.sale = sale;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

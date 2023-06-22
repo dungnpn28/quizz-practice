@@ -164,6 +164,10 @@
         <servlet-name>QuestionListController</servlet-name>
         <servlet-class>controller.QuestionListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyRegistrationController</servlet-name>
+        <servlet-class>controller.MyRegistrationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -319,6 +323,10 @@
     <servlet-mapping>
         <servlet-name>QuestionListController</servlet-name>
         <url-pattern>/questionList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyRegistrationController</servlet-name>
+        <url-pattern>/myRegistration</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
