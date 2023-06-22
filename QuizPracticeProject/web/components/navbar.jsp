@@ -88,7 +88,7 @@
                         </li>
                         <li>
                             
-                            <a href="#">QUESTION LIST</a>
+                            <a href="questionList">QUESTION LIST</a>
 
                         </li>     
                         <li>
@@ -115,7 +115,7 @@
                         </li>
                         <li>
                             
-                            <a href="subjectListAE">SUBJECT LIST</a>
+                            <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
                             
@@ -127,7 +127,7 @@
                         </li>
                         <li>
                             
-                            <a href="#">QUESTION BANKS</a>
+                            <a href="questionList">QUESTION BANKS</a>
                         </li>
                         <li>
                             

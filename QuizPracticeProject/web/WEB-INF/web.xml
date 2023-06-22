@@ -117,10 +117,6 @@
         <servlet-class>controller.QuizHandleController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EndQuizController</servlet-name>
-        <servlet-class>controller.EndQuizController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ScoreExamController</servlet-name>
         <servlet-class>controller.ScoreExamController</servlet-class>
     </servlet>
@@ -151,6 +147,26 @@
     <servlet>
         <servlet-name>AddNewLessonDetailsController</servlet-name>
         <servlet-class>controller.AddNewLessonDetailsController</servlet-class>
+         </servlet>
+    <servlet>
+        <servlet-name>ReviewQuizController</servlet-name>
+        <servlet-class>controller.ReviewQuizController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeUserProfileAdminController</servlet-name>
+        <servlet-class>controller.ChangeUserProfileAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewUserController</servlet-name>
+        <servlet-class>controller.AddNewUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyAddNewUserController</servlet-name>
+        <servlet-class>controller.VerifyAddNewUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <servlet-class>controller.SubjectListAEController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SliderDetailController</servlet-name>
@@ -171,6 +187,14 @@
     <servlet>
         <servlet-name>EditLessonDetailsController</servlet-name>
         <servlet-class>controller.EditLessonDetailsController</servlet-class>
+        </servlet>
+    <servlet>
+        <servlet-name>QuestionListController</servlet-name>
+        <servlet-class>controller.QuestionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyRegistrationController</servlet-name>
+        <servlet-class>controller.MyRegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -281,10 +305,6 @@
         <url-pattern>/quizhandle</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EndQuizController</servlet-name>
-        <url-pattern>/endquiz</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ScoreExamController</servlet-name>
         <url-pattern>/scorequiz</url-pattern>
     </servlet-mapping>
@@ -315,6 +335,26 @@
     <servlet-mapping>
         <servlet-name>AddNewLessonDetailsController</servlet-name>
         <url-pattern>/addNewLessonDetails</url-pattern>
+         </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewQuizController</servlet-name>
+        <url-pattern>/reviewquiz</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUserProfileAdminController</servlet-name>
+        <url-pattern>/changeuserprofileadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewUserController</servlet-name>
+        <url-pattern>/addnewuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAddNewUserController</servlet-name>
+        <url-pattern>/verifyaddnewuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <url-pattern>/subjectlistae</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SliderDetailController</servlet-name>
@@ -335,6 +375,14 @@
     <servlet-mapping>
         <servlet-name>EditLessonDetailsController</servlet-name>
         <url-pattern>/editLessonDetails</url-pattern>
+         </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionListController</servlet-name>
+        <url-pattern>/questionList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyRegistrationController</servlet-name>
+        <url-pattern>/myRegistration</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

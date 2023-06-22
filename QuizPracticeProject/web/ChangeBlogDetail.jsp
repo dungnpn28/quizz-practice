@@ -16,6 +16,9 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="ckeditor/ckeditor.js"></script>
+        <script src="ckfinder/ckfinder.js"></script>
+
     </head>
     <body>
         <%
@@ -50,33 +53,36 @@
                             <div class="image-upload">
                                 <input type="file" name="thumbnail" id="imageUpload" accept="image/*"  onchange="loadFile(event)">
                                 <label for="imageUpload">
-                                    <img id="imagePreview" src="uploads/" class="img-fluid">
+                                    <img id="imagePreview" src="uploads/${blog.thumbnail}" class="img-fluid">
                                     <span class="btn btn-primary">Upload Image</span>
                                 </label>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Title</label>
-                                <input name="title" value="${blog.title}" class="form-control" id="" aria-describedby="">
+                                <input name="title" value="${blog.title}" class="form-control" id="" aria-describedby="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
                                 <select class="form-select" id="category" name="category" required>
-                                    <option value="" hidden>Select a category</option>
+                                    <option value="${blog.category_id}" hidden>${categoryName}</option>
                                     <c:forEach var="category" items="${listCategory}">
+                                        <c:if test="${category.getId() != blog.category_id}">
+                                            <option value="${category.getId()}">${category.getName()}</option>
+                                        </c:if>
 
-                                        <option value="${category.getId()}">${category.getName()}</option>
 
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Brief Information</label>
-                                <textarea name="brief_info" class="form-control" id="" aria-describedby="">${blog.brief_info}</textarea>
+                                <textarea name="brief_info" class="form-control" id="" aria-describedby="" required>${blog.brief_info}</textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Content</label>
-                                <textarea name="content" class="form-control" id="" aria-describedby="">${blog.content}</textarea>
+                            <div class="mb-3" id="contentInput">
+                                <label for="editor" class="form-label"> Content</label>
+                                <textarea name="htmlContent" id="editor" class="form-control" rows="10" cols="80" required> ${blog.content}</textarea>
                             </div>
+
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="featured" name="flag" ${blog.flag == '1' ? 'checked' : ''}>
                                 <label class="form-check-label" for="featured">Featured</label>
@@ -103,6 +109,7 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/navBar.js"></script>
+        <script src="js/CKeditor.js"></script>
         <script>
                                     var loadFile = function (event) {
                                         var output = document.getElementById('imagePreview');
@@ -114,7 +121,7 @@
         </script>
         <script>
             // Gắn sự kiện "submit" vào form khi người dùng ấn submit
-            var formElement = document.getElementById("changeDetailForm"); 
+            var formElement = document.getElementById("changeDetailForm");
             formElement.addEventListener("submit", function (event) {
                 if (!confirm("Are you sure you want to submit?")) {
                     event.preventDefault(); // Hủy sự kiện submit nếu người dùng không đồng ý

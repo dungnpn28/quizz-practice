@@ -21,4 +21,3 @@ CKEDITOR.replace('editor', {
             filebrowserImageBrowseUrl: 'ckfinder/ckfinder.html?type=Images',
             filebrowserImageUploadUrl: 'ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images'
         });
-

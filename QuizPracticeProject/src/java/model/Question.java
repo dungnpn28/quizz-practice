@@ -12,14 +12,99 @@ public class Question {
 
     private int id;
     private int subjectId;
+    private int lessonId;
     private String content;
     private String optionA;
     private String optionB;
     private String optionC;
     private String optionD;
     private String answer;
+    private String answer_explaination;
+    private String level;
     private int questionOrder;
     private double marksAllocated;
+    
+    public Question() {
+    }
+    
+    private String explaination;
+    private boolean marked;
+    private String userAnswer;
+    private double score;
+
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated, String explaination, boolean marked, String userAnswer, double score) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.questionOrder = questionOrder;
+        this.marksAllocated = marksAllocated;
+        this.explaination = explaination;
+        this.marked = marked;
+        this.userAnswer = userAnswer;
+        this.score = score;
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+    
+
+    public String getExplaination() {
+        return explaination;
+    }
+
+    public void setExplaination(String explaination) {
+        this.explaination = explaination;
+    }
+
+    public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated, String explaination) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.questionOrder = questionOrder;
+        this.marksAllocated = marksAllocated;
+        this.explaination = explaination;
+    }
+
+    public Question(int id, int subjectId, int lessonId, String content, String level) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.lessonId = lessonId;
+        this.content = content;
+        this.level = level;
+    }
+
+    
 
     public int getQuestionOrder() {
         return questionOrder;
@@ -49,6 +134,21 @@ public class Question {
         this.questionOrder = questionOrder;
         this.marksAllocated = marksAllocated;
     }
+    
+    public Question(int id, int subjectId, int lessonId, String content, String optionA, String optionB, String optionC, String optionD, String answer,String answer_explaination,String level){
+        this.id = id;
+        this.subjectId = subjectId;
+        this.lessonId = lessonId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.answer_explaination = answer_explaination;
+        this.level = level;
+        
+    }
 
 
     public int getId() {
@@ -65,6 +165,14 @@ public class Question {
 
     public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public int getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(int lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getContent() {
@@ -114,4 +222,21 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    public String getAnswer_explaination() {
+        return answer_explaination;
+    }
+
+    public void setAnswer_explaination(String answer_explaination) {
+        this.answer_explaination = answer_explaination;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+    
 }

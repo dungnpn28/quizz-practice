@@ -45,6 +45,9 @@
                             <h1> / </h1>
                             <h1><a href="sliderDetail?sliderId=${sliderId}">Details </a></h1>
                         </div>
+                        <c:if test="${not empty mess}">
+                            <p id="notification"> ${mess}</p>
+                        </c:if>
                         <div class="row">
                             <div class="col-12">
                                 <c:if test="${not empty notificationMessage}">
@@ -57,10 +60,28 @@
                                 </form>
                                 <p></p>
 
+
+                                <div class ="header-container">
+                                    <h3>Last updated date: </h3>
+
+                                    <c:if test="${slider.modified != null}">
+                                        <h3>${slider.modified}</h3>
+                                    </c:if>
+
+                                    <p> </p>
+                                </div>
+                                <div class ="header-container">
+                                    <h3>Status: </h3>
+                                    <h3>
+                                        ${slider.status?"Active":"Inactive"}
+                                    </h3>
+                                    <p> </p>
+                                </div>
+
                                 <h1 style="font-weight: bold">${slider.title}</h1>
 
 
-                                <img src = "${slider.image}" alt="Can't display image" class="center" style="height:350px; width:750px">        
+                                <img src = "uploads/${slider.image}" alt="Can't display image" class="center" style="height:350px; width:750px">        
 
                                 <div class ="header-container">
                                     <h2></h2>
@@ -86,7 +107,7 @@
                                 </div>
                                 <div class ="header-container">
                                     <h2>Notes:  </h2>
-                                    <h2></h2>
+                                    <h2>${slider.note}</h2>
                                     <p> </p>
                                 </div>
                             </div>
@@ -97,5 +118,14 @@
             </div>
         </div>
         <script src="js/navBar.js"></script>
+        <script>
+            document.getElementById("notification").style.display = "block";
+
+// Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                document.getElementById("notification").style.display = "none";
+            }, 5000);
+
+        </script>
     </body>
 </html>

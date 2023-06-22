@@ -36,3 +36,8 @@ function closeScorePopup() {
     document.getElementById('score-popup').classList.remove('active');
 }
 
+
+
+
+
+

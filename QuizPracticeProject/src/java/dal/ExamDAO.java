@@ -369,4 +369,19 @@ public class ExamDAO extends MyDAO {
 //            System.out.println(exam.getName());
 //        }
 //    }
+    public String getExamNameById(int examId) {
+        try {
+            String strSelect = "select name from [exam] "
+                    + "where id=?;";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getExamNameById:" + e.getMessage());
+        }
+        return null;
+    }
 }
