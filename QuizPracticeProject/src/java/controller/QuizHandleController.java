@@ -29,13 +29,24 @@ public class QuizHandleController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AttemptDAO a = new AttemptDAO();
         QuestionDAO q = new QuestionDAO();
-        QuestionExamDAO eq = new QuestionExamDAO();
+        ExamDAO e = new ExamDAO();
+        QuestionExamDAO qe = new QuestionExamDAO();
 
         HttpSession session = req.getSession();
         int page = Integer.parseInt(req.getParameter("page"));
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("id"));
-        int questionId = eq.getQuestionIdByExamId(examId, page);
+        int questionId = qe.getQuestionIdByExamId(examId, page);
+
+        //get exam time 
+        String duration = e.getExamDurationById(examId);
+        int examDurationSecond = convertToTime(duration);
+        req.setAttribute("examDuration", examDurationSecond);
+
+        //get attempt id
+        int countAttempt = a.countExamAttempt(examId, u.getId());
+        int attemptId = countAttempt;
+        req.setAttribute("attId", attemptId);
 
         //quiz business
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
@@ -46,7 +57,7 @@ public class QuizHandleController extends HttpServlet {
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
         req.setAttribute("questionL", questionList);
-        int endPage = 10;
+        int endPage = qe.countExamQuestion(examId);
         req.setAttribute("endP", endPage);
 
         //mark question
@@ -55,28 +66,26 @@ public class QuizHandleController extends HttpServlet {
             if (req.getParameter("mark").equals("mark")) {
                 markAction = true;
             }
-            a.markUnmarkQuestion(markAction, examId, questionId, u.getId());
-
+            a.markUnmarkQuestion(markAction, attemptId, examId, questionId, u.getId());
         }
-
         //save answer
         String answer = req.getParameter("option");
-        a.saveAnswer(answer, examId, questionId, u.getId());
-        Attempt att = a.getAttempt(examId, questionId, u.getId());
+        a.saveAnswer(answer, attemptId, examId, questionId, u.getId());
+        Attempt att = a.getAttempt(attemptId, examId, questionId, u.getId());
         req.setAttribute("attempt", att);
 
         //score question
         if (att.getUserAnswer() != null) {
             Question currentQues = q.getQuestionById(questionId);
             if (att.getUserAnswer().equals(currentQues.getAnswer())) {
-                a.scoreQuestion(currentQues.getMarksAllocated(), examId, questionId, u.getId());
+                a.scoreQuestion(currentQues.getMarksAllocated(), attemptId, examId, questionId, u.getId());
             } else {
-                a.scoreQuestion(0, examId, questionId, u.getId());
+                a.scoreQuestion(0, attemptId, examId, questionId, u.getId());
             }
         }
 
         //progress bar business
-        int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
+        int countAnsweredQuestion = a.getTotalAnsweredQuestion(attemptId, examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
 
         //question status
@@ -94,41 +103,48 @@ public class QuizHandleController extends HttpServlet {
         QuestionDAO q = new QuestionDAO();
         AttemptDAO a = new AttemptDAO();
         ExamDAO e = new ExamDAO();
-        QuestionExamDAO eq = new QuestionExamDAO();
+        QuestionExamDAO qe = new QuestionExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
 
         //pagination
-        int endPage = 10;
         int page = Integer.parseInt(req.getParameter("page"));
         int examId = Integer.parseInt(req.getParameter("id"));
-        int questionId = eq.getQuestionIdByExamId(examId, page);
+        int endPage = qe.countExamQuestion(examId);
+        int questionId = qe.getQuestionIdByExamId(examId, page);
         req.setAttribute("p", page);
         req.setAttribute("id", examId);
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
         req.setAttribute("questionL", questionList);
         ArrayList<Question> allQuestionList = q.getAllListQuestionByExamId(examId);
         req.setAttribute("allQuestionL", allQuestionList);
-
         req.setAttribute("endP", endPage);
 
-        //create exam attempts
-        a.createAttempt(examId, questionId, examId);
+        //get attempt id
+        int countAttempt = a.countExamAttempt(examId, u.getId());
+        int attemptId = countAttempt + 1;
+        if (page > 1) {
+            attemptId = countAttempt;
+        }
+        req.setAttribute("attId", attemptId);
 
-        Attempt att = a.getAttempt(examId, questionId, u.getId());
+        //create exam attempts
+        a.createAttempt(attemptId, examId, questionId, u.getId());
+
+        Attempt att = a.getAttempt(attemptId, examId, questionId, u.getId());
         req.setAttribute("attempt", att);
 
         //progress bar business
-        int countAnsweredQuestion = a.getTotalAnsweredQuestion(examId, u.getId());
+        int countAnsweredQuestion = a.getTotalAnsweredQuestion(attemptId, examId, u.getId());
         req.setAttribute("countAnsQues", countAnsweredQuestion);
 
         //get exam time 
         String duration = e.getExamDurationById(examId);
         int examDurationSecond = convertToTime(duration);
         req.setAttribute("examDuration", examDurationSecond);
-        
+
         //get attempt list where user_answer not null
-        ArrayList<Attempt> attemptList = a.getAttemptList(examId, questionId, u.getId());
+        ArrayList<Attempt> attemptList = a.getAttemptList(attemptId, examId, questionId, u.getId());
         req.setAttribute("attL", attemptList);
 
         //push to QuizHandle
