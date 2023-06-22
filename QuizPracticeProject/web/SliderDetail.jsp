@@ -81,7 +81,7 @@
                                 <h1 style="font-weight: bold">${slider.title}</h1>
 
 
-                                <img src = "${slider.image}" alt="Can't display image" class="center" style="height:350px; width:750px">        
+                                <img src = "uploads/${slider.image}" alt="Can't display image" class="center" style="height:350px; width:750px">        
 
                                 <div class ="header-container">
                                     <h2></h2>

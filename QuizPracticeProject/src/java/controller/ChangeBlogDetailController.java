@@ -83,7 +83,7 @@ public class ChangeBlogDetailController extends HttpServlet {
         String title = request.getParameter("title");
         int category_id = Integer.parseInt(request.getParameter("category"));
         String brief_info = request.getParameter("brief_info");
-        String content = request.getParameter("content");
+        String content = request.getParameter("htmlContent");
         String featured = request.getParameter("flag");
         String flag;
         if (featured != null && featured.equals("on")) {
@@ -107,9 +107,8 @@ public class ChangeBlogDetailController extends HttpServlet {
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             thumbnail = System.currentTimeMillis() + fileExtension;
 
-            String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + thumbnail;
+            String uploadPath = "web/uploads" + thumbnail;
             try {
-
                 FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = file.getInputStream();
                 byte[] data = new byte[is.available()];

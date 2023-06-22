@@ -23,7 +23,8 @@
         <link href="css/BlogDetail.css" rel="stylesheet" type="text/css"/>
         <link href="css/Home.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+        <script src="ckeditor/ckeditor.js"></script>
+        <script src="ckfinder/ckfinder.js"></script>
     </head>
 
 
@@ -117,7 +118,7 @@
                                     </div>
                                     <h3>
                                         <p class="content">
-                                            <c:out value="${blog.content}"/>
+                                            ${blog.content}
                                         </p>
                                     </h3>
                                     <div class ="header-container-right">
@@ -129,15 +130,8 @@
                                     </div>
                                     <div class ="header-container-right">
                                         <div class="author-value-container">
-                                            <h2 class="author-value"> Updated date:
-                                                <c:choose>
-                                                    <c:when test="${blog.modified == null }">
-                                                        <c:out value="${blog.created}"/>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <c:out value="${blog.modified}"/>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                            <h2 class="author-value"> Created date:
+                                                <c:out value="${blog.created}"/>
                                             </h2>
                                         </div>         
                                     </div>
@@ -162,23 +156,39 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <c:forEach var="blog" items="${updatedBlogList}" begin="0" end="2">
-                                                    <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="uploads/${blog.thumbnail}" alt="Image">
-                                                            </div>
-                                                        </td>
-                                                        <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
-                                                            <br/>
-                                                            <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
-                                                            <i class="fas fa-eye"></i>${blog.view}
+                                                    <c:if test="${(sessionScope.user.getRole_id() != 2 || empty sessionScope.user) && blog.status}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye"></i>${blog.view}
 
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.getRole_id() == 2}">                                                 
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye"></i>${blog.view}
+
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
                                                 </c:forEach>
-
+                                            <td style="border: none"> <a href="BlogListController?updatedCheck=1">View all</a></td>
                                             </tbody>
                                         </table>
                                         <table class="table">
@@ -189,20 +199,38 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach var="blog" items="${mostViewBlogList}" begin="0" end="2">
-                                                    <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="uploads/${blog.thumbnail}" alt="Image">
-                                                            </div>
-                                                        </td>
-                                                        <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
-                                                            <br/>
-                                                            <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
-                                                            <i class="fas fa-eye eye-icon">${blog.view}</i>
+                                                    <c:if test="${(sessionScope.user.getRole_id() != 2 || empty sessionScope.user) && blog.status}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye eye-icon">${blog.view}</i>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.getRole_id() == 2}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye eye-icon">${blog.view}</i>
 
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
                                                 </c:forEach>
+                                            <td style="border: none"> <a href="BlogListController?viewCheck=1">View all</a></td>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -219,6 +247,7 @@
         </div>
         <script src="js/navBar.js"></script>
         <script src="js/blogDetails.js"></script>
+        <script src="js/CKeditor.js"></script>
 
     </body>
     <%@include file="components/Footer.jsp" %>

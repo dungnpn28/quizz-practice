@@ -38,7 +38,7 @@
                             </td>
                             <td>
                                 <div class="col">
-                                    <img src="${listSlider.getImage()}" height="100px" width="150px">
+                                    <img src="uploads/${listSlider.getImage()}" height="100px" width="150px">
                                 </div>
                             </td>
                             <td>
