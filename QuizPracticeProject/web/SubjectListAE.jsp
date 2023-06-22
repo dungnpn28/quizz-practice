@@ -115,7 +115,10 @@
                                             <td>Deactive</td>
                                         </c:otherwise>
                                     </c:choose>
-                                    <td><a class="dialog-btn"><img src="img/search.jpg"></a></td>
+                                    <td>
+                                        <a class="dialog-btn"><img src="img/search.jpg"></a>
+                                        <a class="dialog-btn"><img src="img/search.jpg"></a>
+                                    </td>
 
                                 </tr>
                             </c:forEach>
