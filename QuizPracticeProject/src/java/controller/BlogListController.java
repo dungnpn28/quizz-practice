@@ -80,7 +80,15 @@ public class BlogListController extends HttpServlet {
             }
             req.setAttribute("listBlog", listBlog);
         }
+        if (req.getParameter("updatedCheck") != null) {
+            listBlog = bDAO.getBlogListOrderByUpdated();
+            req.setAttribute("listBlog", listBlog);
 
+        }
+        if (req.getParameter("viewCheck") != null) {
+            listBlog = bDAO.getBlogListOrderByView();
+            req.setAttribute("listBlog", listBlog);
+        }
         req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
     }
 

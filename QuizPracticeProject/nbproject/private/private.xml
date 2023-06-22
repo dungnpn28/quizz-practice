@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/ReviewGeneral.jsp</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/css/ReviewGeneral.css</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/js/QuizReview.js</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/QuizHandleController.java</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/css/Result.css</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/img/yellowflag.png</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/ScoreExamController.java</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/Result.jsp</file>
-            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/AccessDenied.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogDetails.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/CusHome.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/ChangeBlogDetailController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Home.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogList.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/BlogListController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/ChangeBlogDetail.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/CusHomeController.java</file>
         </group>
     </open-files>
 </project-private>
