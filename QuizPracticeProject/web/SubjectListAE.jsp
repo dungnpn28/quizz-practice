@@ -119,7 +119,8 @@
                                             <td>Deactive</td>
                                         </c:otherwise>
                                     </c:choose>
-                                    <td><a class="dialog-btn"><img src="img/search.jpg"></a></td>
+                                    <td><a class="dialog-btn" href="pricePackage?subjectId=${subjectList.getId()}">View detail</a>
+                                        <a class="dialog-btn" href="subjectLessons?subjectId=${subjectList.getId()}">View lessons</a></td>
 
                                 </tr>
                             </c:forEach>

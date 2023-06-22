@@ -93,7 +93,7 @@ public class SubjectDAO extends MyDAO {
             int xAuthor_id;
             Date xModified;
             boolean xFeatured;
-            int xAuthor_id;
+            
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");

@@ -61,6 +61,54 @@ public class LessonDAO extends MyDAO {
         }
         return (t);
     }
+    public List<Lesson> getLessonBySubjectId(int subjectId) {
+        List<Lesson> t = new ArrayList<>();
+        xSql = " select l.*, lt.name as 'lesson_type_name', lp.name as 'lesson_topic_name'\n"
+                + "                 from lesson l\n"
+                + "                  join lesson_type lt on l.type_id = lt.id\n"
+                + "                  join lesson_topic lp on l.topic_id = lp.id\n"
+                + "				  where l.subject_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            int xTopic_id;
+            String xName;
+            int xType_id;
+            int xOrder;
+            String xVideo_link;
+            String xHtml_content;
+            String xLesson_type_name;
+            String xLesson_topic_name;
+
+            boolean xStatus;
+            Lesson x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xLesson_type_name = rs.getString("lesson_type_name");
+                xLesson_topic_name = rs.getString("lesson_topic_name");
+                xStatus = rs.getBoolean("status");
+                x = new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content, xLesson_type_name, xLesson_topic_name, xStatus);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("abcasknclas" + e.getMessage());
+        }
+        return (t);
+    }
+
     public List<Lesson_Type> getLessonType() {
         List<Lesson_Type> t = new ArrayList<>();
         xSql = "select * from lesson_type";

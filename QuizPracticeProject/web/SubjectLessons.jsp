@@ -17,6 +17,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href="subjectlistae" >Back to Subject List</a><br>
         <a href="addNewLessonDetails?subjectId=${subjectId}">Add lesson</a>
         <table border="1">
             <thead>

@@ -19,9 +19,9 @@ import model.Lesson;
 import model.Lesson_Type;
 import model.Lesson_Topic;
 import model.Subject;
- *
- * @author Dell
- */
+import model.Subject_Category;
+import model.UserProfile;
+
 public class SubjectListAEController extends HttpServlet {
 
     @Override

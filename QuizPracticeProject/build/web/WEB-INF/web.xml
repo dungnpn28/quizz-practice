@@ -147,7 +147,7 @@
     <servlet>
         <servlet-name>AddNewLessonDetailsController</servlet-name>
         <servlet-class>controller.AddNewLessonDetailsController</servlet-class>
-        </servlet>
+         </servlet>
     <servlet>
         <servlet-name>ReviewQuizController</servlet-name>
         <servlet-class>controller.ReviewQuizController</servlet-class>
@@ -335,7 +335,7 @@
     <servlet-mapping>
         <servlet-name>AddNewLessonDetailsController</servlet-name>
         <url-pattern>/addNewLessonDetails</url-pattern>
-        </servlet-mapping>
+         </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReviewQuizController</servlet-name>
         <url-pattern>/reviewquiz</url-pattern>
@@ -375,7 +375,7 @@
     <servlet-mapping>
         <servlet-name>EditLessonDetailsController</servlet-name>
         <url-pattern>/editLessonDetails</url-pattern>
-        </servlet-mapping>
+         </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuestionListController</servlet-name>
         <url-pattern>/questionList</url-pattern>

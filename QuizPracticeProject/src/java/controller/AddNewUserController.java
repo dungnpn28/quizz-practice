@@ -65,7 +65,7 @@ public class AddNewUserController extends HttpServlet {
         } else {
             String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                     + "To finish registration, please click the button below:<br>"
-                    + "<a href=\"http://localhost:8080/QuizPracticeProject/verifyaddnewuser?name64=" + name64
+                    + "<a href=\"http://localhost:9999/QuizPracticeProject/verifyaddnewuser?name64=" + name64
                     + "&email64=" + email64 + "&phone_number64=" + phone_number64 + "&gender64=" + gender64
                     + "&pass64=" + password64 + "&dob64=" + dob64 + "&role64=" + role64 + "&status64=" + status64 + "\">"
                     + "<button style=\"display: inline-block; padding: 10px 20px; font-size: 16px; text-align: center; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;\">Verify Account</button></a><br>"

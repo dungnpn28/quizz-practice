@@ -17,6 +17,21 @@
     <body>
         <link rel="stylesheet" href="css/Result.css">
         <div>
+            <h1>Exam Result Page</h1>
+            <table>
+                <tr>
+                    <th>Exam Name</th>
+                    <th>Attempt Number</th>
+                    <th>Mark</th>
+                    <th>State</th>
+                </tr>
+                <tr>
+                    <td>${examname}</td>
+                    <td>${attId}</td>
+                    <td>${examscore}</td>
+                    <td><span class="${examscore < 5 ? 'not-passed' : 'passed'}">${examscore < 5 ? 'Not Passed' : 'Passed'}</span></td>
+                </tr>
+            </table>
             <table>
                 <thead>
                     <tr>
@@ -39,8 +54,10 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <a href="simulationExam"> Simulation Exam </a>
-            <a href="reviewquiz?examId=${examId}&attId=${attId}&page=1"> Review attempt </a> 
+            <div class="button-div">
+                <a class="button" href="simulationExam">Simulation Exam </a>
+                <a class="button" href="reviewquiz?examId=${examId}&attId=${attId}&page=1"> Review attempt </a>
+            </div>
         </div>
         <%@include file="/components/Footer.jsp" %>
     </body>
