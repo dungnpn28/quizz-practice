@@ -63,7 +63,7 @@
                     <c:forEach items="${listSlider}" var="slider" varStatus="status">
                         <div class="carousel-item ${status.first ? 'active' : ''}">
                             <a href="${slider.getBacklink()}">
-                                <img src="${slider.getImage()}" class="d-block w-100 carousel-image" alt="...">
+                                <img src="uploads/${slider.getImage()}" class="d-block w-100 carousel-image" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>${slider.getTitle()}</h5>
                                     <p>Some representative placeholder content for the first slide.</p>
@@ -178,7 +178,7 @@
                                                             <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${item.getId()}'">
                                                                 <div class="row g-0">
                                                                     <div class="col-md-4">
-                                                                        <img src="${item.getThumbnail()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">
+                                                                        <img src="uploads/${item.getThumbnail()}" class="card-img-left zoom-image" style="height:250px; width:250px" alt="...">
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <div class="card-body">
@@ -222,7 +222,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="table-image">
-                                                            <img src="${item.getThumbnail()}" alt="Image">
+                                                            <img src="uploads/${item.getThumbnail()}" alt="Image">
                                                         </div>
                                                     </td>
                                                     <td>
