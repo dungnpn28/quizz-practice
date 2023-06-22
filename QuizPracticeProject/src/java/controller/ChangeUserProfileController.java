@@ -78,7 +78,7 @@ public class ChangeUserProfileController extends HttpServlet {
          String originalFileName = file.getSubmittedFileName();
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String xAvatar = System.currentTimeMillis() + fileExtension;
-        String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;      
+        String uploadPath = "web/uploads/" + xAvatar;      
         try {
         FileOutputStream fos = new FileOutputStream(uploadPath);
         InputStream is = file.getInputStream();

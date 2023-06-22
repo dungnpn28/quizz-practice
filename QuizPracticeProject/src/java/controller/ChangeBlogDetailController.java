@@ -107,9 +107,8 @@ public class ChangeBlogDetailController extends HttpServlet {
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
             thumbnail = System.currentTimeMillis() + fileExtension;
 
-            String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + thumbnail;
+            String uploadPath = "web/uploads" + thumbnail;
             try {
-
                 FileOutputStream fos = new FileOutputStream(uploadPath);
                 InputStream is = file.getInputStream();
                 byte[] data = new byte[is.available()];
