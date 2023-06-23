@@ -2,13 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-
         <group>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/css/Result.css</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/Result.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/MyRegistration.jsp</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/src/java/controller/SubjectDetailsController.java</file>
+            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/SubjectDetails.jsp</file>
             <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/ChangeBlogDetail.jsp</file>
-            <file>file:/D:/ktpm/ki5/SWP391/new%20branch/QuizPracticeProject/web/EditSlider.jsp</file>
         </group>
     </open-files>
 </project-private>
