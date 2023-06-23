@@ -64,7 +64,7 @@
                             <div class="col-md-9">
                                 <div class="col-12">
                                     <c:if test="${not empty notificationMessage}">
-                                        <div id="notification">${notificationMessage}</div>
+                                        <div id="notification"><h2 style="color: green">${notificationMessage}</h2></div>
                                     </c:if>
                                     <c:if test="${sessionScope.user.getRole_id() == 2}">
                                         <a href="changeBlogDetail?id=${id}" class="btn btn-primary mb-3 mt-4 custom-button">

@@ -22,10 +22,6 @@ import model.Subject;
 import model.Subject_Category;
 import model.UserProfile;
 
-/**
- *
- * @author Dell
- */
 public class SubjectListAEController extends HttpServlet {
 
     @Override

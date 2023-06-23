@@ -51,57 +51,57 @@
                 <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">My Registration</h1>
                 <div class="topnav">
-                    <form action="questionList" method="get">
-                        <div class="search-container">
+                    <!--                    <form action="questionList" method="get">
+                                            <div class="search-container">
+            
+                                                <input type="text" placeholder="Search subject" name="search" id="searchInput" value="${search}">
+                                                <button type="submit"><i class="fa fa-search"></i></button>
+            
+            
+                                            </div>
+                                            <div class="search-container">
+                                                <div class="a1">
+                                                    Subject
+                                                    <select name="subject" id="role">
+                                                        <option value= "all" >All</option>
+                    <c:forEach items="${subjectList}" var="subjectList">
+                        <option value="${subjectList.id}" ${subjectList.id.toString() eq subject ? "selected" : ''}>${subjectList.name}</option>
+                    </c:forEach>
+                </select>
 
-                            <input type="text" placeholder="Search subject" name="search" id="searchInput" value="${search}">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div class="search-container">
+            <div class="a1">
+                Lesson
+                <select name="lesson" id="role">
+                    <option value= "all" >All</option>
+                    <c:forEach items="${lessonList}" var="lessonList">
+                        <option value="${lessonList.id}" ${lessonList.id.toString() eq lesson ? "selected" : ''}>${lessonList.name}</option>
+                    </c:forEach>
+                </select>
 
+            </div>
+        </div>
+        <div class="search-container">
+            <div class="a1">
+                level
+                <select name="level" id="status">
+                    <option value="all" ${level eq "all" ? "selected" : ''}>All</option>
+                    <option value="easy" ${level eq "easy" ? "selected" : ''}>Easy</option>
+                    <option value="medium" ${level eq "medium" ? "selected" : ''}>Medium</option>
+                    <option value="hard" ${level eq "hard" ? "selected" : ''}>Hard</option>
 
-                        </div>
-                        <div class="search-container">
-                            <div class="a1">
-                                Subject
-                                <select name="subject" id="role">
-                                    <option value= "all" >All</option>
-                                    <c:forEach items="${subjectList}" var="subjectList">
-                                        <option value="${subjectList.id}" ${subjectList.id.toString() eq subject ? "selected" : ''}>${subjectList.name}</option>
-                                    </c:forEach>
-                                </select>
+                </select>
+            </div>
+        </div>
+    </form>
 
-                            </div>
-                        </div>
-                        <div class="search-container">
-                            <div class="a1">
-                                Lesson
-                                <select name="lesson" id="role">
-                                    <option value= "all" >All</option>
-                                    <c:forEach items="${lessonList}" var="lessonList">
-                                        <option value="${lessonList.id}" ${lessonList.id.toString() eq lesson ? "selected" : ''}>${lessonList.name}</option>
-                                    </c:forEach>
-                                </select>
+    <div class="search-container">
 
-                            </div>
-                        </div>
-                        <div class="search-container">
-                            <div class="a1">
-                                level
-                                <select name="level" id="status">
-                                    <option value="all" ${level eq "all" ? "selected" : ''}>All</option>
-                                    <option value="easy" ${level eq "easy" ? "selected" : ''}>Easy</option>
-                                    <option value="medium" ${level eq "medium" ? "selected" : ''}>Medium</option>
-                                    <option value="hard" ${level eq "hard" ? "selected" : ''}>Hard</option>
+        <button><a href="questionList">Clear filter</a></button>
 
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="search-container">
-
-                        <button><a href="questionList">Clear filter</a></button>
-
-                    </div>
+    </div>-->
 
                     <div class="search-container3">
                         <div class="dialog overlay" id="my-dialog">

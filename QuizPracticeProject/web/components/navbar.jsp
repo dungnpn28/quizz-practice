@@ -84,7 +84,7 @@
                         </li>
                         <li>
                             
-                            <a href="SubjectListAE.jsp">SUBJECT LIST</a>
+                            <a href="subjectListAE">SUBJECT LIST</a>
                         </li>
                         <li>
                             

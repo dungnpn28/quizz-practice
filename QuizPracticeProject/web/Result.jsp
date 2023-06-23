@@ -23,11 +23,13 @@
                     <th>Exam Name</th>
                     <th>Attempt Number</th>
                     <th>Mark</th>
+                    <th>State</th>
                 </tr>
                 <tr>
                     <td>${examname}</td>
                     <td>${attId}</td>
                     <td>${examscore}</td>
+                    <td><span class="${examscore < 5 ? 'not-passed' : 'passed'}">${examscore < 5 ? 'Not Passed' : 'Passed'}</span></td>
                 </tr>
             </table>
             <table>

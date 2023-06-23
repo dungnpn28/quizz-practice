@@ -129,6 +129,26 @@
         <servlet-class>controller.EditSliderController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PricePackageController</servlet-name>
+        <servlet-class>controller.PricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewPricePackageController</servlet-name>
+        <servlet-class>controller.AddNewPricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonDetailsController</servlet-name>
+        <servlet-class>controller.LessonDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectLessonsController</servlet-name>
+        <servlet-class>controller.SubjectLessonsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewLessonDetailsController</servlet-name>
+        <servlet-class>controller.AddNewLessonDetailsController</servlet-class>
+         </servlet>
+    <servlet>
         <servlet-name>ReviewQuizController</servlet-name>
         <servlet-class>controller.ReviewQuizController</servlet-class>
     </servlet>
@@ -160,6 +180,14 @@
         <servlet-name>ChangeSliderDetailController</servlet-name>
         <servlet-class>controller.ChangeSliderDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <servlet-class>controller.SubjectListAEController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditLessonDetailsController</servlet-name>
+        <servlet-class>controller.EditLessonDetailsController</servlet-class>
+        </servlet>
     <servlet>
         <servlet-name>QuestionListController</servlet-name>
         <servlet-class>controller.QuestionListController</servlet-class>
@@ -289,6 +317,26 @@
         <url-pattern>/editSlider</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PricePackageController</servlet-name>
+        <url-pattern>/pricePackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPricePackageController</servlet-name>
+        <url-pattern>/addnewpricePackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonDetailsController</servlet-name>
+        <url-pattern>/lessonDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectLessonsController</servlet-name>
+        <url-pattern>/subjectLessons</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewLessonDetailsController</servlet-name>
+        <url-pattern>/addNewLessonDetails</url-pattern>
+         </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ReviewQuizController</servlet-name>
         <url-pattern>/reviewquiz</url-pattern>
     </servlet-mapping>
@@ -320,6 +368,14 @@
         <servlet-name>ChangeSliderDetailController</servlet-name>
         <url-pattern>/changeSliderDetail</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <url-pattern>/subjectListAE</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditLessonDetailsController</servlet-name>
+        <url-pattern>/editLessonDetails</url-pattern>
+         </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuestionListController</servlet-name>
         <url-pattern>/questionList</url-pattern>

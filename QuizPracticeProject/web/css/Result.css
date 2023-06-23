@@ -65,3 +65,13 @@ tr:nth-child(even) {
 h1 {
     margin-left: 30px;
 }
+
+.passed {
+    font-weight: bold;
+    color: green;
+}
+
+.not-passed {
+    font-weight: bold;
+    color: red;
+}

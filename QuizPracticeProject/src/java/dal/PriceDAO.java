@@ -169,3 +169,4 @@ public class PriceDAO extends MyDAO {
         pd.update(x);
     }
 }
+
