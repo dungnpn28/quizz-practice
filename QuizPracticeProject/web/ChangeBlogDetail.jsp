@@ -100,6 +100,8 @@
                             </div>
                             <input type="hidden" name="id" value="${id}">
                             <button type="submit" class="btn btn-primary">Update</button><br/>
+                            <a href="blogDetail?id=${id}" class="btn btn-danger">Cancel</a>
+
                         </form>
                     </div>
                 </div>

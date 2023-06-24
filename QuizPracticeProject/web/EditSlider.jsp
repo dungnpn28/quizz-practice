@@ -59,6 +59,7 @@
                 <input hidden name="sid" value="${listSlider.getId()}" class="form-control">
 
                 <button type="submit" class="btn btn-primary">Update</button><br/>
+
             </form>
         </div>
         <br/><button class="custom-button mb-3"><a href="sliderList" style="text-decoration: none"> < Back to Slider list</a></button>

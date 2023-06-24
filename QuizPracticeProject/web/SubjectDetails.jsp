@@ -58,59 +58,49 @@ if (session.getAttribute("user") != null) {
 <!--                        <p><strong>Status:</strong> ${subject.status ? "Enrolled" : "Unenroll" }</p>-->
                         <c:if test="${subject.status}">
                             <div>
-                            <form  method="POST" action="subjectDetails">
-                                <input type="hidden" name="subjectId" value="${SubjectDetails.subjectId}">
-                                <button class="btn btn-primary" type="submit" ${SubjectDetails.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to enroll?')">Enroll</button>
-                            </form>     
-                        </div>
+                                <form  method="POST" action="subjectDetails">
+                                    <input type="hidden" name="subjectId" value="${SubjectDetails.subjectId}">
+                                    <button class="btn btn-primary" type="submit" ${SubjectDetails.status ? "disabled" : ""} onclick="return confirm('Are you sure you want to enroll?')">Enroll</button>
+                                </form>     
+                            </div>
                         </c:if> 
-                        
+
                     </div>
                     <div class="col-md-6 sidebar">
                         <div class="searchBox">
-                                        <form action="subjectListPublic" method="get">
-                                            <div class="input-group">
-                                                <input
-                                                    class="form-control"
-                                                    value="${key}"
-                                                    type="search"
-                                                    placeholder="Search by exam name"
-                                                    aria-label="Search"
-                                                    name="keyword"
-                                                    />
-                                                <button class="btn btn-primary" type="submit">
-                                                    Search
-                                                </button>
-                                            </div>
-                                        </form>
-                                        <c:if test="${key!= mull}" >
-                                            <c:choose>
-                                                <c:when test="${not empty sessionScope.checkFeatured}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
-                                                </c:when>
-                                                <c:when test="${not empty sessionScope.checkRegisted}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from registed subject</h3>
-                                                </c:when>
-                                                <c:when test="${not empty sessionScope.checkNotRegisted}">
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from not registed subject</h3>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <h3 class="mb-3 mt-4">Search "${key}" from all subject</h3>
-                                                </c:otherwise>
-                                            </c:choose>            
-                                        </c:if>
-                                    </div>
+                            <form action="subjectListPublic" method="get">
+                                <div class="input-group">
+                                    <input
+                                        class="form-control"
+                                        value="${key}"
+                                        type="search"
+                                        placeholder="Search by exam name"
+                                        aria-label="Search"
+                                        name="keyword"
+                                        />
+                                    <button class="btn btn-primary" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
+                            <c:if test="${key!= mull}" >
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.checkFeatured}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.checkRegisted}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from registed subject</h3>
+                                    </c:when>
+                                    <c:when test="${not empty sessionScope.checkNotRegisted}">
+                                        <h3 class="mb-3 mt-4">Search "${key}" from not registed subject</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3 class="mb-3 mt-4">Search "${key}" from all subject</h3>
+                                    </c:otherwise>
+                                </c:choose>            
+                            </c:if>
+                        </div>
                         <div class="widget">
-<!--                            <h2 class="widget-title">List</h2>
-                            <form action="sort" method="POST">
-                                <p>Sorting type:
-                                <p>
-                                    <input type="radio" name="sortType" value="ASC" checked="" /> Ascendingly
-                                <p>
-                                    <input type="radio" name="sortType" value="DESC" /> Descendingly
-                                <p>
-                                    <input type="submit" class="btn btn-success" value="Sort">
-                            </form>-->
                             <form action="subjectListPublic" method="get">
                                 <select name="selectedCategory">
                                     <option value="0">All</option>
@@ -135,7 +125,7 @@ if (session.getAttribute("user") != null) {
                                 </tr>
                                 <c:forEach var="item" items="${featuredSubjectList}" begin="0" end="2">
 
-                                    <tr onclick="window.location.href = 'subjectDetailS?id=${item.getId()}'">
+                                    <tr onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                         <td>
                                             <div class="table-image">
                                                 <img src="uploads/${item.getIllustration()}" alt="Image">
@@ -157,9 +147,9 @@ if (session.getAttribute("user") != null) {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-                                                    $(document).ready(function () {
-                                                        $('#carouselExampleIndicators2').carousel();
-                                                    });
+                                        $(document).ready(function () {
+                                            $('#carouselExampleIndicators2').carousel();
+                                        });
         </script>
         <script type="text/javascript">
             $(document).ready(function () {

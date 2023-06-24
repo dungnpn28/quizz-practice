@@ -4,10 +4,8 @@
  */
 package controller;
 
-import dal.PriceDAO;
-import dal.SubjectDAO;
-import dal.SubjectDetailsDAO;
-import dal.Subject_CategoryDAO;
+import dal.ExamDAO;
+import dal.LessonDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -15,15 +13,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Price_Package;
-import model.Subject;
-import model.Subject_Category;
+import model.Exam;
+import model.Lesson;
+import model.Lesson_Topic;
+import model.Lesson_Type;
+
 
 /**
  *
  * @author dai
  */
-public class SubjectDetailsController extends HttpServlet {
+public class AddNewLessonDetailsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +37,21 @@ public class SubjectDetailsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+
+        LessonDAO lDAO = new LessonDAO();
+        ExamDAO eDAO = new ExamDAO();
+        List<Lesson_Topic> lessonTopicList = new ArrayList<>();
+        List<Lesson_Type> lessonTypeList = new ArrayList<>();
+        List<Exam> lExam = eDAO.getAllExam();
+        lessonTypeList = lDAO.getLessonType();
+        lessonTopicList = lDAO.getLessonTopic();
+        request.setAttribute("lessonTopicList", lessonTopicList);
+        request.setAttribute("lessonTypeList", lessonTypeList);
+        request.setAttribute("lExam", lExam);
+        request.setAttribute("subjectId", subjectId);
+        request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,27 +67,7 @@ public class SubjectDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        SubjectDetailsDAO sdDAO = new SubjectDetailsDAO();
-        Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
-        SubjectDAO sDAO = new SubjectDAO();
-        PriceDAO pDAO = new PriceDAO();
 
-        List<Price_Package> pricePackageList = new ArrayList<>();
-        pricePackageList = pDAO.getPrice_Package();
-        request.setAttribute("pricePackageList", pricePackageList);
-
-        List<Subject_Category> subjectCategoryList = new ArrayList<>();
-        subjectCategoryList = scDAO.getSubjectCategory();
-        request.setAttribute("subjectCategoryList", subjectCategoryList);
-        
-        
-        Subject s = sDAO.getSubjectById(Integer.parseInt(request.getParameter("id")));
-        request.setAttribute("subject", s);
-        int page =1;
-        int PAGE_SIZE = 5;
-        List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
-        request.setAttribute("featuredSubjectList", featuredSubjectList);
-        request.getRequestDispatcher("SubjectDetails.jsp").forward(request, response);
     }
 
     /**
@@ -86,8 +81,23 @@ public class SubjectDetailsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        response.sendRedirect("cusHome");
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+
+        String xName = request.getParameter("name");
+        int xType = Integer.parseInt(request.getParameter("selectedType"));
+        int xTopic = Integer.parseInt(request.getParameter("selectedTopic"));
+        int xOrder = Integer.parseInt(request.getParameter("order"));
+        String xLink = request.getParameter("link");
+        String xContent = request.getParameter("htmlContent");
+        String xStatus = request.getParameter("status");
+        int xQuiz = Integer.parseInt(request.getParameter("selectedQuiz"));
+        boolean status = true;
+        if (xStatus.equals("0")) {
+            status = false;
+        }
+        LessonDAO lDAO = new LessonDAO();
+        lDAO.insertQuizlesson(subjectId, xTopic, xName, xType, xOrder, xLink, xContent, status, xQuiz);
+        response.sendRedirect("subjectLessons?subjectId=" + subjectId);
     }
 
     /**

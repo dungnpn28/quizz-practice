@@ -4,28 +4,23 @@
  */
 package controller;
 
-import dal.UserProfileDAO;
+import dal.PriceDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+import model.Price_Package;
 import model.User;
-import model.UserProfile;
 
 /**
  *
  * @author dai
  */
-@MultipartConfig
-public class ChangeUserProfileController extends HttpServlet {
+public class PricePackageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +50,25 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int page_size = 5;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getPrice_PackageWithPaging(page, page_size);
+//        pricePackageList = pDAO.getPrice_Package();
+        int totalPricePackage = pDAO.getTotalPricePackage();
+        int totalPage = totalPricePackage / page_size; //1
+        if (totalPricePackage % page_size != 0) {
+            totalPage += 1;
+        }
+        request.setAttribute("page", page);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("pricePackageList", pricePackageList);
+        request.getRequestDispatcher("PricePackage.jsp").forward(request, response);
     }
 
     /**
@@ -69,47 +83,18 @@ public class ChangeUserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        int xUser_id = user.getId();
-        int genderValue = 0;
-            
-        Part file = request.getPart("avatar");
-         String originalFileName = file.getSubmittedFileName();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String xAvatar = System.currentTimeMillis() + fileExtension;
-        String uploadPath = "web/uploads/" + xAvatar;      
-        try {
-        FileOutputStream fos = new FileOutputStream(uploadPath);
-        InputStream is = file.getInputStream();
-        byte[] data = new byte[is.available()];
-        is.read(data);
-        fos.write(data);
-        fos.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        
-        String xFull_name = request.getParameter("fullname");
-        String xPhone_number = request.getParameter("phonenum");
-        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
-        String input = xPhone_number;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        if (!matcher.matches()) {
-            request.setAttribute("tbao", "Invalid phone number");
-            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
-        } else {
-            String xDob = request.getParameter("dob");
-            String xGender = request.getParameter("radB1");
-            if (xGender.equals("male")) {
-                genderValue = 1;
-            }
-            UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
-            UserProfileDAO u = new UserProfileDAO();
-            u.update(up);
-            response.sendRedirect("cusHome");
-        }
+        int xId = Integer.parseInt(request.getParameter("id"));
+        String xName = request.getParameter("name");
+        String xDescription = request.getParameter("description");
+        int xDuration = Integer.parseInt(request.getParameter("duration"));
+        Double xPrice = Double.parseDouble(request.getParameter("price"));
+        Double xSale = Double.parseDouble(request.getParameter("sale"));
+        int xStatus = Integer.parseInt(request.getParameter("status"));
+        PriceDAO pd = new PriceDAO();
+        Price_Package pp = new Price_Package(xId, xName, xDescription, xDuration, xPrice, xSale, xStatus);
+        pd.update(pp);
+        response.sendRedirect("pricePackage");
+
     }
 
     /**
