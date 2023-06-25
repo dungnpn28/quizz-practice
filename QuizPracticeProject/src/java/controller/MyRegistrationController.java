@@ -32,6 +32,12 @@ public class MyRegistrationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sessions = request.getSession();
+        int PAGE_SIZE = 3;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
         User user = (User) sessions.getAttribute("user");
         SubjectDAO sDAO = new SubjectDAO();
 //        PriceDAO pDAO = new PriceDAO();
@@ -39,7 +45,7 @@ public class MyRegistrationController extends HttpServlet {
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         MyRegistrationDAO mrDAO = new MyRegistrationDAO();
         List<Subject> subjectList = new ArrayList<>();
-        List<MyRegistration> mrList = mrDAO.getMyRegistration(user.getId());
+        List<MyRegistration> mrList = mrDAO.getMyRegistration(user.getId(), page, PAGE_SIZE);
         subjectList = sDAO.getSubjects();
         request.setAttribute("pL", pL);
         request.setAttribute("mrList", mrList);

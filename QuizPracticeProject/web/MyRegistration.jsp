@@ -239,13 +239,13 @@
                     </div>
                     <ul class="pagination" style="display: flex; justify-content: center;">
                         <c:if test="${page > 1}">
-                            <li><a href="questionList?page=${page-1}" >Previous</a></li>
+                            <li><a href="myRegistration?page=${page-1}" >Previous</a></li>
                             </c:if>
                             <c:forEach begin="1" end="${totalPage}" var="i">
-                            <li><a href="questionList?page=${i}&search=${search}&level=${level}&subject=${subject}&lesson=${lesson}">${i}</a></li>
+                            <li><a href="myRegistration?page=${i}}">${i}</a></li>
                             </c:forEach>
                             <c:if test="${page < totalPage}">
-                            <li><a href="questionList?page=${page+1}">Next</a></li>
+                            <li><a href="myRegistration?page=${page+1}">Next</a></li>
                             </c:if>
                     </ul>
 

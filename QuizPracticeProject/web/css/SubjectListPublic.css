@@ -92,3 +92,23 @@
 .btn {
     border-radius: 0 5px 5px 0;
 }
+
+.modal_popUp2 {
+    display: none; /* Ẩn ban đầu */
+    position: fixed; /* Cố định vị trí */
+    z-index: 999999; /* Hiển thị trên các phần tử khác */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /*    overflow: auto;*/
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
+}
+
+.modal-content_popUp2 {
+    background-color: #fefefe;
+    margin:auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px; /*thay đổi cái chiều rộng ở đây */
+}

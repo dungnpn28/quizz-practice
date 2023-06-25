@@ -11,7 +11,7 @@ import model.MyRegistration;
  */
 public class MyRegistrationDAO extends MyDAO {
 
-    public List<MyRegistration> getMyRegistration(int user_id) {
+    public List<MyRegistration> getMyRegistration(int user_id, int page, int PAGE_SIZE) {
         List<MyRegistration> mr = new ArrayList<>();
         String Sql = "select id, subject_id, price_package_id ,user_id, created from registration where user_id = ?";
         try {

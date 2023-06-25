@@ -53,11 +53,8 @@
                 <div class="topnav">
                     <form action="questionList" method="get">
                         <div class="search-container">
-
                             <input type="text" placeholder="Search by content" name="search" id="searchInput" value="${search}">
                             <button type="submit"><i class="fa fa-search"></i></button>
-
-
                         </div>
                         <div class="search-container">
                             <div class="a1">
@@ -68,7 +65,6 @@
                                         <option value="${subjectList.id}" ${subjectList.id.toString() eq subject ? "selected" : ''}>${subjectList.name}</option>
                                     </c:forEach>
                                 </select>
-
                             </div>
                         </div>
                         <div class="search-container">
@@ -80,7 +76,6 @@
                                         <option value="${lessonList.id}" ${lessonList.id.toString() eq lesson ? "selected" : ''}>${lessonList.name}</option>
                                     </c:forEach>
                                 </select>
-
                             </div>
                         </div>
                         <div class="search-container">
@@ -88,31 +83,24 @@
                                 level
                                 <select name="level" id="status">
                                     <option value="all" ${level eq "all" ? "selected" : ''}>All</option>
-
                                     <option value="easy" ${level eq "easy" ? "selected" : ''}>Easy</option>
                                     <option value="medium" ${level eq "medium" ? "selected" : ''}>Medium</option>
                                     <option value="hard" ${level eq "hard" ? "selected" : ''}>Hard</option>
-
                                 </select>
                             </div>
                         </div>
                     </form>
-
                     <div class="search-container">
-
                         <button><a href="questionList">Clear filter</a></button>
-
                     </div>
-
                     <div class="search-container3">
                         <button><a class="dialog-btn" href="#my-dialog">ADD NEW</a></button>
                         <div class="dialog overlay" id="my-dialog">
-                            <!--                            <a href="#" class="overlay-close"></a>-->
                             <div class="dialog-body">
                                 <a class="dialog-close-btn" href="">&times;</a>
                                 <div class="container">
                                     <br>
-                                    <form action="addnew" method="post">
+<!--                                    <form action="addnew" method="post">
                                         <div class="add row">
                                             <label class="form-label">Email</label>
 
@@ -142,7 +130,7 @@
                                         </div>
                                         <br>
                                         <button type="submit" name="submit">CREATE</button>
-                                    </form>
+                                    </form>-->
                                 </div>
                             </div>
                         </div>

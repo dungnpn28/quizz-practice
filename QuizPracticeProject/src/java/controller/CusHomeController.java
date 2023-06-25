@@ -43,8 +43,9 @@ public class CusHomeController extends HttpServlet {
 //        String password = request.getParameter("password");
 //        UserDAO p = new UserDAO();
 //        User a = p.login(account, password);
-        
-        List<Blog> listBlog = new BlogDAO().getBlogList();
+        int PAGE_SIZE = 5;
+        int page = 1;
+        List<Blog> listBlog = new BlogDAO().getBlogList(page,PAGE_SIZE);
         request.setAttribute("listBlog", listBlog);
 
         List<Slider> listSlider = new SliderDAO().getSliderByStatus(1);

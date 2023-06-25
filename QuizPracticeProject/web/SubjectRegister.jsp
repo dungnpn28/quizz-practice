@@ -19,12 +19,12 @@
 
     </head>
     <body>
-        <div id="popUpModal2" class="modal_popUp2">
+        <div id="popUpModal3" class="modal_popUp2">
             <div class="modal-content_popUp2 " style='width: 1200px'>
                 <div class="row g-0">
                     <div class="col-lg-6">
                         <div class="card-body mx-md-4 p-0 m-0 h-100">
-                            <a class="close" href="home" >&times;</a>
+                            <a class="close-popup3" >&times;</a>
                             <div class="text-center">
                                 <img src="img/2.png"
                                      style="width: 150px;" alt="logo">
@@ -35,7 +35,7 @@
 
 
                                 <div class="form-outline mb-3">
-                                    <label class="inputLabel" for="Name">Full name: </label>
+                                    <label class="inputLabel" for="Name">dcm id la ${sessionScope.subjectId} </label>
                                     <input type="text" id="Name" class="form-control"
                                            name="Name" value="" required = "required"
                                            placeholder="Full name" />
@@ -124,13 +124,14 @@
             </div>
         </div>
         <script>
-            var closeBtn2 = document.querySelector('.close-popup2');
-            var popUpModal2 = document.getElementById('popUpModal2');
+            var closeBtn3 = document.querySelector('.close-popup3');
+            var popUpModal3 = document.getElementById('popUpModal3');
 
-            closeBtn2.addEventListener('click', function () {
-                popUpModal2.style.display = 'none';
+            closeBtn3.addEventListener('click', function () {
+                popUpModal3.style.display = 'none';
             });
         </script>
+        
         <script src="js/PopUp.js" type="text/javascript"></script>
     </body>
 </html>
