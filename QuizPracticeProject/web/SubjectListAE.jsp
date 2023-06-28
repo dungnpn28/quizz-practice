@@ -32,10 +32,13 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<!--        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">-->
 
     </head>
+
     <body>
+
+
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
@@ -119,7 +122,7 @@
                                             <td>Deactive</td>
                                         </c:otherwise>
                                     </c:choose>
-                                    <td><a class="dialog-btn" href="pricePackage?subjectId=${subjectList.getId()}">View detail</a>
+                                    <td><a class="dialog-btn" href="subjectdetailae?subjectId=${subjectList.getId()}">View detail</a>
                                         <a class="dialog-btn" href="subjectLessons?subjectId=${subjectList.getId()}">View lessons</a></td>
 
                                 </tr>
@@ -135,10 +138,15 @@
                     </div>
                 </div>
             </div>
+        
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
         <script src="js/PopUp.js" type="text/javascript"></script>
+
+<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script src="js/subjectList.js" type="text/javascript"></script>      
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
