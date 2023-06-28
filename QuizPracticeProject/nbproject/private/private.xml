@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/RegisterController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectRegister.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/MyRegistrationDAO.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/js/PopUp.js</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Register.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectListPublic.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/Header.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Home.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/Login.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/components/navbar.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/QuestionList.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/BlogDetails.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/SubjectListAE.css</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/UserList.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/css/UserList.css</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectLessons.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/SubjectLessonsController.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/LessonDAO.java</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SliderListAd.jsp</file>
+            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/MyRegistration.jsp</file>
         </group>
     </open-files>
 </project-private>

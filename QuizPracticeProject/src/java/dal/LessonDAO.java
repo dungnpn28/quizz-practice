@@ -4,18 +4,142 @@
  */
 package dal;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import model.Lesson;
 import model.Lesson_Topic;
 import model.Lesson_Type;
+import model.Subject;
 
 /**
  *
  * @author dai
  */
 public class LessonDAO extends MyDAO {
-    
+
+    public List<Lesson> getLessonsWithPaging(int index, String category, String status, String search, int subjectId) {
+        List<Lesson> t = new ArrayList<>();
+        xSql = "select * from lesson WHERE subject_id = ? AND 1=1";
+
+        if (!category.equals("all")) {
+            xSql += " and [type_id]= ?";
+        }
+        if (!status.equals("all")) {
+            xSql += " and [status]= ?";
+        }
+
+        xSql += " and [name] like ? ";
+        xSql += " order by [id] desc offset ? rows fetch next 5 rows only";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            int i = 2;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+            i++;
+            ps.setInt(i, (index - 1) * 5);
+
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            int xTopic_id;
+            String xName;
+            int xType_id;
+            int xOrder;
+            String xVideo_link;
+            String xHtml_content;
+            boolean xStatus;
+            int xExam_id;
+
+            Lesson x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xStatus = rs.getBoolean("status");
+                xExam_id = rs.getInt("exam_id");
+                x = new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content, xExam_id, xStatus);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public int getTotalLessonFilter(String category, String status, String search, int subject_id) {
+        try {
+            String strSelect = "select count(*) from lesson  WHERE subject_id = ? AND 1=1 ";
+            if (!category.equals("all")) {
+                strSelect += " and [type_id]= ?";
+            }
+
+            if (!status.equals("all")) {
+                strSelect += " and [status]= ?";
+
+            }
+            strSelect += " and [name] like ? ";
+
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, subject_id);
+            int i = 2;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalLessonFilter: " + e.getMessage());
+        }
+
+        return 0;
+
+    }
+
+    public void updateStatus(String lessonId, int status) {
+        xSql = "UPDATE [dbo].[lesson]\n"
+                + "   SET [status] = ?\n"
+                + "\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, status);
+            ps.setString(2, lessonId);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
     public List<Lesson> getLesson() {
         List<Lesson> t = new ArrayList<>();
         xSql = " select l.*, lt.name as 'lesson_type_name', lp.name as 'lesson_topic_name'\n"
@@ -57,10 +181,11 @@ public class LessonDAO extends MyDAO {
             rs.close();
             ps.close();
         } catch (Exception e) {
-           System.out.println("getLesson():"+e.getMessage());
+            System.out.println("getLesson():" + e.getMessage());
         }
         return (t);
     }
+
     public List<Lesson> getLessonBySubjectId(int subjectId) {
         List<Lesson> t = new ArrayList<>();
         xSql = " select l.*, lt.name as 'lesson_type_name', lp.name as 'lesson_topic_name'\n"
@@ -123,7 +248,6 @@ public class LessonDAO extends MyDAO {
 
                 xName = rs.getString("name");
 
-               
                 x = new Lesson_Type(xID, xName);
                 t.add(x);
             }
@@ -134,6 +258,7 @@ public class LessonDAO extends MyDAO {
         }
         return (t);
     }
+
     public List<Lesson_Topic> getLessonTopic() {
         List<Lesson_Topic> t = new ArrayList<>();
         xSql = "select * from lesson_topic";
@@ -147,7 +272,7 @@ public class LessonDAO extends MyDAO {
                 xID = rs.getInt("id");
 
                 xName = rs.getString("name");
-               
+
                 x = new Lesson_Topic(xID, xName);
                 t.add(x);
             }
@@ -317,8 +442,8 @@ public class LessonDAO extends MyDAO {
         }
         return (x);
     }
-    
-    public void insertQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status,int exam_id) {
+
+    public void insertQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status, int exam_id) {
         xSql = "INSERT INTO [dbo].[lesson]\n"
                 + "           ([subject_id]\n"
                 + "           ,[topic_id]\n"
@@ -357,8 +482,8 @@ public class LessonDAO extends MyDAO {
             System.out.println("insert:" + e.getMessage());
         }
     }
-    
-    public void updateQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status,int examId, int lessonId) {
+
+    public void updateQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status, int examId, int lessonId) {
         xSql = "UPDATE [dbo].[lesson]\n"
                 + "   SET [subject_id] = ?\n"
                 + "      ,[topic_id] = ?\n"

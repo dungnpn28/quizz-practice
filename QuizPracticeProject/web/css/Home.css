@@ -313,7 +313,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .sticky-table-container {
     position: sticky;
     top: 20px; /* Adjust the top value as per your requirement */
-    max-height: calc(120vh - 20px); /* Set the maximum height to fill the viewport minus the top distance */
+    max-height: calc(150vh - 20px); /* Set the maximum height to fill the viewport minus the top distance */
     overflow: hidden;
 }
 /*table a{

@@ -128,6 +128,69 @@ public class BlogDAO extends MyDAO {
         return (totalBlog);
     }
 
+    public List<Blog> getFeaturedBlogList(int page, int PAGE_SIZE) {
+        List<Blog> t = new ArrayList<>();
+        xSql = "select * from blog where flag = 1\n"
+                + "order by id ASC\n"
+                + "offset(?-1)*? row fetch next ? rows only";
+        int xId;
+        String xThumbnail;
+        int xAuthor_id;
+        String xTitle;
+        int xCategory;
+        String xFlag;
+        boolean xStatus;
+        String xContent;
+        Date xCreated;
+        Date xModified;
+        String xBrief;
+        int xView;
+        Blog x = null;
+        try {
+
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xThumbnail = rs.getString("thumbnail");
+                xAuthor_id = rs.getInt("author_id");
+                xTitle = rs.getString("title");
+                xCategory = rs.getInt("category_id");
+                xFlag = rs.getString("flag");
+                xStatus = rs.getBoolean("status");
+                xContent = rs.getString("content");
+                xCreated = rs.getDate("created");
+                xModified = rs.getDate("modified");
+                xBrief = rs.getString("brief_info");
+                xView = rs.getInt("view");
+                x = new Blog(xId, xThumbnail, xAuthor_id, xTitle, xCategory, xFlag, xStatus, xContent, xCreated, xModified, xBrief, xView);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+    
+    public int getTotalFeaturedBlog() {
+        xSql = "select count(id) from blog where flag = 1";
+        int totalBlog = 0;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (totalBlog);
+    }
+    
     public List<Blog> getBlogListOrderByUpdated() {
         List<Blog> t = new ArrayList<>();
         xSql = "select * from [blog] order by [modified] DESC";

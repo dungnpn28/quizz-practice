@@ -44,22 +44,22 @@
             session.getAttribute("up");  
         %>
         <% } %>
+        <%@include file="components/CusHeader.jsp"%>
 
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
-                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">QUESTION LIST</h1>
                 <div class="topnav">
                     <form action="questionList" method="get">
                         <div class="search-container">
-                            <input type="text" placeholder="Search by content" name="search" id="searchInput" value="${search}">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <input type="text" placeholder="Search by content" name="search" id="searchInput" value="${search}" style="margin-top: 14px">
+                            <button type="submit" style="margin-top: 14px"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                Subject
-                                <select name="subject" id="role">
+                                
+                                <select name="subject" id="role" style="margin-right: 5px">
                                     <option value= "all" >All</option>
                                     <c:forEach items="${subjectList}" var="subjectList">
                                         <option value="${subjectList.id}" ${subjectList.id.toString() eq subject ? "selected" : ''}>${subjectList.name}</option>
@@ -69,8 +69,8 @@
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                Lesson
-                                <select name="lesson" id="role">
+                                
+                                <select name="lesson" id="role" style="margin-right: 5px">
                                     <option value= "all" >All</option>
                                     <c:forEach items="${lessonList}" var="lessonList">
                                         <option value="${lessonList.id}" ${lessonList.id.toString() eq lesson ? "selected" : ''}>${lessonList.name}</option>
@@ -80,8 +80,8 @@
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                level
-                                <select name="level" id="status">
+                                
+                                <select name="level" id="status" style="margin-right: 5px">
                                     <option value="all" ${level eq "all" ? "selected" : ''}>All</option>
                                     <option value="easy" ${level eq "easy" ? "selected" : ''}>Easy</option>
                                     <option value="medium" ${level eq "medium" ? "selected" : ''}>Medium</option>
@@ -91,51 +91,9 @@
                         </div>
                     </form>
                     <div class="search-container">
-                        <button><a href="questionList">Clear filter</a></button>
+                        <button><a href="questionList" style="background-color: #4CAF50; padding: 7px 16px; text-decoration: none; color: #ffffff">Clear filter</a></button>
                     </div>
-                    <div class="search-container3">
-                        <button><a class="dialog-btn" href="#my-dialog">ADD NEW</a></button>
-                        <div class="dialog overlay" id="my-dialog">
-                            <div class="dialog-body">
-                                <a class="dialog-close-btn" href="">&times;</a>
-                                <div class="container">
-                                    <br>
-<!--                                    <form action="addnew" method="post">
-                                        <div class="add row">
-                                            <label class="form-label">Email</label>
-
-
-                                            <input type="text" placeholder="Email" required="">
-
-                                            <label class="form-label">name</label>
-                                            <input type="text" placeholder="Name" required="">
-                                            <div>
-                                                <label class="form-label">Gender</label> &nbsp&nbsp
-                                                <input type="radio" name="gender" value="0">Female &nbsp&nbsp
-                                                <input type="radio" name="gender" value="0">Male
-                                            </div>
-                                            <label class="form-label">Phone</label>
-                                            <input type="text" placeholder="Phone number" required="">
-                                            <label class="form-label">Role</label>
-                                            <select class="select">                                               
-                                                <c:forEach var="list_role" items="${list_role}">
-                                                    <option value="${list_role.getId()}">${list_role.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                            <label class="form-label">Status</label>
-                                            <select name="status" id="status" >
-                                                <option value="0" >Deative</option>
-                                                <option value="1">Active</option>
-                                            </select>
-                                        </div>
-                                        <br>
-                                        <button type="submit" name="submit">CREATE</button>
-                                    </form>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
+                    
                     <div class="header_fixed">
                         <table>
                             <thead>
@@ -149,37 +107,39 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:if test="${questionList == null || questionList.size() == 0}"> 
+                                <h3>Not found </h3>
+                            </c:if>
+                            <c:forEach items="${questionList}" var="questionList">
 
-                                <c:forEach items="${questionList}" var="questionList">
+                                <tr>
+                                    <td>${questionList.getId()}</td>
+                                    <c:forEach items="${subjectList}" var="subjectList">
+                                        <c:if test="${subjectList.id == questionList.subjectId}">
+                                            <td>${subjectList.name}</td>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:forEach items="${lessonList}" var="lessonList">
+                                        <c:if test="${lessonList.id == questionList.lessonId}">
+                                            <td>${lessonList.name}</td>
+                                        </c:if>
 
-                                    <tr>
-                                        <td>${questionList.getId()}</td>
-                                        <c:forEach items="${subjectList}" var="subjectList">
-                                            <c:if test="${subjectList.id == questionList.subjectId}">
-                                                <td>${subjectList.name}</td>
-                                            </c:if>
-                                        </c:forEach>
-                                        <c:forEach items="${lessonList}" var="lessonList">
-                                            <c:if test="${lessonList.id == questionList.lessonId}">
-                                                <td>${lessonList.name}</td>
-                                            </c:if>
+                                    </c:forEach>
 
-                                        </c:forEach>
+                                    <td>${questionList.getContent()}</td>
 
-                                        <td>${questionList.getContent()}</td>
-
-                                        <td>${questionList.getLevel()}</td>
-                                        <td>
-                                            <form method="post" action="questionList">
-                                                <button type="submit" name="btnUpdate">Edit</button>
-                                                <button type="submit" name="btnDel">Delete</button>
-                                                <input hidden name="qid" value="${questionList.id}">
-                                            </form>
-                                        </td>
+                                    <td>${questionList.getLevel()}</td>
+                                    <td>
+                                        <form method="post" action="questionList">
+                                            <button type="submit" name="btnUpdate" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Edit</button>
+                                            <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Delete</button>
+                                            <input hidden name="qid" value="${questionList.id}">
+                                        </form>
+                                    </td>
 
 
 
-                                    </tr>
+                                </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
                                     <!--                            <a href="#" class="overlay-close"></a>-->
                                     <div class="dialog-body">

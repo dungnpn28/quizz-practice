@@ -41,11 +41,11 @@
             session.getAttribute("up");  
         %>
         <% } %>
+                <%@include file="components/CusHeader.jsp"%>
 
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
-                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">USER LIST</h1>
                 <div class="topnav">
 

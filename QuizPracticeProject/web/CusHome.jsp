@@ -120,7 +120,7 @@
                                                     <div class="row">
                                                     </c:if>
                                                     <div class="col-md-4">
-                                                        <div class="card">
+                                                        <div class="card" onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                             <img src="uploads/${item.getIllustration()}" class="card-img-top zoom-image" alt="...">
                                                             <div class="card-body">
                                                                 <h5 class="card-title">${item.getName()}</h5>
@@ -217,7 +217,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="item" items="${listBlog}">
+                                        <c:forEach var="item" items="${listUpdatedBlog}" begin="0" end="4">
                                             <c:if test="${item.status}">
                                                 <tr>
                                                     <td>
