@@ -112,7 +112,7 @@
                                                     <div class="row">
                                                     </c:if>
                                                     <div class="col-md-4">
-                                                        <div class="card">
+                                                        <div class="card" onclick="window.location.href = 'subjectDetails?id=${item.getId()}'">
                                                             <img src="uploads/${item.getIllustration()}" class="card-img-top zoom-image" alt="...">
                                                             <div class="card-body">
                                                                 <h5 class="card-title">${item.getName()}</h5>
@@ -210,8 +210,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="item" items="${listBlog}">
-                                        
+                                        <c:forEach var="item" items="${listUpdatedBlog}" begin="0" end="4">
                                             <tr>
                                                 <td>
                                                     <div class="table-image">
@@ -223,8 +222,7 @@
                                                     <a href="blogDetail?id=${item.getId()}"> Read more</a>
                                                 </td>
                                             </tr>
-                                        
-                                    </c:forEach>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -245,9 +243,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-                                            $(document).ready(function () {
-                                                $('#carouselExampleIndicators2').carousel();
-                                            });
+                                                                $(document).ready(function () {
+                                                                    $('#carouselExampleIndicators2').carousel();
+                                                                });
 </script>
 <!--<script>
     $(document).ready(function () {

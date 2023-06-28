@@ -89,20 +89,20 @@ public class SubjectListPublicController extends HttpServlet {
             selectedCategoryId = (int) sessions.getAttribute("selectedCategoryId");
         }
 
-        if(sessions.getAttribute("selectedCategoryId") != null && sessions.getAttribute("checkFeatured") == null && 
-                sessions.getAttribute("checkRegisted") == null && sessions.getAttribute("checkNotRegisted") == null && 
-                sessions.getAttribute("sortValue") == null && sessions.getAttribute("keywordInSubjectList") == null) {
+        if (sessions.getAttribute("selectedCategoryId") != null && sessions.getAttribute("checkFeatured") == null
+                && sessions.getAttribute("checkRegisted") == null && sessions.getAttribute("checkNotRegisted") == null
+                && sessions.getAttribute("sortValue") == null && sessions.getAttribute("keywordInSubjectList") == null) {
             selectedCategoryId = Integer.parseInt(sessions.getAttribute("selectedCategoryId").toString());
             subjectList = sDAO.getSubjectsByCategoryAndPaging(selectedCategoryId, page, PAGE_SIZE);
-                totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
-                totalPage = totalSubject / PAGE_SIZE; //1
-                if (totalSubject % PAGE_SIZE != 0) {
-                    totalPage += 1;
-                }
-                String categoryName = scDAO.getCategoryName(selectedCategoryId);
-                request.setAttribute("categoryName", categoryName);
+            totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            String categoryName = scDAO.getCategoryName(selectedCategoryId);
+            request.setAttribute("categoryName", categoryName);
         }
-        
+
         List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
         request.setAttribute("featuredSubjectList", featuredSubjectList);
 
@@ -277,8 +277,8 @@ public class SubjectListPublicController extends HttpServlet {
                 }
             }
         }
-        
-        if (request.getParameter("selectedCategory") != null ) {
+
+        if (request.getParameter("selectedCategory") != null) {
             selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
             sessions.setAttribute("selectedCategoryId", selectedCategoryId);
             sessions.removeAttribute("sortValue");
@@ -351,8 +351,16 @@ public class SubjectListPublicController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
+        String id = request.getParameter("id");
+        if (id != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("subjectId", id);
+            // Hoặc lưu giá trị id vào session theo cách khác
+            // ...
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
     }
 
     /**

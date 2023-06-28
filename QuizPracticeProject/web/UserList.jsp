@@ -40,7 +40,6 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
-                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">USER LIST</h1>
                 <div class="topnav">
 
@@ -254,7 +253,7 @@
 
                                     </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
-                                    <!--                            <a href="#" class="overlay-close"></a>-->
+                                    <!-- <a href="#" class="overlay-close"></a>-->
                                     <div class="dialog-body">
                                         <a class="dialog-close-btn" href="">&times;</a>
                                         <div class="container">

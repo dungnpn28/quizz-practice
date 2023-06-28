@@ -102,7 +102,7 @@
 
                         <li>
                             
-                            <a href="#">HOME</a>                  
+                            <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
                             
@@ -123,11 +123,12 @@
                         </li>
                         <li>
                             
-                            <a href="#">POST LIST</a>
+                            
+                            <a href="BlogListController">POST LIST</a>
                         </li>
                         <li>
                             
-                            <a href="#">SlIDER LIST</a>
+                            <a href="sliderList">SlIDER LIST</a>
                         </li>
                         <li>
                             

@@ -51,15 +51,20 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int PAGE_SIZE = 5;
+        int page = 1;
 //        String account = request.getParameter("account");
 //        String password = request.getParameter("password");
 //        UserDAO p = new UserDAO();
-        List<Blog> listBlog = new BlogDAO().getBlogList();
+        List<Blog> listBlog = new BlogDAO().getBlogList(page, PAGE_SIZE);
         request.setAttribute("listBlog", listBlog);
+        List<Blog> listUpdatedBlog = new BlogDAO().getBlogListOrderByUpdated();
+        request.setAttribute("listUpdatedBlog", listUpdatedBlog);
 
         List<Slider> listSlider = new SliderDAO().getSliderByStatus(1);
         request.setAttribute("listSlider", listSlider);
         
+
         List<Subject> listSubject = new SubjectDAO().getSubjects();
         request.setAttribute("listSubject", listSubject);
 //        User a = p.login(account, password);

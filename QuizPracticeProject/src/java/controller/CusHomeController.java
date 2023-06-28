@@ -37,19 +37,22 @@ public class CusHomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
 //        String account = request.getParameter("account");
 //        String password = request.getParameter("password");
 //        UserDAO p = new UserDAO();
 //        User a = p.login(account, password);
-        
-        List<Blog> listBlog = new BlogDAO().getBlogList();
+        int PAGE_SIZE = 5;
+        int page = 1;
+        List<Blog> listBlog = new BlogDAO().getBlogList(page, PAGE_SIZE);
         request.setAttribute("listBlog", listBlog);
+        List<Blog> listUpdatedBlog = new BlogDAO().getBlogListOrderByUpdated();
+        request.setAttribute("listUpdatedBlog", listUpdatedBlog);
 
         List<Slider> listSlider = new SliderDAO().getSliderByStatus(1);
-        request.setAttribute("listSlider",listSlider);
-        
+        request.setAttribute("listSlider", listSlider);
+
         List<Subject> listSubject = new SubjectDAO().getSubjects();
         request.setAttribute("listSubject", listSubject);
 //        if(a== null){
@@ -59,7 +62,7 @@ public class CusHomeController extends HttpServlet {
 //        sessions.setAttribute("user", a);
         request.getRequestDispatcher("CusHome.jsp").forward(request, response);
 //        }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
