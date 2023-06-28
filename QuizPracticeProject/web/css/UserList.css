@@ -8,7 +8,7 @@
 
 body {
     width: 100%;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
     background-color: #adacac;
@@ -163,7 +163,7 @@ activation2{
 }
 .a1 select{
     font-size: 17px;
-
+    border: none;
 }
 /* Pagination links */
 .pagination a {

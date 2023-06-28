@@ -25,6 +25,10 @@
         <link href="css/Style.css" rel="stylesheet" type="text/css"/>
         <link href="css/SubjectListPublic.css" rel="stylesheet" type="text/css"/>
         <link href="css/Home.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
 
 
     </head>
@@ -139,49 +143,45 @@
                                                                             <p style="display: inline;">Featured subject</p>
                                                                         </c:if>
                                                                     </span>
-                                                                    <c:choose>
-                                                                        <c:when test="${empty sessionScope.user}">
-                                                                            <%-- Nếu không có user trong session --%>
-                                                                            <%-- Hiển thị nút Register --%>
+
+                                                                    <c:if test="${empty sessionScope.user}">
+                                                                        <%-- Nếu không có user trong session --%>
+                                                                        <%-- Hiển thị nút Register --%>
+                                                                        <span class="registerButton">
+                                                                            <a href="#" id="popUpLink3" data-toggle="modal"><button >Register</button> </a>
+                                                                        </span>
+
+                                                                    </c:if>
+                                                                    <c:if test="${not empty sessionScope.user}">
+                                                                        <%-- Kiểm tra xem subject hiện tại có trong danh sách userSubjects hay không --%>
+                                                                        <c:if test="${subjectListByUserId == null}">
                                                                             <span class="registerButton">
-                                                                                <a href="">  <button >Register</button> </a>
+                                                                                <a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>
                                                                             </span>
+                                                                        </c:if>
+                                                                        <c:if test="${subjectListByUserId != null}">
+                                                                            <c:set var="isRegistered" value="false"/>
+                                                                            <c:forEach var="subject" items="${subjectListByUserId}">
+                                                                                <c:if test="${subject.getId() == item.getId()}">
 
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <%-- Nếu có user trong session --%>
-                                                                            <% User user = (User) session.getAttribute("user"); %>
-                                                                            <% int userId = user.getId(); %>
-                                                                            <%-- Kiểm tra xem người dùng đã tham gia subject nào hay chưa --%>
-                                                                            <c:set var="subjectListByUserId" value="${requestScope.subjectListByUserId}" />
-                                                                            <%-- Kiểm tra xem subject hiện tại có trong danh sách userSubjects hay không --%>
-                                                                            <c:choose>
-                                                                                <c:when test="${subjectListByUserId != null}">
-                                                                                    <c:set var="isRegistered" value="false" />
-                                                                                    <c:forEach var="subject" items="${subjectListByUserId}">
-                                                                                        <c:if test="${subject.getId() == item.getId()}">
+                                                                                    <%-- Nếu người dùng đã tham gia môn học này --%>
+                                                                                    <%-- Hiển thị nút không bấm được --%>
+                                                                                    <span class="alreadyRegistedButton">
+                                                                                        <button disabled>Already registed</button>
+                                                                                    </span>
+                                                                                    <%-- Gán giá trị true cho biến isRegistered và thoát khỏi vòng lặp --%>
+                                                                                    <c:set var="isRegistered" value="true" />
+                                                                                </c:if>
+                                                                            </c:forEach>
+                                                                            <%-- Kiểm tra biến isRegistered để hiển thị nút Register nếu không tìm thấy subject trùng khớp --%>
+                                                                            <c:if test="${!isRegistered}">
+                                                                                <span class="registerButton">
+                                                                                    <a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>
+                                                                                </span>
+                                                                            </c:if>
 
-                                                                                            <%-- Nếu người dùng đã tham gia môn học này --%>
-                                                                                            <%-- Hiển thị nút không bấm được --%>
-                                                                                            <span class="alreadyRegistedButton">
-                                                                                                <button disabled>Already registed</button>
-                                                                                            </span>
-                                                                                            <%-- Gán giá trị true cho biến isRegistered và thoát khỏi vòng lặp --%>
-                                                                                            <c:set var="isRegistered" value="true" />
-                                                                                        </c:if>
-                                                                                    </c:forEach>
-                                                                                    <%-- Kiểm tra biến isRegistered để hiển thị nút Register nếu không tìm thấy subject trùng khớp --%>
-                                                                                    <c:if test="${!isRegistered}">
-
-                                                                                        <span class="registerButton">
-                                                                                            <a href="">  <button >Register</button> </a>
-                                                                                        </span>
-                                                                                    </c:if>
-                                                                                </c:when>
-                                                                            </c:choose>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-
+                                                                        </c:if>
+                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -299,10 +299,23 @@
                             </div>
                         </div>
                     </div>
+                    <%@include file="Register.jsp" %>
                     <%@include file = "Login.jsp"%> 
+                    <%@include file="SubjectRegister.jsp" %>
+
                 </div>
             </div>    
         </div>
+        <%@include file="SubjectRegister.jsp" %>
+
+        <script>
+            document.getElementById("popUpLink3").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("popUpModal3").style.display = "block";
+            });
+            }
+        </script>
+        <script src="js/PopUp.js" type="text/javascript"></script>
         <script src="js/navBar.js"></script>
     </body>
     <%@include file="components/Footer.jsp" %>

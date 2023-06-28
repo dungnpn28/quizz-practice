@@ -12,8 +12,20 @@ public class MyRegistration {
     private int pricePackageId;
     private int userId;
     private Date created;
+    private int category_id;
+    private String subject_name;
 
     public MyRegistration() {
+    }
+
+    public MyRegistration(int id, int subjectId, int pricePackageId, int userId, Date created, int category_id, String subject_name) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.pricePackageId = pricePackageId;
+        this.userId = userId;
+        this.created = created;
+        this.category_id = category_id;
+        this.subject_name = subject_name;
     }
 
     public MyRegistration(int id, int subjectId, int pricePackageId, int userId, Date created) {
@@ -63,5 +75,23 @@ public class MyRegistration {
     public void setCreated(Date created) {
         this.created = created;
     }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public String getSubject_name() {
+        return subject_name;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
+    }
+    
+    
     
 }

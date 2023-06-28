@@ -33,13 +33,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
+    <%@include file="components/CusHeader.jsp"%>
+
     <body>
+
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">SUBJECT LIST</h1>
                 <div class="topnav">
                     <div class="left-container">
@@ -142,4 +146,6 @@
         <script src="js/subjectList.js" type="text/javascript"></script>      
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
+        <%@include file="components/Footer.jsp" %>
+
 </html>
