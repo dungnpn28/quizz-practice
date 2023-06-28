@@ -1558,4 +1558,23 @@ public class SubjectDAO extends MyDAO {
             System.out.println("updateSubject: " + e.getMessage());
         }
     }
+        public void updateSubjectWithoutImage(int id,String name,int category_id,boolean status,String description,int author_id,boolean featured) {
+        try {
+            String strAdd = "update subject set name =?, category_id = ?,status= ?,description= ?,author_id =?,featured= ? where id = ?";
+            ps = con.prepareStatement(strAdd);
+
+          
+            ps.setString(1, name);
+            ps.setInt(2, category_id);
+            ps.setBoolean(3, status);
+            ps.setString(4, description);
+            ps.setInt(5, author_id);
+            ps.setBoolean(6, featured);
+            ps.setInt(7, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateSubject: " + e.getMessage());
+        }
+    }
 }

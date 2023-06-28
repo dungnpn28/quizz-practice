@@ -27,11 +27,6 @@ public class EditOverviewSubjectController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("subjectId");
         Part file = req.getPart("image");
-
-        String originalFileName = file.getSubmittedFileName();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String image = System.currentTimeMillis() + fileExtension;
-
         String name = req.getParameter("name");
         String category = req.getParameter("category");
         String featured = req.getParameter("featured");
@@ -44,6 +39,12 @@ public class EditOverviewSubjectController extends HttpServlet {
         String ownerr = req.getParameter("owner");
         String description = req.getParameter("description");
         SubjectDAO sj = new SubjectDAO();
+        if (file != null && file.getSize() > 0) {
+        String originalFileName = file.getSubmittedFileName();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String image = System.currentTimeMillis() + fileExtension;
+
+        
         sj.updateSubject(Integer.parseInt(id), image, name, Integer.parseInt(category), status, description, Integer.parseInt(ownerr), featuredValue);
 
         String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads/" + image;
@@ -57,12 +58,13 @@ public class EditOverviewSubjectController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        resp.sendRedirect("subjectdetailae?subjectId="+id);
-        
-    }
+        }else{
+            sj.updateSubjectWithoutImage(Integer.parseInt(id), name, Integer.parseInt(category), status, description, Integer.parseInt(ownerr), featuredValue);
+        }
 
-  
+        resp.sendRedirect("subjectdetailae?subjectId=" + id);
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

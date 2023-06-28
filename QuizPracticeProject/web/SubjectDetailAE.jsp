@@ -113,7 +113,7 @@
                                     <!-- Image -->
                                     <img id="imagePreview" src="uploads/${subject.illustration}" alt="Image" class="img-fluid">
                                     <br>
-                                    <input id="fileInput" name="image" type="file" accept="image/*" onchange="loadFile(event)" >
+                                    <input id="fileInput" name="image" type="file" accept="image/*" onchange="loadFile(event)" hidden>
                                     <div class="mt-3">
                                         <button type="button" class="btn btn-primary" onclick="chooseFile()">Change avatar</button>
                                     </div>
