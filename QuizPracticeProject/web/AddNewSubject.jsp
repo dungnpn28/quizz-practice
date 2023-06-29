@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="subjectlistae" > <button type="button" class="btn btn-danger cancel-btn">Cancel</button> </a>
+                                        <a href="subjectlistae" > <button type="button" class="btn btn-danger">Cancel</button> </a>
                                     </div>
                             </form>
                         </div>

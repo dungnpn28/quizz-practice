@@ -32,25 +32,15 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-<<<<<<< HEAD
-<!--        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">-->
 
     </head>
 
     <body>
 
 
-=======
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <%@include file="components/CusHeader.jsp"%>
+        <%@include file="components/CusHeader.jsp"%>
 
-    <body>
 
->>>>>>> main
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
@@ -149,18 +139,17 @@
                     </div>
                 </div>
             </div>
-        
+
         </div>
 
 
         <script src="js/PopUp.js" type="text/javascript"></script>
 
-<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="js/subjectList.js" type="text/javascript"></script>      
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
-        <%@include file="components/Footer.jsp" %>
+    <%@include file="components/Footer.jsp" %>
 
 </html>

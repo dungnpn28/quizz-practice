@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="text-center mt-4">
                                     <button class="btn btn-primary" type="button" onclick="openConfirmationDialogSubject()">Submit</button>
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button class="btn btn-danger"><a href="subjectdetailae?subjectId=${subjectId}">Cancel</a></button>
                                 </div>
                             </div>
                         </form>
