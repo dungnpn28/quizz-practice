@@ -177,7 +177,7 @@ public class PriceDAO extends MyDAO {
         xSql = "select max(id) from price_package";
         try {
             ps = con.prepareStatement(xSql);
-          
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -196,21 +196,22 @@ public class PriceDAO extends MyDAO {
             ps.setInt(3, x.getDuration());
             ps.setDouble(4, x.getPrice());
             ps.setDouble(5, x.getSale());
-      
+
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             System.out.println("insert:" + e.getMessage());
         }
     }
-    public void insert1(int pricepackage,int subject,int status) {
+
+    public void insert1(int pricepackage, int subject, int status) {
         xSql = "insert into [dbo].[subject_price_package] ([subject_id],[price_package_id],[status]) values(?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1,subject);
-            ps.setInt(2,pricepackage);
-            ps.setInt(3,status);
-         
+            ps.setInt(1, subject);
+            ps.setInt(2, pricepackage);
+            ps.setInt(3, status);
+
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -366,5 +367,43 @@ public class PriceDAO extends MyDAO {
         PriceDAO pd = new PriceDAO();
         Price_Package x = new Price_Package(6, "Unlimited", "life access", 0, 11111, 100000, 0);
         pd.update(x);
+    }
+
+    public List<Price_Package> getAllPricePackage() {
+        List<Price_Package> t = new ArrayList<>();
+        xSql = "select id,subject_id,name,description,duration,price,sale,subject_price_package.status from subject_price_package inner join price_package on subject_price_package.price_package_id = price_package.id \n"
+                + "                where price_package.status =1";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            String xName;
+            String xDescription;
+            int xDuration;
+            double xPrice;
+            double xSale;
+            int xStatus;
+            Price_Package x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xName = rs.getString("name");
+                xDescription = rs.getString("description");
+                xDuration = rs.getInt("duration");
+                xPrice = rs.getDouble("price");
+                xSale = rs.getDouble("sale");
+                xStatus = rs.getInt("status");
+                x = new Price_Package(xID,xSubject_id, xName, xDescription, xDuration, xPrice, xSale, xStatus);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("getPricePackageBySubjectId:" + e.getMessage());
+        }
+        return (t);
     }
 }

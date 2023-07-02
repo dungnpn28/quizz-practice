@@ -4,8 +4,10 @@
  */
 package controller;
 
+import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,9 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import model.Price_Package;
 import model.Subject;
 import model.Subject_Category;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -331,7 +335,18 @@ public class SubjectListPublicController extends HttpServlet {
                 totalPage += 1;
             }
         }
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getAllPricePackage();
+        request.setAttribute("pricePackageList", pricePackageList);
 
+        if (sessions.getAttribute("user") != null) {
+            User a = (User) sessions.getAttribute("user");
+            UserProfileDAO upDAO = new UserProfileDAO();
+            UserProfile userProfile = upDAO.getUserProfile(a.getId());
+            request.setAttribute("userProfile", userProfile);
+
+        }
         request.setAttribute("key", keyword);
         request.setAttribute("subjectCategoryList", subjectCategoryList);
         request.setAttribute("page", page);
