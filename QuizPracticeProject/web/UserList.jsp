@@ -41,7 +41,7 @@
             session.getAttribute("up");  
         %>
         <% } %>
-                <%@include file="components/CusHeader.jsp"%>
+        <%@include file="components/CusHeader.jsp"%>
 
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
@@ -253,9 +253,11 @@
                                                 <td>THIS IS ME</td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a></td>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <td>
+                                                    <a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
@@ -359,7 +361,7 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 
     </body>

@@ -110,7 +110,7 @@
 
                                 <div class="col-12">
                                     <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
+                                        <div class="carousel-inner header_fixed">
                                             <c:if test="${subjectList == null || subjectList.size() == 0}">
                                                 Not found
                                             </c:if>
@@ -148,7 +148,9 @@
                                                                         <%-- Nếu không có user trong session --%>
                                                                         <%-- Hiển thị nút Register --%>
                                                                         <span class="registerButton">
-                                                                            <a href="#" id="popUpLink3" data-toggle="modal"><button >Register</button> </a>
+                                                                            <!--<a href="#" id="popUpLink3" data-toggle="modal"><button >Register</button> </a>-->
+                                                                            <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
+
                                                                         </span>
 
                                                                     </c:if>
@@ -156,7 +158,9 @@
                                                                         <%-- Kiểm tra xem subject hiện tại có trong danh sách userSubjects hay không --%>
                                                                         <c:if test="${subjectListByUserId == null}">
                                                                             <span class="registerButton">
-                                                                                <a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>
+                                                                                <!--<a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>-->
+                                                                                <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
+
                                                                             </span>
                                                                         </c:if>
                                                                         <c:if test="${subjectListByUserId != null}">
@@ -176,12 +180,77 @@
                                                                             <%-- Kiểm tra biến isRegistered để hiển thị nút Register nếu không tìm thấy subject trùng khớp --%>
                                                                             <c:if test="${!isRegistered}">
                                                                                 <span class="registerButton">
-                                                                                    <a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>
+                                                                                    <!--<a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>-->
+                                                                                    <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
                                                                                 </span>
                                                                             </c:if>
-
                                                                         </c:if>
                                                                     </c:if>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dialog overlay" id="my-dialog2-${item.getId()}">
+                                                            <!-- <a href="#" class="overlay-close"></a>-->
+                                                            <div class="dialog-body">
+                                                                <a class="dialog-close-btn" href="">&times;</a>
+                                                                <div class="container">
+                                                                    <br>
+                                                                    <form id="changeuser-${userprofile.getUser().getId()}" action="changeuserprofileadmin" method="post">
+                                                                        <div class="add row">
+                                                                            <div class="col-md-5">
+                                                                                <img src="uploads/${item.getIllustration()}" alt="User Avatar">
+
+                                                                            </div>
+                                                                            <div class="col-md-7">
+                                                                                <label class="form-label">Subject name</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                <input type="text" value="${item.getName()}" name="id" readonly>
+                                                                                <br>
+                                                                                <label class="form-label">Email</label>
+
+
+                                                                                <input type="text" value="${userprofile.getUser().getAccount()}" readonly>
+                                                                                <br>
+                                                                                <label class="form-label">Name</label>
+                                                                                <input type="text" name="name" value="${userprofile.getFull_name()}"readonly>
+                                                                                <div>
+                                                                                    <label class="form-label">Gender</label> &nbsp&nbsp
+                                                                                    <input type="radio" name="gender" value="0" ${userprofile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
+                                                                                    <input type="radio" name="gender" value="1" ${userprofile.getGender() == 1 ? "checked":""} disabled >Male
+                                                                                </div>
+                                                                                <label class="form-label">Phone</label>
+                                                                                <input type="text" name="phone" value="${userprofile.phone_number()}" readonly>
+                                                                            </div>
+
+                                                                            <label class="form-label">Role</label>
+                                                                            <select class="select" name="role">                                               
+                                                                                <c:forEach var="list_role" items="${list_role}">
+                                                                                    <option value="${list_role.getId()}" ${userprofile.getUser().getRole_id() == list_role.getId() ? "selected" : ""}>${list_role.name}</option>
+                                                                                </c:forEach>
+                                                                            </select>
+                                                                            <br>
+                                                                            <label class="form-label">Status</label>
+                                                                            <select name="status" id="status">
+                                                                                <option value="0" ${userprofile.getUser().getStatus() == 0 ? "selected" : ""}>Deactive</option>
+                                                                                <option value="1" ${userprofile.getUser().getStatus() == 1 ? "selected" : ""}>Active</option>
+                                                                            </select>
+
+                                                                            <br><br><br>
+                                                                            <!--                                                    <button type="submit">Change Update</button>-->
+                                                                            <button type="button" onclick="openConfirmationDialog(${userprofile.getUser().getId()})">Change update</button>
+                                                                            <div id="confirmation-dialog-${userprofile.getUser().getId()}" class="modal">
+                                                                                <div class="modal-content">
+                                                                                    <p>Are you sure?</p>
+                                                                                    <div class="buttons">
+                                                                                        <button id="confirm-yes-${userprofile.getUser().getId()}">Yes</button>
+                                                                                        <button id="confirm-no-${userprofile.getUser().getId()}" onclick="modalCloseHandler(event)">No</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -317,6 +386,11 @@
         </script>
         <script src="js/PopUp.js" type="text/javascript"></script>
         <script src="js/navBar.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="js/subjectListPublic.js" type="text/javascript"></script>      
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
     </body>
     <%@include file="components/Footer.jsp" %>
 
