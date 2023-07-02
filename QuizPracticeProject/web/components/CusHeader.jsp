@@ -43,7 +43,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-lg" aria-labelledby="dropdownMenuButton">
                     <li class="d-flex justify-content-center" style="font-weight: bold;font-size: 10px"><%=a.getFull_name()%></li><br>
-                    <li class="d-flex" ><img src="img/profile.png" style="width: 20px" alt=""><a class="dropdown-item" href="UserProfile.jsp">My profile</a></li>
+                    <li class="d-flex" ><img src="img/profile.png" style="width: 20px" alt=""><a class="dropdown-item" href="UserProfile.jsp">VIew profile</a></li>
                     <li class="d-flex"><img src="img/setting.png" style="width: 20px" alt=""><a class="dropdown-item" href="#" id="popUpLink">Change password</a></li>
                     <li class="d-flex"><img src="" style="width: 20px" alt=""><a class="dropdown-item" href="myRegistration">My registration</a></li>
                     <li class="d-flex"><img src="img/logout.png" style="width: 20px" alt=""><a class="dropdown-item" href="logout">Log out</a></li>

@@ -344,7 +344,7 @@ table a:hover{
 
 .buttons button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #0d6efd;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -556,7 +556,7 @@ td button {
 
 #add-button {
   padding: 10px 16px;
-  background-color: #4CAF50;
+  background-color:#0578A4;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -572,7 +572,7 @@ td button {
 }
 .clear-filter {
   padding: 10px 16px;
-  background-color: #4CAF50;
+  background-color: #0578A4;
   color: #fff;
   border: none;
   border-radius: 4px;

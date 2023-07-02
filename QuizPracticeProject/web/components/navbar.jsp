@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/Home.css" type="text/css"/>
+   
         <link rel="stylesheet" href="css/Style.css" type="text/css"/>
 
         <meta charset="UTF-8">
@@ -87,8 +87,8 @@
                             <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
-
-                            <a href="subjectListAE">SUBJECT LIST</a>
+                            
+                            <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
 
@@ -122,7 +122,12 @@
                             <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
-
+                            
+                            <a href="pricePackage">PRICE PACKAGE LIST</a>
+                        </li>
+                        <li>
+                            
+                            
                             <a href="BlogListController">POST LIST</a>
                         </li>
                         <li>

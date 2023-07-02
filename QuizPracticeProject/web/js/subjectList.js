@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+});
 
 function clearFilters() {
     window.location.href = "subjectlistae";
@@ -45,8 +49,3 @@ function applyFilters() {
     // Redirect to the filtered URL
     window.location.href = baseUrl;
 }
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-});
