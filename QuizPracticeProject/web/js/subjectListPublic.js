@@ -102,19 +102,46 @@ function validateSubjectRegistedForm() {
     var name = document.forms["subjectRegisted"]["name"].value;
     var email = document.forms["subjectRegisted"]["email"].value;
     var phone = document.forms["subjectRegisted"]["phone"].value;
-
+    var dob = document.forms["subjectRegisted"]["dob"].value;
 
     // Kiểm tra tính hợp lệ của các trường
     if (name === "") {
-        alert("Vui lòng nhập tên");
+        alert("Please enter name");
+        return false;
+    }
+    var nameRegex = /^[\p{L}\s]+$/u;
+    if (!nameRegex.test(name)) {
+        alert("Name cannot contains digits");
         return false;
     }
     if (email === "") {
-        alert("Vui lòng nhập email");
+        alert("Please enter email");
         return false;
     }
-    if(phone === "") {
-        alert("Vui long nhap so dien thoai");
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+        alert("Email is invalid");
+        return false;
+    }
+
+    if (phone === "") {
+        alert("Please enter phone number");
+        return false;
+    }
+    if (phone === "" || phone.length !== 10 || !phone.startsWith("0")) {
+        alert("Phone number is invalid");
+        return false;
+    }
+    if (dob === "") {
+        alert("Please enter date of birth");
+        return false;
+    }
+    var today = new Date();
+    var selectedDate = new Date(dob.value);
+    var age = today.getFullYear() - selectedDate.getFullYear();
+    if (age < 16) {
+        alert("You must be at least 16 years old");
         return false;
     }
 }
@@ -123,3 +150,39 @@ $(document).ready(function () {
         $('#sidebar').toggleClass('active');
     });
 });
+
+function hideNotification() {
+  var notification = document.getElementById("notification");
+  notification.classList.add("hidden");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  var notification = document.getElementById("notification");
+
+  // Hiển thị thông báo
+  notification.classList.remove("hidden");
+
+  // Thiết lập nội dung thông báo
+  var notificationContent = document.getElementById("notificationContent");
+  notificationContent.textContent = "Registed seccessfully";
+
+  // Tạo thanh tiến trình
+  var progressBar = document.getElementById("progressBar");
+
+  // Đặt thời gian hiển thị và khoảng thời gian còn lại
+  var displayTime = 2000; // Thời gian hiển thị (miligiây)
+  var remainingTime = displayTime; // Khoảng thời gian còn lại (ban đầu bằng thời gian hiển thị)
+
+  // Cập nhật thanh tiến trình
+  var intervalId = setInterval(function() {
+    remainingTime -= 100;
+    var progress = (remainingTime / displayTime) * 100;
+    progressBar.style.width = progress + "%";
+
+    if (remainingTime <= 0) {
+      clearInterval(intervalId);
+      notification.classList.add("hidden");
+    }
+  }, 100);
+});
+

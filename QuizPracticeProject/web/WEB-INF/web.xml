@@ -212,6 +212,10 @@
         <servlet-name>SubjectRegistedController</servlet-name>
         <servlet-class>controller.SubjectRegistedController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerifyAddNewUserAndSubjectController</servlet-name>
+        <servlet-class>controller.VerifyAddNewUserAndSubjectController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -415,6 +419,10 @@
     <servlet-mapping>
         <servlet-name>SubjectRegistedController</servlet-name>
         <url-pattern>/subjectRegisted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAddNewUserAndSubjectController</servlet-name>
+        <url-pattern>/verifyAddNewUserAndSubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

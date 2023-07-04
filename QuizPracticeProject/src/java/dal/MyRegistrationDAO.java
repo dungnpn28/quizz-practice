@@ -88,7 +88,7 @@ public class MyRegistrationDAO extends MyDAO {
     public int getTotalRegistrationFilter(String category, String search, int user_id) {
         try {
             String strSelect = "select count(*) from registration r\n"
-                + "WHERE user_id = ? AND 1=1 ";
+                    + "WHERE user_id = ? AND 1=1 ";
             if (!category.equals("all")) {
                 strSelect += " and [category_id]= ?";
             }
@@ -115,5 +115,34 @@ public class MyRegistrationDAO extends MyDAO {
 
         return 0;
 
+    }
+
+    public void addNewRegistration(String subjectId, String price_package_id, int userId, int category_id, String subjectName) {
+        xSql = "INSERT INTO [dbo].[registration]\n"
+                + "           ([subject_id]\n"
+                + "           ,[price_package_id]\n"
+                + "           ,[user_id]\n"
+                + "           ,[created]\n"
+                + "           ,[category_id]\n"
+                + "           ,[subject_name])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,GETDATE()\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subjectId);
+            ps.setString(2, price_package_id);
+            ps.setInt(3, userId);
+            ps.setInt(4, category_id);
+            ps.setString(5, subjectName);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insert: " + e.getMessage());
+        }
     }
 }

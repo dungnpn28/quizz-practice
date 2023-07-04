@@ -201,3 +201,26 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  transition: opacity 0.5s;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#progressBar {
+  height: 5px;
+  background-color: #fff;
+  margin-top: 5px;
+  transition: width 0.5s;
+}
+

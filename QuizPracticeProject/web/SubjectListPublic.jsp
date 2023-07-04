@@ -47,8 +47,11 @@
         <%
         }
         %>
-
+        <%
+         List<String> userList = (List<String>) request.getAttribute("userList");
+        %>
         <div class="wrapper">
+
             <%
             if (session.getAttribute("user") != null) {
             %>
@@ -57,6 +60,13 @@
             } 
             %>
             <div id="content">
+                <c:if test="${openNotification != null}">
+                    <div id="notification" class="notification hidden" onclick="hideNotification()">
+                    <span id="notificationContent">Nội dung thông báo</span>
+                    <div id="progressBar"></div>
+                </div>
+                </c:if>
+                
 
                 <div class="container row d-flex">
                     <div class="container row d-flex justify-content-between">
@@ -64,6 +74,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="gif-and-heading d-flex">
+
                                         <c:choose>
                                             <c:when test="${not empty sessionScope.checkFeatured}">
                                                 <h3 class="mb-3 mt-4">Subject list by featured</h3>
@@ -224,7 +235,8 @@
                                                                                 </div>
                                                                                 <label class="form-label">Phone</label>
                                                                                 <input type="text" name="phone" value="${userProfile.phone_number()}" readonly>
-
+                                                                                <input type="hidden" name="subjectId" value="${item.getId()}">
+                                                                                <input type="hidden" name="subjectName" value="${item.getName()}">
                                                                                 <br>
 
 
@@ -235,6 +247,7 @@
                                                                         </form>
                                                                     </c:if>
                                                                     <c:if test="${empty sessionScope.user}">
+
                                                                         <form id="subjectregisted-${item.getId()}" name="subjectRegisted" action="subjectRegisted" method="post" onsubmit="return validateSubjectRegistedForm()">
                                                                             <div class="add row">
                                                                                 <div class="col-md-5">
@@ -256,35 +269,30 @@
                                                                                 <label class="form-label">Name</label>
                                                                                 <input type="text" name="name">
                                                                                 <label class="form-label">Email</label>
-                                                                                <input type="text" name="email">
+                                                                                <input type="text" name="email" id="emailInput">
+                                                                                <div id="duplicateEmailMessage" style="display: none; color: red;">
+                                                                                    Email already exist !!!
+                                                                                </div>
                                                                                 <div>
                                                                                     <label class="form-label">Gender</label> &nbsp&nbsp
                                                                                     <input type="radio" name="gender" value="0" checked>Female &nbsp;&nbsp;
                                                                                     <input type="radio" name="gender" value="1">Male
                                                                                 </div>
+                                                                                <label>DOB</label>
+                                                                                <input type="date" name="dob">
                                                                                 <label class="form-label">Phone</label>
                                                                                 <input type="text" name="phone">
+                                                                                <br>
+                                                                                <input type="hidden" name="subjectId" value="${item.getId()}">
+                                                                                <input type="hidden" name="subjectName" value="${item.getName()}">
 
                                                                                 <br>
-
-
-                                                                                <br>
-                                                                                <!--                                                    <button type="submit">Change Update</button>-->
-                                                                                <!--<button type="button" onclick="openConfirmationDialogSubjectRegisted(${item.getId()})">Registed</button>-->
-                                                                                <input type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
-
-                                                                                <div id="confirmation-dialog-${item.getId()}" class="modal">
-                                                                                    <div class="modal-content">
-                                                                                        <p>Are you sure?</p>
-                                                                                        <div class="buttons">
-                                                                                            <button id="confirm-yes-${item.getId()}">Yes</button>
-                                                                                            <button id="confirm-no-${item.getId()}" onclick="modalCloseHandler(event)">No</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
+                                                                                <input id="submitButton" type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
                                                                             </div>
                                                                         </form>
+
+
+
                                                                     </c:if>
                                                                 </div>
                                                             </div>
@@ -409,7 +417,30 @@
                 </div>
             </div>    
         </div>
+        <script>
+            var emailInput = document.getElementById("emailInput");
+            var submitButton = document.getElementById("submitButton");
+            var duplicateEmailMessage = document.getElementById("duplicateEmailMessage");
+            var userList = [
+            <% for (String email : userList) { %>
+                '<%= email %>',
+            <% } %>
+            ];
 
+            emailInput.addEventListener("input", function () {
+                var email = emailInput.value;
+                var isEmailDuplicate = userList.includes(email);
+
+                if (isEmailDuplicate) {
+                    duplicateEmailMessage.style.display = "block";
+                    submitButton.style.display = "none";
+                } else {
+                    duplicateEmailMessage.style.display = "none";
+
+                    submitButton.style.display = "block";
+                }
+            });
+        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
         <script src="js/subjectListPublic.js" type="text/javascript"></script>      
