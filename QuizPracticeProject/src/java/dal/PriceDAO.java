@@ -129,7 +129,22 @@ public class PriceDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
+     public void updateStatus(int price,int subjectId,int status) {
+        xSql = "update subject_price_package set status = ? where subject_id = ? and price_package_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, status);
+            ps.setInt(2, subjectId);
+            ps.setInt(3, price);
+       
 
+           
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("updateStatus: " + e.getMessage());
+        }
+    }
     public void updatedetail(Price_Package x) {
         xSql = "UPDATE [dbo].[price_package] \n"
                 + "   SET \n"
