@@ -75,7 +75,7 @@
 
                         <li>
 
-                            <a href="#">SALE LIST</a>
+                            <a href="registrationList">Registration list</a>
 
                         </li>
 

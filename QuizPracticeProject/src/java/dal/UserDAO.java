@@ -144,4 +144,31 @@ public class UserDAO extends MyDAO {
         return t;
     }
 
+    public List<User> getUsers() {
+        xSql = "select * from [user]";
+        int xId;
+        String xAccount;
+        String xPassword;
+        int xRoleId;
+        int xStatus;
+
+        List<User> t = new ArrayList<>();
+        User x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xAccount = rs.getString("account");
+                xPassword = rs.getString("password");
+                xRoleId = rs.getInt("role_id");
+                xStatus = rs.getInt("status");
+                x = new User(xId, xAccount, xPassword, xRoleId, xStatus);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+
 }

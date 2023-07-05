@@ -174,4 +174,115 @@ public class MyRegistrationDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
+
+    public List<MyRegistration> getAllRegistrationWithPaging(int index, String category, String search, String status) {
+        List<MyRegistration> t = new ArrayList<>();
+        xSql = "SELECT \n"
+                + "    r.*,\n"
+                + "    p.duration,\n"
+                + "    DATEADD(DAY, p.duration, r.created) AS expired,\n"
+                + "    FORMAT(created, 'HH:mm:ss') AS time_only\n"
+                + "FROM [registration] r \n"
+                + "join price_package p on r.price_package_id = p.id\n"
+                + "where 1=1";
+
+        if (!category.equals("all")) {
+            xSql += " and [category_id]= ?";
+        }
+        if (!status.equals("all")) {
+            xSql += " and r.[status]= ?";
+        }
+
+        xSql += " and [subject_name] like ?";
+        xSql += " order by [id] asc offset ? rows fetch next 5 rows only";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+            i++;
+            ps.setInt(i, (index - 1) * 5);
+
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            int xPrice_package_id;
+            int xUser_id;
+            Date xCreated;
+            int xCategory_id;
+            String xSubject_name;
+            Date xExpired;
+            int xStatus;
+            String xTime;
+            MyRegistration x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xPrice_package_id = rs.getInt("price_package_id");
+                xUser_id = rs.getInt("user_id");
+                xCreated = rs.getDate("created");
+                xCategory_id = rs.getInt("category_id");
+                xSubject_name = rs.getString("subject_name");
+                xExpired = rs.getDate("expired");
+                xStatus = rs.getInt("status");
+                xTime = rs.getString("time_only");
+                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated, xCategory_id, xSubject_name, xExpired, xStatus, xTime);
+//                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public int getTotalAllRegistrationFilter(String category, String search, String status) {
+        try {
+            String strSelect = "select count(*) from registration r\n"
+                    + "WHERE 1=1 ";
+            if (!category.equals("all")) {
+                strSelect += " and [category_id]= ?";
+            }
+            if (!status.equals("all")) {
+                strSelect += " and [status]= ?";
+            }
+
+            strSelect += " and [subject_name] like ? ";
+
+            ps = con.prepareStatement(strSelect);
+
+            int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+            if (!status.equals("all")) {
+                ps.setInt(i, Integer.parseInt(status));
+                i++;
+            }
+
+            ps.setString(i, "%" + search + "%");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalLessonFilter: " + e.getMessage());
+        }
+
+        return 0;
+
+    }
 }

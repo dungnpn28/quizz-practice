@@ -45,14 +45,14 @@
                         <div class="filter-container">
                             <select name="category" id="filter1" onchange="applyFilters()">
                                 <option value= "all" >All</option>
-                                <c:forEach var="lessonTypeList" items="${lessonTypeList}">
-                                    <option value="${lessonTypeList.getId()}" ${lessonTypeList.getId().toString() eq category ? "selected" : ""} >${lessonTypeList.getName()}</option>
+                                <c:forEach var="categoryList" items="${categoryList}">
+                                    <option value="${categoryList.getId()}" ${categoryList.getId().toString() eq category ? "selected" : ""} >${categoryList.getName()}</option>
                                 </c:forEach>
                             </select>
                             <select name="status" id="filter2" onchange="applyFilters()">
                                 <option value="all" ${status eq "all" ? "selected" : ""}>All</option>
-                                <option value="1" ${status eq "1" ? "selected" : ""}>Active</option>
-                                <option value="0" ${status eq "0" ? "selected" : ""}>Deactive</option>
+                                <option value="1" ${status eq "1" ? "selected" : ""}>Paid</option>
+                                <option value="0" ${status eq "0" ? "selected" : ""}>Submitted</option>
 
                             </select>
                             <button class="clear-filter" id="clear-filter" onclick="clearFilters()">Clear</button>
@@ -72,45 +72,45 @@
                                 <th>Subject</th>
                                 <th>Package</th>
                                 <th>Total cost</th>
+                                <th>Status</th>
                                 <th>Valid from</th>
                                 <th>Valid to</th>
-                                <th>Last update by</th>
-
-
-
+                                <!--<th>Last update by</th>-->
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${lessonList}" var="lesson">
+                            <c:forEach items="${mrList}" var="mrList">
                                 <tr>
-                                    <td>${lesson.getId()}</td>
-                                    <td>${lesson.getName()}</td>
-                                    <td>${lesson.getOrder()}</td>
+                                    <td>${mrList.getId()}</td>
 
-                                    <c:forEach items="${lessonTypeList}" var="lessonType">
-                                        <c:if test="${lesson.type_id == lessonType.id}">
-                                            <td>${lessonType.name}</td>
+                                    <c:forEach items="${userList}" var="userList">
+                                        <c:if test="${mrList.userId == userList.id}">
+                                            <td>${userList.account}</td>
                                         </c:if>
                                     </c:forEach>
 
-                                    <c:if test="${lesson.isStatus() == true}">
-                                        <td><div class="active-button">Active</div></td>
-                                    </c:if>
-                                    <c:if test="${lesson.isStatus() == false}">
-                                        <td><div class="deactive-button">Deactive</div></td>
-                                    </c:if>
-                                    <td>
-                                        <c:if test="${lesson.status}">
-                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusDeactive=1&lessonId=${lesson.getId()}">Deactive</a>
-                                        </c:if>
-                                        <c:if test="${!lesson.status}">
-                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusActive=1&lessonId=${lesson.getId()}">Active</a>
-                                        </c:if>
+                                    <td>${mrList.time}</td>
+                                    <td>${mrList.subject_name}</td>
 
-                                        <a href="editLessonDetails?lessonId=${lesson.getId()}&subjectId=${subjectId}">Edit</a>
-                                        <a href="#">View detail</a>
+                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
+                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
+                                            <td>${pricePackageList.name}</td>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
+                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
+                                            <td>${pricePackageList.sale}</td>
+                                        </c:if>
+                                    </c:forEach>
+                                    <td>${mrList.status == 1 ?'paid':'submitted'}</td>
+
+                                    <td>${mrList.created}</td>
+                                    <td>${mrList.expired}</td>
+                                    <td>
+                                        <a class="dialog-btn" href="#">View detail</a>
                                     </td>
+
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -119,7 +119,7 @@
                     </table>
                     <div class="pagination">
                         <c:forEach begin="1" end="${endP}" var="i">
-                            <a class="${tag == i?"active":""}" href="subjectlistae?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
+                            <a class="${tag == i?"active":""}" href="registrationList?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
                         </c:forEach>
                     </div>
 
@@ -131,7 +131,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
-        <script src="js/SubjectLesson.js" type="text/javascript"></script>      
+        <script src="js/RegistrationList.js" type="text/javascript"></script>      
         <script src="js/navBar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>

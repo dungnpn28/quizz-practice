@@ -31,7 +31,7 @@ public class MyRegistrationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-HttpSession sessions = request.getSession();
+        HttpSession sessions = request.getSession();
         int PAGE_SIZE = 3;
         int page = 1;
         String pageStr = request.getParameter("page");
@@ -70,7 +70,7 @@ HttpSession sessions = request.getSession();
         if (count % 5 != 0) {
             endPage++;
         }
-        List<MyRegistration> mrList = mrDAO.getMyRegistrationWithPaging(endPage, category, search, user.getId());
+        List<MyRegistration> mrList = mrDAO.getMyRegistrationWithPaging(Integer.parseInt(index), category, search, user.getId());
         request.setAttribute("categoryList", categoryList);
         User a = (User) sessions.getAttribute("user");
         UserProfileDAO upDAO = new UserProfileDAO();
@@ -100,7 +100,7 @@ HttpSession sessions = request.getSession();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
