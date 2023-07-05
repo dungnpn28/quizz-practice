@@ -222,7 +222,7 @@ activation2{
     right:0;
     bottom:0;
     left:0;
-    z-index: 10;
+    z-index: 10000;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -259,8 +259,8 @@ activation2{
     background-color: #fff;
 }
 .dialog-body img{
-    width:50px;
-    height:50px;
+    width:200px;
+    height:200px;
 }
 .form-label{
     font-size: 15px;

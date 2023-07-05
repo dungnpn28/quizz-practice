@@ -53,11 +53,12 @@ public class VerifyAddNewUserAndSubjectController extends HttpServlet {
         String dob64 = req.getParameter("dob64");
         String role64 = req.getParameter("role64");
         String status64 = req.getParameter("status64");
-
+        
         String subjectid64 = req.getParameter("subjectid64");
         String pricePackage64 = req.getParameter("pricePackage64");
         String categoryId64 = req.getParameter("categoryId64");
         String subjectName64 = req.getParameter("subjectName64");
+        String registedStatus64 = req.getParameter("registedStatus64");
 
         byte[] decodedBytes = Base64.getDecoder().decode(name64);
         String name = new String(decodedBytes, StandardCharsets.UTF_8);
@@ -84,6 +85,8 @@ public class VerifyAddNewUserAndSubjectController extends HttpServlet {
         String categoryId = new String(decodedBytes, StandardCharsets.UTF_8);
         decodedBytes = Base64.getDecoder().decode(subjectName64);
         String subjectName = new String(decodedBytes, StandardCharsets.UTF_8);
+        decodedBytes = Base64.getDecoder().decode(registedStatus64);
+        String registedStatus = new String(decodedBytes, StandardCharsets.UTF_8);
 
         RegisterDAO r = new RegisterDAO();
         UserDAO u = new UserDAO();
@@ -104,7 +107,7 @@ public class VerifyAddNewUserAndSubjectController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(VerifyAddNewUserController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            mrDAO.addNewRegistration(subjectId, pricePackage, id, Integer.parseInt(categoryId), subjectName);
+            mrDAO.addNewRegistration(subjectId, pricePackage, id, Integer.parseInt(categoryId), subjectName, Integer.parseInt(registedStatus));
             resp.sendRedirect("home");
         }
 

@@ -62,11 +62,11 @@
             <div id="content">
                 <c:if test="${openNotification != null}">
                     <div id="notification" class="notification hidden" onclick="hideNotification()">
-                    <span id="notificationContent">Nội dung thông báo</span>
-                    <div id="progressBar"></div>
-                </div>
+                        <span id="notificationContent">Nội dung thông báo</span>
+                        <div id="progressBar"></div>
+                    </div>
                 </c:if>
-                
+
 
                 <div class="container row d-flex">
                     <div class="container row d-flex justify-content-between">
@@ -239,7 +239,11 @@
                                                                                 <input type="hidden" name="subjectName" value="${item.getName()}">
                                                                                 <br>
 
-
+                                                                                <div>
+                                                                                    <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
+                                                                                    <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
+                                                                                    <input type="radio" name="registedStatus" value="1" >Yes
+                                                                                </div>
                                                                                 <br>
                                                                                 <!--                                                    <button type="submit">Change Update</button>-->
                                                                                 <input type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
@@ -283,6 +287,11 @@
                                                                                 <label class="form-label">Phone</label>
                                                                                 <input type="text" name="phone">
                                                                                 <br>
+                                                                                <div>
+                                                                                    <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
+                                                                                    <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
+                                                                                    <input type="radio" name="registedStatus" value="1" >Yes
+                                                                                </div>
                                                                                 <input type="hidden" name="subjectId" value="${item.getId()}">
                                                                                 <input type="hidden" name="subjectName" value="${item.getName()}">
 

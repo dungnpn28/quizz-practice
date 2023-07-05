@@ -34,8 +34,13 @@ public class MyRegistrationDAO extends MyDAO {
 
     public List<MyRegistration> getMyRegistrationWithPaging(int index, String category, String search, int user_id) {
         List<MyRegistration> t = new ArrayList<>();
-        xSql = "select * from registration r\n"
-                + "WHERE user_id = ? AND 1=1 ";
+        xSql = "SELECT \n"
+                + "    r.*,\n"
+                + "    p.duration,\n"
+                + "    DATEADD(DAY, p.duration, r.created) AS expired\n"
+                + "FROM [registration] r \n"
+                + "join price_package p on r.price_package_id = p.id\n"
+                + "where r.user_id = ? AND 1=1";
 
         if (!category.equals("all")) {
             xSql += " and [category_id]= ?";
@@ -64,6 +69,8 @@ public class MyRegistrationDAO extends MyDAO {
             Date xCreated;
             int xCategory_id;
             String xSubject_name;
+            Date xExpired;
+            int xStatus;
             MyRegistration x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -73,7 +80,9 @@ public class MyRegistrationDAO extends MyDAO {
                 xCreated = rs.getDate("created");
                 xCategory_id = rs.getInt("category_id");
                 xSubject_name = rs.getString("subject_name");
-                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated, xCategory_id, xSubject_name);
+                xExpired = rs.getDate("expired");
+                xStatus = rs.getInt("status");
+                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated, xCategory_id, xSubject_name, xExpired, xStatus);
 //                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated);
                 t.add(x);
             }
@@ -117,19 +126,21 @@ public class MyRegistrationDAO extends MyDAO {
 
     }
 
-    public void addNewRegistration(String subjectId, String price_package_id, int userId, int category_id, String subjectName) {
+    public void addNewRegistration(String subjectId, String price_package_id, int userId, int category_id, String subjectName, int registedStatus) {
         xSql = "INSERT INTO [dbo].[registration]\n"
                 + "           ([subject_id]\n"
                 + "           ,[price_package_id]\n"
                 + "           ,[user_id]\n"
                 + "           ,[created]\n"
                 + "           ,[category_id]\n"
-                + "           ,[subject_name])\n"
+                + "           ,[subject_name]\n"
+                + "           ,[status])\n"
                 + "     VALUES\n"
                 + "           (?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,GETDATE()\n"
+                + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?)";
         try {
@@ -139,10 +150,28 @@ public class MyRegistrationDAO extends MyDAO {
             ps.setInt(3, userId);
             ps.setInt(4, category_id);
             ps.setString(5, subjectName);
+            ps.setInt(6, registedStatus);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             System.out.println("insert: " + e.getMessage());
+        }
+    }
+
+    public void updateRegistration(String registrationId, String pricePackage, int registedstatus) {
+        xSql = "UPDATE [dbo].[registration]\n"
+                + "   SET [price_package_id] = ?\n"
+                + "      ,[status] = ?\n"
+                + " WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, pricePackage);
+            ps.setInt(2, registedstatus);
+            ps.setString(3, registrationId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
         }
     }
 }

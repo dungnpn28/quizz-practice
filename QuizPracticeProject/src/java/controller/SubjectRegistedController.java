@@ -69,11 +69,12 @@ public class SubjectRegistedController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         HttpSession sessions = request.getSession();
-
+        
         String subjectId = request.getParameter("subjectId");
         String subjectName = request.getParameter("subjectName");
         String pricePackage = request.getParameter("selectedPackaged");
-
+        String registedStatus = request.getParameter("registedStatus");
+        int registedstatus = Integer.parseInt(registedStatus);
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         int categoryId = scDAO.getCategoryId(subjectId);
 
@@ -81,7 +82,7 @@ public class SubjectRegistedController extends HttpServlet {
             User a = (User) sessions.getAttribute("user");
 
             MyRegistrationDAO mrDAO = new MyRegistrationDAO();
-            mrDAO.addNewRegistration(subjectId, pricePackage, a.getId(), categoryId, subjectName);
+            mrDAO.addNewRegistration(subjectId, pricePackage, a.getId(), categoryId, subjectName, registedstatus);
             sessions.setAttribute("openNotification", "1");
             response.sendRedirect("subjectListPublic");
 
@@ -107,13 +108,14 @@ public class SubjectRegistedController extends HttpServlet {
             String pricePackage64 = Base64.getEncoder().encodeToString(pricePackage.getBytes());
             String categoryId64 = Base64.getEncoder().encodeToString(String.valueOf(categoryId).getBytes());
             String subjectName64 = Base64.getEncoder().encodeToString(subjectName.getBytes());
+            String registedStatus64 = Base64.getEncoder().encodeToString(registedStatus.getBytes());
 
             String emailContent = "<h1 style=\"color:blue\">Hi there</h1><br>"
                     + "To finish registration, please click the button below:<br>"
                     + "<a href=\"http://localhost:9999/QuizPracticeProject/verifyAddNewUserAndSubject?name64=" + name64
                     + "&email64=" + email64 + "&phone_number64=" + phone_number64 + "&gender64=" + gender64
                     + "&pass64=" + password64 + "&dob64=" + dob64 + "&role64=" + role64 + "&status64=" + status64
-                    + "&subjectid64=" + subjectid64 + "&pricePackage64=" + pricePackage64 + "&categoryId64=" + categoryId64 + "&subjectName64=" + subjectName64 + "\">"
+                    + "&subjectid64=" + subjectid64 + "&pricePackage64=" + pricePackage64 + "&categoryId64=" + categoryId64 + "&subjectName64=" + subjectName64 + "&registedStatus64=" + registedStatus64 + "\">"
                     + "<button style=\"display: inline-block; padding: 10px 20px; font-size: 16px; text-align: center; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;\">Verify Account</button></a><br>"
                     + "Admin has provided you an account. Make sure that you click this button to verify the account.<br>"
                     + "<br>"
