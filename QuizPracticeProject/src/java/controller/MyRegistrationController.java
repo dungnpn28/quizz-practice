@@ -5,6 +5,7 @@ import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
 import dal.UserDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,6 +20,7 @@ import model.Price_Package;
 import model.Subject;
 import model.Subject_Category;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -26,12 +28,9 @@ import model.User;
  */
 public class MyRegistrationController extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession sessions = request.getSession();
         int PAGE_SIZE = 3;
         int page = 1;
@@ -71,8 +70,17 @@ public class MyRegistrationController extends HttpServlet {
         if (count % 5 != 0) {
             endPage++;
         }
-        List<MyRegistration> mrList = mrDAO.getMyRegistrationWithPaging(endPage, category, search, user.getId());
+        List<MyRegistration> mrList = mrDAO.getMyRegistrationWithPaging(Integer.parseInt(index), category, search, user.getId());
         request.setAttribute("categoryList", categoryList);
+        User a = (User) sessions.getAttribute("user");
+        UserProfileDAO upDAO = new UserProfileDAO();
+        UserProfile userProfile = upDAO.getUserProfile(a.getId());
+        request.setAttribute("userProfile", userProfile);
+
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getAllPricePackage();
+        request.setAttribute("pricePackageList", pricePackageList);
 
         request.setAttribute("endP", endPage);
         request.setAttribute("tag", Integer.parseInt(index));
@@ -82,6 +90,17 @@ public class MyRegistrationController extends HttpServlet {
         request.setAttribute("subjectList", subjectList);
 
         request.getRequestDispatcher("MyRegistration.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

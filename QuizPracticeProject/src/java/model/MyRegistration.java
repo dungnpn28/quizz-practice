@@ -14,6 +14,9 @@ public class MyRegistration {
     private Date created;
     private int category_id;
     private String subject_name;
+    private Date expired;
+    private int status;
+    private String time;
 
     public MyRegistration() {
     }
@@ -35,6 +38,33 @@ public class MyRegistration {
         this.userId = userId;
         this.created = created;
     }
+
+    public MyRegistration(int id, int subjectId, int pricePackageId, int userId, Date created, int category_id, String subject_name, Date expired, int status) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.pricePackageId = pricePackageId;
+        this.userId = userId;
+        this.created = created;
+        this.category_id = category_id;
+        this.subject_name = subject_name;
+        this.expired = expired;
+        this.status = status;
+    }
+
+    public MyRegistration(int id, int subjectId, int pricePackageId, int userId, Date created, int category_id, String subject_name, Date expired, int status, String time) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.pricePackageId = pricePackageId;
+        this.userId = userId;
+        this.created = created;
+        this.category_id = category_id;
+        this.subject_name = subject_name;
+        this.expired = expired;
+        this.status = status;
+        this.time = time;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -90,6 +120,30 @@ public class MyRegistration {
 
     public void setSubject_name(String subject_name) {
         this.subject_name = subject_name;
+    }
+
+    public Date getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Date expired) {
+        this.expired = expired;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
     
     

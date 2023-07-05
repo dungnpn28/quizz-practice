@@ -4,8 +4,11 @@
  */
 package controller;
 
+import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
+import dal.UserDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,9 +18,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import model.Price_Package;
 import model.Subject;
 import model.Subject_Category;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -37,23 +42,11 @@ public class SubjectListPublicController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
         HttpSession sessions = request.getSession();
+        if (sessions.getAttribute("openNotification") != null) {
+            request.setAttribute("openNotification", "1");
+            sessions.removeAttribute("openNotification");
+        }
         int PAGE_SIZE = 3;
         int page = 1;
         String pageStr = request.getParameter("page");
@@ -331,6 +324,22 @@ public class SubjectListPublicController extends HttpServlet {
                 totalPage += 1;
             }
         }
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getAllPricePackage();
+        request.setAttribute("pricePackageList", pricePackageList);
+
+        if (sessions.getAttribute("user") != null) {
+            User a = (User) sessions.getAttribute("user");
+            UserProfileDAO upDAO = new UserProfileDAO();
+            UserProfile userProfile = upDAO.getUserProfile(a.getId());
+            request.setAttribute("userProfile", userProfile);
+        }
+        UserDAO uDAO = new UserDAO();
+        List<String> userList = new ArrayList<>();
+        userList = uDAO.getAllUser();
+
+        request.setAttribute("userList", userList);
 
         request.setAttribute("key", keyword);
         request.setAttribute("subjectCategoryList", subjectCategoryList);
@@ -338,6 +347,22 @@ public class SubjectListPublicController extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("subjectList", subjectList);
         request.getRequestDispatcher("SubjectListPublic.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+
     }
 
     /**
