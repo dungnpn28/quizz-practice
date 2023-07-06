@@ -70,39 +70,55 @@
                                         </select>
                                     </div>
                                     <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" name="featured" id="featured" ${subject.featured?"checked":""}>
+                                        <c:if test="${sessionScope.user.getRole_id() == 5}">
+                                            <input type="checkbox" class="form-check-input" name="featured" id="featured" ${subject.featured?"checked":""}>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.getRole_id() == 4}">
+                                            <input type="checkbox" class="form-check-input" name="featured" id="featured" ${subject.featured?"checked disabled":" disabled"}>
+                                        </c:if>
                                         <label class="form-check-label form-check-label-lg" for="featured">Featured Subject</label>
                                     </div>
                                     <div class="mb-3">
                                         <label for="status" class="form-label form-label-lg">Status:</label>
-                                        <select class="form-select form-select-lg" id="status" name="status">
-                                            <option value="false" ${subject.status== false?"selected":""}>Deactive</option>
-                                            <option value="true" ${subject.status == true ?"selected":""}>Active</option>
-                                            <!-- Add more options if needed -->
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        
-                                        <label for="author" class="form-label form-label-lg">Author:</label>
                                         <c:if test="${sessionScope.user.getRole_id() == 5}">
-                                        <select class="form-select form-select-lg" id="author" name="owner">
-                                            <c:forEach var="list_expert" items="${list_expert}">
-
-                                                <option value="${list_expert.getUser_id()}" ${subject.author_id == list_expert.getUser_id()?"selected":""}>${list_expert.getFull_name()}</option>
-
-                                            </c:forEach>
-                                            <!-- Add more options if needed -->
-                                        </select>
+                                            <select class="form-select form-select-lg" id="status" name="status">
+                                                <option value="false" ${subject.status== false?"selected":""}>Deactive</option>
+                                                <option value="true" ${subject.status == true ?"selected":""}>Active</option>
+                                                <!-- Add more options if needed -->
+                                            </select>
                                         </c:if>
                                         <c:if test="${sessionScope.user.getRole_id() == 4}">
-                                        <select class="form-select form-select-lg" id="author" name="owner">
-                                            <c:forEach var="list_expert" items="${list_expert}">
+                                            <select class="form-select form-select-lg" id="status" name="status">
+                                                <option value="false" ${subject.status== false?"selected":"hidden"}>Deactive</option>
+                                                <option value="true" ${subject.status == true ?"selected":"hidden"}>Active</option>
+                                                <!-- Add more options if needed -->
+                                            </select>
 
-                                                <option value="${list_expert.getUser_id()}" ${subject.author_id == list_expert.getUser_id()?"selected":""} ${subject.author_id != list_expert.getUser_id()?"disabled":""}>${list_expert.getFull_name()}</option>
+                                        </c:if>
 
-                                            </c:forEach>
-                                            <!-- Add more options if needed -->
-                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+
+                                        <label for="author" class="form-label form-label-lg">Author:</label>
+                                        <c:if test="${sessionScope.user.getRole_id() == 5}">
+                                            <select class="form-select form-select-lg" id="author" name="owner">
+                                                <c:forEach var="list_expert" items="${list_expert}">
+
+                                                    <option value="${list_expert.getUser_id()}" ${subject.author_id == list_expert.getUser_id()?"selected":""}>${list_expert.getFull_name()}</option>
+
+                                                </c:forEach>
+                                                <!-- Add more options if needed -->
+                                            </select>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.getRole_id() == 4}">
+                                            <select class="form-select form-select-lg" id="author" name="owner">
+                                                <c:forEach var="list_expert" items="${list_expert}">
+
+                                                    <option value="${list_expert.getUser_id()}" ${subject.author_id == list_expert.getUser_id()?"selected":""} ${subject.author_id != list_expert.getUser_id()?"disabled hidden":""}>${list_expert.getFull_name()}</option>
+
+                                                </c:forEach>
+                                                <!-- Add more options if needed -->
+                                            </select>
                                         </c:if>
                                     </div>
                                 </div>
@@ -136,9 +152,9 @@
                         <h1>DIMENSION</h1>
                         <div class="table-content">
                             <div class="table-view">
-                                
+
                                 <button class="btn btn-primary" onclick="openAddDimensionForms()">Add New</button>
-                                
+
                                 <div class="edit-pricePackage" id="add-dimension">
                                     <div class="edit-content">
                                         <div class="edit-dimension-close">
@@ -187,6 +203,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:if test="${dimensionList.size() == 0}">
+                                            <tr>NO RESULT</tr>
+                                        </c:if>
                                         <c:forEach items="${dimensionList}" var="dimensionList">
                                             <tr class="table-info">
                                                 <th scope="row">${dimensionList.getId()}</th>
@@ -226,7 +245,7 @@
                                                     <label>Description:</label>
                                                     <input name="description" id="description-${dimensionList.getId()}" type="text" value="${dimensionList.description}" required oninput="validateDescriptionInput(${dimensionList.getId()})">
                                                     <div id="descriptionDimensionError-${dimensionList.getId()}" class="text-danger"> </div>
-                                               
+
 
                                                     <input type="hidden" name="subjectId" value="${subjectId}">
                                                     <input type="hidden" name="index" value="${tagD}"> <br>
@@ -247,7 +266,7 @@
                                         </div>
                                     </c:forEach>
                                     </tbody>
-                             
+
 
                                 </table>
                                 <ul class="pagination">
@@ -298,198 +317,203 @@
                                                 </div>
                                                 <div class="table-view">                        
                                                     <c:if test="${sessionScope.user.getRole_id() == 5}">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Add New
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li class="dropdown">
-                                                                <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add existing package</button>
-                                                                <ul class="dropdown-menu dropdown-submenu">
-                                                                    <!--                                            <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
-                                                                                                                <li><a class="dropdown-item" href="#">Submenu item 2</a></li>-->
-                                                                    <c:forEach items="${allPricePackageList}" var="allPricePackageList">
-                                                                        <c:set var="count" value="0" />
-                                                                        <c:forEach items="${pricePackageList}" var="pricePackage">
-                                                                            <c:if test="${allPricePackageList.id == pricePackage.id}">
-                                                                                <c:set var="count" value="${count + 1}" /> <!-- Tăng giá trị biến đếm count -->
-                                                                            </c:if>
-                                                                        </c:forEach>
-                                                                        <c:if test="${count eq 0}">
-                                                                            <li><a class="dropdown-item" href="addnewpricepackagedetail?price=${allPricePackageList.id}&subjectId=${subjectId}">
-                                                                                    <span class="label" style="color: red;font-weight: bold;">name:</span>
-                                                                                    <span class="value">${allPricePackageList.name}</span>
-                                                                                    <span class="label" style="color: red;font-weight: bold;">description:</span>
-                                                                                    <span class="value" >${allPricePackageList.description}</span>
-                                                                                    <span class="label" style="color: red;font-weight: bold;">duration:</span>
-                                                                                    <span class="value">${allPricePackageList.duration}</span>
-                                                                                    <span class="label" style="color: red;font-weight: bold;">price:</span>
-                                                                                    <span class="value">${allPricePackageList.price}</span>
-                                                                                    <span class="label" style="color: red;font-weight: bold;">sale:</span>
-                                                                                    <span class="value">${allPricePackageList.sale}</span>
-                                                                                </a></li>
-                                                                            </c:if>
-                                                                        </c:forEach>
-                                                                </ul>
-                                                            </li>
-                                                            <li><a class="dropdown-item" href="#" onclick="openAddForms()">Add new</a></li>
-                                                        </ul>
-                                                    </div>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Add New
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li class="dropdown">
+                                                                    <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Add existing package</button>
+                                                                    <ul class="dropdown-menu dropdown-submenu">
+                                                                        <!--                                            <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
+                                                                                                                    <li><a class="dropdown-item" href="#">Submenu item 2</a></li>-->
+                                                                        <c:forEach items="${allPricePackageList}" var="allPricePackageList">
+                                                                            <c:set var="count" value="0" />
+                                                                            <c:forEach items="${pricePackageList}" var="pricePackage">
+                                                                                <c:if test="${allPricePackageList.id == pricePackage.id}">
+                                                                                    <c:set var="count" value="${count + 1}" /> <!-- Tăng giá trị biến đếm count -->
+                                                                                </c:if>
+                                                                            </c:forEach>
+                                                                            <c:if test="${count eq 0}">
+                                                                                <li><a class="dropdown-item" href="addnewpricepackagedetail?price=${allPricePackageList.id}&subjectId=${subjectId}">
+                                                                                        <span class="label" style="color: red;font-weight: bold;">name:</span>
+                                                                                        <span class="value">${allPricePackageList.name}</span>
+                                                                                        <span class="label" style="color: red;font-weight: bold;">description:</span>
+                                                                                        <span class="value" >${allPricePackageList.description}</span>
+                                                                                        <span class="label" style="color: red;font-weight: bold;">duration:</span>
+                                                                                        <span class="value">${allPricePackageList.duration}</span>
+                                                                                        <span class="label" style="color: red;font-weight: bold;">price:</span>
+                                                                                        <span class="value">${allPricePackageList.price}</span>
+                                                                                        <span class="label" style="color: red;font-weight: bold;">sale:</span>
+                                                                                        <span class="value">${allPricePackageList.sale}</span>
+                                                                                    </a></li>
+                                                                                </c:if>
+                                                                            </c:forEach>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="#" onclick="openAddForms()">Add new</a></li>
+                                                            </ul>
+                                                        </div>
                                                     </c:if>
                                                     <c:if test="${sessionScope.user.getRole_id() == 5}">
-                                                    <div id="pricepackage">
+                                                        <div id="pricepackage">
 
 
-                                                        <table class="table table-hover">
+                                                            <table class="table table-hover">
 
-                                                            <tr class="table-menu">
-                                                                <th scope="col">#</th>
-                                                                <th scope="col">Package</th>
-                                                                <th scope="col">Description</th>
-                                                                <th scope="col">Duration</th>
-                                                                <th scope="col">List Price</th>
-                                                                <th scope="col">Sale Price</th>                
-                                                                <th scope="col">Status</th>
-                                                             
-                                                                <th scope="col">Action</th>
-                                                              
-                                                            </tr>
+                                                                <tr class="table-menu">
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Package</th>
+                                                                    <th scope="col">Description</th>
+                                                                    <th scope="col">Duration</th>
+                                                                    <th scope="col">List Price</th>
+                                                                    <th scope="col">Sale Price</th>                
+                                                                    <th scope="col">Status</th>
 
-                                                            <c:forEach items="${pricePackageListWithPaging}" var="pricePackageListWithPaging">
-                                                                <tr class="table-info">
-                                                                    <th scope="row">${pricePackageListWithPaging.getId()}</th>
-                                                                    <td>${pricePackageListWithPaging.getName()}</td>
-                                                                    <td>${pricePackageListWithPaging.getDescription()}</td>
-                                                                    <c:if test="${pricePackageListWithPaging.getDuration() == 0}">
-                                                                        <td></td>
-                                                                    </c:if>
-                                                                    <c:if test="${pricePackageListWithPaging.getDuration() != 0}">
-                                                                        <td>${pricePackageListWithPaging.getDuration()}</td>
-                                                                    </c:if>
-                                                                    <td>${pricePackageListWithPaging.getPrice()}</td>
-                                                                    <td>${pricePackageListWithPaging.getSale()}</td>
-                                                                    <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
-                                                                        <td><div class="active-button">Active</div></td>
-                                                                    </c:if>
-                                                                    <c:if test="${pricePackageListWithPaging.getStatus() == 0}">
-                                                                        <td><div class="deactive-button">Deactive</div></td>
-                                                                    </c:if>
-                                                                    <td>
-                                                                        <div class="button-container">
-                                                                            <a href="#edit-pricePackage-${pricePackageListWithPaging.getId()}">  <button class="btn btn-primary" onclick="openEditForms(${pricePackageListWithPaging.getId()})" >EDIT</button></a>
-                                                                            <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
-                                                                                <a href="editstatuspricepackage?tab=${tab}&price=${pricePackageListWithPaging.getId()}&subjectId=${subjectId}&index=${tag}&status=0"><img src="img/remove.png"></a>
-                                                                                </c:if>
-                                                                                <c:if test="${pricePackageListWithPaging.getStatus() == 0}">
-                                                                                <a href="editstatuspricepackage?tab=${tab}&price=${pricePackageListWithPaging.getId()}&subjectId=${subjectId}&index=${tag}&status=1" ><img src="img/check.png"></a>
-                                                                                </c:if>   
-                                                                        </div>
-                                                                    </td>
+                                                                    <th scope="col">Action</th>
 
                                                                 </tr>
-                                                                <div class="edit-pricePackage" id="edit-pricePackage-${pricePackageListWithPaging.getId()}">
-                                                                    <div class="edit-content">
-                                                                        <a href="" id="edit-pricePackage-close" style="display: none;"></a>
+                                                                <c:if test="${pricePackageListWithPaging.size() == 0}">
+                                                                    <tr>NO RESULT</tr>
+                                                                </c:if>
+                                                                <c:forEach items="${pricePackageListWithPaging}" var="pricePackageListWithPaging">
+                                                                    <tr class="table-info">
+                                                                        <th scope="row">${pricePackageListWithPaging.getId()}</th>
+                                                                        <td>${pricePackageListWithPaging.getName()}</td>
+                                                                        <td>${pricePackageListWithPaging.getDescription()}</td>
+                                                                        <c:if test="${pricePackageListWithPaging.getDuration() == 0}">
+                                                                            <td></td>
+                                                                        </c:if>
+                                                                        <c:if test="${pricePackageListWithPaging.getDuration() != 0}">
+                                                                            <td>${pricePackageListWithPaging.getDuration()}</td>
+                                                                        </c:if>
+                                                                        <td>${pricePackageListWithPaging.getPrice()}</td>
+                                                                        <td>${pricePackageListWithPaging.getSale()}</td>
+                                                                        <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
+                                                                            <td><div class="active-button">Active</div></td>
+                                                                        </c:if>
+                                                                        <c:if test="${pricePackageListWithPaging.getStatus() == 0}">
+                                                                            <td><div class="deactive-button">Deactive</div></td>
+                                                                        </c:if>
+                                                                        <td>
+                                                                            <div class="button-container">
+                                                                                <a href="#edit-pricePackage-${pricePackageListWithPaging.getId()}">  <button class="btn btn-primary" onclick="openEditForms(${pricePackageListWithPaging.getId()})" >EDIT</button></a>
+                                                                                <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
+                                                                                    <a href="editstatuspricepackage?tab=${tab}&price=${pricePackageListWithPaging.getId()}&subjectId=${subjectId}&index=${tag}&status=0"><img src="img/remove.png"></a>
+                                                                                    </c:if>
+                                                                                    <c:if test="${pricePackageListWithPaging.getStatus() == 0}">
+                                                                                    <a href="editstatuspricepackage?tab=${tab}&price=${pricePackageListWithPaging.getId()}&subjectId=${subjectId}&index=${tag}&status=1" ><img src="img/check.png"></a>
+                                                                                    </c:if>   
+                                                                            </div>
+                                                                        </td>
 
-                                                                        <div class="button-close">
-                                                                            <button onclick="closeEditForms(${pricePackageListWithPaging.getId()})" class="btn btn-danger">x</button>
+                                                                    </tr>
+                                                                    <div class="edit-pricePackage" id="edit-pricePackage-${pricePackageListWithPaging.getId()}">
+                                                                        <div class="edit-content">
+                                                                            <a href="" id="edit-pricePackage-close" style="display: none;"></a>
+
+                                                                            <div class="button-close">
+                                                                                <button onclick="closeEditForms(${pricePackageListWithPaging.getId()})" class="btn btn-danger">x</button>
+                                                                            </div>
+                                                                            <form id="editeditPricePackagedetail-${pricePackageListWithPaging.getId()}" action="editpricepackage" method="post" onsubmit="return validateFormPricePackageDetail(${pricePackageListWithPaging.getId()})" >
+
+                                                                                <label>ID:</label>
+                                                                                <input name="id" type="text" value="${pricePackageListWithPaging.getId()}" readonly> <br>
+                                                                                <label>Package's Name:</label>
+                                                                                <input name="name" type="text" value="${pricePackageListWithPaging.getName()}" required><br>
+                                                                                <div id="namePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
+                                                                                <label>Description:</label>
+                                                                                <input name="description" type="text" value="${pricePackageListWithPaging.getDescription()}" required><br>
+                                                                                <div id="descriptionPackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
+                                                                                <label>Duration(months):</label>
+                                                                                <input name="duration" type="text" value="${pricePackageListWithPaging.getDuration()}" required><br>
+                                                                                <div id="durationPackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
+
+                                                                                <label>List Price:</label>
+                                                                                <input name="price" type="text" value="${pricePackageListWithPaging.getPrice()}" required><br>
+                                                                                <div id="listPricePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
+
+                                                                                <label>Sale Price:</label>
+                                                                                <input name="sale" type="text" value="${pricePackageListWithPaging.getSale()}" required><br>
+                                                                                <div id="salePricePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
+
+                                                                                <label>Status:</label>
+
+                                                                                <input type="radio" name="status" value="1" ${pricePackageListWithPaging.getStatus() == 1?"checked":""} >Active
+                                                                                <input type="radio" name="status" value="0" ${pricePackageListWithPaging.getStatus() == 0?"checked":""} > Deactive
+                                                                                <br>
+                                                                                <input type="hidden" name="subjectId" value="${subjectId}">
+                                                                                <input type="hidden" name="index" value="${tag}"> <br>
+
+                                                                                <input type="submit" value="Update" class="btn btn-primary">
+                                                                            </form>    
                                                                         </div>
-                                                                        <form id="editeditPricePackagedetail-${pricePackageListWithPaging.getId()}" action="editpricepackage" method="post" onsubmit="return validateFormPricePackageDetail(${pricePackageListWithPaging.getId()})" >
-
-                                                                            <label>ID:</label>
-                                                                            <input name="id" type="text" value="${pricePackageListWithPaging.getId()}" readonly> <br>
-                                                                            <label>Package's Name:</label>
-                                                                            <input name="name" type="text" value="${pricePackageListWithPaging.getName()}" required><br>
-                                                                            <div id="namePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
-                                                                            <label>Description:</label>
-                                                                            <input name="description" type="text" value="${pricePackageListWithPaging.getDescription()}" required><br>
-                                                                            <div id="descriptionPackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
-                                                                            <label>Duration(months):</label>
-                                                                            <input name="duration" type="text" value="${pricePackageListWithPaging.getDuration()}" required><br>
-                                                                            <div id="durationPackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
-
-                                                                            <label>List Price:</label>
-                                                                            <input name="price" type="text" value="${pricePackageListWithPaging.getPrice()}" required><br>
-                                                                            <div id="listPricePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
-
-                                                                            <label>Sale Price:</label>
-                                                                            <input name="sale" type="text" value="${pricePackageListWithPaging.getSale()}" required><br>
-                                                                            <div id="salePricePackageError-${pricePackageListWithPaging.getId()}" class="text-danger"> </div>
-
-                                                                            <label>Status:</label>
-
-                                                                            <input type="radio" name="status" value="1" ${pricePackageListWithPaging.getStatus() == 1?"checked":""} >Active
-                                                                            <input type="radio" name="status" value="0" ${pricePackageListWithPaging.getStatus() == 0?"checked":""} > Deactive
-                                                                            <br>
-                                                                            <input type="hidden" name="subjectId" value="${subjectId}">
-                                                                            <input type="hidden" name="index" value="${tag}"> <br>
-
-                                                                            <input type="submit" value="Update" class="btn btn-primary">
-                                                                        </form>    
                                                                     </div>
-                                                                </div>
-                                                            </c:forEach>
+                                                                </c:forEach>
 
-                                                        </table>
-                                                        <ul class="pagination">
-                                                            <c:forEach begin="1" end="${endP}" var="i">
-                                                                <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
-                                                            </c:forEach>
-                                                        </ul>
+                                                            </table>
+                                                            <ul class="pagination">
+                                                                <c:forEach begin="1" end="${endP}" var="i">
+                                                                    <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
+                                                                </c:forEach>
+                                                            </ul>
 
-                                                    </div>
+                                                        </div>
                                                     </c:if>
                                                     <c:if test="${sessionScope.user.getRole_id() == 4}">
                                                         <div id="pricepackage">
 
 
-                                                        <table class="table table-hover">
+                                                            <table class="table table-hover">
 
-                                                            <tr class="table-menu">
-                                                                <th scope="col">#</th>
-                                                                <th scope="col">Package</th>
-                                                                <th scope="col">Description</th>
-                                                                <th scope="col">Duration</th>
-                                                                <th scope="col">List Price</th>
-                                                                <th scope="col">Sale Price</th>                
-                                                                <th scope="col">Status</th>
-                                                             
-                                                            
-                                                              
-                                                            </tr>
+                                                                <tr class="table-menu">
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Package</th>
+                                                                    <th scope="col">Description</th>
+                                                                    <th scope="col">Duration</th>
+                                                                    <th scope="col">List Price</th>
+                                                                    <th scope="col">Sale Price</th>                
+                                                                    <th scope="col">Status</th>
 
-                                                            <c:forEach items="${pricePackageListWithPaging}" var="pricePackageListWithPaging">
-                                                                <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
-                                                                <tr class="table-info">
-                                                                    <th scope="row">${pricePackageListWithPaging.getId()}</th>
-                                                                    <td>${pricePackageListWithPaging.getName()}</td>
-                                                                    <td>${pricePackageListWithPaging.getDescription()}</td>
-                                                                    <c:if test="${pricePackageListWithPaging.getDuration() == 0}">
-                                                                        <td></td>
-                                                                    </c:if>
-                                                                    <c:if test="${pricePackageListWithPaging.getDuration() != 0}">
-                                                                        <td>${pricePackageListWithPaging.getDuration()}</td>
-                                                                    </c:if>
-                                                                    <td>${pricePackageListWithPaging.getPrice()}</td>
-                                                                    <td>${pricePackageListWithPaging.getSale()}</td>
-                                                                    <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
-                                                                        <td><div class="active-button">Active</div></td>
-                                                                    </c:if>
-                                                                    
-                                                                   
+
 
                                                                 </tr>
-                                                               </c:if>
-                                                            </c:forEach>
+                                                                
+                                                                <c:if test="${pricePackageListWithPaging.size() == 0}">
+                                                                    <tr>NO RESULT</tr>
+                                                                </c:if>
+                                                                <c:forEach items="${pricePackageListWithPaging}" var="pricePackageListWithPaging">
+                                                                    <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
+                                                                        <tr class="table-info">
+                                                                            <th scope="row">${pricePackageListWithPaging.getId()}</th>
+                                                                            <td>${pricePackageListWithPaging.getName()}</td>
+                                                                            <td>${pricePackageListWithPaging.getDescription()}</td>
+                                                                            <c:if test="${pricePackageListWithPaging.getDuration() == 0}">
+                                                                                <td></td>
+                                                                            </c:if>
+                                                                            <c:if test="${pricePackageListWithPaging.getDuration() != 0}">
+                                                                                <td>${pricePackageListWithPaging.getDuration()}</td>
+                                                                            </c:if>
+                                                                            <td>${pricePackageListWithPaging.getPrice()}</td>
+                                                                            <td>${pricePackageListWithPaging.getSale()}</td>
+                                                                            <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
+                                                                                <td><div class="active-button">Active</div></td>
+                                                                            </c:if>
 
-                                                        </table>
-                                                        <ul class="pagination">
-                                                            <c:forEach begin="1" end="${endP}" var="i">
-                                                                <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
-                                                            </c:forEach>
-                                                        </ul>
 
-                                                    </div>
+
+                                                                        </tr>
+                                                                    </c:if>
+                                                                </c:forEach>
+
+                                                            </table>
+                                                            <ul class="pagination">
+                                                                <c:forEach begin="1" end="${endP}" var="i">
+                                                                    <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
+                                                                </c:forEach>
+                                                            </ul>
+
+                                                        </div>
 
                                                     </c:if>
                                                 </div>

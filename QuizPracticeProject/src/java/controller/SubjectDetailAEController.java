@@ -67,7 +67,7 @@ public class SubjectDetailAEController extends HttpServlet {
         }
         int countD = d.countDimensionBySubjectIdWithPaging(Integer.parseInt(subjectId));
         int endPageD = countD / 5;
-        if (count % 5 != 0) {
+        if (countD % 5 != 0) {
             endPageD++;
         }
         List<Price_Package> allPricePackageList = p.getPricePackageAvailable();
