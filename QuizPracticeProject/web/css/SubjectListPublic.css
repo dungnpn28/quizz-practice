@@ -28,6 +28,16 @@
 .registerButton a {
     text-decoration: none;
     color: black;
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    background-color: #11ab2d;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .registerButton button{
     position: absolute;
@@ -112,3 +122,105 @@
     border: 1px solid #888;
     width: 500px; /*thay đổi cái chiều rộng ở đây */
 }
+
+.dialog{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index: 9999999;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity:0;
+    transition: opacity linear 0.2s;
+}
+
+.overlay{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.dialog-body{
+    height:700px;
+    width:750px;
+    position: absolute;
+    padding:16px;
+    background-color: #fff;
+}
+
+.header_fixed {
+    max-height: 100vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.dialog-body img{
+    width:200px;
+    height:200px;
+}
+.dialog-body button{
+
+    position:relative;
+    display:inline-block;
+    padding:10px 20px;
+    margin:10px 0;
+    color:#fff;
+    text-decoration:none;
+    text-transform: uppercase;
+    font-size:18px;
+    letter-spacing: 2px;
+    border-radius:40px;
+    background: linear-gradient(90deg,#755bea,#ff72c0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    margin: 15% auto; /* Adjust the percentage to position the dialog vertically */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    max-width: 30%;
+    text-align: center;
+    position: relative; /* Add relative positioning */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  transition: opacity 0.5s;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#progressBar {
+  height: 5px;
+  background-color: #fff;
+  margin-top: 5px;
+  transition: width 0.5s;
+}
+

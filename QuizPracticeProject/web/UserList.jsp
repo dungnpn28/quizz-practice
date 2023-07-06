@@ -245,9 +245,11 @@
                                                 <td>THIS IS ME</td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a></td>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <td>
+                                                    <a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">

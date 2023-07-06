@@ -13,6 +13,9 @@
         <title>Slider List</title>
         <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">-->
         <link href="css/SliderListAd.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/MyRegistration.css" type="text/css"/>
+
+
     </head>
     <body>
         <%@ include file="components/CusHeader.jsp" %>
@@ -62,7 +65,7 @@
                                 </td>
                                 <td>
                                     <div class="col">
-                                        <a href="${listSlider.getBacklink()}">${listSlider.getBacklink()}</a>
+                                        <a href="${listSlider.getBacklink()}" style="background: none; color: #000000">${listSlider.getBacklink()}</a>
                                     </div>
                                 </td>
                                 <td>
@@ -77,23 +80,25 @@
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="sliderDetail?sid=${listSlider.getId()}" style="color: black"><button>VIEW DETAIL</button></a>
-                                        </div>
-                                        <div class="col-md-8">
+                                        <div class ="col">
+
+
+
                                             <div class="col">
                                                 <form action="sliderList" method="post">
-                                                    <button type="submit" name="btnEdit">EDIT</button>
+                                                    <button type="submit" name="btnEdit" style="background: linear-gradient(90deg,#755bea,#ff72c0)">EDIT</button>
 
                                                     <input hidden name="sid" value="${listSlider.id}">
                                                 </form>
                                                 <form action="sliderList" method="post" id="deleteForm">
                                                     <input hidden name="sid" value="${listSlider.getId()}">
-                                                    <button type="submit" name="btnDel">DELETE</button>
+                                                    <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0)">DELETE</button>
                                                 </form>
                                             </div>  
+                                            <a  class="dialog-btn"  href="sliderDetail?sid=${listSlider.getId()}" style="color: #ffffff">VIEW DETAIL</a>
+
+
                                         </div>
-                                    </div>
                                 </td>
                             </tr>
                         </c:forEach>

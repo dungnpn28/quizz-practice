@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 
 /**
@@ -83,7 +86,8 @@ public class UserDAO extends MyDAO {
             System.out.println("updatePassword: " + e.getMessage());
         }
     }
-     public User getUserById(int id) {
+
+    public User getUserById(int id) {
         try {
             String strSelect = "select id,account,[password],[role_id],[status] from [user] where id = ?";
             ps = con.prepareStatement(strSelect);
@@ -103,11 +107,12 @@ public class UserDAO extends MyDAO {
         return null;
 
     }
-      public void changeUser(int id,int role,int status) {
+
+    public void changeUser(int id, int role, int status) {
         try {
             String strAdd = "update [user] set role_id = ?,[status] = ? where id = ?";
             ps = con.prepareStatement(strAdd);
-            
+
             ps.setInt(1, role);
             ps.setInt(2, status);
             ps.setInt(3, id);
@@ -115,10 +120,55 @@ public class UserDAO extends MyDAO {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("changeUser: " + e.getMessage());
-            
+
         }
     }
-     
-    
+
+    public List<String> getAllUser() {
+        xSql = "select account from [user]";
+        String xAccount;
+
+        List<String> t = new ArrayList<>();
+        User x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                xAccount = rs.getString("account");
+
+                t.add(xAccount);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
+
+    public List<User> getUsers() {
+        xSql = "select * from [user]";
+        int xId;
+        String xAccount;
+        String xPassword;
+        int xRoleId;
+        int xStatus;
+
+        List<User> t = new ArrayList<>();
+        User x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                xAccount = rs.getString("account");
+                xPassword = rs.getString("password");
+                xRoleId = rs.getInt("role_id");
+                xStatus = rs.getInt("status");
+                x = new User(xId, xAccount, xPassword, xRoleId, xStatus);
+                t.add(x);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
 
 }
