@@ -209,6 +209,22 @@
         <servlet-class>controller.AddNewPricePackageDetailController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditStatusPricePackageController</servlet-name>
+        <servlet-class>controller.EditStatusPricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditDimensionController</servlet-name>
+        <servlet-class>controller.EditDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <servlet-class>controller.DeleteDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDimensionController</servlet-name>
+        <servlet-class>controller.AddDimensionController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SubjectRegistedController</servlet-name>
         <servlet-class>controller.SubjectRegistedController</servlet-class>
     </servlet>
@@ -423,6 +439,22 @@
     <servlet-mapping>
         <servlet-name>AddNewPricePackageDetailController</servlet-name>
         <url-pattern>/addnewpricepackagedetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStatusPricePackageController</servlet-name>
+        <url-pattern>/editstatuspricepackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditDimensionController</servlet-name>
+        <url-pattern>/editdimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <url-pattern>/deletedimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDimensionController</servlet-name>
+        <url-pattern>/adddimension</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SubjectRegistedController</servlet-name>

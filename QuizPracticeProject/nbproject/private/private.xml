@@ -3,14 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/RegistrationList.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/controller/RegistrationListController.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/User.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/model/MyRegistration.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/MyRegistrationDAO.java</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/js/RegistrationList.js</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/web/SubjectLessons.jsp</file>
-            <file>file:/E:/FPT%20Subjects/SE5/SWP/pull2/QuizPracticeProject/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/AddNewLessonDetailsController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/LoginController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Subject.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Price_Package.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/SubjectDetailAE.jsp</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/SliderListAd.jsp</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/BlogDetailController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/SubjectListAEController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/AddNewPricePackageController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Dimension.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/js/userList.js</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Subject_Category.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/AddNewPricePackageDetailController.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/UserProfile.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Dimension_Type.java</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/SubjectListAE.jsp</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/components/navbar.jsp</file>
+            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/SubjectDetailAEController.java</file>
         </group>
     </open-files>
 </project-private>

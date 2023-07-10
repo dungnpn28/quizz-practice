@@ -5,6 +5,8 @@
 package controller;
 
 
+import dal.DimensionDAO;
+import dal.Dimension_TypeDAO;
 import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Dimension;
+import model.Dimension_Type;
 import model.Price_Package;
 import model.Subject;
 import model.Subject_Category;
@@ -45,16 +49,26 @@ public class SubjectDetailAEController extends HttpServlet {
         if (index == null) {
             index = "1";
         }
-
+        String indexD = req.getParameter("indexD");
+        if(indexD == null){
+            indexD = "1";
+        }
         SubjectDAO s = new SubjectDAO();
         Subject_CategoryDAO sc = new Subject_CategoryDAO();
         UserProfileDAO up = new UserProfileDAO();
         PriceDAO p = new PriceDAO();
-
+        DimensionDAO d = new DimensionDAO();
+        Dimension_TypeDAO dt = new Dimension_TypeDAO();
+        
         int count = p.countPricePackageBySubjectIdWithPaging(Integer.parseInt(subjectId));
         int endPage = count / 5;
         if (count % 5 != 0) {
             endPage++;
+        }
+        int countD = d.countDimensionBySubjectIdWithPaging(Integer.parseInt(subjectId));
+        int endPageD = countD / 5;
+        if (countD % 5 != 0) {
+            endPageD++;
         }
         List<Price_Package> allPricePackageList = p.getPricePackageAvailable();
         List<Price_Package> pricePackageListWithPaging = p.getPricePackageBySubjectIdWithPaging(Integer.parseInt(index), Integer.parseInt(subjectId));
@@ -62,7 +76,9 @@ public class SubjectDetailAEController extends HttpServlet {
         Subject subject = s.getSubjectDetailById(Integer.parseInt(subjectId));
         List<Subject_Category> list_sc = sc.getSubjectCategory();
         List<UserProfile> list_expert = up.getListUserProfileByRole(4);
-
+        List<Dimension> dimensionList = d.getDimensionBySubjectId(Integer.parseInt(indexD),Integer.parseInt(subjectId));
+        List<Dimension_Type> list_dimension_type = dt.getDimensionType();
+        
         req.setAttribute("tab", tab);
         req.setAttribute("subjectId", subjectId);
         req.setAttribute("pricePackageListWithPaging", pricePackageListWithPaging);
@@ -71,9 +87,12 @@ public class SubjectDetailAEController extends HttpServlet {
         req.setAttribute("subject", subject);
         req.setAttribute("list_sc", list_sc);
         req.setAttribute("list_expert", list_expert);
+        req.setAttribute("dimensionList", dimensionList);
+        req.setAttribute("list_dimension_type", list_dimension_type);
         req.setAttribute("endP", endPage);
         req.setAttribute("tag", Integer.parseInt(index));
-
+        req.setAttribute("endPD", endPageD);
+        req.setAttribute("tagD", Integer.parseInt(indexD));
 //        boolean isAjaxRequest = "XMLHttpRequest".equals(req.getHeader("X-Requested-With"));
 //
 //        if (isAjaxRequest) {
