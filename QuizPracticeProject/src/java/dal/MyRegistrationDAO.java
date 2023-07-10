@@ -285,4 +285,18 @@ public class MyRegistrationDAO extends MyDAO {
         return 0;
 
     }
+
+    public void deleteRegistration(String registrationId) {
+        xSql = "DELETE FROM [dbo].[registration]\n"
+                + "      WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, registrationId);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("delete: " + e.getMessage());
+        }
+    }
 }

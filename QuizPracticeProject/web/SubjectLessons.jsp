@@ -116,7 +116,7 @@
                     </div>
 
                 </div>
-                <a href="subjectListAE" class="btn btn-primary">Back to Subject list</a>
+                <a href="subjectlistae" class="btn btn-primary">Back to Subject list</a>
 
             </div>
         </div>

@@ -32,6 +32,11 @@ public class MyRegistrationController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sessions = request.getSession();
+        MyRegistrationDAO mrDAO = new MyRegistrationDAO();
+
+        if (request.getParameter("reigsId") != null && request.getParameter("checkCancel") != null) {
+               mrDAO.deleteRegistration(request.getParameter("reigsId"));
+        }
         int PAGE_SIZE = 3;
         int page = 1;
         String pageStr = request.getParameter("page");
@@ -43,7 +48,6 @@ public class MyRegistrationController extends HttpServlet {
 //        PriceDAO pDAO = new PriceDAO();
         List<Price_Package> pL = new PriceDAO().getPrice_Package();
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
-        MyRegistrationDAO mrDAO = new MyRegistrationDAO();
         List<Subject> subjectList = new ArrayList<>();
 //        List<MyRegistration> mrList = mrDAO.getMyRegistration(user.getId(), page, PAGE_SIZE);
         subjectList = sDAO.getSubjects();
