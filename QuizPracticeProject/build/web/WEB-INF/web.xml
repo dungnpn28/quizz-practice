@@ -240,6 +240,14 @@
         <servlet-name>RegistrationListController</servlet-name>
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <servlet-class>controller.AddNewQuizDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <servlet-class>controller.EditQuizDetailsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -471,6 +479,14 @@
     <servlet-mapping>
         <servlet-name>RegistrationListController</servlet-name>
         <url-pattern>/registrationList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <url-pattern>/addNewQuizDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <url-pattern>/editQuizDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

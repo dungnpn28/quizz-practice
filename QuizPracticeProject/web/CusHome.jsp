@@ -36,7 +36,15 @@
 
 <body>
 
-   
+    <%
+            User u = null;
+            if(session.getAttribute("user") != null) {
+                u = (User) session.getAttribute("user");
+            }
+            UserProfileDAO upd = new UserProfileDAO();
+            UserProfile up = upd.getUserProfile(u.getId());
+            session.setAttribute("up", up);
+    %>
 
     <%@include file="components/CusHeader.jsp"%>
     <!--    SIDEBAR-->

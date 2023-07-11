@@ -10,7 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.Attempt;
+import model.Dimension_Type;
 import model.Exam;
+import model.Subject;
 
 /**
  *
@@ -361,7 +363,7 @@ public class ExamDAO extends MyDAO {
         }
         return (examList);
     }
-    
+
 //    public static void main(String[] args) {
 //        ExamDAO eDAO = new ExamDAO();
 //        List<Exam> lExam = eDAO.getAllExam();
@@ -384,4 +386,158 @@ public class ExamDAO extends MyDAO {
         }
         return null;
     }
+
+    public void insertExam(String name, int subject_id, int level, int hour, int minute, double pass_rate, int number_of_question, String description, boolean mode, int dimension_type_id) {
+        xSql = "INSERT INTO [dbo].[exam]\n"
+                + "           ([name]\n"
+                + "           ,[subject_id]\n"
+                + "           ,[level]\n"
+                + "           ,[duration]\n"
+                + "           ,[pass_rate]\n"
+                + "           ,[number_of_question]\n"
+                + "           ,[description]\n"
+                + "           ,[created]\n"
+                + "           ,[mode]\n"
+                + "           ,[dimension_type_id])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,GETDATE()\n"
+                + "           ,?\n"
+                + "           ,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, name);
+            ps.setInt(2, subject_id);
+            ps.setInt(3, level);
+            Time duration = new Time(hour, minute, 0);
+            ps.setTime(4, duration);
+            ps.setDouble(5, pass_rate);
+            ps.setInt(6, number_of_question);
+            ps.setString(7, description);
+            ps.setBoolean(8, mode);
+            ps.setInt(9, dimension_type_id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insert:" + e.getMessage());
+        }
+    }
+
+    public Exam getExamById(int examId) {
+        try {
+            String strSelect = "select * from [exam] "
+                    + "where id=?;";
+            int xID;
+            String xName;
+            int xSubject_id;
+            int xLevel;
+            Time xDuration;
+            String xxDuration;
+            double xPass_rate;
+            int xNumQue;
+            String xDescription;
+            Date xCreated;
+            int xMode;
+            int xDimensionType_id;
+            Exam x = null;
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xName = rs.getString("name");
+                xSubject_id = rs.getInt("subject_id");
+                xLevel = rs.getInt("level");
+                xDuration = rs.getTime("duration");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                xxDuration = dateFormat.format(xDuration);
+                xPass_rate = rs.getDouble("pass_rate");
+                xNumQue = rs.getInt("number_of_question");
+                xDescription = rs.getString("description");
+                xCreated = rs.getDate("created");
+                xMode = rs.getInt("mode");
+                xDimensionType_id = rs.getInt("dimension_type_id");
+                x = new Exam(examId, xName, xSubject_id, xLevel, xxDuration, xPass_rate, xNumQue, xDescription, true, xDimensionType_id);
+                return x;
+            }
+        } catch (Exception e) {
+            System.out.println("getExamNameById:" + e.getMessage());
+        }
+        return null;
+    }
+
+    public void update(String name, int subjectId, int level, int hour, int minute, Double pass_rate, int number_of_question, String description, boolean mode, int dimension_type_id, int examId) {
+        xSql = "UPDATE [dbo].[exam]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[subject_id] = ?\n"
+                + "      ,[level] = ?\n"
+                + "      ,[duration] = ?\n"
+                + "      ,[pass_rate] = ?\n"
+                + "      ,[number_of_question] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[mode] = ?\n"
+                + "      ,[dimension_type_id] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, name);
+            ps.setInt(2, subjectId);
+            ps.setInt(3, level);
+            Time duration = new Time(hour, minute, 0);
+            ps.setTime(4, duration);
+            ps.setDouble(5, pass_rate);
+            ps.setInt(6, number_of_question);
+            ps.setString(7, description);
+            ps.setBoolean(8, mode);
+            ps.setInt(9, dimension_type_id);
+            ps.setInt(10, examId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+    
+    public void updateSubject(Subject x) {
+        xSql = "UPDATE [dbo].[Subject]\n"
+                + "   SET [name] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());;
+            ps.setInt(2, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+    
+    public void updateDimensionType(Dimension_Type x) {
+        xSql = "UPDATE [dbo].[dimension_type]\n"
+                + "   SET [name] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getName());;
+            ps.setInt(2, x.getId());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update: " + e.getMessage());
+        }
+    }
+
+//    public static void main(String[] args) {
+//        ExamDAO eDAO = new ExamDAO();
+//        Exam lexam = eDAO.getExamById(1);
+//        System.out.println(lexam.getName());
+//    }
 }

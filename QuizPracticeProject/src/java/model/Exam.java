@@ -23,6 +23,8 @@ public class Exam {
     private Date created;
     private String description;
     private String subjectName;
+    private boolean mode;
+    private int dimension_type_id;
 
     public Exam() {
     }
@@ -58,6 +60,35 @@ public class Exam {
         this.number_of_question = number_of_question;
         this.subjectName = subjectName;
         this.description = description;
+    }
+
+    public Exam(int id, String name, int subject_id, int level, String duration, double pass_rate, int number_of_question, String description, boolean mode, int dimension_type_id) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
+        this.level = level;
+        this.duration = duration;
+        this.pass_rate = pass_rate;
+        this.number_of_question = number_of_question;
+        this.description = description;
+        this.mode = mode;
+        this.dimension_type_id = dimension_type_id;
+    }
+
+    public Exam(int id, String name, int subject_id, int level, String duration, double pass_rate, int number_of_question, String description, Date created, boolean mode) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
+
+        this.level = level;
+        this.duration = duration;
+        this.pass_rate = pass_rate;
+        this.number_of_question = number_of_question;
+        this.created = created;
+        this.description = description;
+
+        this.mode = mode;
+
     }
 
     public String getDescription() {
