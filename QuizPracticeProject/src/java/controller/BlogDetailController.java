@@ -37,7 +37,8 @@ public class BlogDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        int PAGE_SIZE = 5;
+        int page = 1;
         String id = request.getParameter("id");
         int blogId = Integer.parseInt(id);
         request.setAttribute("id", id);
@@ -66,7 +67,7 @@ public class BlogDetailController extends HttpServlet {
 
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
         request.setAttribute("listCategory", listCategory);
-        List<Blog> listBlog = bDAO.getBlogList();
+        List<Blog> listBlog = bDAO.getBlogList(page, PAGE_SIZE);
         request.setAttribute("listBlog", listBlog);
 
         request.getRequestDispatcher("BlogDetails.jsp").forward(request, response);

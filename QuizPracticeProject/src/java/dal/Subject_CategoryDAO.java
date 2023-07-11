@@ -57,4 +57,22 @@ public class Subject_CategoryDAO extends MyDAO {
         }
         return xName;
     }
+    
+    public int getCategoryId(String subjectId) {
+        xSql = "select category_id from subject where id = ?";
+        int xCategoryId = 0;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, subjectId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                xCategoryId = rs.getInt("category_id");
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return xCategoryId;
+    }
 }

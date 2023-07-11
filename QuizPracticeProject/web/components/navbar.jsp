@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/Home.css" type="text/css"/>
+   
         <link rel="stylesheet" href="css/Style.css" type="text/css"/>
 
         <meta charset="UTF-8">
@@ -29,35 +29,39 @@
                 <c:choose>
                     <c:when test="${sessionScope.user.getRole_id() == 1}">
                         <li>
-                            
+
                             <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
-                            
+
                             <a href="BlogListController">POST</a>
                         </li>
                         <li>
-                            
+
                             <a href="practiceList">PRACTICE LIST</a>
 
                         </li>
                         <li>
-                            
+
                             <a href="subjectListPublic">SUBJECT</a>
+                        </li>
+                        <li>
+
+                            <a href="myRegistration">MY REGISTRATION</a>
                         </li>
 
                     </c:when>
                     <c:when test="${sessionScope.user.getRole_id() == 2}">
                         <li>
-                            
+
                             <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
-                            
+
                             <a href="BlogListController">POST LIST</a>
                         </li>
                         <li>
-                            
+
                             <a href="sliderList">SLIDER LIST</a>
 
                         </li>                      
@@ -65,34 +69,34 @@
                     </c:when>
                     <c:when test="${sessionScope.user.getRole_id() == 3}">
                         <li>
-                            
+
                             <a href="cusHome">HOME</a>                  
                         </li>
-                       
+
                         <li>
-                            
-                            <a href="#">SALE LIST</a>
+
+                            <a href="registrationList">Registration list</a>
 
                         </li>
-                        
+
 
                     </c:when>
                     <c:when test="${sessionScope.user.getRole_id() == 4}">
                         <li>
-                            
+
                             <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
                             
-                            <a href="subjectListAE">SUBJECT LIST</a>
+                            <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
-                            
+
                             <a href="questionList">QUESTION LIST</a>
 
                         </li>     
                         <li>
-                            
+
                             <a href="#">EXAM LIST</a>
 
                         </li>    
@@ -101,36 +105,41 @@
                     <c:otherwise>
 
                         <li>
-                            
-                            <a href="#">HOME</a>                  
+
+                            <a href="cusHome">HOME</a>                  
                         </li>
                         <li>
-                            
+
                             <a href="#">DASHBOARD</a>
                         </li>
                         <li>
-                       
+
                             <a href="userlist">USER LIST</a>
 
                         </li>
                         <li>
-                            
+
                             <a href="subjectlistae">SUBJECT LIST</a>
                         </li>
                         <li>
                             
-                            <a href="#">POST LIST</a>
+                            <a href="pricePackage">PRICE PACKAGE LIST</a>
                         </li>
                         <li>
                             
-                            <a href="#">SlIDER LIST</a>
+                            
+                            <a href="BlogListController">POST LIST</a>
                         </li>
                         <li>
-                            
+
+                            <a href="sliderList">SlIDER LIST</a>
+                        </li>
+                        <li>
+
                             <a href="questionList">QUESTION BANKS</a>
                         </li>
                         <li>
-                            
+
                             <a href="#">SETTING LIST</a>
                         </li>
                     </c:otherwise>

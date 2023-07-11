@@ -158,7 +158,7 @@ public class QuestionDAO extends MyDAO {
             Sql += " and [lesson_id]= ?";
         }
         if (!level.equals("all")) {
-            Sql += " and [level]= ?";
+            Sql += " and [level] like ?";
 
         }
         Sql += " and (content like ?) ";
@@ -176,7 +176,7 @@ public class QuestionDAO extends MyDAO {
                 i++;
             }
             if (!level.equals("all")) {
-                ps.setInt(i, Integer.parseInt(level));
+                ps.setString(i, "%" + level + "%");
                 i++;
             }
             ps.setString(i, "%" + search + "%");
@@ -213,7 +213,7 @@ public class QuestionDAO extends MyDAO {
             xSql += " and [lesson_id]= ?";
         }
         if (!level.equals("all")) {
-            xSql += " and [level]= ?";
+            xSql += " and [level] like ?";
 
         }
         xSql += " and (content like ?) ";
@@ -231,7 +231,7 @@ public class QuestionDAO extends MyDAO {
                 i++;
             }
             if (!level.equals("all")) {
-                ps.setInt(i, Integer.parseInt(level));
+                ps.setString(i, "%" + level + "%");
                 i++;
             }
             ps.setString(i, "%" + search + "%");

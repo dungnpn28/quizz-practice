@@ -75,6 +75,21 @@ public class Lesson {
         this.status = status;
     }
 
+    public Lesson(int id, int subject_id, int topic_id, String name, int type_id, int order, String video_link, String html_content, int exam_id, boolean status) {
+        this.id = id;
+        this.subject_id = subject_id;
+        this.topic_id = topic_id;
+        this.name = name;
+        this.type_id = type_id;
+        this.order = order;
+        this.video_link = video_link;
+        this.html_content = html_content;
+        this.exam_id = exam_id;
+        this.status = status;
+    }
+    
+    
+
     public String getLesson_type_name() {
         return lesson_type_name;
     }
