@@ -53,7 +53,7 @@ tr:nth-child(even) {
 .button:hover {
     text-decoration: none;
     opacity: 0.7;
-    color: white;   
+    color: white;
 }
 
 .button-div {
@@ -64,4 +64,5 @@ tr:nth-child(even) {
 
 h1 {
     margin-left: 30px;
+
 }

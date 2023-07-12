@@ -17,7 +17,7 @@
     <body>
         <link rel="stylesheet" href="css/Result.css">
         <div>
-            <h1>Exam Result Page</h1>
+            <h1>${examname} - Result</h1>
             <table>
                 <tr>
                     <th>Exam Name</th>
