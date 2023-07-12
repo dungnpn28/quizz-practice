@@ -1,0 +1,64 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 8, 2023, 12:36:50 AM
+    Author     : dai
+*/
+
+.card {
+    border-radius:0;
+    margin:10px auto;
+
+}
+
+.card img{
+    max-height: 200px;
+    width: auto;
+}
+.card-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #E44424;
+    font-size: 20px;
+}
+
+.card-text {
+    margin-top:10px;
+    margin-bottom: 10px;
+    background-color:#FFFFFF;
+    color:#000000;
+}
+
+p{
+    font-size: 15px;
+    text-decoration: underline;
+}
+.font-only h1{
+    font-size:35px;
+    font-weight: bold;
+}
+.font-only h2{
+    color:black;
+    font-weight: bold ;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+.subject-name{
+
+    margin-bottom: 50px;
+
+}
+.subject-topic {
+    border-bottom: 3px solid black; /* Đổi màu và kiểu đường kẻ tùy ý */
+     /* Điều chỉnh khoảng cách giữa đường kẻ và các phần tử dưới */
+}
+.lesson-content-container {
+  max-height: 250px; /* Điều chỉnh chiều cao tối đa cho phần tử */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Số dòng hiển thị */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
