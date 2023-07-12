@@ -320,4 +320,20 @@ public class QuestionDAO extends MyDAO {
         return questionList;
     }
 
+    public List<Integer> getQuestionIdBySubjectId(int subjectId) {
+        String Sql = "select id from question where subject_id = ?";
+        List<Integer> t = new ArrayList<>();
+        int xId;
+        try {
+            PreparedStatement ps = con.prepareStatement(Sql);
+            ps.setInt(1, subjectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                t.add(xId);
+            }
+        } catch (Exception e) {
+        }
+        return t;
+    }
 }

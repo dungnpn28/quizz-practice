@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -38,6 +39,8 @@ public class LoginController extends HttpServlet {
             sessions.setAttribute("user", a);
             UserProfileDAO upDAO = new UserProfileDAO();
             String userName = upDAO.getUserName(a.getId());
+            UserProfile uProfile = upDAO.getUserProfile(a.getId());
+            sessions.setAttribute("uProfile", uProfile);
             sessions.setAttribute("userName", userName);
             sendResponse(resp,"");
         }

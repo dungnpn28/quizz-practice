@@ -59,6 +59,14 @@ public class UserProfile {
         this.phone_number = phone_number;
     }
 
+    public UserProfile(int user_id, String full_name, int gender, String phone_number, String dob) {
+        this.user_id = user_id;
+        this.full_name = full_name;
+        this.gender = gender;
+        this.phone_number = phone_number;
+        this.dob = dob;
+    }
+
     public int getUser_id() {
         return user_id;
     }

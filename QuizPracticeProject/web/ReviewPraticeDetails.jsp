@@ -19,26 +19,22 @@
     <%@include file="components/CusHeader.jsp" %>
     <body>
         <div class="practiceDetailForm">
-            <form action="practiceDetails" method="POST">
+            <form action="reviewpracticeDetails" method="POST">
                 <h2>PRACTICE DETAILS</h2>
-                <c:if test="${errorMessage != null}">
-                    <p>${errorMessage}</p>
-                </c:if>
                 <br>
                 <label class="" for="subject">Subject:</label>
                 <br>
                 <select name="subject" id="subject" class="btn btn-secondary">
-                    <option value="" disabled selected hidden>Subject name</option>
-                    <c:forEach items="${mr}" var="mr">
-                        <option value="${mr.subjectId}">${mr.subject_name}</option>
+                    <c:forEach items="${subjectCategoryList}" var="category">
+                        <option value="${category.id}" disabled>${category.name}</option>
                     </c:forEach>
                 </select>
                 <br>
                 <label for="ques">Number of practicing questions</label>
                 <br>
-                <input name="questions" id="ques" type="text" >
+                <input name="questions" id="ques" type="number" disabled>
                 <br>
-                <input type="submit" value="Practice" class="btn btn-primary">
+                <input type="submit" value="Practice Review" class="btn btn-primary">
             </form>
         </div>
     </body>

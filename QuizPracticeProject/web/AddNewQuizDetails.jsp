@@ -75,8 +75,8 @@
                         <br>                
                         <div class="mb-3">
                             <label for="quizType" class="form-label">Quiz Type</label>
-                            <input type="radio" name="quizType" value="1" />1
-                            <input type="radio" name="quizType" value="0" />0
+                            <input type="radio" name="quizType" value="1" />Simulation
+                            <input type="radio" name="quizType" value="0" />Practice
                         </div>
                         <br>
                         <div class="mb-3">

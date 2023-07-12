@@ -179,4 +179,20 @@ public class Exam {
         this.created = created;
     }
 
+    public boolean isMode() {
+        return mode;
+    }
+
+    public void setMode(boolean mode) {
+        this.mode = mode;
+    }
+
+    public int getDimension_type_id() {
+        return dimension_type_id;
+    }
+
+    public void setDimension_type_id(int dimension_type_id) {
+        this.dimension_type_id = dimension_type_id;
+    }
+
 }

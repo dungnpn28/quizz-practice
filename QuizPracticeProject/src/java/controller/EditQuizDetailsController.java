@@ -83,7 +83,26 @@ public class EditQuizDetailsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int examId = Integer.parseInt(request.getParameter("examId"));
+        String xName = request.getParameter("name");
+        int xSubject = Integer.parseInt(request.getParameter("selectedSubject"));
+        int xLevel = Integer.parseInt(request.getParameter("level"));
+        int xDuration = Integer.parseInt(request.getParameter("duration"));
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+//        String xxDuration = dateFormat.format(xDuration);
+        int hour = xDuration / 60;
+        int minute = xDuration - hour * 60;
+
+        Double xPassrate = Double.parseDouble(request.getParameter("passrate"));
+        boolean xType = Boolean.parseBoolean("mode");
+        String xDescription = request.getParameter("description");
+        int xQuestions = Integer.parseInt(request.getParameter("questions"));
+        int xquesType = Integer.parseInt(request.getParameter("questionType"));
+
+        ExamDAO eDAO = new ExamDAO();
+        eDAO.update(xName, xSubject, xLevel, hour, minute, xPassrate, xQuestions, xDescription, xType, xquesType, examId);
+        response.sendRedirect("cusHome");
+        
     }
 
     /**

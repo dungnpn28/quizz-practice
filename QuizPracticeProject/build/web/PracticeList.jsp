@@ -23,16 +23,12 @@
         <h1>Practice List</h1>
         <div class="button">
             <div class="left-button">
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        All subjects
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <c:forEach items="${subjectList}" var="Subject">
-                            <option value="${Subject.id}">${Subject.name}</option>
-                        </c:forEach>
-                    </div>
-                </div>
+                <select name="subject" id="subject" class="btn btn-secondary">
+                    <option value="" disabled selected hidden>All subjects</option>
+                    <c:forEach items="${mr}" var="mr">
+                        <option value="${mr.subjectId}">${mr.subject_name}</option>
+                    </c:forEach>
+                </select>
             </div>
             <div class="right-buttons">
                 <a href="practiceDetails" class="btn btn-outline-primary">New Practice</a>

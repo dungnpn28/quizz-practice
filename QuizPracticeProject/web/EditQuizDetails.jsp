@@ -35,7 +35,8 @@
             <div id="content">
                 <h1>QUIZ DETAILS</h1>
                 <div class="quiz-detail">
-                    <form class="form-wrapper" id="editQuiz" name="editQuiz" action="editNewQuizDetails" method="post"">
+                    <form class="form-wrapper" id="editQuiz" name="editQuiz" action="editQuizDetails" method="post">
+                        <input name="examId" type="text" value="${lExam.id}" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input name="name" type="text" class="form-control" id="name" value="${lExam.name}">
@@ -51,17 +52,19 @@
                         </div>
                         <br>
                         <div class="mb-3">
-                            <label for="level" class="form-label">Exam level</label>
-                            
-                                <select name="level" >
-                                    <option>${lExam.level}</option>                                  
-                                </select>
-                            
-                        </div>
-                        <br>
-                        <div class="mb-3">
-                            <label for="duration" class="form-label">Duration(minutes)</label>
-                            <input name="duration" type="text" class="form-control" id="duration" value="${lExam.duration}">
+                            <label for="level" class="form-label">Exam level</label>                          
+                            <select name="level" >
+                                <option value="1" <c:if test="${lExam.level == 1}" >selected</c:if>>1</option>
+                                <option value="2" <c:if test="${lExam.level == 2}" >selected</c:if>>2</option>                                  
+                                <option value="3" <c:if test="${lExam.level == 3}" >selected</c:if>>3</option>                                  
+                                <option value="4" <c:if test="${lExam.level == 4}" >selected</c:if>>4</option>                                  
+                                <option value="5" <c:if test="${lExam.level == 5}" >selected</c:if>>5</option>                                  
+                                </select>                           
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                                <label for="duration" class="form-label">Duration(minutes)</label>
+                                <input name="duration" type="text" class="form-control" id="duration" value="${lExam.duration}">
                         </div>
                         <br>
                         <div class="mb-3">
@@ -71,8 +74,8 @@
                         <br>                
                         <div class="mb-3">
                             <label for="quizType" class="form-label">Quiz Type</label>
-                            <input type="radio" name="quizType" value="1" />1
-                            <input type="radio" name="quizType" value="0" />0
+                            <input type="radio" name="quizType" value="1" <c:if test="${lExam.mode == true}">checked</c:if> >Simulation
+                            <input type="radio" name="quizType" value="0" <c:if test="${lExam.mode == false}">checked</c:if> >Practice
                         </div>
                         <br>
                         <div class="mb-3">
@@ -86,9 +89,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="questype" class="form-label">Question type</label>
-                                <select name="questionType">
+                            <select name="questionType">
                                 <c:forEach items="${lDimension}" var="type">
-                                    <option value="${type.id}">${type.name}</option>
+                                    <option value="${type.id}" <c:if test="${type.id == lExam.dimension_type_id}">selected</c:if>>${type.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

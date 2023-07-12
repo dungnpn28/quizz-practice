@@ -463,8 +463,9 @@ public class ExamDAO extends MyDAO {
                 xDescription = rs.getString("description");
                 xCreated = rs.getDate("created");
                 xMode = rs.getInt("mode");
+                boolean xxMode = (xMode == 1) ? true : false;
                 xDimensionType_id = rs.getInt("dimension_type_id");
-                x = new Exam(examId, xName, xSubject_id, xLevel, xxDuration, xPass_rate, xNumQue, xDescription, true, xDimensionType_id);
+                x = new Exam(examId, xName, xSubject_id, xLevel, xxDuration, xPass_rate, xNumQue, xDescription, xxMode, xDimensionType_id);
                 return x;
             }
         } catch (Exception e) {
@@ -473,6 +474,11 @@ public class ExamDAO extends MyDAO {
         return null;
     }
 
+//    public static void main(String[] args) {
+//        ExamDAO eDAO = new ExamDAO();
+//        Exam lExam = eDAO.getExamById(5);
+//        System.out.println(lExam.isMode());
+//    }
     public void update(String name, int subjectId, int level, int hour, int minute, Double pass_rate, int number_of_question, String description, boolean mode, int dimension_type_id, int examId) {
         xSql = "UPDATE [dbo].[exam]\n"
                 + "   SET [name] = ?\n"
@@ -504,7 +510,7 @@ public class ExamDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
-    
+
     public void updateSubject(Subject x) {
         xSql = "UPDATE [dbo].[Subject]\n"
                 + "   SET [name] = ?\n"
@@ -519,7 +525,7 @@ public class ExamDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
-    
+
     public void updateDimensionType(Dimension_Type x) {
         xSql = "UPDATE [dbo].[dimension_type]\n"
                 + "   SET [name] = ?\n"
@@ -535,9 +541,43 @@ public class ExamDAO extends MyDAO {
         }
     }
 
-//    public static void main(String[] args) {
-//        ExamDAO eDAO = new ExamDAO();
-//        Exam lexam = eDAO.getExamById(1);
-//        System.out.println(lexam.getName());
-//    }
+    public void insertPracticeDetail(int subject_id, int number_of_question) {
+        xSql = "INSERT INTO [dbo].[exam]([name],[subject_id],[level],[duration],[pass_rate],[number_of_question],[description],[created],[mode],[dimension_type_id])\n"
+                + "     VALUES (?,?,?,?,?,?,?,GETDATE(),?,?)";
+        try {
+            ps = con.prepareStatement(xSql);
+
+            ps.setString(1, "practice " + "GETDATE()");
+            ps.setInt(2, subject_id);
+            ps.setInt(3, 1);
+            Time duration = new Time(0, number_of_question * 5, 0);
+            ps.setTime(4, duration);
+            ps.setDouble(5, 1);
+            ps.setInt(6, number_of_question);
+            ps.setString(7, "this is new practice for practice GETDATE()");
+            ps.setBoolean(8, false);
+            ps.setInt(9, 1);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("insert exam: " + e.getMessage());
+        }
+    }
+
+    public int getMaxIdFromExam() {
+        xSql = "select MAX(id) as id from exam ";
+        int xId = 0;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                xId = rs.getInt("id");
+            }
+            ps.close();
+
+        }catch (Exception e) {
+            System.out.println("get max id: " + e.getMessage());
+        }
+        return xId;
+    }
 }

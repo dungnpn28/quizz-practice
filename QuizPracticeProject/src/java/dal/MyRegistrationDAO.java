@@ -285,4 +285,29 @@ public class MyRegistrationDAO extends MyDAO {
         return 0;
 
     }
+    
+    public List<MyRegistration> getAllRegistration(int user_id) {
+        List<MyRegistration> mr = new ArrayList<>();
+        String Sql = "select * from registration where user_id = ?";
+        try {
+            ps = con.prepareStatement(Sql);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int subjectId = rs.getInt("subject_id");
+                int pricePackgeId = rs.getInt("price_package_id");
+                int userId = rs.getInt("user_id");
+                Date created = rs.getDate("created");
+                int categoryId = rs.getInt("category_id"); 
+                String subjectName = rs.getString("subject_name");
+                int status = rs.getInt("status");
+                mr.add(new MyRegistration(id, subjectId, pricePackgeId, userId, created, categoryId, subjectName, status));
+            }
+        } catch (Exception e) {
+                        System.out.println("getAllRegistration: " + e.getMessage());
+
+        }
+        return mr;
+    }
 }
