@@ -126,7 +126,7 @@
                                             <a class="dialog-btn" href="#my-dialog2-${mrList.subjectId}">Edit</a>
                                             <a class="dialog-btn" href="myRegistration?reigsId=${mrList.id}&checkCancel=1" onclick ="return confirm('Are you sure you want to cancel this subject?')">Cancel</a>
                                         </c:if>
-                                        <a class="dialog-btn" href="subjectDetails?id=${mrList.subjectId}">View detail</a>
+                                        <a class="dialog-btn" href="lessondetail?id=${mrList.subjectId}">Starting learning</a>
 
                                     </td>
 
