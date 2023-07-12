@@ -9,10 +9,8 @@
 <%@page import= "model.*"%>
 <%@page import= "dal.*"%>
 <%@page import= "java.util.*"%>
-<%@page import= "java.util.ArrayList"%>
-<%@page import= "java.util.List"%>
-<%@page import= "java.util.Date"%>
-<%@page import= "java.text.SimpleDateFormat"%>
+<%@page import= "java.util.ArrayList" %>
+<%@page import= "java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +29,7 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <h1 style="font-size:35px">Registration List</h1>
+                <h1 style="font-size:35px">QUIZZES LIST</h1>
                 <div class="topnav">
                     <div class="left-container">
                         <div class="search-bar-container">
@@ -45,21 +43,21 @@
                         <div class="filter-container">
                             <select name="category" id="filter1" onchange="applyFilters()">
                                 <option value= "all" >All</option>
-                                <c:forEach var="categoryList" items="${categoryList}">
-                                    <option value="${categoryList.getId()}" ${categoryList.getId().toString() eq category ? "selected" : ""} >${categoryList.getName()}</option>
+                                <c:forEach var="lessonTypeList" items="${lessonTypeList}">
+                                    <option value="${lessonTypeList.getId()}" ${lessonTypeList.getId().toString() eq category ? "selected" : ""} >${lessonTypeList.getName()}</option>
                                 </c:forEach>
                             </select>
                             <select name="status" id="filter2" onchange="applyFilters()">
                                 <option value="all" ${status eq "all" ? "selected" : ""}>All</option>
-                                <option value="1" ${status eq "1" ? "selected" : ""}>Paid</option>
-                                <option value="0" ${status eq "0" ? "selected" : ""}>Submitted</option>
+                                <option value="1" ${status eq "1" ? "selected" : ""}>Active</option>
+                                <option value="0" ${status eq "0" ? "selected" : ""}>Deactive</option>
 
                             </select>
                             <button class="clear-filter" id="clear-filter" onclick="clearFilters()">Clear</button>
                         </div>
                     </div>
                     <div class="right-container">
-                        <a href="addnewregistration"><button id="add-button">Add New</button></a>
+                        <a href="addNewLessonDetails?subjectId=${subjectId}"><button id="add-button">Add New</button></a>
                     </div>
                 </div>
                 <div class="header_fixed">
@@ -67,50 +65,44 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Email</th>
-                                <th>Registration Time</th>
-                                <th>Subject</th>
-                                <th>Package</th>
-                                <th>Total cost</th>
+                                <th>Lesson</th>
+                                <th>Order</th>
+                                <th>Type</th>
                                 <th>Status</th>
-                                <th>Valid from</th>
-                                <th>Valid to</th>
-                                <!--<th>Last update by</th>-->
+
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${mrList}" var="mrList">
+                            <c:forEach items="${lessonList}" var="lesson">
                                 <tr>
-                                    <td>${mrList.getId()}</td>
+                                    <td>${lesson.getId()}</td>
+                                    <td>${lesson.getName()}</td>
+                                    <td>${lesson.getOrder()}</td>
 
-                                    <c:forEach items="${userList}" var="userList">
-                                        <c:if test="${mrList.userId == userList.id}">
-                                            <td>${userList.account}</td>
+                                    <c:forEach items="${lessonTypeList}" var="lessonType">
+                                        <c:if test="${lesson.type_id == lessonType.id}">
+                                            <td>${lessonType.name}</td>
                                         </c:if>
                                     </c:forEach>
 
-                                    <td>${mrList.time}</td>
-                                    <td>${mrList.subject_name}</td>
-
-                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
-                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
-                                            <td>${pricePackageList.name}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
-                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
-                                            <td>${pricePackageList.sale}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                    <td>${mrList.status == 1 ?'paid':'submitted'}</td>
-
-                                    <td>${mrList.created}</td>
-                                    <td>${mrList.expired}</td>
+                                    <c:if test="${lesson.isStatus() == true}">
+                                        <td><div class="active-button">Active</div></td>
+                                    </c:if>
+                                    <c:if test="${lesson.isStatus() == false}">
+                                        <td><div class="deactive-button">Deactive</div></td>
+                                    </c:if>
                                     <td>
-                                        <a class="dialog-btn" href="#">View detail</a>
-                                    </td>
+                                        <c:if test="${lesson.status}">
+                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusDeactive=1&lessonId=${lesson.getId()}">Deactive</a>
+                                        </c:if>
+                                        <c:if test="${!lesson.status}">
+                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusActive=1&lessonId=${lesson.getId()}">Active</a>
+                                        </c:if>
 
+                                        <a href="editLessonDetails?lessonId=${lesson.getId()}&subjectId=${subjectId}">Edit</a>
+                                        <a href="#">View detail</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -119,19 +111,19 @@
                     </table>
                     <div class="pagination">
                         <c:forEach begin="1" end="${endP}" var="i">
-                            <a class="${tag == i?"active":""}" href="registrationList?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
+                            <a class="${tag == i?"active":""}" href="subjectlistae?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
                         </c:forEach>
                     </div>
 
                 </div>
-
+                <a href="subjectlistae" class="btn btn-primary">Back to Subject list</a>
 
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
-        <script src="js/RegistrationList.js" type="text/javascript"></script>      
+        <script src="js/SubjectLesson.js" type="text/javascript"></script>      
         <script src="js/navBar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
