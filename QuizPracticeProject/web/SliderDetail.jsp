@@ -51,7 +51,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <c:if test="${not empty notificationMessage}">
-                                    <div id="notification">${notificationMessage}</div>
+                                    <div id="notification"><h2 style="color: green">${notificationMessage}</h2></div>
                                 </c:if>
 
                                 <form action="sliderList" method="post">

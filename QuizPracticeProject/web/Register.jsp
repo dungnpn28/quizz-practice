@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="css/Register.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
-        
+
     </head>
     <body>
         <div id="popUpModal2" class="modal_popUp2">
@@ -100,7 +100,7 @@
                                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
                                         Register</button>
                                 </div>
-                               
+
 
 
                                 <div class="d-flex align-items-center justify-content-center pb-4">
@@ -124,12 +124,12 @@
             </div>
         </div>
         <script>
-                                        var closeBtn2 = document.querySelector('.close-popup2');
-                                        var popUpModal2 = document.getElementById('popUpModal2');
+            var closeBtn2 = document.querySelector('.close-popup2');
+            var popUpModal2 = document.getElementById('popUpModal2');
 
-                                        closeBtn2.addEventListener('click', function () {
-                                            popUpModal2.style.display = 'none';
-                                        });
+            closeBtn2.addEventListener('click', function () {
+                popUpModal2.style.display = 'none';
+            });
         </script>
         <script src="js/PopUp.js" type="text/javascript"></script>
     </body>

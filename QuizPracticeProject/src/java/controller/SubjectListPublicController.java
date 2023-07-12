@@ -4,8 +4,11 @@
  */
 package controller;
 
+import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
+import dal.UserDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,9 +18,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import model.Price_Package;
 import model.Subject;
 import model.Subject_Category;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -37,23 +42,11 @@ public class SubjectListPublicController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
         HttpSession sessions = request.getSession();
+        if (sessions.getAttribute("openNotification") != null) {
+            request.setAttribute("openNotification", "1");
+            sessions.removeAttribute("openNotification");
+        }
         int PAGE_SIZE = 3;
         int page = 1;
         String pageStr = request.getParameter("page");
@@ -89,20 +82,20 @@ public class SubjectListPublicController extends HttpServlet {
             selectedCategoryId = (int) sessions.getAttribute("selectedCategoryId");
         }
 
-        if(sessions.getAttribute("selectedCategoryId") != null && sessions.getAttribute("checkFeatured") == null && 
-                sessions.getAttribute("checkRegisted") == null && sessions.getAttribute("checkNotRegisted") == null && 
-                sessions.getAttribute("sortValue") == null && sessions.getAttribute("keywordInSubjectList") == null) {
+        if (sessions.getAttribute("selectedCategoryId") != null && sessions.getAttribute("checkFeatured") == null
+                && sessions.getAttribute("checkRegisted") == null && sessions.getAttribute("checkNotRegisted") == null
+                && sessions.getAttribute("sortValue") == null && sessions.getAttribute("keywordInSubjectList") == null) {
             selectedCategoryId = Integer.parseInt(sessions.getAttribute("selectedCategoryId").toString());
             subjectList = sDAO.getSubjectsByCategoryAndPaging(selectedCategoryId, page, PAGE_SIZE);
-                totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
-                totalPage = totalSubject / PAGE_SIZE; //1
-                if (totalSubject % PAGE_SIZE != 0) {
-                    totalPage += 1;
-                }
-                String categoryName = scDAO.getCategoryName(selectedCategoryId);
-                request.setAttribute("categoryName", categoryName);
+            totalSubject = sDAO.getTotalSubjectByCategory(selectedCategoryId);
+            totalPage = totalSubject / PAGE_SIZE; //1
+            if (totalSubject % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            String categoryName = scDAO.getCategoryName(selectedCategoryId);
+            request.setAttribute("categoryName", categoryName);
         }
-        
+
         List<Subject> featuredSubjectList = sDAO.getFeaturedSubjectsWithPaging(page, PAGE_SIZE);
         request.setAttribute("featuredSubjectList", featuredSubjectList);
 
@@ -277,8 +270,8 @@ public class SubjectListPublicController extends HttpServlet {
                 }
             }
         }
-        
-        if (request.getParameter("selectedCategory") != null ) {
+
+        if (request.getParameter("selectedCategory") != null) {
             selectedCategoryId = Integer.parseInt(request.getParameter("selectedCategory"));
             sessions.setAttribute("selectedCategoryId", selectedCategoryId);
             sessions.removeAttribute("sortValue");
@@ -331,6 +324,22 @@ public class SubjectListPublicController extends HttpServlet {
                 totalPage += 1;
             }
         }
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getAllPricePackage();
+        request.setAttribute("pricePackageList", pricePackageList);
+
+        if (sessions.getAttribute("user") != null) {
+            User a = (User) sessions.getAttribute("user");
+            UserProfileDAO upDAO = new UserProfileDAO();
+            UserProfile userProfile = upDAO.getUserProfile(a.getId());
+            request.setAttribute("userProfile", userProfile);
+        }
+        UserDAO uDAO = new UserDAO();
+        List<String> userList = new ArrayList<>();
+        userList = uDAO.getAllUser();
+
+        request.setAttribute("userList", userList);
 
         request.setAttribute("key", keyword);
         request.setAttribute("subjectCategoryList", subjectCategoryList);
@@ -338,6 +347,22 @@ public class SubjectListPublicController extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("subjectList", subjectList);
         request.getRequestDispatcher("SubjectListPublic.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+
     }
 
     /**
@@ -351,8 +376,16 @@ public class SubjectListPublicController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
+        String id = request.getParameter("id");
+        if (id != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("subjectId", id);
+            // Hoặc lưu giá trị id vào session theo cách khác
+            // ...
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
     }
 
     /**

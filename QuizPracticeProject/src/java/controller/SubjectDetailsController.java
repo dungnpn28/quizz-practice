@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.SubjectDetailsDAO;
 import dal.Subject_CategoryDAO;
@@ -54,9 +55,10 @@ public class SubjectDetailsController extends HttpServlet {
         SubjectDetailsDAO sdDAO = new SubjectDetailsDAO();
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         SubjectDAO sDAO = new SubjectDAO();
+        PriceDAO pDAO = new PriceDAO();
 
         List<Price_Package> pricePackageList = new ArrayList<>();
-        pricePackageList = sdDAO.getPrice_Package();
+        pricePackageList = pDAO.getPrice_Package();
         request.setAttribute("pricePackageList", pricePackageList);
 
         List<Subject_Category> subjectCategoryList = new ArrayList<>();

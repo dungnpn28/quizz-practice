@@ -5,6 +5,7 @@ import dal.PriceDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
 import dal.UserDAO;
+import dal.UserProfileDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +18,9 @@ import java.util.List;
 import model.MyRegistration;
 import model.Price_Package;
 import model.Subject;
+import model.Subject_Category;
 import model.User;
+import model.UserProfile;
 
 /**
  *
@@ -25,13 +28,16 @@ import model.User;
  */
 public class MyRegistrationController extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession sessions = request.getSession();
+        int PAGE_SIZE = 3;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
         User user = (User) sessions.getAttribute("user");
         SubjectDAO sDAO = new SubjectDAO();
 //        PriceDAO pDAO = new PriceDAO();
@@ -39,53 +45,62 @@ public class MyRegistrationController extends HttpServlet {
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         MyRegistrationDAO mrDAO = new MyRegistrationDAO();
         List<Subject> subjectList = new ArrayList<>();
-        List<MyRegistration> mrList = mrDAO.getMyRegistration(user.getId());
+//        List<MyRegistration> mrList = mrDAO.getMyRegistration(user.getId(), page, PAGE_SIZE);
         subjectList = sDAO.getSubjects();
+        List<Subject_Category> categoryList = new ArrayList<>();
+        categoryList = scDAO.getSubjectCategory();
+
+        String category = request.getParameter("category");
+
+        String search = request.getParameter("search");
+        if (category == null || category.isEmpty()) {
+            category = "all";
+        }
+
+        if (search == null || search.isEmpty()) {
+            search = "";
+        }
+
+        String index = request.getParameter("index");
+        if (index == null) {
+            index = "1";
+        }
+        int count = mrDAO.getTotalRegistrationFilter(category, search, user.getId());
+        int endPage = count / 5;
+        if (count % 5 != 0) {
+            endPage++;
+        }
+        List<MyRegistration> mrList = mrDAO.getMyRegistrationWithPaging(Integer.parseInt(index), category, search, user.getId());
+        request.setAttribute("categoryList", categoryList);
+        User a = (User) sessions.getAttribute("user");
+        UserProfileDAO upDAO = new UserProfileDAO();
+        UserProfile userProfile = upDAO.getUserProfile(a.getId());
+        request.setAttribute("userProfile", userProfile);
+
+        PriceDAO pDAO = new PriceDAO();
+        List<Price_Package> pricePackageList = new ArrayList<>();
+        pricePackageList = pDAO.getAllPricePackage();
+        request.setAttribute("pricePackageList", pricePackageList);
+
+        request.setAttribute("endP", endPage);
+        request.setAttribute("tag", Integer.parseInt(index));
+
         request.setAttribute("pL", pL);
         request.setAttribute("mrList", mrList);
         request.setAttribute("subjectList", subjectList);
 
-//        int totalSubject = sDAO.getTotalSubject();
-//        int PAGE_SIZE = 3;
-//        int page = 1;
-//
-//        int totalPage = totalSubject / PAGE_SIZE; //1
-//        User user = (User) sessions.getAttribute("user");
-//        int userId = user.getId();
-//        List<Subject> subjectListByUserId = sDAO.getSubjectsByUserID(userId);
-//        request.setAttribute("subjectListByUserId", subjectListByUserId);
-//        int selectedCategoryId = 0;
-//
-//        //display registered subject
-//        String checkRegisted = request.getParameter("checkRegisted");
-//        if (checkRegisted != null && checkRegisted.equals("true")) {
-//            sessions.removeAttribute("sortValue");
-//            sessions.removeAttribute("checkFeatured");
-//            sessions.removeAttribute("checkNotRegisted");
-//            sessions.removeAttribute("keywordInSubjectList");
-//            sessions.setAttribute("checkRegisted", checkRegisted);
-//        }
-//        if (sessions.getAttribute("checkRegisted") != null) {
-//            subjectList = sDAO.getSubjectsByUserIDWithPaging(userId, page, PAGE_SIZE);
-//            totalSubject = sDAO.getTotalRegistedSubject(userId);
-//            totalPage = totalSubject / PAGE_SIZE; //1
-//            if (totalSubject % PAGE_SIZE != 0) {
-//                totalPage += 1;
-//            }
-//            if (sessions.getAttribute("selectedCategoryId") != null) {
-//                subjectList = sDAO.getSubjectsByCategoryAndUserIDWithPaging(userId, selectedCategoryId, page, PAGE_SIZE);
-//                totalSubject = sDAO.getTotalRegistedSubjectWithCategory(userId, selectedCategoryId);
-//                totalPage = totalSubject / PAGE_SIZE; //1
-//                if (totalSubject % PAGE_SIZE != 0) {
-//                    totalPage += 1;
-//                }
-//                String categoryName = scDAO.getCategoryName(selectedCategoryId);
-//                request.setAttribute("categoryName", categoryName);
-//                request.setAttribute("subjectList", subjectList);
-//
-//            }
-//        }
         request.getRequestDispatcher("MyRegistration.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

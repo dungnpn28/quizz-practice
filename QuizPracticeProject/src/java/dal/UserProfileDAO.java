@@ -176,7 +176,7 @@ public class UserProfileDAO extends MyDAO {
         try {
             String strSelect = "select [user_id],avatar,full_name,gender,phone_number,dob,created,modified \n"
                     + "                    FROM user_profile LEFT JOIN [user] ON [user].id = [user_profile].[user_id] where full_name like ? or account like ? or phone_number like ? \n"
-                    + "                    order by [user_id]\n"
+                    + "                    order by modified desc \n"
                     + "                    offset ? rows fetch next 5 rows only";
             ps = con.prepareStatement(strSelect);
             ps.setString(1, "%" + search + "%");
@@ -225,7 +225,7 @@ public class UserProfileDAO extends MyDAO {
 
             }
             strSelect += " and (full_name like ? or account like ? or phone_number like ?) ";
-            strSelect += " ORDER BY [user_id] OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY";
+            strSelect += " ORDER BY modified desc OFFSET ? ROWS FETCH NEXT 5 ROWS ONLY";
             ps = con.prepareStatement(strSelect);
             int i = 1;
             if (!role.equals("all")) {

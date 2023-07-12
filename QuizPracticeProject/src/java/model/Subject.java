@@ -20,22 +20,22 @@ public class Subject {
     private int author_id;
     private Date modified;
     private boolean featured;
-    private int user_id;
+ 
     private double min_price;
     private double min_sale;
     public Subject() {
     }
+
+  
     
-    
-    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
+    public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int author_id) {
         this.id = id;
         this.illustration = illustration;
         this.name = name;
         this.category_id = category_id;
         this.status = status;
         this.description = description;
-        this.user_id=user_id;
-      
+        this.author_id=author_id;     
         this.featured = featured;
     }
 

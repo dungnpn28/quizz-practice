@@ -8,7 +8,7 @@
 
 body {
     width: 100%;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
     background-color: #adacac;
@@ -104,62 +104,7 @@ activation2{
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
-/*.topnav {
-    overflow: hidden;
-    background-color: #e9e9e9;
-}
 
-.topnav a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.topnav a.active {
-    background-color: #2196F3;
-    color: white;
-}
-
-.topnav .search-container {
-    float: left;
-}
-.topnav .search-container3{
-
-    float: right;
-}
-
-
-.topnav input[type=text] {
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
-    margin-bottom: 8px;
-}
-
-.topnav .search-container button {
-    float: right;
-    padding: 6px 10px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 8px;
-}
-
-.topnav .search-container button:hover {
-    background: #ccc;
-}*/
 .a1{
     margin-top: 13px;
 
@@ -399,7 +344,7 @@ table a:hover{
 
 .buttons button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #0d6efd;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -611,7 +556,7 @@ td button {
 
 #add-button {
   padding: 10px 16px;
-  background-color: #4CAF50;
+  background-color:#0578A4;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -627,7 +572,7 @@ td button {
 }
 .clear-filter {
   padding: 10px 16px;
-  background-color: #4CAF50;
+  background-color: #0578A4;
   color: #fff;
   border: none;
   border-radius: 4px;

@@ -79,7 +79,7 @@
                                             <c:forEach items="${listBlog}" var="Blog" varStatus="status">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
-                                                        <c:if test="${sessionScope.user.getRole_id() == 2}">
+                                                        <c:if test="${sessionScope.user.getRole_id() == 2 || sessionScope.user.getRole_id() == 5}">
                                                             <div class="card" style="height:200px" onclick="window.location.href = 'blogDetail?id=${Blog.getId()}'">
                                                                 <div class="row g-0">
                                                                     <div class="col-md-4">
@@ -92,9 +92,14 @@
                                                                             <h5 class="card-title">${Blog.getTitle()}</h5>
                                                                             <c:if test="${Blog.flag eq '1'}">
                                                                                 <img src="img/icons8-flame.gif" alt="Animated GIF">
-                                                                                <h3 style="display: inline;">Featured</h3>
+                                                                                <h4 style="display: inline;">Featured</h4>
                                                                             </c:if> 
-                                                                            <i class="fas fa-eye"></i>${Blog.view}
+                                                                            <i class="fas fa-eye">${Blog.view}</i> &emsp;&emsp;&emsp; Last updated date:${Blog.modified} 
+                                                                            <c:forEach items="${listCategory}" var="listCategory">
+                                                                                <c:if test="${Blog.category_id == listCategory.id}">
+                                                                                    <h4 class="card-date">Category: ${listCategory.name}</h4>
+                                                                                </c:if>
+                                                                            </c:forEach>
                                                                             <div class="card-date">${Blog.getBrief_info()}</div>
                                                                             <p><p>
                                                                             <h4 class="card-date">Status: ${Blog.status?"Active":"Inactive"}</h4>
@@ -119,7 +124,12 @@
                                                                                 <img src="img/icons8-flame.gif" alt="Animated GIF">
                                                                                 <h4 style="display: inline;">Featured</h4>
                                                                             </c:if> 
-                                                                            <i class="fas fa-eye"></i>${Blog.view}
+                                                                            <i class="fas fa-eye">${Blog.view}</i> &emsp;&emsp;&emsp; Last updated date:${Blog.modified} 
+                                                                            <c:forEach items="${listCategory}" var="listCategory">
+                                                                                <c:if test="${Blog.category_id == listCategory.id}">
+                                                                                    <h4 class="card-date">Category: ${listCategory.name}</h4>
+                                                                                </c:if>
+                                                                            </c:forEach>
                                                                             <div class="card-date" style="font-size: 13px"> ${Blog.getBrief_info()}</div>
 
                                                                         </div>
@@ -132,24 +142,13 @@
                                             </c:forEach>
                                         </div>
                                     </div>
-                                    <ul class="pagination" style="display: flex; justify-content: center;">
-                                        <c:if test="${page > 1}">
-                                            <li><a href="subjectListPublic?page=${page-1}">Previous</a></li>
-                                            </c:if>
-                                            <c:forEach begin="1" end="${totalPage}" var="i">
-                                            <li><a href="subjectListPublic?page=${i}">${i}</a></li>
-                                            </c:forEach>
-                                            <c:if test="${page < totalPage}">
-                                            <li><a href="subjectListPublic?page=${page+1}">Next</a></li>
-                                            </c:if>
-                                    </ul>
+
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="sticky-table-container">
                                 <div class="row d-flex justify-content-center">
-
                                     <div class="searchBox">
                                         <form action="searchpost">
                                             <div class="input-group">
@@ -175,19 +174,121 @@
                                                 <c:forEach items="${listCategory}" var="category">
                                                     <option value="${category.id}">${category.name}</option>
                                                 </c:forEach>
+                                                <option></option>
                                             </select>
+
                                             <button type="submit">Confirm</button>
+
+                                        </form>
+                                        <form action="BlogListController" method="get">
+                                            <input type="hidden" name="featured" value="1">
+                                            <button type="submit">Featured Subject</button>
                                         </form>
 
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Latest blog</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="blog" items="${updatedBlogList}" begin="0" end="2">
+                                                    <c:if test="${(sessionScope.user.getRole_id() == 1 || empty sessionScope.user) && blog.status}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye"></i>${blog.view}
+
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.getRole_id() == 2 || sessionScope.user.getRole_id() == 5}">                                                 
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal; color: orange">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye"></i>${blog.view}
+
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>
+                                            <td style="border: none"> <a href="BlogListController?updatedCheck=1">View all</a></td>
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Most view blog</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="blog" items="${mostViewBlogList}" begin="0" end="2">
+                                                    <c:if test="${(sessionScope.user.getRole_id() == 1 || empty sessionScope.user) && blog.status}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye eye-icon">${blog.view}</i>
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.getRole_id() == 2 || sessionScope.user.getRole_id() == 5}">
+                                                        <tr onclick="window.location.href = 'blogDetail?id=${blog.getId()}'">
+                                                            <td>
+                                                                <div class="table-image">
+                                                                    <img src="uploads/${blog.thumbnail}" alt="Image">
+                                                                </div>
+                                                            </td>
+                                                            <td class="card-title" style="font-size: 10px; text-align: left">${blog.title}
+                                                                <br/>
+                                                                <div class="card-date" style="font-size: 10px; font-weight: normal">Updated date: ${blog.modified}</div>
+                                                                <i class="fas fa-eye eye-icon">${blog.view}</i>
+
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>
+                                            <td style="border: none"> <a href="BlogListController?viewCheck=1">View all</a></td>
+
+                                            </tbody>
+                                        </table>
+
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <%@include file = "Login.jsp"%> 
+                        <ul class="pagination" style="display: flex; justify-content: center;">
+                            <c:if test="${page > 1}">
+                                <li><a href="BlogListController?page=${page-1}" >Previous</a></li>
+                                </c:if>
+                                <c:forEach begin="1" end="${totalPage}" var="i">
+                                <li><a href="BlogListController?page=${i}">${i}</a></li>
+                                </c:forEach>
+                                <c:if test="${page < totalPage}">
+                                <li><a href="BlogListController?page=${page+1}">Next</a></li>
+                                </c:if>
+                        </ul>
 
+                    </div>
+
+                    <%@include file = "Login.jsp"%> 
                 </div>
             </div>
         </div>

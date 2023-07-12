@@ -53,9 +53,23 @@ public class BlogListController extends HttpServlet {
         List<Blog_Category> listCategory = new Blog_CategoryDAO().getCategory();
         req.setAttribute("listCategory", listCategory);
 
+        int PAGE_SIZE = 5;
+        int page = 1;
+        String pageStr = req.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
         BlogDAO bDAO = new BlogDAO();
-        List<Blog> listBlog = bDAO.getBlogList();
+        List<Blog> listBlog = bDAO.getBlogList(page, PAGE_SIZE);
         req.setAttribute("listBlog", listBlog);
+
+        int totalBlog = bDAO.getTotalBlog();
+        int totalPage = totalBlog / PAGE_SIZE; //1
+        if (totalBlog % PAGE_SIZE != 0) {
+            totalPage += 1;
+        }
+        req.setAttribute("page", page); //de phan trang
+        req.setAttribute("totalPage", totalPage); //de phan trang
 
         int author_id = 0;
         if (req.getParameter("authorId") != null) {
@@ -72,7 +86,7 @@ public class BlogListController extends HttpServlet {
         if (req.getParameter("selectedCategory") != null) {
             selectedCategoryId = Integer.parseInt(req.getParameter("selectedCategory"));
             if (selectedCategoryId == 0) {
-                listBlog = bDAO.getBlogList();
+                listBlog = bDAO.getBlogList(page, PAGE_SIZE);
             } else {
                 listBlog = bDAO.getBlogListByCategory(selectedCategoryId);
                 String categoryName = bDAO.getCategoryName(selectedCategoryId);
@@ -89,6 +103,24 @@ public class BlogListController extends HttpServlet {
             listBlog = bDAO.getBlogListOrderByView();
             req.setAttribute("listBlog", listBlog);
         }
+        List<Blog> updatedBlogList = bDAO.getBlogListOrderByUpdated();
+        List<Blog> mostViewBlogList = bDAO.getBlogListOrderByView();
+
+        req.setAttribute("updatedBlogList", updatedBlogList);
+        req.setAttribute("mostViewBlogList", mostViewBlogList);
+        if (req.getParameter("featured") != null) {
+            listBlog = bDAO.getFeaturedBlogList(page, PAGE_SIZE);
+            req.setAttribute("listBlog", listBlog);
+
+            totalBlog = bDAO.getTotalFeaturedBlog();
+            totalPage = totalBlog / PAGE_SIZE; //1
+            if (totalBlog % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            req.setAttribute("page", page); //de phan trang
+            req.setAttribute("totalPage", totalPage); //de phan trang
+        }
+
         req.getRequestDispatcher("BlogList.jsp").forward(req, resp);
     }
 

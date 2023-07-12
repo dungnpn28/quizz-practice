@@ -28,24 +28,16 @@
         <title>QuizPractice</title>
 
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <!--<link href="css/Style.css" rel="stylesheet" type="text/css"/>-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </head>
     <body>
-        <%
-        if (session.getAttribute("user") != null) {
-        // Nếu có user, bao gồm trang cusheader.jsp
-            session.getAttribute("up");  
-        %>
-        <% } %>
-
+      
+        <%@include file="components/CusHeader.jsp" %>
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
-                <%@include file="components/CusHeader.jsp"%>
                 <h1 style="font-size:35px">USER LIST</h1>
                 <div class="topnav">
 
@@ -253,13 +245,15 @@
                                                 <td>THIS IS ME</td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a></td>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <td>
+                                                    <a class="dialog-btn" href="#my-dialog2-${userprofile.getUser().getId()}"><img src="img/search.jpg"></a>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
-                                    <!--                            <a href="#" class="overlay-close"></a>-->
+                                    <!-- <a href="#" class="overlay-close"></a>-->
                                     <div class="dialog-body">
                                         <a class="dialog-close-btn" href="">&times;</a>
                                         <div class="container">
@@ -359,7 +353,6 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 
     </body>

@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,9 @@ import model.Lesson_Type;
 import model.Lesson_Topic;
 import model.Subject;
 import model.Subject_Category;
+import model.User;
 import model.UserProfile;
 
-/**
- *
- * @author Dell
- */
 public class SubjectListAEController extends HttpServlet {
 
     @Override
@@ -35,6 +33,8 @@ public class SubjectListAEController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
         String category = req.getParameter("category");
         String status = req.getParameter("status");
         String search = req.getParameter("search");
@@ -57,7 +57,7 @@ public class SubjectListAEController extends HttpServlet {
         if (index == null) {
             index = "1";
         }
-         int count = s.getTotalSubjectFilter(category,status,search);//15
+         int count = s.getTotalSubjectFilter(category,status,search,user.getId(),user.getRole_id());//15
         int endPage = count / 5;
         if (count % 5 != 0) {
             endPage++;
@@ -65,7 +65,7 @@ public class SubjectListAEController extends HttpServlet {
         
         List<UserProfile> expertList = up.getListUserProfileByRole(4);
         List<Subject_Category> subjectCategoryList = sc.getSubjectCategory();
-        List<Subject> subjectList = s.getSubjectsWithPaging(Integer.parseInt(index),category,status,search);
+        List<Subject> subjectList = s.getSubjectsWithPaging(Integer.parseInt(index),category,status,search,user.getId(),user.getRole_id());
         List<Lesson> lessonList = l.getLesson();
         
         req.setAttribute("category", category);

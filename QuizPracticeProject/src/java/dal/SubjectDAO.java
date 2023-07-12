@@ -14,9 +14,12 @@ import model.Subject;
  * @author LENOVO
  */
 public class SubjectDAO extends MyDAO {
-      public List<Subject> getSubjectsWithPaging(int index,String category,String status,String search) {
+
+    public List<Subject> getSubjectsWithPaging(int index, String category, String status, String search, int id, int role_id) {
         List<Subject> t = new ArrayList<>();
-         xSql = "select id,illustration,name,category_id,[status],[description],author_id,[modified],[featured] from subject WHERE 1=1";
+        if (role_id == 5) {
+
+            xSql = "select id,illustration,name,category_id,[status],[description],author_id,[modified],[featured] from subject WHERE 1=1";
 
             if (!category.equals("all")) {
                 xSql += " and [category_id]= ?";
@@ -24,59 +27,125 @@ public class SubjectDAO extends MyDAO {
             if (!status.equals("all")) {
                 xSql += " and [status]= ?";
             }
-          
+
             xSql += " and [name] like ? ";
             xSql += " order by [modified] desc offset ? rows fetch next 5 rows only";
-       
-        try {
-            ps = con.prepareStatement(xSql);
-             int i = 1;
-            if (!category.equals("all")) {
-                ps.setInt(i, Integer.parseInt(category));
+
+            try {
+                ps = con.prepareStatement(xSql);
+                int i = 1;
+                if (!category.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(category));
+                    i++;
+                }
+
+                if (!status.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(status));
+                    i++;
+                }
+                ps.setString(i, "%" + search + "%");
                 i++;
-            }
-           
-            if (!status.equals("all")) {
-                ps.setInt(i, Integer.parseInt(status));
-                i++;
-            }
-            ps.setString(i, "%" + search + "%");
-            i++;         
-            ps.setInt(i, (index - 1) * 5);
-           
-            rs = ps.executeQuery();
-            int xID;
-            String xIllustratoin;
+                ps.setInt(i, (index - 1) * 5);
+
+                rs = ps.executeQuery();
+                int xID;
+                String xIllustratoin;
 //            int xDimesion_id;
-            String xName;
-            int xCategory;
-            boolean xStatus;
-            String xDescription;
-            Date xModified;
-            boolean xFeatured;
-            int xAuthor_id;
-            Subject x;
-            while (rs.next()) {
-                xID = rs.getInt("id");
-                xIllustratoin = rs.getString("illustration");
+                String xName;
+                int xCategory;
+                boolean xStatus;
+                String xDescription;
+                Date xModified;
+                boolean xFeatured;
+                int xAuthor_id;
+                Subject x;
+                while (rs.next()) {
+                    xID = rs.getInt("id");
+                    xIllustratoin = rs.getString("illustration");
 //                xDimesion_id = rs.getInt("dimension_id");
-                xModified = rs.getDate("modified");
-                xName = rs.getString("name");
-                xCategory = rs.getInt("category_id");
-                xStatus = rs.getBoolean("status");
-                xDescription = rs.getString("description");
-                xFeatured = rs.getBoolean("featured");
-                xAuthor_id= rs.getInt("author_id");
-                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
-                t.add(x);
+                    xModified = rs.getDate("modified");
+                    xName = rs.getString("name");
+                    xCategory = rs.getInt("category_id");
+                    xStatus = rs.getBoolean("status");
+                    xDescription = rs.getString("description");
+                    xFeatured = rs.getBoolean("featured");
+                    xAuthor_id = rs.getInt("author_id");
+                    x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
+                    t.add(x);
+                }
+                rs.close();
+                ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+
+            xSql = "select id,illustration,name,category_id,[status],[description],author_id,[modified],[featured] from subject WHERE 1=1";
+
+            if (!category.equals("all")) {
+                xSql += " and [category_id]= ?";
+            }
+            if (!status.equals("all")) {
+                xSql += " and [status]= ?";
+            }
+
+            xSql += " and [name] like ? and author_id =? ";
+            xSql += " order by [modified] desc offset ? rows fetch next 5 rows only";
+
+            try {
+                ps = con.prepareStatement(xSql);
+                int i = 1;
+                if (!category.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(category));
+                    i++;
+                }
+
+                if (!status.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(status));
+                    i++;
+                }
+                ps.setString(i, "%" + search + "%");
+                i++;
+                ps.setInt(i, id);
+                i++;
+                ps.setInt(i, (index - 1) * 5);
+
+                rs = ps.executeQuery();
+                int xID;
+                String xIllustratoin;
+//            int xDimesion_id;
+                String xName;
+                int xCategory;
+                boolean xStatus;
+                String xDescription;
+                Date xModified;
+                boolean xFeatured;
+                int xAuthor_id;
+                Subject x;
+                while (rs.next()) {
+                    xID = rs.getInt("id");
+                    xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                    xModified = rs.getDate("modified");
+                    xName = rs.getString("name");
+                    xCategory = rs.getInt("category_id");
+                    xStatus = rs.getBoolean("status");
+                    xDescription = rs.getString("description");
+                    xFeatured = rs.getBoolean("featured");
+                    xAuthor_id = rs.getInt("author_id");
+                    x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
+                    t.add(x);
+                }
+                rs.close();
+                ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return (t);
+
     }
+
     public List<Subject> getSubjects() {
         List<Subject> t = new ArrayList<>();
         xSql = "select * from subject";
@@ -87,12 +156,13 @@ public class SubjectDAO extends MyDAO {
             String xIllustratoin;
 //            int xDimesion_id;
             String xName;
-            int xCategory;
+            int xCategory_id;
             boolean xStatus;
             String xDescription;
+            int xAuthor_id;
             Date xModified;
             boolean xFeatured;
-            int xAuthor_id;
+
             Subject x;
             while (rs.next()) {
                 xID = rs.getInt("id");
@@ -100,12 +170,13 @@ public class SubjectDAO extends MyDAO {
 //                xDimesion_id = rs.getInt("dimension_id");
                 xModified = rs.getDate("modified");
                 xName = rs.getString("name");
-                xCategory = rs.getInt("category_id");
+                xCategory_id = rs.getInt("category_id");
                 xStatus = rs.getBoolean("status");
+                xAuthor_id = rs.getInt("author_id");
                 xDescription = rs.getString("description");
                 xFeatured = rs.getBoolean("featured");
-                xAuthor_id= rs.getInt("author_id");
-                x = new Subject(xID, xIllustratoin, xName, xCategory, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
+                xAuthor_id = rs.getInt("author_id");
+                x = new Subject(xID, xIllustratoin, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
                 t.add(x);
             }
             rs.close();
@@ -115,44 +186,77 @@ public class SubjectDAO extends MyDAO {
         }
         return (t);
     }
-    
-    public int getTotalSubjectFilter(String category,String status,String search){
-         try {
-            String strSelect = "select count(*) from subject  WHERE 1=1 ";
-            if (!category.equals("all")) {
-                strSelect += " and [category_id]= ?";
-            }
-          
-            if (!status.equals("all")) {
-                strSelect += " and [status]= ?";
 
-            }
-            strSelect += " and [name] like ? ";
+    public int getTotalSubjectFilter(String category, String status, String search, int id, int role_id) {
+        try {
 
-            ps = con.prepareStatement(strSelect);
-            int i = 1;
-            if (!category.equals("all")) {
-                ps.setInt(i, Integer.parseInt(category));
+            if (role_id == 5) {
+                String strSelect = "select count(*) from subject  WHERE 1=1 ";
+                if (!category.equals("all")) {
+                    strSelect += " and [category_id]= ?";
+                }
+
+                if (!status.equals("all")) {
+                    strSelect += " and [status]= ?";
+
+                }
+                strSelect += " and [name] like ? ";
+                ps = con.prepareStatement(strSelect);
+                int i = 1;
+                if (!category.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(category));
+                    i++;
+                }
+
+                if (!status.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(status));
+                    i++;
+                }
+                ps.setString(i, "%" + search + "%");
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } else if (role_id == 4) {
+                String strSelect = "select count(*) from subject  WHERE 1=1 ";
+                if (!category.equals("all")) {
+                    strSelect += " and [category_id]= ?";
+                }
+
+                if (!status.equals("all")) {
+                    strSelect += " and [status]= ?";
+
+                }
+                strSelect += " and [name] like ? and author_id = ?  ";
+                ps = con.prepareStatement(strSelect);
+                int i = 1;
+                if (!category.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(category));
+                    i++;
+                }
+
+                if (!status.equals("all")) {
+                    ps.setInt(i, Integer.parseInt(status));
+                    i++;
+                }
+                ps.setString(i, "%" + search + "%");
                 i++;
+                ps.setInt(i, id);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
             }
-            
-            if (!status.equals("all")) {
-                ps.setInt(i, Integer.parseInt(status));
-                i++;
-            }
-            ps.setString(i, "%" + search + "%");
-           
-           rs = ps.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
+
         } catch (Exception e) {
             System.out.println("getTotalSubjectFilter: " + e.getMessage());
         }
 
         return 0;
-        
+
     }
+
     public List<Subject> getSubjectsWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
         xSql = "SELECT s.*, (\n"
@@ -1220,7 +1324,8 @@ public class SubjectDAO extends MyDAO {
         }
         return (totalSubject);
     }
-     public void addNewSubject( String illustration, String name, int category_id, boolean status, String description,boolean featured,int user_id) {
+
+    public void addNewSubject(String illustration, String name, int category_id, boolean status, String description, boolean featured, int user_id) {
         try {
             String strAdd = "insert into [subject] values(?,?,?,?,?,?,GETDATE(),?)";
             ps = con.prepareStatement(strAdd);
@@ -1235,7 +1340,8 @@ public class SubjectDAO extends MyDAO {
         } catch (Exception e) {
             System.out.println("addNewSubject: " + e.getMessage());
         }
-     }
+    }
+
     public List<Subject> getSubjectsSortASCWithPaging(int page, int PAGE_SIZE) {
         List<Subject> t = new ArrayList<>();
         xSql = "SELECT s.*, (\n"
@@ -1352,6 +1458,43 @@ public class SubjectDAO extends MyDAO {
         return (t);
     }
 
+    public Subject getSubjectDetailById(int subjectId) {
+        Subject x = null;
+        xSql = "select illustration,name,category_id,status,description,author_id,modified,featured from subject where id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            rs = ps.executeQuery();
+            String xIllustration;
+            String xName;
+            int xCategory_id;
+            boolean xStatus;
+            String xDescription;
+            int xAuthor_id;
+
+            boolean xFeatured;
+
+            while (rs.next()) {
+                xIllustration = rs.getString("illustration");
+                xName = rs.getString("name");
+                xCategory_id = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xDescription = rs.getString("description");
+                xAuthor_id = rs.getInt("author_id");
+
+                xFeatured = rs.getBoolean("featured");
+                x = new Subject(subjectId, xIllustration, xName, xCategory_id, xStatus, xDescription, xFeatured, xAuthor_id);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("getSubjectDetailById:" + e.getMessage());
+        }
+        return x;
+    }
+//        public Subject(int id, String illustration, String name, int category_id, boolean status, String description,boolean featured,int author_id) {
+
+//        public Subject(int id, String illustration, String name, int category_id, boolean status, String description, int author_id, Date modified, boolean featured, int user_id) {
     public Subject getSubjectById(int subjectId) {
         Subject x = null;
         xSql = "SELECT s.*, (\n"
@@ -1395,5 +1538,43 @@ public class SubjectDAO extends MyDAO {
             e.printStackTrace();
         }
         return x;
+    }
+      public void updateSubject(int id,String illustration,String name,int category_id,boolean status,String description,int author_id,boolean featured) {
+        try {
+            String strAdd = "update subject set illustration = ?, name =?, category_id = ?,status= ?,description= ?,author_id =?,featured= ? where id = ?";
+            ps = con.prepareStatement(strAdd);
+
+            ps.setString(1, illustration);
+            ps.setString(2, name);
+            ps.setInt(3, category_id);
+            ps.setBoolean(4, status);
+            ps.setString(5, description);
+            ps.setInt(6, author_id);
+            ps.setBoolean(7, featured);
+            ps.setInt(8, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateSubject: " + e.getMessage());
+        }
+    }
+        public void updateSubjectWithoutImage(int id,String name,int category_id,boolean status,String description,int author_id,boolean featured) {
+        try {
+            String strAdd = "update subject set name =?, category_id = ?,status= ?,description= ?,author_id =?,featured= ? where id = ?";
+            ps = con.prepareStatement(strAdd);
+
+          
+            ps.setString(1, name);
+            ps.setInt(2, category_id);
+            ps.setBoolean(3, status);
+            ps.setString(4, description);
+            ps.setInt(5, author_id);
+            ps.setBoolean(6, featured);
+            ps.setInt(7, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateSubject: " + e.getMessage());
+        }
     }
 }

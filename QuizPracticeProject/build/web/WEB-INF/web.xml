@@ -129,6 +129,26 @@
         <servlet-class>controller.EditSliderController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PricePackageController</servlet-name>
+        <servlet-class>controller.PricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewPricePackageController</servlet-name>
+        <servlet-class>controller.AddNewPricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonDetailsController</servlet-name>
+        <servlet-class>controller.LessonDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectLessonsController</servlet-name>
+        <servlet-class>controller.SubjectLessonsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewLessonDetailsController</servlet-name>
+        <servlet-class>controller.AddNewLessonDetailsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ReviewQuizController</servlet-name>
         <servlet-class>controller.ReviewQuizController</servlet-class>
     </servlet>
@@ -145,10 +165,6 @@
         <servlet-class>controller.VerifyAddNewUserController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SubjectListAEController</servlet-name>
-        <servlet-class>controller.SubjectListAEController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SliderDetailController</servlet-name>
         <servlet-class>controller.SliderDetailController</servlet-class>
     </servlet>
@@ -161,12 +177,68 @@
         <servlet-class>controller.ChangeSliderDetailController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditLessonDetailsController</servlet-name>
+        <servlet-class>controller.EditLessonDetailsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>QuestionListController</servlet-name>
         <servlet-class>controller.QuestionListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MyRegistrationController</servlet-name>
         <servlet-class>controller.MyRegistrationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectDetailAEController</servlet-name>
+        <servlet-class>controller.SubjectDetailAEController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <servlet-class>controller.SubjectListAEController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditOverviewSubjectController</servlet-name>
+        <servlet-class>controller.EditOverviewSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditPricePackageController</servlet-name>
+        <servlet-class>controller.EditPricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewPricePackageDetailController</servlet-name>
+        <servlet-class>controller.AddNewPricePackageDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStatusPricePackageController</servlet-name>
+        <servlet-class>controller.EditStatusPricePackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditDimensionController</servlet-name>
+        <servlet-class>controller.EditDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <servlet-class>controller.DeleteDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDimensionController</servlet-name>
+        <servlet-class>controller.AddDimensionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectRegistedController</servlet-name>
+        <servlet-class>controller.SubjectRegistedController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyAddNewUserAndSubjectController</servlet-name>
+        <servlet-class>controller.VerifyAddNewUserAndSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSubmittedRegistedSubjectController</servlet-name>
+        <servlet-class>controller.EditSubmittedRegistedSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrationListController</servlet-name>
+        <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -289,6 +361,26 @@
         <url-pattern>/editSlider</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PricePackageController</servlet-name>
+        <url-pattern>/pricePackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPricePackageController</servlet-name>
+        <url-pattern>/addnewpricePackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonDetailsController</servlet-name>
+        <url-pattern>/lessonDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectLessonsController</servlet-name>
+        <url-pattern>/subjectLessons</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewLessonDetailsController</servlet-name>
+        <url-pattern>/addNewLessonDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ReviewQuizController</servlet-name>
         <url-pattern>/reviewquiz</url-pattern>
     </servlet-mapping>
@@ -305,10 +397,6 @@
         <url-pattern>/verifyaddnewuser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SubjectListAEController</servlet-name>
-        <url-pattern>/subjectlistae</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SliderDetailController</servlet-name>
         <url-pattern>/sliderDetail</url-pattern>
     </servlet-mapping>
@@ -321,12 +409,68 @@
         <url-pattern>/changeSliderDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>EditLessonDetailsController</servlet-name>
+        <url-pattern>/editLessonDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>QuestionListController</servlet-name>
         <url-pattern>/questionList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MyRegistrationController</servlet-name>
         <url-pattern>/myRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectDetailAEController</servlet-name>
+        <url-pattern>/subjectdetailae</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListAEController</servlet-name>
+        <url-pattern>/subjectlistae</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditOverviewSubjectController</servlet-name>
+        <url-pattern>/editoverviewsubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPricePackageController</servlet-name>
+        <url-pattern>/editpricepackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPricePackageDetailController</servlet-name>
+        <url-pattern>/addnewpricepackagedetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStatusPricePackageController</servlet-name>
+        <url-pattern>/editstatuspricepackage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditDimensionController</servlet-name>
+        <url-pattern>/editdimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDimensionController</servlet-name>
+        <url-pattern>/deletedimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDimensionController</servlet-name>
+        <url-pattern>/adddimension</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectRegistedController</servlet-name>
+        <url-pattern>/subjectRegisted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAddNewUserAndSubjectController</servlet-name>
+        <url-pattern>/verifyAddNewUserAndSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSubmittedRegistedSubjectController</servlet-name>
+        <url-pattern>/editSubmittedRegistedSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrationListController</servlet-name>
+        <url-pattern>/registrationList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
