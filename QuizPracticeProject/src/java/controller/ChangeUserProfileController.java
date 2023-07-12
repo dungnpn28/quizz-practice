@@ -73,7 +73,7 @@ public class ChangeUserProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int xUser_id = user.getId();
         int genderValue = 0;
-
+        
         Part file = request.getPart("avatar");
         String originalFileName = file.getSubmittedFileName();
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
