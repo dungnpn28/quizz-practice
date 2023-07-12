@@ -384,4 +384,23 @@ public class ExamDAO extends MyDAO {
         }
         return null;
     }
+    
+    public List<Integer> getExamIdBySubjectId(String subjectId) {
+        List<Integer> t = new ArrayList<>();
+        int xExam_id;
+        try {
+            String strSelect = "select id from [exam] "
+                    + "where subject_id=?;";
+            ps = con.prepareStatement(strSelect);
+            ps.setString(1, subjectId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xExam_id = rs.getInt("id");
+                t.add(xExam_id);
+            }
+        } catch (Exception e) {
+            System.out.println("getExamIdBySubjectId:" + e.getMessage());
+        }
+        return t;
+    }
 }

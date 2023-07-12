@@ -4,11 +4,13 @@
  */
 package controller;
 
+import dal.ExamDAO;
 import dal.MyRegistrationDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
 import dal.UserDAO;
 import dal.UserProfileDAO;
+import dal.User_ExamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -70,7 +72,7 @@ public class SubjectRegistedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-                PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
 
         HttpSession sessions = request.getSession();
 
@@ -82,11 +84,18 @@ public class SubjectRegistedController extends HttpServlet {
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         int categoryId = scDAO.getCategoryId(subjectId);
 
+        User_ExamDAO ueDAO = new User_ExamDAO();
+        ExamDAO eDAO = new ExamDAO();
+        List<Integer> exam_ids = eDAO.getExamIdBySubjectId(subjectId);
         if (sessions.getAttribute("user") != null) {
             User a = (User) sessions.getAttribute("user");
 
             MyRegistrationDAO mrDAO = new MyRegistrationDAO();
             mrDAO.addNewRegistration(subjectId, pricePackage, a.getId(), categoryId, subjectName, registedstatus);
+            if (registedStatus.equals("1") && !exam_ids.isEmpty()) {
+
+                ueDAO.addNewUser_Exam(a.getId(), exam_ids);
+            }
             sessions.setAttribute("openNotification", "1");
             response.sendRedirect("subjectListPublic");
 
@@ -142,8 +151,8 @@ public class SubjectRegistedController extends HttpServlet {
 
             SendingEmail sendMail = new SendingEmail();
             sendMail.sendEmail(email, emailContent);
-            sessions.setAttribute("openNotification", "1");
-            response.sendRedirect("subjectListPublic");
+            errorMessage = "Registration email is already sent to you. Please check your mail !";
+            sendResponse(response, errorMessage);
 
         }
     }
