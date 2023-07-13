@@ -285,4 +285,83 @@ public class MyRegistrationDAO extends MyDAO {
         return 0;
 
     }
+    
+    public List<MyRegistration> getAllRegistration(int user_id) {
+        List<MyRegistration> mr = new ArrayList<>();
+        String Sql = "select * from registration where user_id = ?";
+        try {
+            ps = con.prepareStatement(Sql);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int subjectId = rs.getInt("subject_id");
+                int pricePackgeId = rs.getInt("price_package_id");
+                int userId = rs.getInt("user_id");
+                Date created = rs.getDate("created");
+                int categoryId = rs.getInt("category_id"); 
+                String subjectName = rs.getString("subject_name");
+                int status = rs.getInt("status");
+                mr.add(new MyRegistration(id, subjectId, pricePackgeId, userId, created, categoryId, subjectName, status));
+            }
+        } catch (Exception e) {
+                        System.out.println("getAllRegistration: " + e.getMessage());
+
+        }
+        return mr;
+    }
+    public void deleteRegistration(String registrationId) {
+        xSql = "DELETE FROM [dbo].[registration]\n"
+                + "      WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, registrationId);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("delete: " + e.getMessage());
+        }
+    }
+
+    public MyRegistration checkMyRegistration(int id, int user_id) {
+
+        try {
+            String strSelect = "select registration.id,subject_id,price_package_id,user_id,created,category_id,subject_name,registration.status from registration\n"
+                    + "inner join price_package on price_package_id = price_package.id\n"
+                    + "\n"
+                    + "where DATEADD(DAY,price_package.duration,registration.created) >GETDATE()\n"
+                    + "and subject_id = ? and user_id = ? and registration.status = 1";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, id);
+            ps.setInt(2, user_id);
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            int xPrice_package_id;
+            int xUser_id;
+            Date xCreated;
+            int xCategory_id;
+            String xSubject_name;
+            int xStatus;
+            MyRegistration x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xPrice_package_id = rs.getInt("price_package_id");
+                xUser_id = rs.getInt("user_id");
+                xCreated = rs.getDate("created");
+                xCategory_id = rs.getInt("category_id");
+                xSubject_name = rs.getString("subject_name");
+                xStatus = rs.getInt("status");
+                return new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated, xCategory_id, xSubject_name, xStatus);
+//                x = new MyRegistration(xID, xSubject_id, xPrice_package_id, xUser_id, xCreated);
+
+            }
+        } catch (Exception e) {
+            System.out.println("checkMyRegistration: " + e.getMessage());
+        }
+
+        return null;
+    }
 }

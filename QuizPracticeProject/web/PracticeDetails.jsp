@@ -14,39 +14,41 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="css/PracticeDetails.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quizerro</title>
+        <title>Quizzero</title>
     </head>
     <%@include file="components/CusHeader.jsp" %>
     <body>
-        <div class="practiceDetailForm">
-            <form action="practiceDetails" method="POST">
-                <h2>PRACTICE DETAILS</h2>
-                <br>
-                <label class="" for="subject">Subject:</label>
-                <br>
-                <select name="subject" id="subject" class="btn btn-secondary">
-                    <option value="0">All</option>
-                    <c:forEach items="${subjectCategoryList}" var="category">
-                        <option value="${category.id}">${category.name}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <label for="ques">Number of practicing questions</label>
-                <br>
-                <input name="questions" id="ques" type="number">
-                <br>
-                <label for="topic">Questions are selected by topic(s) or a specific dimension?</label>
-                <br>
-                <select name="topic" id=topic" class="btn btn-secondary">
-                    <option value="0">All</option>
-                    <c:forEach items="${DimensionList}" var="dimension">
-                        <option value="${dimension.id}">${dimension.name}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <input type="submit" value="Practice" class="btn btn-primary">
-            </form>
+        <div class="wrapper">
+            <%@include file="components/navbar.jsp" %>
+            <div id="content">
+                <div class="practiceDetailForm">
+                    <form action="practiceDetails" method="POST" class="bigForm">
+                        <h2>PRACTICE DETAILS</h2>
+                        <c:if test="${errorMessage != null}">
+                            <p>${errorMessage}</p>
+                        </c:if>
+                        <br>
+                        <label class="" for="subject">Subject:</label>
+                        <br>
+                        <select name="subject" id="subject" class="btn btn-secondary">
+                            <option value="" disabled selected hidden>Subject name</option>
+                            <c:forEach items="${mr}" var="mr">
+                                <option value="${mr.subjectId}">${mr.subject_name}</option>
+                            </c:forEach>
+                        </select>
+                        <br>
+                        <label for="ques">Number of practicing questions</label>
+                        <br>
+                        <input name="questions" id="ques" type="text" >
+                        <br>
+                        <input type="submit" value="Practice" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/navBar.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <%@include file="components/Footer.jsp" %>
 </html>

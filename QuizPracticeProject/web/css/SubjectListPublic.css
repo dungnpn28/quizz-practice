@@ -27,7 +27,7 @@
 
 .registerButton a {
     text-decoration: none;
-    color: black;
+    
     position: absolute;
     right: 5px;
     margin: 10px;
@@ -224,3 +224,23 @@
   transition: width 0.5s;
 }
 
+.edit-subjectRegister{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.edit-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 750px; /* Could be more or less, depending on screen size */
+    height: 700px;
+}

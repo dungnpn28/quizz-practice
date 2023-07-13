@@ -94,7 +94,7 @@
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <input type="radio" name="status" value="1" ${lesson.status ?"checked":""} >Active
-                            <input type="radio" name="status" value="0" ${!lesson.status ?"checked":""} > Deactive       
+                            <input type="radio" name="status" value="0" ${!lesson.status ?"checked":""} >Deactive       
                         </div>
                         <input type="hidden" name="subjectId" value="${subjectId}">
                         <input type="hidden" name="lessonId" value="${lessonId}">
@@ -107,22 +107,8 @@
             </div>
         </div>
     </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-                                $(document).ready(function () {
-                                    $('#carouselExampleIndicators2').carousel();
-                                });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/navBar.js" type="text/javascript"></script>
     <script src="js/Validation.js"></script>
     <script src="js/CKeditor.js"></script>
         <%@include file="components/Footer.jsp" %>

@@ -4,11 +4,13 @@
  */
 package controller;
 
+import dal.ExamDAO;
 import dal.MyRegistrationDAO;
 import dal.SubjectDAO;
 import dal.Subject_CategoryDAO;
 import dal.UserDAO;
 import dal.UserProfileDAO;
+import dal.User_ExamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +18,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 import model.User;
 
@@ -68,8 +72,10 @@ public class SubjectRegistedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        PrintWriter out = response.getWriter();
+
         HttpSession sessions = request.getSession();
-        
+
         String subjectId = request.getParameter("subjectId");
         String subjectName = request.getParameter("subjectName");
         String pricePackage = request.getParameter("selectedPackaged");
@@ -78,16 +84,35 @@ public class SubjectRegistedController extends HttpServlet {
         Subject_CategoryDAO scDAO = new Subject_CategoryDAO();
         int categoryId = scDAO.getCategoryId(subjectId);
 
+        User_ExamDAO ueDAO = new User_ExamDAO();
+        ExamDAO eDAO = new ExamDAO();
+        List<Integer> exam_ids = eDAO.getExamIdBySubjectId(subjectId);
         if (sessions.getAttribute("user") != null) {
             User a = (User) sessions.getAttribute("user");
 
             MyRegistrationDAO mrDAO = new MyRegistrationDAO();
             mrDAO.addNewRegistration(subjectId, pricePackage, a.getId(), categoryId, subjectName, registedstatus);
+            if (registedStatus.equals("1") && !exam_ids.isEmpty()) {
+
+                ueDAO.addNewUser_Exam(a.getId(), exam_ids);
+            }
             sessions.setAttribute("openNotification", "1");
             response.sendRedirect("subjectListPublic");
 
         } else {
+            String errorMessage = "";
             String email = request.getParameter("email");
+            List<String> userList = new ArrayList<>();
+            UserDAO uDAO = new UserDAO();
+            userList = uDAO.getAllUser();
+
+            for (String userEmail : userList) {
+                if (email.equals(userEmail)) {
+                    errorMessage = "Email already exist";
+                    sendResponse(response, errorMessage);
+                    return;
+                }
+            }
             String name = request.getParameter("name");
             String gender = request.getParameter("gender");
             String phone = request.getParameter("phone");
@@ -126,8 +151,8 @@ public class SubjectRegistedController extends HttpServlet {
 
             SendingEmail sendMail = new SendingEmail();
             sendMail.sendEmail(email, emailContent);
-            sessions.setAttribute("openNotification", "1");
-            response.sendRedirect("subjectListPublic");
+            errorMessage = "Registration email is already sent to you. Please check your mail !";
+            sendResponse(response, errorMessage);
 
         }
     }
@@ -159,6 +184,15 @@ public class SubjectRegistedController extends HttpServlet {
         }
 
         return passwordBuilder.toString();
+    }
+
+    private void sendResponse(HttpServletResponse response, String errorMessage) throws IOException {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(errorMessage);
+        out.flush();
     }
 
     /**

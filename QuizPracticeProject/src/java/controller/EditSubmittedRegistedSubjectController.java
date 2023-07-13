@@ -4,13 +4,18 @@
  */
 package controller;
 
+import dal.ExamDAO;
 import dal.MyRegistrationDAO;
+import dal.User_ExamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.User;
 
 /**
  *
@@ -60,13 +65,26 @@ public class EditSubmittedRegistedSubjectController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        HttpSession sessions = request.getSession();
 
+        String idOfSubject = request.getParameter("idOfSubject");
         String registrationId = request.getParameter("registrationId");
         String pricePackage = request.getParameter("selectedPackaged");
         String registedStatus = request.getParameter("registedStatus");
         int registedstatus = Integer.parseInt(registedStatus);
         MyRegistrationDAO mrDAO = new MyRegistrationDAO();
+        User_ExamDAO ueDAO = new User_ExamDAO();
+        ExamDAO eDAO = new ExamDAO();
+        List<Integer> exam_ids = eDAO.getExamIdBySubjectId(idOfSubject);
+
         mrDAO.updateRegistration(registrationId, pricePackage, registedstatus);
+
+        User a = (User) sessions.getAttribute("user");
+                    
+
+        if (registedStatus.equals("1") && !exam_ids.isEmpty()) {
+            ueDAO.addNewUser_Exam(a.getId(), exam_ids);
+        }
         response.sendRedirect("myRegistration");
     }
 

@@ -22,19 +22,26 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <div>
-                    <form id="cateForm" method="" action="">
-                        <select name="cateSelect" class="cateSelect">
-                            <option>All</option>
-                            <c:forEach items="${filterStatus}" var="statusItem">
-                                <option>${statusItem.status}</option>
-                            </c:forEach>
-                        </select>            
-                    </form>
+                <h1><a href="sliderList" style="text-decoration: none">SLIDER LIST</a></h1>
+                <div class="filterTable">
+                    <!--                    <form id="cateForm" method="" action="">
+                                            <select name="cateSelect" class="cateSelect">
+                                                <option>All</option>
+                    <c:forEach items="${filterStatus}" var="statusItem">
+                        <option>${statusItem.status}</option>
+                    </c:forEach>
+                </select>            
+            </form>-->
                     <form action="sliderList" method="post">
                         <input value="${key}" type="search" placeholder="Search..." aria-label="Search" name="keyword"/>
                         <button class="btn" type="submit">Search</button>
+
+                        <a class="btn" href="sliderList?checkActive=1">Active Slider</a>
+                        <a class="btn" href="sliderList?checkDeactive=1">Deactive Slider</a>
+
                     </form>
+
+
                 </div>
                 <table border="1">          
                     <tbody>
@@ -92,10 +99,10 @@
                                                 </form>
                                                 <form action="sliderList" method="post" id="deleteForm">
                                                     <input hidden name="sid" value="${listSlider.getId()}">
-                                                    <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0)">DELETE</button>
+                                                    <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0)" onclick ="return confirm('Are you sure you want to delete?')">DELETE</button>
                                                 </form>
                                             </div>  
-                                            <a  class="dialog-btn"  href="sliderDetail?sid=${listSlider.getId()}" style="color: #ffffff">VIEW DETAIL</a>
+                                            <a  class="dialog-btn"  href="sliderDetail?sid=${listSlider.getId()}" style="color: #ffffff; font-size: 13px">VIEW DETAIL</a>
 
 
                                         </div>
@@ -118,11 +125,11 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-            });
+                                                        $(document).ready(function () {
+                                                            $('#sidebarCollapse').on('click', function () {
+                                                                $('#sidebar').toggleClass('active');
+                                                            });
+                                                        });
         </script>
         <script>
             // Gắn sự kiện "submit" vào form khi người dùng ấn submit

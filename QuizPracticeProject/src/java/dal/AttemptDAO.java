@@ -299,4 +299,29 @@ public class AttemptDAO extends MyDAO {
         }
     }
 
+    public ArrayList<Attempt> getAttemptList(int userId) {
+        ArrayList<Attempt> list = new ArrayList<>();
+        try {
+            String strSel = "SELECT DISTINCT a.attempt_id, a.exam_id, e.name, e.number_of_question, e.duration\n"
+                    + "FROM [attempt] a\n"
+                    + "JOIN [exam] e ON a.exam_id = e.id\n"
+                    + "WHERE user_id = ?;";
+            ps = con.prepareStatement(strSel);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int attemptId = rs.getInt(1);
+                int examId = rs.getInt(2);
+                String examName = rs.getString(3);
+                int numberOfQuestion = rs.getInt(4);
+                String duration = (String) rs.getString(5);
+                Attempt a = new Attempt(attemptId, userId, examId, examName, numberOfQuestion, duration);
+                list.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("getAttemptList: " + e.getMessage());
+        }
+        return list;
+    }
+
 }
