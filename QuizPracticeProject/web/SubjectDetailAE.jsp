@@ -43,8 +43,8 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link  ${tab eq "contact"?"active":""}" onclick="goToTab('contact',${subjectId})" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Price Package</button>
                     </li>
-
                 </ul>
+                    
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane  ${tab eq "home"?"show active":""}" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <form id="editoverview" action="editoverviewsubject" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -457,15 +457,11 @@
                                                                     <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
                                                                 </c:forEach>
                                                             </ul>
-
                                                         </div>
                                                     </c:if>
                                                     <c:if test="${sessionScope.user.getRole_id() == 4}">
                                                         <div id="pricepackage">
-
-
                                                             <table class="table table-hover">
-
                                                                 <tr class="table-menu">
                                                                     <th scope="col">#</th>
                                                                     <th scope="col">Package</th>
@@ -474,11 +470,8 @@
                                                                     <th scope="col">List Price</th>
                                                                     <th scope="col">Sale Price</th>                
                                                                     <th scope="col">Status</th>
-
-
-
                                                                 </tr>
-                                                                
+
                                                                 <c:if test="${pricePackageListWithPaging.size() == 0}">
                                                                     <tr>NO RESULT</tr>
                                                                 </c:if>
@@ -499,9 +492,6 @@
                                                                             <c:if test="${pricePackageListWithPaging.getStatus() == 1}">
                                                                                 <td><div class="active-button">Active</div></td>
                                                                             </c:if>
-
-
-
                                                                         </tr>
                                                                     </c:if>
                                                                 </c:forEach>
@@ -512,22 +502,13 @@
                                                                     <a class="${tag == i?"active":""}" href="subjectdetailae?index=${i}&subjectId=${subjectId}&tab=contact">${i}</a>
                                                                 </c:forEach>
                                                             </ul>
-
                                                         </div>
-
                                                     </c:if>
                                                 </div>
                                                 </div>
                                                 </div>
-
-
-
-
+                                                </div>
                                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
                                                 <script src="js/navBar.js" type="text/javascript"></script>
-
-
                                                 </body>
-
                                                 </html>

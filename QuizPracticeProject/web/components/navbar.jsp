@@ -140,6 +140,10 @@
                         </li>
                         <li>
 
+                            <a href="quizlist">QUIZZES LIST</a>
+                        </li>
+                        <li>
+
                             <a href="#">SETTING LIST</a>
                         </li>
                     </c:otherwise>

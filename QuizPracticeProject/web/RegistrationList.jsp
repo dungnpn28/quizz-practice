@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="right-container">
-                        <a href="addNewLessonDetails?subjectId=${subjectId}"><button id="add-button">Add New</button></a>
+                        <a href="addnewregistration"><button id="add-button">Add New</button></a>
                     </div>
                 </div>
                 <div class="header_fixed">

@@ -55,7 +55,7 @@ function validateForm1(id) {
         alert("Giá phải là số nguyên và lớn hơn hoặc bằng 100");
         return false;
     }
-    if (isNaN(sale) || sale < 0 || sale >= price) {
+    if (isNaN(sale) || sale <= 0 || sale >= price) {
         alert("Giá khuyến mãi phải là số nguyên và nằm trong khoảng từ 0 đến giá gốc");
         return false;
     }
@@ -82,9 +82,9 @@ function ValidateLessonDetail() {
     if (type_id !== '1' && type_id !== '3') {
         var linkInput = document.getElementById("link");
         var linkValue = linkInput.value.trim();
-        if (!/^https?:\/\/.+/.test(linkValue)) {
-            // Trường "link" không phải là URL hợp lệ
-            alert("Link phải là URL hợp lệ");
+        if (!/^https?:\/\/.*embed.*$/.test(linkValue)) {
+            // Trường "link" không phải là URL YouTube đã nhúng
+            alert("Link phải là URL YouTube đã nhúng");
             return false;
         }
     }
@@ -98,19 +98,19 @@ var quizInput = document.getElementById('quizInput');
 
 
 if (selectedType.value === '1') {
-        linkInput.style.display = 'none';
-        contentInput.style.display = 'none';
-        quizInput.style.display = 'none';
-    } else if (selectedType.value === '2') {
-        linkInput.style.display = 'block';
-        contentInput.style.display = 'block';
-        quizInput.style.display = 'none';
-    } else {
-        linkInput.style.display = 'none';
-        contentInput.style.display = 'block';
-        quizInput.style.display = 'block';
-    }
-    
+    linkInput.style.display = 'none';
+    contentInput.style.display = 'none';
+    quizInput.style.display = 'none';
+} else if (selectedType.value === '2') {
+    linkInput.style.display = 'block';
+    contentInput.style.display = 'block';
+    quizInput.style.display = 'none';
+} else {
+    linkInput.style.display = 'none';
+    contentInput.style.display = 'block';
+    quizInput.style.display = 'block';
+}
+
 selectedType.addEventListener('change', function () {
     if (selectedType.value === '1') {
         linkInput.style.display = 'none';

@@ -1535,7 +1535,7 @@ public class SubjectDAO extends MyDAO {
             rs.close();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
         return x;
     }

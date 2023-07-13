@@ -37,7 +37,7 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <servlet-class>controller.UserAuthorizationController</servlet-class>
     </servlet>
     <servlet>
@@ -241,8 +241,33 @@
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>QuestionImportController</servlet-name>
         <servlet-class>controller.QuestionImportController</servlet-class>
+=======
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <servlet-class>controller.AddNewQuizDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <servlet-class>controller.EditQuizDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewRegistrationController</servlet-name>
+        <servlet-class>controller.AddNewRegistrationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizListController</servlet-name>
+        <servlet-class>controller.QuizListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonDetailController</servlet-name>
+        <servlet-class>controller.LessonDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudyLessonController</servlet-name>
+        <servlet-class>controller.StudyingLessonController</servlet-class>
+>>>>>>> main
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
@@ -273,7 +298,7 @@
         <url-pattern>/simulationExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -479,6 +504,30 @@
     <servlet-mapping>
         <servlet-name>QuestionImportController</servlet-name>
         <url-pattern>/questionimport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <url-pattern>/addNewQuizDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <url-pattern>/editQuizDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewRegistrationController</servlet-name>
+        <url-pattern>/addnewregistration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizListController</servlet-name>
+        <url-pattern>/quizlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonDetailController</servlet-name>
+        <url-pattern>/lessondetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudyLessonController</servlet-name>
+        <url-pattern>/studylesson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

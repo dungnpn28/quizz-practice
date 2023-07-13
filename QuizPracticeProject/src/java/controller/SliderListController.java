@@ -40,6 +40,14 @@ public class SliderListController extends HttpServlet {
         List<Slider> filterStatus = new SliderDAO().getSliderByStatus(1);
 //        List<Slider> filterStatus = new SliderDAO().getSliderByStatus(false);
         request.setAttribute("filterStatus", filterStatus);
+        if(request.getParameter("checkActive") != null) {
+            listSlider = new SliderDAO().getSliderByStatus(1);
+        }
+        if(request.getParameter("checkDeactive") != null) {
+            listSlider = new SliderDAO().getSliderByStatus(0);
+        }
+                    request.setAttribute("listSlider", listSlider);
+
         request.getRequestDispatcher("SliderListAd.jsp").forward(request, response);
 
     }

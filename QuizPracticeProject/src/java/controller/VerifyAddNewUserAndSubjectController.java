@@ -4,21 +4,26 @@
  */
 package controller;
 
+import dal.ExamDAO;
 import dal.MyRegistrationDAO;
 import dal.RegisterDAO;
 import dal.UserDAO;
 import dal.UserProfileDAO;
+import dal.User_ExamDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.User;
 
 /**
  *
@@ -53,7 +58,7 @@ public class VerifyAddNewUserAndSubjectController extends HttpServlet {
         String dob64 = req.getParameter("dob64");
         String role64 = req.getParameter("role64");
         String status64 = req.getParameter("status64");
-        
+
         String subjectid64 = req.getParameter("subjectid64");
         String pricePackage64 = req.getParameter("pricePackage64");
         String categoryId64 = req.getParameter("categoryId64");
@@ -108,6 +113,20 @@ public class VerifyAddNewUserAndSubjectController extends HttpServlet {
                 Logger.getLogger(VerifyAddNewUserController.class.getName()).log(Level.SEVERE, null, ex);
             }
             mrDAO.addNewRegistration(subjectId, pricePackage, id, Integer.parseInt(categoryId), subjectName, Integer.parseInt(registedStatus));
+            User_ExamDAO ueDAO = new User_ExamDAO();
+            ExamDAO eDAO = new ExamDAO();
+            List<Integer> exam_ids = eDAO.getExamIdBySubjectId(subjectId);
+
+            System.out.println("user id: " + id);
+                        System.out.println("subject id: " + subjectId);
+            System.out.println("exam_ids: " + exam_ids.isEmpty());
+                        System.out.println("registedStatus: " + registedStatus);
+
+
+            if (registedStatus.equals("1") && !exam_ids.isEmpty()) {
+
+                ueDAO.addNewUser_Exam(id, exam_ids);
+            }
             resp.sendRedirect("home");
         }
 
