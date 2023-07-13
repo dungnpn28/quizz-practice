@@ -19,6 +19,10 @@ public class Authorization {
         this.url = url;
     }
 
+    public Authorization(String url) {
+        this.url = url;
+    }
+
     public int getId() {
         return id;
     }
