@@ -1,0 +1,72 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jul 13, 2023, 3:03:13 AM
+    Author     : LENOVO
+*/
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container h1 {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+.image-upload input[type="file"] {
+    display: none;
+}
+
+.image-upload label {
+    display: block;
+    cursor: pointer;
+}
+
+#accountList {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#accountList li {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+#accountList li:hover {
+  background-color: #ddd;
+}
+
+#subjectList {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#subjectList li {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+#subjectList li:hover {
+  background-color: #ddd;
+}

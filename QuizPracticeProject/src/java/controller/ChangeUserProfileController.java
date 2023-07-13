@@ -108,6 +108,11 @@ public class ChangeUserProfileController extends HttpServlet {
             UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
             UserProfileDAO u = new UserProfileDAO();
             u.update(up);
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             response.sendRedirect("cusHome");
         }
     }

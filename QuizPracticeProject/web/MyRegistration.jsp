@@ -76,6 +76,7 @@
                     <table>
                         <thead>
                             <tr>
+
                                 <th>Image</th>
                                 <th>Subject</th>
                                 <th>Category</th>
@@ -91,6 +92,7 @@
                             <c:forEach items="${mrList}" var="mrList">
 
                                 <tr>
+
                                     <c:forEach items="${subjectList}" var="subjectList">
                                         <c:if test="${mrList.subjectId == subjectList.id}">
                                             <td> <img src="uploads/${subjectList.illustration}" width="10%" height="10%" alt="Ảnh"></td>
@@ -178,6 +180,8 @@
                                                     <input type="radio" name="registedStatus" value="1" >Yes
                                                 </div>
                                                 <input type="hidden" name="registrationId" value="${mrList.id}">
+                                                <input type="hidden" name="idOfSubject" value="${mrList.subjectId}">
+                                                
                                                 <br>
                                                 <!--                                                    <button type="submit">Change Update</button>-->
                                                 <input type="submit" value="Updated" class="btn btn-primary" onclick ="return confirm('Are you sure you want to updated?')">
@@ -234,8 +238,6 @@
                                                         // Redirect to the filtered URL
                                                         window.location.href = baseUrl;
                                                     }
-
-
         </script>
         <script src="js/PopUp.js"></script>
         <script src="js/subjectListPublic.js"></script>

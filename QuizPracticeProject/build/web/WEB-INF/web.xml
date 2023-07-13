@@ -241,6 +241,14 @@
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddNewRegistrationController</servlet-name>
+        <servlet-class>controller.AddNewRegistrationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizListController</servlet-name>
+        <servlet-class>controller.QuizListController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>LessonDetailController</servlet-name>
         <servlet-class>controller.LessonDetailController</servlet-class>
     </servlet>
@@ -479,6 +487,14 @@
     <servlet-mapping>
         <servlet-name>RegistrationListController</servlet-name>
         <url-pattern>/registrationList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewRegistrationController</servlet-name>
+        <url-pattern>/addnewregistration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizListController</servlet-name>
+        <url-pattern>/quizlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LessonDetailController</servlet-name>

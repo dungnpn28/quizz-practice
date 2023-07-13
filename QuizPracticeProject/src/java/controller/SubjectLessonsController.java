@@ -34,23 +34,25 @@ public class SubjectLessonsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-HttpSession sessions = request.getSession();
+        HttpSession sessions = request.getSession();
         int subjectId;
-        if (sessions.getAttribute("subjectId") != null) {
-            subjectId = Integer.parseInt(sessions.getAttribute("subjectId").toString());
-        } else {
-            subjectId = Integer.parseInt(request.getParameter("subjectId"));
-        }
-                LessonDAO lDAO = new LessonDAO();
 
-        if(request.getParameter("statusActive") != null) {
+        if (request.getParameter("subjectId") != null) {
+            subjectId = Integer.parseInt(request.getParameter("subjectId"));
+
+        } else {
+            subjectId = Integer.parseInt(sessions.getAttribute("subjectId").toString());
+        }
+        LessonDAO lDAO = new LessonDAO();
+
+        if (request.getParameter("statusActive") != null) {
             String lessonId = request.getParameter("lessonId");
             lDAO.updateStatus(lessonId, 1);
         } else if (request.getParameter("statusDeactive") != null) {
             String lessonId = request.getParameter("lessonId");
             lDAO.updateStatus(lessonId, 0);
         }
-        
+
         String category = request.getParameter("category");
         String status = request.getParameter("status");
         String search = request.getParameter("search");
@@ -77,7 +79,7 @@ HttpSession sessions = request.getSession();
         List<Lesson_Type> lessonTypeList = new ArrayList<>();
         lessonTypeList = lDAO.getLessonType();
         List<Lesson> lessonList = new ArrayList<>();
-        lessonList = lDAO.getLessonsWithPaging(endPage, category, status, search, subjectId);
+        lessonList = lDAO.getLessonsWithPaging(Integer.parseInt(index), category, status, search, subjectId);
 
         request.setAttribute("category", category);
         request.setAttribute("status", status);
@@ -106,7 +108,7 @@ HttpSession sessions = request.getSession();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**

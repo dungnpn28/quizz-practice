@@ -27,6 +27,18 @@ public class Exam {
     public Exam() {
     }
 
+    public Exam(int id, String name, int subject_id, int level, String duration, double pass_rate, int number_of_question, Date created, String description) {
+        this.id = id;
+        this.name = name;
+        this.subject_id = subject_id;
+        this.level = level;
+        this.duration = duration;
+        this.pass_rate = pass_rate;
+        this.number_of_question = number_of_question;
+        this.created = created;
+        this.description = description;
+    }
+
     public Exam(int id, String name, int subject_id, int user_id, int level, String duration, double pass_rate, int number_of_question, Date created) {
         this.id = id;
         this.name = name;

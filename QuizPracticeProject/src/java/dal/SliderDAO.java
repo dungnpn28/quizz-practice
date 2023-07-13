@@ -154,6 +154,7 @@ public class SliderDAO extends MyDAO {
         String xTitle;
         String xImage;
         String xBacklink;
+        Boolean xStatus;
         Slider x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -164,8 +165,8 @@ public class SliderDAO extends MyDAO {
                 xTitle = rs.getString("title");
                 xImage = rs.getString("image");
                 xBacklink = rs.getString("backlink");
-
-                x = new Slider(xId, xTitle, xImage, xBacklink);
+                xStatus = rs.getBoolean("status");
+                x = new Slider(xId, xTitle, xImage, xBacklink, xStatus);
                 searchs.add(x);
             }
             rs.close();

@@ -26,8 +26,9 @@
         <link href="css/SubjectListPublic.css" rel="stylesheet" type="text/css"/>
         <link href="css/Home.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
 
@@ -158,8 +159,8 @@
                                                                         <%-- Hiển thị nút Register --%>
                                                                         <span class="registerButton">
                                                                             <!--<a href="#" id="popUpLink3" data-toggle="modal"><button >Register</button> </a>-->
-                                                                            <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
-
+                                                                            <!--<a class="dialog-btn" href="#my-dialog3-${item.getId()}">Registed</a>-->
+                                                                              <button class="btn btn-primary" onclick="openSubjectRegistedForm(${item.getId()})">Register</button>
                                                                         </span>
 
                                                                     </c:if>
@@ -168,7 +169,7 @@
                                                                         <c:if test="${subjectListByUserId == null}">
                                                                             <span class="registerButton">
                                                                                 <!--<a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>-->
-                                                                                <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
+                                                                                <a class="btn btn-primary" href="#my-dialog2-${item.getId()}">Registed</a>
 
                                                                             </span>
                                                                         </c:if>
@@ -190,7 +191,7 @@
                                                                             <c:if test="${!isRegistered}">
                                                                                 <span class="registerButton">
                                                                                     <!--<a href="#" id="popUpLink3" data-toggle="modal"><button>Register</button> </a>-->
-                                                                                    <a class="dialog-btn" href="#my-dialog2-${item.getId()}">Registed</a>
+                                                                                    <a class="btn btn-primary" href="#my-dialog2-${item.getId()}">Registed</a>
                                                                                 </span>
                                                                             </c:if>
                                                                         </c:if>
@@ -205,109 +206,117 @@
                                                                 <a class="dialog-close-btn" href="">&times;</a>
                                                                 <div class="container">
                                                                     <br>
-                                                                    <c:if test="${not empty sessionScope.user}">
-                                                                        <form id="subjectregisted-${item.getId()}" action="subjectRegisted" method="post">
-                                                                            <div class="add row">
-                                                                                <div class="col-md-5">
-                                                                                    <img src="uploads/${item.getIllustration()}" alt="User Avatar">
 
-                                                                                </div>
-                                                                                <div class="col-md-7">
-                                                                                    <label class="form-label">Subject name: ${item.getName()}</label>
-                                                                                    <br>
-                                                                                    <label class="form-label">Package option</label><br>
-                                                                                    <c:forEach var="pricePackage" items="${pricePackageList}">
-                                                                                        <c:if test="${item.getId() == pricePackage.subject_id}">
-                                                                                            <input id="pricePackage" type="radio" name="selectedPackaged" value="${pricePackage.id}" required checked>${pricePackage.name}<br>
-                                                                                        </c:if>
-                                                                                    </c:forEach>
-                                                                                    <div id="priceError" class="text-danger"></div>
+                                                                    <form id="subjectregisted-${item.getId()}" action="subjectRegisted" method="post">
+                                                                        <div class="add row">
+                                                                            <div class="col-md-5">
+                                                                                <img src="uploads/${item.getIllustration()}" alt="User Avatar">
 
-                                                                                </div>
-                                                                                <label class="form-label">Name</label>
-                                                                                <input type="text" name="name" value="${userProfile.getFull_name()}"readonly>
-                                                                                <label class="form-label">Email</label>
-                                                                                <input type="text" name="email" value="${sessionScope.user.getAccount()}"readonly>
-                                                                                <div>
-                                                                                    <label class="form-label">Gender</label> &nbsp&nbsp
-                                                                                    <input type="radio" name="gender" value="0" ${userProfile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
-                                                                                    <input type="radio" name="gender" value="1" ${userProfile.getGender() == 1 ? "checked":""} disabled >Male
-                                                                                </div>
-                                                                                <label class="form-label">Phone</label>
-                                                                                <input type="text" name="phone" value="${userProfile.phone_number()}" readonly>
-                                                                                <input type="hidden" name="subjectId" value="${item.getId()}">
-                                                                                <input type="hidden" name="subjectName" value="${item.getName()}">
-                                                                                <br>
-
-                                                                                <div>
-                                                                                    <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
-                                                                                    <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
-                                                                                    <input type="radio" name="registedStatus" value="1" >Yes
-                                                                                </div>
-                                                                                <br>
-                                                                                <!--                                                    <button type="submit">Change Update</button>-->
-                                                                                <input type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
                                                                             </div>
-                                                                        </form>
-                                                                    </c:if>
-                                                                    <c:if test="${empty sessionScope.user}">
-
-                                                                        <form id="subjectregisted-${item.getId()}" name="subjectRegisted" action="subjectRegisted" method="post" onsubmit="return validateSubjectRegistedForm()">
-                                                                            <div class="add row">
-                                                                                <div class="col-md-5">
-                                                                                    <img src="uploads/${item.getIllustration()}" alt="User Avatar">
-
-                                                                                </div>
-                                                                                <div class="col-md-7">
-                                                                                    <label class="form-label">Subject name: ${item.getName()}</label>
-                                                                                    <br>
-                                                                                    <label class="form-label">Package option</label><br>
-                                                                                    <c:forEach var="pricePackage" items="${pricePackageList}">
-                                                                                        <c:if test="${item.getId() == pricePackage.subject_id}">
-                                                                                            <input id="pricePackage" type="radio" name="selectedPackaged" value="${pricePackage.id}" required checked>${pricePackage.name}<br>
-                                                                                        </c:if>
-                                                                                    </c:forEach>
-                                                                                    <div id="priceError" class="text-danger"></div>
-
-                                                                                </div>
-                                                                                <label class="form-label">Name</label>
-                                                                                <input type="text" name="name">
-                                                                                <label class="form-label">Email</label>
-                                                                                <input type="text" name="email" id="emailInput">
-                                                                                <div id="duplicateEmailMessage" style="display: none; color: red;">
-                                                                                    Email already exist !!!
-                                                                                </div>
-                                                                                <div>
-                                                                                    <label class="form-label">Gender</label> &nbsp&nbsp
-                                                                                    <input type="radio" name="gender" value="0" checked>Female &nbsp;&nbsp;
-                                                                                    <input type="radio" name="gender" value="1">Male
-                                                                                </div>
-                                                                                <label>DOB</label>
-                                                                                <input type="date" name="dob">
-                                                                                <label class="form-label">Phone</label>
-                                                                                <input type="text" name="phone">
+                                                                            <div class="col-md-7">
+                                                                                <label class="form-label">Subject name: ${item.getName()}</label>
                                                                                 <br>
-                                                                                <div>
-                                                                                    <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
-                                                                                    <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
-                                                                                    <input type="radio" name="registedStatus" value="1" >Yes
-                                                                                </div>
-                                                                                <input type="hidden" name="subjectId" value="${item.getId()}">
-                                                                                <input type="hidden" name="subjectName" value="${item.getName()}">
+                                                                                <label class="form-label">Package option</label><br>
+                                                                                <c:forEach var="pricePackage" items="${pricePackageList}">
+                                                                                    <c:if test="${item.getId() == pricePackage.subject_id && pricePackage.status == 1}">
+                                                                                        <input id="pricePackage" type="radio" name="selectedPackaged" value="${pricePackage.id}" required checked>${pricePackage.name}<br>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                                <div id="priceError" class="text-danger"></div>
 
-                                                                                <br>
-                                                                                <input id="submitButton" type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
                                                                             </div>
-                                                                        </form>
+                                                                            <label class="form-label">Name</label>
+                                                                            <input type="text" name="name" value="${userProfile.getFull_name()}"readonly>
+                                                                            <label class="form-label">Email</label>
+                                                                            <input type="text" name="email" value="${sessionScope.user.getAccount()}"readonly>
+                                                                            <div>
+                                                                                <label class="form-label">Gender</label> &nbsp&nbsp
+                                                                                <input type="radio" name="gender" value="0" ${userProfile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
+                                                                                <input type="radio" name="gender" value="1" ${userProfile.getGender() == 1 ? "checked":""} disabled >Male
+                                                                            </div>
+                                                                            <label class="form-label">Phone</label>
+                                                                            <input type="text" name="phone" value="${userProfile.phone_number()}" readonly>
+                                                                            <input type="hidden" name="subjectId" value="${item.getId()}">
+                                                                            <input type="hidden" name="subjectName" value="${item.getName()}">
+                                                                            <br>
+
+                                                                            <div>
+                                                                                <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
+                                                                                <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
+                                                                                <input type="radio" name="registedStatus" value="1" >Yes
+                                                                            </div>
+                                                                            <br>
+                                                                            <!--                                                    <button type="submit">Change Update</button>-->
+                                                                            <input type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
+                                                                        </div>
+                                                                    </form>
 
 
-
-                                                                    </c:if>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
+                                                <div class="edit-subjectRegister" id="edit-subjectRegister-${item.getId()}">
+                                                    <div class="edit-content">
+                                                        <div class="button-close">
+                                                            <button onclick="closeSubjectRegistedForm(${item.getId()})" class="btn btn-danger">x</button>
+                                                        </div>
+                                                        <br>
+
+                                                        <form id="subjectregisted-${item.getId()}" name="subjectRegisted-${item.getId()}" action="subjectRegisted" method="POST" onsubmit="return validateSubjectRegistedForm(${item.getId()})">
+                                                            <div class="add row">
+                                                                <div class="col-md-5">
+                                                                    <img src="uploads/${item.getIllustration()}" alt="User Avatar" style="width: 200px; height: 200px">
+
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <label class="form-label">Subject name: ${item.getName()}</label>
+                                                                    <br>
+                                                                    <label class="form-label">Package option</label><br>
+                                                                    <c:forEach var="pricePackage" items="${pricePackageList}">
+                                                                        <c:if test="${item.getId() == pricePackage.subject_id}">
+                                                                            <input id="pricePackage" type="radio" name="selectedPackaged" value="${pricePackage.id}" required checked>${pricePackage.name}<br>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                    <div id="priceError" class="text-danger"></div>
+
+                                                                </div>
+                                                                <label class="form-label">Name</label>
+                                                                <input type="text" name="name">
+                                                                <label class="form-label">Email</label>
+                                                                <input type="text" name="email" id="emailInput">
+<!--                                                                <div id="duplicateEmailMessage" style="display: none; color: red;">
+                                                                    Email already exist !!!
+                                                                </div>-->
+                                                                <div>
+                                                                    <label class="form-label">Gender</label> &nbsp&nbsp
+                                                                    <input type="radio" name="gender" value="0" checked>Female &nbsp;&nbsp;
+                                                                    <input type="radio" name="gender" value="1">Male
+                                                                </div>
+                                                                <label>DOB</label>
+                                                                <input type="date" name="dob">
+                                                                <label class="form-label">Phone</label>
+                                                                <input type="text" name="phone">
+                                                                <br>
+                                                                <div>
+                                                                    <label class="form-label">Do you want to paid now ?</label> &nbsp&nbsp
+                                                                    <input type="radio" name="registedStatus" value="0" checked>No &nbsp;&nbsp;
+                                                                    <input type="radio" name="registedStatus" value="1" >Yes
+                                                                </div>
+                                                                <input type="hidden" name="subjectId" value="${item.getId()}">
+                                                                <input type="hidden" name="subjectName" value="${item.getName()}">
+
+                                                                <br>
+                                                                <input id="submitButton" type="submit" value="Registed" class="btn btn-primary" onclick ="return confirm('Are you sure you want to registed?')">
+                                                            </div>
+                                                        </form>
+                                                        <div id="errorMessage" class="error-message"></div>
+
+                                                    </div>
+                                                </div>
+
                                             </c:forEach>
                                         </div>
                                     </div>
@@ -345,7 +354,7 @@
                                                 </button>
                                             </div>
                                         </form>
-                                        <c:if test="${key!= mull}" >
+                                        <c:if test="${key!= null}" >
                                             <c:choose>
                                                 <c:when test="${not empty sessionScope.checkFeatured}">
                                                     <h3 class="mb-3 mt-4">Search "${key}" from featured subject</h3>
@@ -426,30 +435,7 @@
                 </div>
             </div>    
         </div>
-        <script>
-            var emailInput = document.getElementById("emailInput");
-            var submitButton = document.getElementById("submitButton");
-            var duplicateEmailMessage = document.getElementById("duplicateEmailMessage");
-            var userList = [
-            <% for (String email : userList) { %>
-                '<%= email %>',
-            <% } %>
-            ];
-
-            emailInput.addEventListener("input", function () {
-                var email = emailInput.value;
-                var isEmailDuplicate = userList.includes(email);
-
-                if (isEmailDuplicate) {
-                    duplicateEmailMessage.style.display = "block";
-                    submitButton.style.display = "none";
-                } else {
-                    duplicateEmailMessage.style.display = "none";
-
-                    submitButton.style.display = "block";
-                }
-            });
-        </script>
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
         <script src="js/subjectListPublic.js" type="text/javascript"></script>      

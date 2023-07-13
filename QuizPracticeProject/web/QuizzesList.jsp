@@ -29,7 +29,7 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <h1 style="font-size:35px">SUBJECT LESSONS</h1>
+                <h1 style="font-size:35px">QUIZZES LIST</h1>
                 <div class="topnav">
                     <div class="left-container">
                         <div class="search-bar-container">
@@ -43,21 +43,16 @@
                         <div class="filter-container">
                             <select name="category" id="filter1" onchange="applyFilters()">
                                 <option value= "all" >All</option>
-                                <c:forEach var="lessonTypeList" items="${lessonTypeList}">
-                                    <option value="${lessonTypeList.getId()}" ${lessonTypeList.getId().toString() eq category ? "selected" : ""} >${lessonTypeList.getName()}</option>
+                                <c:forEach var="subjectList" items="${subjectList}">
+                                    <option value="${subjectList.getId()}" ${subjectList.getId().toString() eq category ? "selected" : ""} >${subjectList.getName()}</option>
                                 </c:forEach>
                             </select>
-                            <select name="status" id="filter2" onchange="applyFilters()">
-                                <option value="all" ${status eq "all" ? "selected" : ""}>All</option>
-                                <option value="1" ${status eq "1" ? "selected" : ""}>Active</option>
-                                <option value="0" ${status eq "0" ? "selected" : ""}>Deactive</option>
 
-                            </select>
                             <button class="clear-filter" id="clear-filter" onclick="clearFilters()">Clear</button>
                         </div>
                     </div>
                     <div class="right-container">
-                        <a href="addNewLessonDetails?subjectId=${subjectId}"><button id="add-button">Add New</button></a>
+                        <a href="#"><button id="add-button">Add New</button></a>
                     </div>
                 </div>
                 <div class="header_fixed">
@@ -65,42 +60,39 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Lesson</th>
-                                <th>Order</th>
-                                <th>Type</th>
-                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Level</th>
+                                <th>#Question</th>
+                                <th>Duration</th>
+                                <th>Passrate</th>
+
+
 
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${lessonList}" var="lesson">
+                            <c:forEach items="${examList}" var="examList">
                                 <tr>
-                                    <td>${lesson.getId()}</td>
-                                    <td>${lesson.getName()}</td>
-                                    <td>${lesson.getOrder()}</td>
+                                    <td>${examList.getId()}</td>
+                                    <td>${examList.getName()}</td>
 
-                                    <c:forEach items="${lessonTypeList}" var="lessonType">
-                                        <c:if test="${lesson.type_id == lessonType.id}">
-                                            <td>${lessonType.name}</td>
+
+                                    <c:forEach items="${subjectList}" var="subjectList">
+                                        <c:if test="${subjectList.id == examList.subject_id}">
+                                            <td>${subjectList.name}</td>
                                         </c:if>
                                     </c:forEach>
+                                    <td>${examList.level}</td>
 
-                                    <c:if test="${lesson.isStatus() == true}">
-                                        <td><div class="active-button">Active</div></td>
-                                    </c:if>
-                                    <c:if test="${lesson.isStatus() == false}">
-                                        <td><div class="deactive-button">Deactive</div></td>
-                                    </c:if>
+                                    <td>${examList.number_of_question}</td>
+                                    <td>${examList.duration}</td>
+                                    <td>${examList.pass_rate}</td>
+
+
                                     <td>
-                                        <c:if test="${lesson.status}">
-                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusDeactive=1&lessonId=${lesson.getId()}">Deactive</a>
-                                        </c:if>
-                                        <c:if test="${!lesson.status}">
-                                            <a class="dialog-btn" href="subjectLessons?subjectId=${subjectId}&statusActive=1&lessonId=${lesson.getId()}">Active</a>
-                                        </c:if>
-
-                                        <a href="editLessonDetails?lessonId=${lesson.getId()}&subjectId=${subjectId}">Edit</a>
+                                        <a href="#">Edit</a>
                                         <a href="#">View detail</a>
                                     </td>
                                 </tr>
@@ -123,7 +115,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
-        <script src="js/SubjectLesson.js" type="text/javascript"></script>      
+        <script src="js/QuizzesList.js" type="text/javascript"></script>      
         <script src="js/navBar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
