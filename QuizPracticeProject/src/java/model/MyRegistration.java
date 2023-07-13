@@ -75,16 +75,6 @@ public class MyRegistration {
         this.time = time;
     }
 
-    public MyRegistration(int id, int subjectId, int pricePackageId, int userId, Date created, int category_id, String subject_name, int status) {
-        this.id = id;
-        this.subjectId = subjectId;
-        this.pricePackageId = pricePackageId;
-        this.userId = userId;
-        this.created = created;
-        this.category_id = category_id;
-        this.subject_name = subject_name;
-        this.status = status;
-    }
     
     
 

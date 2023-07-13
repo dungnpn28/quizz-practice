@@ -37,7 +37,7 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <servlet-class>controller.UserAuthorizationController</servlet-class>
     </servlet>
     <servlet>
@@ -293,7 +293,7 @@
         <url-pattern>/simulationExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
