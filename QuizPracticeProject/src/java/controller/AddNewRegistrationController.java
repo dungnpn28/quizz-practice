@@ -4,24 +4,23 @@
  */
 package controller;
 
-import dal.ExamDAO;
-import dal.MyRegistrationDAO;
-import dal.User_ExamDAO;
+import dal.SubjectDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Subject;
 import model.User;
 
 /**
  *
  * @author LENOVO
  */
-public class EditSubmittedRegistedSubjectController extends HttpServlet {
+public class AddNewRegistrationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +34,15 @@ public class EditSubmittedRegistedSubjectController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        UserDAO uDAO = new UserDAO();
+        List<User> userList = uDAO.getUsers();
+        request.setAttribute("userList", userList);
+
+        SubjectDAO sDAO = new SubjectDAO();
+        List<Subject> subjectList = sDAO.getSubjects();
+        request.setAttribute("subjectList", subjectList);
+
+        request.getRequestDispatcher("AddNewRegistration.jsp").forward(request, response);
 
     }
 
@@ -64,28 +72,34 @@ public class EditSubmittedRegistedSubjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        HttpSession sessions = request.getSession();
 
-        String idOfSubject = request.getParameter("idOfSubject");
-        String registrationId = request.getParameter("registrationId");
-        String pricePackage = request.getParameter("selectedPackaged");
-        String registedStatus = request.getParameter("registedStatus");
-        int registedstatus = Integer.parseInt(registedStatus);
-        MyRegistrationDAO mrDAO = new MyRegistrationDAO();
-        User_ExamDAO ueDAO = new User_ExamDAO();
-        ExamDAO eDAO = new ExamDAO();
-        List<Integer> exam_ids = eDAO.getExamIdBySubjectId(idOfSubject);
+        UserDAO uDAO = new UserDAO();
+        List<User> userList = uDAO.getUsers();
+        request.setAttribute("userList", userList);
 
-        mrDAO.updateRegistration(registrationId, pricePackage, registedstatus);
+        SubjectDAO sDAO = new SubjectDAO();
+        List<Subject> subjectList = sDAO.getSubjects();
+        request.setAttribute("subjectList", subjectList);
 
-        User a = (User) sessions.getAttribute("user");
-                    
+        if (request.getParameter("subjectSelected") != null) {
+            String subjectName = request.getParameter("subjectSelected");
+            int subjectId = 0;
 
-        if (registedStatus.equals("1") && !exam_ids.isEmpty()) {
-            ueDAO.addNewUser_Exam(a.getId(), exam_ids);
+            for (Subject subject : subjectList) {
+                if (subjectName.equals(subject.getName())) {
+                    subjectId = subject.getId();
+                    break;
+                }
+            }
+            System.out.println("subject id: " + subjectId);
+            Subject chooseSubject = sDAO.getSubjectById(subjectId);
+            request.setAttribute("chooseSubject", chooseSubject);
+                        System.out.println("chooseSubject name: " + chooseSubject.getName());
+
+            request.getRequestDispatcher("AddNewRegistration.jsp").forward(request, response);
         }
-        response.sendRedirect("myRegistration");
+
+        request.getRequestDispatcher("AddNewRegistration.jsp").forward(request, response);
     }
 
     /**

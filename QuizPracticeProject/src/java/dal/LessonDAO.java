@@ -30,7 +30,7 @@ public class LessonDAO extends MyDAO {
         }
 
         xSql += " and [name] like ? ";
-        xSql += " order by [id] desc offset ? rows fetch next 5 rows only";
+        xSql += " order by [order] offset ? rows fetch next 5 rows only";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -232,6 +232,57 @@ public class LessonDAO extends MyDAO {
             System.out.println("abcasknclas" + e.getMessage());
         }
         return (t);
+    }
+
+    public Lesson getLessonByLessonId(int subjectId, int userId, int lessonId) {
+        
+        xSql = " select lesson.id,lesson.subject_id,topic_id,lesson.name,lesson.type_id,[order],video_link,html_content,lesson.[status],exam_id from lesson \n"
+                + "inner join subject on lesson.subject_id = subject.id\n"
+                + "inner join registration on registration.subject_id = subject.id\n"
+                + "inner join price_package on registration.price_package_id=price_package.id\n"
+                + "\n"
+                + "where DATEADD(DAY,price_package.duration,registration.created) >GETDATE()\n"
+                + "and lesson.subject_id = ? and user_id = ? and registration.status = 1\n"
+                + "and lesson.id=? ";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, userId);
+            ps.setInt(3, lessonId);
+            rs = ps.executeQuery();
+            int xID;
+            int xSubject_id;
+            int xTopic_id;
+            String xName;
+            int xType_id;
+            int xOrder;
+            String xVideo_link;
+            String xHtml_content;
+           int xExam_id;
+
+            boolean xStatus;
+            Lesson x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xExam_id=rs.getInt("exam_id");
+                xStatus = rs.getBoolean("status");
+                return new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content,xExam_id, xStatus);
+                
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("abcasknclas" + e.getMessage());
+        }
+        return null;
     }
 
     public List<Lesson_Type> getLessonType() {
@@ -483,6 +534,87 @@ public class LessonDAO extends MyDAO {
         }
     }
 
+    public Lesson getLessonDetailByLessonId(int lessonId) {
+
+        xSql = "select * from lesson where subject_id = ? order by [order]";
+        int xID;
+        int xSubject_id;
+        int xTopic_id;
+        String xName;
+        int xType_id;
+        int xOrder;
+        String xVideo_link;
+        String xHtml_content;
+        int xExam_id;
+        boolean xStatus;
+        Lesson x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, lessonId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xStatus = rs.getBoolean("status");
+                xExam_id = rs.getInt("exam_id");
+                return new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content, xExam_id, xStatus);
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Lesson> getLessonDetailBySubjectId(int lessonId) {
+        List<Lesson> t = new ArrayList<>();
+
+        xSql = "select * from lesson where subject_id = ? order by [order]";
+        int xID;
+        int xSubject_id;
+        int xTopic_id;
+        String xName;
+        int xType_id;
+        int xOrder;
+        String xVideo_link;
+        String xHtml_content;
+        int xExam_id;
+        boolean xStatus;
+        Lesson x = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, lessonId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xSubject_id = rs.getInt("subject_id");
+                xTopic_id = rs.getInt("topic_id");
+                xName = rs.getString("name");
+                xType_id = rs.getInt("type_id");
+                xOrder = rs.getInt("order");
+                xVideo_link = rs.getString("video_link");
+                xHtml_content = rs.getString("html_content");
+                xStatus = rs.getBoolean("status");
+                xExam_id = rs.getInt("exam_id");
+                x = new Lesson(xID, xSubject_id, xTopic_id, xName, xType_id, xOrder, xVideo_link, xHtml_content, xExam_id, xStatus);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return t;
+    }
+
     public void updateQuizlesson(int subjectId, int topicId, String name, int type_id, int order, String video_link, String htmlContent, boolean Status, int examId, int lessonId) {
         xSql = "UPDATE [dbo].[lesson]\n"
                 + "   SET [subject_id] = ?\n"
@@ -513,6 +645,7 @@ public class LessonDAO extends MyDAO {
             System.out.println("update: " + e.getMessage());
         }
     }
+
 //    public static void main(String[] args) {
 //        LessonDAO lDAO = new LessonDAO();
 //        lDAO.updateQuizlesson(2, 2, "asdasd", 2, 2, "https://www.youtube.com/", "lewlew", true, 2, 2);

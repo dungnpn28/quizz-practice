@@ -9,10 +9,8 @@
 <%@page import= "model.*"%>
 <%@page import= "dal.*"%>
 <%@page import= "java.util.*"%>
-<%@page import= "java.util.ArrayList"%>
-<%@page import= "java.util.List"%>
-<%@page import= "java.util.Date"%>
-<%@page import= "java.text.SimpleDateFormat"%>
+<%@page import= "java.util.ArrayList" %>
+<%@page import= "java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +29,7 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <h1 style="font-size:35px">Registration List</h1>
+                <h1 style="font-size:35px">QUIZZES LIST</h1>
                 <div class="topnav">
                     <div class="left-container">
                         <div class="search-bar-container">
@@ -45,21 +43,16 @@
                         <div class="filter-container">
                             <select name="category" id="filter1" onchange="applyFilters()">
                                 <option value= "all" >All</option>
-                                <c:forEach var="categoryList" items="${categoryList}">
-                                    <option value="${categoryList.getId()}" ${categoryList.getId().toString() eq category ? "selected" : ""} >${categoryList.getName()}</option>
+                                <c:forEach var="subjectList" items="${subjectList}">
+                                    <option value="${subjectList.getId()}" ${subjectList.getId().toString() eq category ? "selected" : ""} >${subjectList.getName()}</option>
                                 </c:forEach>
                             </select>
-                            <select name="status" id="filter2" onchange="applyFilters()">
-                                <option value="all" ${status eq "all" ? "selected" : ""}>All</option>
-                                <option value="1" ${status eq "1" ? "selected" : ""}>Paid</option>
-                                <option value="0" ${status eq "0" ? "selected" : ""}>Submitted</option>
 
-                            </select>
                             <button class="clear-filter" id="clear-filter" onclick="clearFilters()">Clear</button>
                         </div>
                     </div>
                     <div class="right-container">
-                        <a href="addnewregistration"><button id="add-button">Add New</button></a>
+                        <a href="#"><button id="add-button">Add New</button></a>
                     </div>
                 </div>
                 <div class="header_fixed">
@@ -67,50 +60,41 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Email</th>
-                                <th>Registration Time</th>
+                                <th>Name</th>
                                 <th>Subject</th>
-                                <th>Package</th>
-                                <th>Total cost</th>
-                                <th>Status</th>
-                                <th>Valid from</th>
-                                <th>Valid to</th>
-                                <!--<th>Last update by</th>-->
+                                <th>Level</th>
+                                <th>#Question</th>
+                                <th>Duration</th>
+                                <th>Passrate</th>
+
+
+
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${mrList}" var="mrList">
+                            <c:forEach items="${examList}" var="examList">
                                 <tr>
-                                    <td>${mrList.getId()}</td>
+                                    <td>${examList.getId()}</td>
+                                    <td>${examList.getName()}</td>
 
-                                    <c:forEach items="${userList}" var="userList">
-                                        <c:if test="${mrList.userId == userList.id}">
-                                            <td>${userList.account}</td>
+
+                                    <c:forEach items="${subjectList}" var="subjectList">
+                                        <c:if test="${subjectList.id == examList.subject_id}">
+                                            <td>${subjectList.name}</td>
                                         </c:if>
                                     </c:forEach>
+                                    <td>${examList.level}</td>
 
-                                    <td>${mrList.time}</td>
-                                    <td>${mrList.subject_name}</td>
+                                    <td>${examList.number_of_question}</td>
+                                    <td>${examList.duration}</td>
+                                    <td>${examList.pass_rate}</td>
 
-                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
-                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
-                                            <td>${pricePackageList.name}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:forEach items="${pricePackageList}" var="pricePackageList">
-                                        <c:if test="${mrList.pricePackageId == pricePackageList.id}">
-                                            <td>${pricePackageList.sale}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                    <td>${mrList.status == 1 ?'paid':'submitted'}</td>
 
-                                    <td>${mrList.created}</td>
-                                    <td>${mrList.expired}</td>
                                     <td>
-                                        <a class="dialog-btn" href="#">View detail</a>
+                                        <a href="#">Edit</a>
+                                        <a href="#">View detail</a>
                                     </td>
-
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -119,19 +103,19 @@
                     </table>
                     <div class="pagination">
                         <c:forEach begin="1" end="${endP}" var="i">
-                            <a class="${tag == i?"active":""}" href="registrationList?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
+                            <a class="${tag == i?"active":""}" href="subjectlistae?index=${i}&status=${status}&category=${category}&search=${search}"">${i}</a>
                         </c:forEach>
                     </div>
 
                 </div>
-
+                <a href="subjectlistae" class="btn btn-primary">Back to Subject list</a>
 
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/PopUp.js" type="text/javascript"></script>
-        <script src="js/RegistrationList.js" type="text/javascript"></script>      
+        <script src="js/QuizzesList.js" type="text/javascript"></script>      
         <script src="js/navBar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>

@@ -50,3 +50,13 @@ img {
     display: block;
     cursor: pointer;
 }
+
+.filterTable{
+    display: grid;
+    text-align: left;
+        
+}
+
+.filterTable .btn{
+    font-size: 14px;
+}
