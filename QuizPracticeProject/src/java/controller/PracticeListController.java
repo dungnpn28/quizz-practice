@@ -59,20 +59,13 @@ public class PracticeListController extends HttpServlet {
         processRequest(request, response);
 
         HttpSession sessions = request.getSession();
-        User a = (User) sessions.getAttribute("user");
+        User u = (User) sessions.getAttribute("user");
 
         AttemptDAO aDAO = new AttemptDAO();
-        List<Attempt> at = new ArrayList<>();
-        at = aDAO.getAttemptList(0, 0, 0, a.getId());
-        request.setAttribute("at", at);
-
-        if (at.isEmpty() || at == null) {
-            request.getRequestDispatcher("PracticeList.jsp").include(request, response);
-        } else {
-
-            request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
-
-        }
+        ArrayList<Attempt> list = new ArrayList<>();
+        list = aDAO.getAttemptList(u.getId());
+        request.setAttribute("attemptlist", list);
+        request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
     }
 
     /**
@@ -100,3 +93,4 @@ public class PracticeListController extends HttpServlet {
     }// </editor-fold>
 
 }
+

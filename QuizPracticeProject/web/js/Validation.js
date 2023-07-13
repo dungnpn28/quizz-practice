@@ -55,7 +55,7 @@ function validateForm1(id) {
         alert("Giá phải là số nguyên và lớn hơn hoặc bằng 100");
         return false;
     }
-    if (isNaN(sale) || sale < 0 || sale >= price) {
+    if (isNaN(sale) || sale <= 0 || sale >= price) {
         alert("Giá khuyến mãi phải là số nguyên và nằm trong khoảng từ 0 đến giá gốc");
         return false;
     }

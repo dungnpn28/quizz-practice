@@ -18,29 +18,37 @@
     </head>
     <%@include file="components/CusHeader.jsp" %>
     <body>
-        <div class="practiceDetailForm">
-            <form action="practiceDetails" method="POST">
-                <h2>PRACTICE DETAILS</h2>
-                <c:if test="${errorMessage != null}">
-                    <p>${errorMessage}</p>
-                </c:if>
-                <br>
-                <label class="" for="subject">Subject:</label>
-                <br>
-                <select name="subject" id="subject" class="btn btn-secondary">
-                    <option value="" disabled selected hidden>Subject name</option>
-                    <c:forEach items="${mr}" var="mr">
-                        <option value="${mr.subjectId}">${mr.subject_name}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <label for="ques">Number of practicing questions</label>
-                <br>
-                <input name="questions" id="ques" type="text" >
-                <br>
-                <input type="submit" value="Practice" class="btn btn-primary">
-            </form>
+        <div class="wrapper">
+            <%@include file="components/navbar.jsp" %>
+            <div id="content">
+                <div class="practiceDetailForm">
+                    <form action="practiceDetails" method="POST" class="bigForm">
+                        <h2>PRACTICE DETAILS</h2>
+                        <c:if test="${errorMessage != null}">
+                            <p>${errorMessage}</p>
+                        </c:if>
+                        <br>
+                        <label class="" for="subject">Subject:</label>
+                        <br>
+                        <select name="subject" id="subject" class="btn btn-secondary">
+                            <option value="" disabled selected hidden>Subject name</option>
+                            <c:forEach items="${mr}" var="mr">
+                                <option value="${mr.subjectId}">${mr.subject_name}</option>
+                            </c:forEach>
+                        </select>
+                        <br>
+                        <label for="ques">Number of practicing questions</label>
+                        <br>
+                        <input name="questions" id="ques" type="text" >
+                        <br>
+                        <input type="submit" value="Practice" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/navBar.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <%@include file="components/Footer.jsp" %>
 </html>

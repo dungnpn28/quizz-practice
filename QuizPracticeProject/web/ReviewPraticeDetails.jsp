@@ -18,25 +18,33 @@
     </head>
     <%@include file="components/CusHeader.jsp" %>
     <body>
-        <div class="practiceDetailForm">
-            <form action="reviewpracticeDetails" method="POST">
-                <h2>PRACTICE DETAILS</h2>
-                <br>
-                <label class="" for="subject">Subject:</label>
-                <br>
-                <select name="subject" id="subject" class="btn btn-secondary">
-                    <c:forEach items="${subjectCategoryList}" var="category">
-                        <option value="${category.id}" disabled>${category.name}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <label for="ques">Number of practicing questions</label>
-                <br>
-                <input name="questions" id="ques" type="number" disabled>
-                <br>
-                <input type="submit" value="Practice Review" class="btn btn-primary">
-            </form>
+        <div class="wrapper">
+            <%@include file="components/navbar.jsp" %>
+            <div id="content">
+                <div class="practiceDetailForm">
+                    <form action="reviewpracticeDetails" method="POST">
+                        <h2>PRACTICE DETAILS</h2>
+                        <br>
+                        <label class="" for="subject">Subject:</label>
+                        <br>
+                        <select name="subject" id="subject" class="btn btn-secondary">
+                            <c:forEach items="${subjectCategoryList}" var="category">
+                                <option value="${category.id}" disabled>${category.name}</option>
+                            </c:forEach>
+                        </select>
+                        <br>
+                        <label for="ques">Number of practicing questions</label>
+                        <br>
+                        <input name="questions" id="ques" type="number" disabled>
+                        <br>
+                        <input type="submit" value="Practice Review" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/navBar.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <%@include file="components/Footer.jsp" %>
 </html>
