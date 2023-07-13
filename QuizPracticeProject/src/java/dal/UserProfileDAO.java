@@ -347,4 +347,27 @@ public class UserProfileDAO extends MyDAO {
             System.out.println("changeUser: " + e.getMessage());
         }
     }
+    
+    public void update2(UserProfile x) {
+        xSql = "UPDATE [dbo].[user_profile]\n"
+                + "   SET \n"
+                + "      [full_name]= ?\n"
+                + "      ,[gender] = ? \n"
+                + "      ,[dob] = ? \n"
+                + "      ,[phone_number] = ? \n"
+                + "      ,[modified] = GETDATE()\n"
+                + " WHERE [user_id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, x.getFull_name());
+            ps.setInt(2, x.getGender());
+            ps.setString(3, x.getDob());
+            ps.setString(4, x.phone_number());
+            ps.setInt(5, x.getUser_id());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("update2: " + e.getMessage());
+        }
+    }
 }

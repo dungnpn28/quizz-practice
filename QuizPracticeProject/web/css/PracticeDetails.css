@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     justify-content: center;
     align-items: center;
-    background:linear-gradient(to right, #5CE1E6,#0079A7) ;
+    
 }
 
 form{
@@ -19,6 +19,6 @@ form{
     padding: 20px;
     margin: auto; /* to center the form horizontally */
     width: 500px;
-    height: 500px;
+    height: 300px;
     font-size: 20px;
 }

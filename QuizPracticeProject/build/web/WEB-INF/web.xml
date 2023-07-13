@@ -37,7 +37,7 @@
         <servlet-class>controller.SimulationExamController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <servlet-class>controller.UserAuthorizationController</servlet-class>
     </servlet>
     <servlet>
@@ -241,6 +241,14 @@
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <servlet-class>controller.AddNewQuizDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <servlet-class>controller.EditQuizDetailsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddNewRegistrationController</servlet-name>
         <servlet-class>controller.AddNewRegistrationController</servlet-class>
     </servlet>
@@ -285,7 +293,7 @@
         <url-pattern>/simulationExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserAuthorization</servlet-name>
+        <servlet-name>UserAuthorizationController</servlet-name>
         <url-pattern>/userauthorization</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -487,6 +495,14 @@
     <servlet-mapping>
         <servlet-name>RegistrationListController</servlet-name>
         <url-pattern>/registrationList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewQuizDetailsController</servlet-name>
+        <url-pattern>/addNewQuizDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditQuizDetailsController</servlet-name>
+        <url-pattern>/editQuizDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddNewRegistrationController</servlet-name>

@@ -92,8 +92,8 @@
 
 
                                     <td>
-                                        <a href="#">Edit</a>
-                                        <a href="#">View detail</a>
+                                        
+                                        <a href="editQuizDetails?examId=${examList.getId()}">View detail</a>
                                     </td>
                                 </tr>
                             </c:forEach>

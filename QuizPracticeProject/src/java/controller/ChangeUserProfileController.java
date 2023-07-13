@@ -71,50 +71,54 @@ public class ChangeUserProfileController extends HttpServlet {
         processRequest(request, response);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int xUser_id = user.getId();
-        int genderValue = 0;
-
-        Part file = request.getPart("avatar");
-        String originalFileName = file.getSubmittedFileName();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String xAvatar = System.currentTimeMillis() + fileExtension;
-        String uploadPath = "E:/FPT Subjects/SE5/SWP/pull2/QuizPracticeProject/web/uploads/" + xAvatar;
-        try {
-            FileOutputStream fos = new FileOutputStream(uploadPath);
-            InputStream is = file.getInputStream();
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            fos.write(data);
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         String xFull_name = request.getParameter("fullname");
         String xPhone_number = request.getParameter("phonenum");
-        String regex = "^(03[2-9]|05[6|8|9]|07[0|6-9]|08[1-5|8|9]|09[0-9])[0-9]{7}$";
-        String input = xPhone_number;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        if (!matcher.matches()) {
-            request.setAttribute("tbao", "Invalid phone number");
-            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
-        } else {
-            String xDob = request.getParameter("dob");
-            String xGender = request.getParameter("radB1");
-            if (xGender.equals("male")) {
-                genderValue = 1;
+        String xDob = request.getParameter("dob");
+        String xGender = request.getParameter("radB1");
+        int xUser_id = user.getId();
+        int genderValue = 0;
+        if (xGender.equals("male")) {
+            genderValue = 1;
+        }
+        Part file = request.getPart("avatar");
+        if (file != null && file.getSize() > 0) {
+            String originalFileName = file.getSubmittedFileName();
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            String xAvatar = System.currentTimeMillis() + fileExtension;
+            String uploadPath = "D:/ktpm/ki5/SWP391/new branch/QuizPracticeProject/web/uploads/" + xAvatar;
+            try {
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
             UserProfile up = new UserProfile(xUser_id, xAvatar, xFull_name, genderValue, xDob, xPhone_number);
             UserProfileDAO u = new UserProfileDAO();
             u.update(up);
+            session.removeAttribute("uProfile");
+            UserProfile uProfile = u.getUserProfile(xUser_id);
+            session.setAttribute("uProfile", uProfile);
             try {
                 Thread.sleep(2000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             response.sendRedirect("cusHome");
+        } else{
+            UserProfile up = new UserProfile(xUser_id, xFull_name, genderValue, xPhone_number, xDob);
+            UserProfileDAO u = new UserProfileDAO();
+            u.update2(up);
+            session.removeAttribute("uProfile");
+            UserProfile uProfile = u.getUserProfile(xUser_id);
+            session.setAttribute("uProfile", uProfile);
+            response.sendRedirect("cusHome");
         }
+
     }
 
     /**

@@ -74,6 +74,7 @@ public class MyRegistration {
         this.status = status;
         this.time = time;
     }
+
     
     
 

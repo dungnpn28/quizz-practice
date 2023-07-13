@@ -47,7 +47,7 @@
                             </div>
                             <div class="exit-popup-button">
                                 <button onclick="closeExitPopup()">Continue Reviewing</button>
-                                <a id="exit-immediate" href="simulationExam">Yes</a>
+                                <a id="exit-immediate" href="practiceList">Yes</a>
                             </div>
                         </div>
                     </div>

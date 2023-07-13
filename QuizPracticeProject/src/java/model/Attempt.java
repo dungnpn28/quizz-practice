@@ -16,11 +16,57 @@ public class Attempt {
     private boolean marked;
     private String userAnswer;
     private double score;
+    private String examName;
+    private int numberOfQuestion;
+    private String duration;
+
+    public int getAttemptId() {
+        return attemptId;
+    }
+
+    public void setAttemptId(int attemptId) {
+        this.attemptId = attemptId;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public int getNumberOfQuestion() {
+        return numberOfQuestion;
+    }
+
+    public void setNumberOfQuestion(int numberOfQuestion) {
+        this.numberOfQuestion = numberOfQuestion;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+    
+    
 
     public Attempt(int attemptId, int userId, int exam_id) {
         this.attemptId = attemptId;
         this.userId = userId;
         this.exam_id = exam_id;
+    }
+
+    public Attempt(int attemptId, int userId, int exam_id, String examName, int numberOfQuestion, String duration) {
+        this.attemptId = attemptId;
+        this.userId = userId;
+        this.exam_id = exam_id;
+        this.examName = examName;
+        this.numberOfQuestion = numberOfQuestion;
+        this.duration = duration;
     }
 
     public Attempt(int attemptId, int userId, int questionId, int exam_id, boolean marked, String userAnswer, double score) {
