@@ -181,7 +181,7 @@
                                                 </div>
                                                 <input type="hidden" name="registrationId" value="${mrList.id}">
                                                 <input type="hidden" name="idOfSubject" value="${mrList.subjectId}">
-                                                <label class="form-label">${mrList.subjectId}</label>
+                                                
                                                 <br>
                                                 <!--                                                    <button type="submit">Change Update</button>-->
                                                 <input type="submit" value="Updated" class="btn btn-primary" onclick ="return confirm('Are you sure you want to updated?')">

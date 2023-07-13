@@ -361,7 +361,7 @@ public class ExamDAO extends MyDAO {
         }
         return (examList);
     }
-    
+
 //    public static void main(String[] args) {
 //        ExamDAO eDAO = new ExamDAO();
 //        List<Exam> lExam = eDAO.getAllExam();
@@ -384,7 +384,7 @@ public class ExamDAO extends MyDAO {
         }
         return null;
     }
-    
+
     public List<Integer> getExamIdBySubjectId(String subjectId) {
         List<Integer> t = new ArrayList<>();
         int xExam_id;
@@ -402,5 +402,96 @@ public class ExamDAO extends MyDAO {
             System.out.println("getExamIdBySubjectId:" + e.getMessage());
         }
         return t;
+    }
+
+    public int getTotalExamFilter(String category, String search) {
+        try {
+            String strSelect = "select count(*) from exam WHERE mode = 1 AND 1=1 ";
+            if (!category.equals("all")) {
+                strSelect += " and [subject_id]= ?";
+            }
+
+            strSelect += " and [name] like ? ";
+
+            ps = con.prepareStatement(strSelect);
+
+            int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+            ps.setString(i, "%" + search + "%");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalExamFilter: " + e.getMessage());
+        }
+
+        return 0;
+
+    }
+
+    public List<Exam> getExamWithPaging(int index, String category, String search) {
+        List<Exam> t = new ArrayList<>();
+        xSql = "select * from exam WHERE mode = 1 AND 1=1";
+
+        if (!category.equals("all")) {
+            xSql += " and [subject_id]= ?";
+        }
+
+        xSql += " and [name] like ? ";
+        xSql += " order by [id] offset ? rows fetch next 5 rows only";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            int i = 1;
+            if (!category.equals("all")) {
+                ps.setInt(i, Integer.parseInt(category));
+                i++;
+            }
+
+            ps.setString(i, "%" + search + "%");
+            i++;
+            ps.setInt(i, (index - 1) * 5);
+
+            rs = ps.executeQuery();
+            int xID;
+            String xName;
+            int xSubject_id;
+            int xLevel;
+            Time xDuration;
+            double xPass_rate;
+            int xNumber_of_question;
+            String xDescription;
+            Date xCreated;
+            int xMode;
+            String xxDuration;
+            Exam x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xName = rs.getString("name");
+                xSubject_id = rs.getInt("subject_id");
+                xLevel = rs.getInt("level");
+                xDuration = rs.getTime("duration");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                xxDuration = dateFormat.format(xDuration);
+                xPass_rate = rs.getDouble("pass_rate");
+                xNumber_of_question = rs.getInt("number_of_question");
+                xDescription = rs.getString("description");
+                xCreated = rs.getDate("created");
+                xMode = rs.getInt("mode");
+                x = new Exam(xID, xName, xSubject_id, xLevel, xxDuration, xPass_rate, xNumber_of_question, xCreated, xDescription);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("getExamWithPaging: " + e.getMessage());
+        }
+        return (t);
     }
 }

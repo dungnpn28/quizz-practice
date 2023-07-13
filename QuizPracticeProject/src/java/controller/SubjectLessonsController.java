@@ -36,10 +36,12 @@ public class SubjectLessonsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession sessions = request.getSession();
         int subjectId;
-        if (sessions.getAttribute("subjectId") != null) {
-            subjectId = Integer.parseInt(sessions.getAttribute("subjectId").toString());
-        } else {
+
+        if (request.getParameter("subjectId") != null) {
             subjectId = Integer.parseInt(request.getParameter("subjectId"));
+
+        } else {
+            subjectId = Integer.parseInt(sessions.getAttribute("subjectId").toString());
         }
         LessonDAO lDAO = new LessonDAO();
 

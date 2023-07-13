@@ -60,7 +60,7 @@
                                         <div class="card-block">
                                             <h6 class="card-title">${list_lesson.name}</h6>
                                             <!--                                            <p class="card-text text-justify" id="lesson-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
-                                            <a href="https://www.google.com" class="btn btn-primary">Do quiz</a>
+                                            <a href="quizhandle?id=${list_lesson.exam_id}&page=1" class="btn btn-primary">Do quiz</a>
                                         </div>
                                     </div>
                                 </div>
@@ -74,4 +74,6 @@
         <script src="js/navBar.js" type="text/javascript"></script>
 
     </body>
+        <%@include file="components/Footer.jsp" %>
+
 </html>
