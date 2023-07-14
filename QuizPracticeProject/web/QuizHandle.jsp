@@ -14,7 +14,7 @@
         <title>Quiz Handle</title>
         <link rel="stylesheet" href="css/QuizHandle.css" type="text/css" />
         <script src="js/QuizHandle.js"></script>
-        
+
     </head>
 
     <body>
@@ -28,7 +28,7 @@
                 <div class="runout-time w-100 h-auto col-md-4">
 
                     <h1>
-                        <div id="time"></div>
+                        <div> Remaining time: ${remainingTime} seconds</div>
                     </h1>
 
                 </div>
@@ -208,6 +208,25 @@
 
                 </c:forEach>
         </main>
+        <script>
+            // Function to update the remaining time
+            function updateRemainingTime() {
+                // Send an AJAX request to the servlet to get the updated remaining time
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "quizhandle", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Update the remaining time on the page
+                        var remainingTime = xhr.responseText;
+                        document.getElementById("remainingTime").innerText = remainingTime;
+                    }
+                };
+                xhr.send();
+            }
+
+            // Update the remaining time every second
+            setInterval(updateRemainingTime, 1000);
+        </script>
     </body>
 
 </html>

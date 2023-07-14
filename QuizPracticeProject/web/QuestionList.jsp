@@ -32,7 +32,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>QuizPractice</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <!--<link href="css/Style.css" rel="stylesheet" type="text/css"/>-->
+        <link href="css/QuestionImport.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                
+
                                 <select name="subject" id="role" style="margin-right: 5px">
                                     <option value= "all" >All</option>
                                     <c:forEach items="${subjectList}" var="subjectList">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                
+
                                 <select name="lesson" id="role" style="margin-right: 5px">
                                     <option value= "all" >All</option>
                                     <c:forEach items="${lessonList}" var="lessonList">
@@ -80,7 +80,7 @@
                         </div>
                         <div class="search-container">
                             <div class="a1">
-                                
+
                                 <select name="level" id="status" style="margin-right: 5px">
                                     <option value="all" ${level eq "all" ? "selected" : ''}>All</option>
                                     <option value="easy" ${level eq "easy" ? "selected" : ''}>Easy</option>
@@ -89,16 +89,48 @@
                                 </select>
                             </div>
                         </div>
+
                     </form>
                     <div class="search-container">
                         <button><a href="questionList" style="background-color: #4CAF50; padding: 7px 16px; text-decoration: none; color: #ffffff">Clear filter</a></button>
                     </div>
-                    
+                    <div class="search-container">
+
+                        <button onclick="openPopup();" style="background-color: #755bea; padding: 7px 16px; text-decoration: none; color: #ffffff">Question Import</button>
+
+                        <div id="question-import" class="question-import-overlay">
+                            <div class="question-import-content" >
+
+                                <h1 style="font-weight: bold;" class="d-flex justify-content-center">Question Import</h1>
+                                <div class="question-import-button">
+                                    <form class="d-flex justify-content-between" action="questionimport" method="post" enctype='multipart/form-data'>
+                                        <div class="question-import-left d-flex flex-column">                                       
+                                            <h2>Upload Excel file</h2>
+                                            <input name="xlsxfile" type="file" id="fileInput" onchange="handleFileSelect(event)" />
+                                            <h3 style="color: red; font-weight: bold;" id="resultContainer"></h3>
+                                        </div>
+                                        <div class="question-import-right d-flex flex-column">
+                                            <h2>Haven't got template?</h2>
+                                            <button><a href="questionimport">Download Excel file</a></button>
+                                        </div>
+                                        <input style="display: none" id="submit" type="submit" name="submit" value="submit">
+                                    </form>
+                                    <div class="d-flex justify-content-center">
+                                        <button onclick="closePopup();">Close</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="header_fixed">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>id</th>
+                                    <th>Id</th>
                                     <th>Subject</th>
                                     <th>Lesson</th>
                                     <th>Content</th>
@@ -141,7 +173,6 @@
 
                                 </tr>
                                 <div class="dialog overlay" id="my-dialog2-${userprofile.getUser().getId()}">
-                                    <!--                            <a href="#" class="overlay-close"></a>-->
                                     <div class="dialog-body">
                                         <a class="dialog-close-btn" href="">&times;</a>
                                         <div class="container">
@@ -156,7 +187,7 @@
                                                     <label class="form-label">name</label>
                                                     <input type="text" value="${userprofile.getFull_name()}"readonly>
                                                     <div>
-                                                        <label class="form-label">Gender</label> &nbsp&nbsp
+                                                        <label class="form-label">Gender</label>
                                                         <input type="radio" name="gender" value="0" ${userprofile.getGender() == 0 ? "checked":""} disabled>Female &nbsp;&nbsp;
                                                         <input type="radio" name="gender" value="1" ${userprofile.getGender() == 1 ? "checked":""} disabled >Male
                                                     </div>
@@ -205,49 +236,74 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            function applyFilters() {
-                var genderSelect = document.getElementById("gender");
-                var roleSelect = document.getElementById("role");
-                var statusSelect = document.getElementById("status");
-                var searchInput = document.getElementById("searchInput");
+                                                                                function applyFilters() {
+                                                                                    var genderSelect = document.getElementById("gender");
+                                                                                    var roleSelect = document.getElementById("role");
+                                                                                    var statusSelect = document.getElementById("status");
+                                                                                    var searchInput = document.getElementById("searchInput");
 
-                var gender = genderSelect.options[genderSelect.selectedIndex].value;
-                var role = roleSelect.options[roleSelect.selectedIndex].value;
-                var status = statusSelect.options[statusSelect.selectedIndex].value;
-                var search = searchInput.value;
-
-
-
-
-                // Build your base URL
-                var baseUrl = "userlist?";
-
-                if (gender !== "all") {
-                    baseUrl += "gender=" + gender + "&";
-                }
-                if (role !== "all") {
-                    baseUrl += "role=" + role + "&";
-                }
-                if (status !== "all") {
-                    baseUrl += "status=" + status + "&";
-                }
-                if (search.trim() !== "") {
-                    baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
-                }
-
-                baseUrl = baseUrl.slice(0, -1);
-                localStorage.setItem("gender", gender);
-                localStorage.setItem("role", role);
-                localStorage.setItem("status", status);
-                localStorage.setItem("search", search);
+                                                                                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
+                                                                                    var role = roleSelect.options[roleSelect.selectedIndex].value;
+                                                                                    var status = statusSelect.options[statusSelect.selectedIndex].value;
+                                                                                    var search = searchInput.value;
 
 
 
-                // Redirect to the filtered URL
-                window.location.href = baseUrl;
-            }
+
+                                                                                    // Build your base URL
+                                                                                    var baseUrl = "userlist?";
+
+                                                                                    if (gender !== "all") {
+                                                                                        baseUrl += "gender=" + gender + "&";
+                                                                                    }
+                                                                                    if (role !== "all") {
+                                                                                        baseUrl += "role=" + role + "&";
+                                                                                    }
+                                                                                    if (status !== "all") {
+                                                                                        baseUrl += "status=" + status + "&";
+                                                                                    }
+                                                                                    if (search.trim() !== "") {
+                                                                                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
+                                                                                    }
+
+                                                                                    baseUrl = baseUrl.slice(0, -1);
+                                                                                    localStorage.setItem("gender", gender);
+                                                                                    localStorage.setItem("role", role);
+                                                                                    localStorage.setItem("status", status);
+                                                                                    localStorage.setItem("search", search);
 
 
+
+                                                                                    // Redirect to the filtered URL
+                                                                                    window.location.href = baseUrl;
+                                                                                }
+
+                                                                                function openPopup() {
+                                                                                    document.getElementById('question-import').classList.add('active');
+                                                                                }
+
+                                                                                function closePopup() {
+                                                                                    document.getElementById('question-import').classList.remove('active');
+                                                                                }
+                                                                                document.getElementById('fileInput').addEventListener('change', function (event) {
+                                                                                    var file = event.target.files[0];
+                                                                                    // display the id=submit
+                                                                                    var allowedType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                                                                                    if (file.type !== allowedType) {
+                                                                                        event.target.value = null; // Clear the file selection
+                                                                                        document.getElementById('resultContainer').textContent = "Invalid file type. Only XLSX files are allowed.";
+                                                                                        return;
+                                                                                    } else {
+                                                                                        document.getElementById('resultContainer').textContent = "";
+                                                                                        //hide the id=submit
+                                                                                        document.getElementById('submit').style.display = 'block';
+
+                                                                                    }
+                                                                                });
+                                                                                function chooseFile() {
+                                                                                    var fileInput = document.getElementById('fileInput');
+                                                                                    fileInput.click();
+                                                                                }
         </script>
         <script src="js/PopUp.js"></script>
         <script src="js/navBar.js"></script>

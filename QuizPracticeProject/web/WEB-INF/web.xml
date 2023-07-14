@@ -241,6 +241,10 @@
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>QuestionImportController</servlet-name>
+        <servlet-class>controller.QuestionImportController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddNewQuizDetailsController</servlet-name>
         <servlet-class>controller.AddNewQuizDetailsController</servlet-class>
     </servlet>
@@ -495,6 +499,10 @@
     <servlet-mapping>
         <servlet-name>RegistrationListController</servlet-name>
         <url-pattern>/registrationList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionImportController</servlet-name>
+        <url-pattern>/questionimport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddNewQuizDetailsController</servlet-name>

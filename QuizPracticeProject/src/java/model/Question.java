@@ -23,6 +23,29 @@ public class Question {
     private String level;
     private int questionOrder;
     private double marksAllocated;
+    private boolean status;
+
+    public Question(int subjectId, int lessonId, String content, String optionA, String optionB, String optionC, String optionD, String answer, String answer_explaination, String level, boolean status) {
+        this.subjectId = subjectId;
+        this.lessonId = lessonId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.answer_explaination = answer_explaination;
+        this.level = level;
+        this.status = status;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     
     public Question() {
     }
@@ -147,7 +170,6 @@ public class Question {
         this.answer = answer;
         this.answer_explaination = answer_explaination;
         this.level = level;
-        
     }
 
 

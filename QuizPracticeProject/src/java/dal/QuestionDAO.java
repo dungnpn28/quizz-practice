@@ -320,6 +320,47 @@ public class QuestionDAO extends MyDAO {
         return questionList;
     }
 
+    public void addQuestion(Question q) {
+        try {
+            String strAdd = "INSERT INTO[question]\n"
+                    + "           ([subject_id]\n"
+                    + "           ,[lesson_id]\n"
+                    + "           ,[content]\n"
+                    + "           ,[option_a]\n"
+                    + "           ,[option_b]\n"
+                    + "           ,[option_c]\n"
+                    + "           ,[option_d]\n"
+                    + "           ,[answer]\n"
+                    + "           ,[answer_explaination]\n"
+                    + "           ,[level]\n"
+                    + "           ,[status]\n"
+                    + "           ,[created])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?,?,?,?,?, GETDATE())";
+            ps = con.prepareStatement(strAdd);
+            ps.setInt(1, q.getSubjectId());
+            ps.setInt(2, q.getLessonId());
+            ps.setString(3, q.getContent());
+            ps.setString(4, (String) q.getOptionA());
+            ps.setString(5, (String) q.getOptionB());
+            ps.setString(6, (String) q.getOptionC());
+            ps.setString(7, (String) q.getOptionD());
+            ps.setString(8, (String) q.getAnswer());
+            ps.setString(9, (String) q.getAnswer_explaination());
+            ps.setString(10, (String) q.getAnswer());
+            if (q.isStatus()) {
+                ps.setInt(11, 1);
+            } else {
+                ps.setInt(11, 0);
+            }
+            ps.execute();
+
+        } catch (Exception e) {
+            System.out.println("addQuestion: " + e.getMessage());
+        }
+    }
+
+
     public List<Integer> getQuestionIdBySubjectId(int subjectId) {
         String Sql = "select id from question where subject_id = ?";
         List<Integer> t = new ArrayList<>();

@@ -48,7 +48,7 @@
                                         <div class="col text-center">
                                             <img id="imagePreview" src="uploads/<%=up.getAvatar()%>" width="200" height="250">
                                             <br>
-                                            <input name="avatar" type="file" accept="image/*"  onchange="loadFile(event)">
+                                            <input name="avatar" type="file" accept="image/*" onchange="loadFile(event)">
                                         </div>
                                     </div>
                                     <div class="col-md-7" class="info">

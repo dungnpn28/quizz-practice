@@ -24,6 +24,9 @@ import model.User;
  * @author Acer
  */
 public class QuizHandleController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static final long COUNTDOWN_DURATION = 60; // Countdown duration in seconds
+    
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -106,6 +109,17 @@ public class QuizHandleController extends HttpServlet {
         QuestionExamDAO qe = new QuestionExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
+        
+        //count-down timer
+        // Get the current time in seconds
+        long currentTime = System.currentTimeMillis() / 1000;
+
+        // Calculate the remaining time
+        long remainingTime = COUNTDOWN_DURATION - currentTime;
+
+        // Set the remainingTime attribute in the request
+        req.setAttribute("remainingTime", remainingTime);
+
 
         //pagination
         int page = Integer.parseInt(req.getParameter("page"));
@@ -161,6 +175,6 @@ public class QuizHandleController extends HttpServlet {
         int second = Integer.parseInt(t[2]);
         int totalTime = hour * 3600 + minute * 60 + second;
         return totalTime;
-    }
+    } 
 
 }
