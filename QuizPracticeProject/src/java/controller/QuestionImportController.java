@@ -77,6 +77,7 @@ public class QuestionImportController extends HttpServlet {
                 }
             }
         }
+        resp.sendRedirect("questionList");
     }
     
     @Override

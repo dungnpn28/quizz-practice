@@ -241,10 +241,10 @@
         <servlet-class>controller.RegistrationListController</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>QuestionImportController</servlet-name>
         <servlet-class>controller.QuestionImportController</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>AddNewQuizDetailsController</servlet-name>
         <servlet-class>controller.AddNewQuizDetailsController</servlet-class>
     </servlet>
@@ -267,7 +267,6 @@
     <servlet>
         <servlet-name>StudyLessonController</servlet-name>
         <servlet-class>controller.StudyingLessonController</servlet-class>
->>>>>>> main
     </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
