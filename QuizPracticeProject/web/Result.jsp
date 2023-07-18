@@ -34,7 +34,7 @@
                             <td>${examname}</td>
                             <td>${attId}</td>
                             <td>${examscore}</td>
-                            <td><span class="${examscore < 5 ? 'not-passed' : 'passed'}">${examscore < 5 ? 'Not Passed' : 'Passed'}</span></td>
+                            <td><span class="${examscore < pass_score ? 'not-passed' : 'passed'}">${examscore < pass_score ? 'Not Passed' : 'Passed'}</span></td>
                         </tr>
                     </table>
                     <table>

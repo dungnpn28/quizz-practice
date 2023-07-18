@@ -119,9 +119,9 @@ public class PracticeDetailsController extends HttpServlet {
         List<Integer> exam_ids = new ArrayList<>();
         exam_ids.add(examId);
         ueDAO.addNewUser_Exam(a.getId(), exam_ids);
-
+        double mark = 10/numberOfQuestion;
         QuestionExamDAO qeDAO = new QuestionExamDAO();
-        qeDAO.insertQuestionExam(examId, randomQusetionId, randomOrderList);
+        qeDAO.insertQuestionExam(examId, randomQusetionId, randomOrderList,mark);
 
 //        request.getRequestDispatcher("quizhandle?id="+examId+"&page=1").forward(request, response);
         response.sendRedirect("quizhandle?id="+examId+"&page=1");

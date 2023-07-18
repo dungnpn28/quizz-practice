@@ -347,7 +347,7 @@ public class QuestionDAO extends MyDAO {
             ps.setString(7, (String) q.getOptionD());
             ps.setString(8, (String) q.getAnswer());
             ps.setString(9, (String) q.getAnswer_explaination());
-            ps.setString(10, (String) q.getAnswer());
+            ps.setString(10, (String) q.getLevel());
             if (q.isStatus()) {
                 ps.setInt(11, 1);
             } else {
@@ -374,6 +374,27 @@ public class QuestionDAO extends MyDAO {
                 t.add(xId);
             }
         } catch (Exception e) {
+        }
+        return t;
+    }
+    public List<Integer> getQuestionIdBySubjectIdAndQuestionType(int subjectId,int type_id) {
+        String Sql = "select question.id from question\n" +
+        "inner join question_dimension on question.id = question_dimension.question_id\n" +
+        "inner join dimension on dimension.id = question_dimension.dimension_id\n" +
+        "where question.subject_id = ? and type_id = ?";
+        List<Integer> t = new ArrayList<>();
+        int xId;
+        try {
+            PreparedStatement ps = con.prepareStatement(Sql);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, type_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                t.add(xId);
+            }
+        } catch (Exception e) {
+            System.out.println("getQuestionIdBySubjectIdAndQuestionType"+e.getMessage());
         }
         return t;
     }
