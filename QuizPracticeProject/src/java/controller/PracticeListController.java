@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AttemptDAO;
+import dal.ExamDAO;
 import dal.MyRegistrationDAO;
 import dal.PracticeListDAO;
 import dal.SubjectDAO;
@@ -60,10 +61,12 @@ public class PracticeListController extends HttpServlet {
 
         HttpSession sessions = request.getSession();
         User u = (User) sessions.getAttribute("user");
-
+       // ExamDAO e = new ExamDAO();
         AttemptDAO aDAO = new AttemptDAO();
         ArrayList<Attempt> list = new ArrayList<>();
+        //List<Exam>list_exam = e.getAllExam();
         list = aDAO.getAttemptList(u.getId());
+       // request.setAttribute("list_exam", list_exam);
         request.setAttribute("attemptlist", list);
         request.getRequestDispatcher("PracticeList.jsp").forward(request, response);
     }

@@ -27,9 +27,7 @@
                 </div>
                 <div class="runout-time w-100 h-auto col-md-4">
 
-                    <h1>
-                        <div> Remaining time: ${remainingTime} seconds</div>
-                    </h1>
+                    
 
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">

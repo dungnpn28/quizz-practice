@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="right-container">
-                        <a href="#"><button id="add-button">Add New</button></a>
+                        <a href="addnewquizdetailsae"><button id="add-button">Add New</button></a>
                     </div>
                 </div>
                 <div class="header_fixed">

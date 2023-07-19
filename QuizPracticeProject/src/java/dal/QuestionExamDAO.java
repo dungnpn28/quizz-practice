@@ -46,17 +46,18 @@ public class QuestionExamDAO extends MyDAO {
         return 0;
     }
 
-    public void insertQuestionExam(int exam_id, List<Integer> randomQusetionId, List<Integer> randomOrderList) {
+    public void insertQuestionExam(int exam_id, List<Integer> randomQusetionId, List<Integer> randomOrderList,double mark) {
         xSql = "INSERT INTO [dbo].[question_exam]\n"
                 + "           ([exam_id],[question_id],[question_order],[marks_allocated])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,1)";
+                + "           (?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             for (int i = 0; i < randomOrderList.size(); i++) {
                 ps.setInt(1, exam_id);
                 ps.setInt(2, randomQusetionId.get(i));
                 ps.setInt(3, randomOrderList.get(i));
+                ps.setDouble(4, mark);
                 ps.executeUpdate();
             }
             ps.close();
