@@ -24,7 +24,10 @@ public class Question {
     private int questionOrder;
     private double marksAllocated;
     private boolean status;
+    private String created;
+    private String modified;
 
+  
     public Question(int subjectId, int lessonId, String content, String optionA, String optionB, String optionC, String optionD, String answer, String answer_explaination, String level, boolean status) {
         this.subjectId = subjectId;
         this.lessonId = lessonId;
@@ -54,6 +57,24 @@ public class Question {
     private boolean marked;
     private String userAnswer;
     private double score;
+
+    public Question(int id, int subjectId, int lessonId, String content, String optionA, String optionB, String optionC, String optionD, String answer, String answer_explaination, String level, boolean status, String created, String modified) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.lessonId = lessonId;
+        this.content = content;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.answer_explaination = answer_explaination;
+        this.level = level;
+        this.status = status;
+        this.created = created;
+        this.modified = modified;
+     
+    }
 
     public Question(int id, int subjectId, String content, String optionA, String optionB, String optionC, String optionD, String answer, int questionOrder, double marksAllocated, String explaination, boolean marked, String userAnswer, double score) {
         this.id = id;
@@ -119,12 +140,21 @@ public class Question {
         this.explaination = explaination;
     }
 
-    public Question(int id, int subjectId, int lessonId, String content, String level) {
+    public Question(int id, int subjectId, int lessonId, String content, String level,Boolean status) {
         this.id = id;
         this.subjectId = subjectId;
         this.lessonId = lessonId;
         this.content = content;
         this.level = level;
+        this.status=status;
+    }
+       public Question(int id, int subjectId, int lessonId, String content, String level) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.lessonId = lessonId;
+        this.content = content;
+        this.level = level;
+ 
     }
 
     
@@ -260,5 +290,19 @@ public class Question {
     public void setLevel(String level) {
         this.level = level;
     }
-    
+      public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
 }

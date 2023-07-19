@@ -135,6 +135,7 @@
                                     <th>Lesson</th>
                                     <th>Content</th>
                                     <th>Level</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -162,11 +163,19 @@
 
                                     <td>${questionList.getLevel()}</td>
                                     <td>
-                                        <form method="post" action="questionList">
-                                            <button type="submit" name="btnUpdate" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Edit</button>
-                                            <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Delete</button>
-                                            <input hidden name="qid" value="${questionList.id}">
-                                        </form>
+                                        <c:if test="${questionList.status == false}">
+                                            <div style="font-weight: bold;color:red;">Deactive</div>
+                                        </c:if>
+                                        <c:if test="${questionList.status == true}">
+                                            <div style="font-weight: bold;color:green;">Active</div>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <div class=' d-flex justify-content-center'>
+                                        <a href="questiondetail?id=${questionList.id}"><img src="img/magnifying-glass.png" style="height:25px;width:25px;"></a> &nbsp;&nbsp;&nbsp;
+                                        <a href="deletequestion?id=${questionList.id}"><img src="img/recycle-bin.png" style="height:25px;width:25px;"></a>
+                                        </div>
+
                                     </td>
 
 
@@ -236,74 +245,74 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                                                function applyFilters() {
-                                                                                    var genderSelect = document.getElementById("gender");
-                                                                                    var roleSelect = document.getElementById("role");
-                                                                                    var statusSelect = document.getElementById("status");
-                                                                                    var searchInput = document.getElementById("searchInput");
+                                            function applyFilters() {
+                                                var genderSelect = document.getElementById("gender");
+                                                var roleSelect = document.getElementById("role");
+                                                var statusSelect = document.getElementById("status");
+                                                var searchInput = document.getElementById("searchInput");
 
-                                                                                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
-                                                                                    var role = roleSelect.options[roleSelect.selectedIndex].value;
-                                                                                    var status = statusSelect.options[statusSelect.selectedIndex].value;
-                                                                                    var search = searchInput.value;
-
-
-
-
-                                                                                    // Build your base URL
-                                                                                    var baseUrl = "userlist?";
-
-                                                                                    if (gender !== "all") {
-                                                                                        baseUrl += "gender=" + gender + "&";
-                                                                                    }
-                                                                                    if (role !== "all") {
-                                                                                        baseUrl += "role=" + role + "&";
-                                                                                    }
-                                                                                    if (status !== "all") {
-                                                                                        baseUrl += "status=" + status + "&";
-                                                                                    }
-                                                                                    if (search.trim() !== "") {
-                                                                                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
-                                                                                    }
-
-                                                                                    baseUrl = baseUrl.slice(0, -1);
-                                                                                    localStorage.setItem("gender", gender);
-                                                                                    localStorage.setItem("role", role);
-                                                                                    localStorage.setItem("status", status);
-                                                                                    localStorage.setItem("search", search);
+                                                var gender = genderSelect.options[genderSelect.selectedIndex].value;
+                                                var role = roleSelect.options[roleSelect.selectedIndex].value;
+                                                var status = statusSelect.options[statusSelect.selectedIndex].value;
+                                                var search = searchInput.value;
 
 
 
-                                                                                    // Redirect to the filtered URL
-                                                                                    window.location.href = baseUrl;
-                                                                                }
 
-                                                                                function openPopup() {
-                                                                                    document.getElementById('question-import').classList.add('active');
-                                                                                }
+                                                // Build your base URL
+                                                var baseUrl = "userlist?";
 
-                                                                                function closePopup() {
-                                                                                    document.getElementById('question-import').classList.remove('active');
-                                                                                }
-                                                                                document.getElementById('fileInput').addEventListener('change', function (event) {
-                                                                                    var file = event.target.files[0];
-                                                                                    // display the id=submit
-                                                                                    var allowedType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                                                                                    if (file.type !== allowedType) {
-                                                                                        event.target.value = null; // Clear the file selection
-                                                                                        document.getElementById('resultContainer').textContent = "Invalid file type. Only XLSX files are allowed.";
-                                                                                        return;
-                                                                                    } else {
-                                                                                        document.getElementById('resultContainer').textContent = "";
-                                                                                        //hide the id=submit
-                                                                                        document.getElementById('submit').style.display = 'block';
+                                                if (gender !== "all") {
+                                                    baseUrl += "gender=" + gender + "&";
+                                                }
+                                                if (role !== "all") {
+                                                    baseUrl += "role=" + role + "&";
+                                                }
+                                                if (status !== "all") {
+                                                    baseUrl += "status=" + status + "&";
+                                                }
+                                                if (search.trim() !== "") {
+                                                    baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
+                                                }
 
-                                                                                    }
-                                                                                });
-                                                                                function chooseFile() {
-                                                                                    var fileInput = document.getElementById('fileInput');
-                                                                                    fileInput.click();
-                                                                                }
+                                                baseUrl = baseUrl.slice(0, -1);
+                                                localStorage.setItem("gender", gender);
+                                                localStorage.setItem("role", role);
+                                                localStorage.setItem("status", status);
+                                                localStorage.setItem("search", search);
+
+
+
+                                                // Redirect to the filtered URL
+                                                window.location.href = baseUrl;
+                                            }
+
+                                            function openPopup() {
+                                                document.getElementById('question-import').classList.add('active');
+                                            }
+
+                                            function closePopup() {
+                                                document.getElementById('question-import').classList.remove('active');
+                                            }
+                                            document.getElementById('fileInput').addEventListener('change', function (event) {
+                                                var file = event.target.files[0];
+                                                // display the id=submit
+                                                var allowedType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                                                if (file.type !== allowedType) {
+                                                    event.target.value = null; // Clear the file selection
+                                                    document.getElementById('resultContainer').textContent = "Invalid file type. Only XLSX files are allowed.";
+                                                    return;
+                                                } else {
+                                                    document.getElementById('resultContainer').textContent = "";
+                                                    //hide the id=submit
+                                                    document.getElementById('submit').style.display = 'block';
+
+                                                }
+                                            });
+                                            function chooseFile() {
+                                                var fileInput = document.getElementById('fileInput');
+                                                fileInput.click();
+                                            }
         </script>
         <script src="js/PopUp.js"></script>
         <script src="js/navBar.js"></script>
