@@ -47,7 +47,7 @@ public class UserAuthorizationFilter implements Filter {
         System.out.println(requestedURL);
         int userId = 6;
         if (u!=null) {
-            userId = u.getId();
+            userId = u.getRole_id();
         }
         ArrayList<Authorization> list = new ArrayList<>();
         list = a.getAllowedUrlByRoleId(userId);

@@ -1577,4 +1577,45 @@ public class SubjectDAO extends MyDAO {
             System.out.println("updateSubject: " + e.getMessage());
         }
     }
+    public List<Subject> getSubjectByAuthorId(int userid){
+           List<Subject> t = new ArrayList<>();
+        xSql = "select * from subject where author_id=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userid);
+            rs = ps.executeQuery();
+            int xID;
+            String xIllustratoin;
+//            int xDimesion_id;
+            String xName;
+            int xCategory_id;
+            boolean xStatus;
+            String xDescription;
+            int xAuthor_id;
+            Date xModified;
+            boolean xFeatured;
+
+            Subject x;
+            while (rs.next()) {
+                xID = rs.getInt("id");
+                xIllustratoin = rs.getString("illustration");
+//                xDimesion_id = rs.getInt("dimension_id");
+                xModified = rs.getDate("modified");
+                xName = rs.getString("name");
+                xCategory_id = rs.getInt("category_id");
+                xStatus = rs.getBoolean("status");
+                xAuthor_id = rs.getInt("author_id");
+                xDescription = rs.getString("description");
+                xFeatured = rs.getBoolean("featured");
+                xAuthor_id = rs.getInt("author_id");
+                x = new Subject(xID, xIllustratoin, xName, xCategory_id, xStatus, xDescription, xModified, xFeatured, xAuthor_id);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 }

@@ -21,7 +21,7 @@
         <title>Quizzero</title>
     </head>
     <body>
-     
+
 
         <%@include file="components/CusHeader.jsp" %>
     <body>
@@ -53,12 +53,12 @@
                                 <option value="3">3</option>                                  
                                 <option value="4">4</option>                                  
                                 <option value="5">5</option>                                  
-                                </select>                           
-                            </div>
-                            <br>
-                            <div class="mb-3">
-                                <label for="duration" class="form-label">Duration(minutes)</label>
-                                <input name="duration" type="text" class="form-control" id="duration" required>
+                            </select>                           
+                        </div>
+                        <br>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Duration(minutes)</label>
+                            <input name="duration" type="text" class="form-control" id="duration" required>
                         </div>
                         <br>
                         <div class="mb-3">
@@ -66,7 +66,7 @@
                             <input name="passrate" type="text" class="form-control" id="passrate" required>
                         </div>
                         <br>                
-                       
+
                         <br>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
@@ -79,13 +79,34 @@
                         </div>
                         <div class="mb-3">
                             <label for="questype" class="form-label">Question type</label>
-                                
-                                <c:forEach items="${lDimension}" var="type">
-                                    <input type="radio" name="questionType" value="${type.id}">${type.name}</option>
-                                </c:forEach>
-                            
+
+                            <c:forEach items="${lDimension}" var="type">
+                                <input type="radio" name="questionType" value="${type.id}">${type.name}</option>
+                            </c:forEach>
+
                         </div>
-                      
+
+                        <div id="formContainer">
+                            <div class="form-row mb-2 d-flex">
+
+                                <div class="col">
+                                    <select id="selectOption" class="form-control" name="selectOption0">
+
+                                        <option value="option1">Option 1</option>
+                                        <option value="option2">Option 2</option>
+                                        <option value="option3">Option 3</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="inputNumber" name="inputNumber0" class="form-control" placeholder="Number of Questions">
+                                </div>
+
+                                <div class="col">
+                                    <button class="btn btn-primary"  onclick="addRow()">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="button-group">
                             <input type="submit" class="btn btn-primary" value="Add" onclick ="return confirm('Are you sure you want to update?')">
                             <a href="javascript:history.go(-1)" class="btn btn-danger">Back</a>
@@ -95,6 +116,74 @@
             </div>
         </div>
     </body>
+    <script>
+        function addRow() {
+            var selectOption = document.getElementById('selectOption').value;
+            var inputNumber = document.getElementById('inputNumber').value;
+
+            var formContainer = document.getElementById('formContainer');
+            var rows = Array.from(formContainer.getElementsByClassName('form-row')); // Chuyển HTMLCollection thành mảng
+
+            var newRow = document.createElement('div');
+            newRow.className = 'form-row mb-2 d-flex';
+
+            var selectColumn = document.createElement('div');
+            selectColumn.className = 'col';
+            var selectClone = document.getElementById('selectOption').cloneNode(true);
+            selectClone.name = 'selectOption' + rows.length;
+            selectClone.value = selectOption;
+            selectColumn.appendChild(selectClone);
+            newRow.appendChild(selectColumn);
+
+            var inputColumn = document.createElement('div');
+            inputColumn.className = 'col';
+            var inputClone = document.getElementById('inputNumber').cloneNode(true);
+            inputClone.name = 'inputNumber' + rows.length;
+            inputClone.value = inputNumber;
+            inputColumn.appendChild(inputClone);
+            newRow.appendChild(inputColumn);
+
+            var deleteColumn = document.createElement('div');
+            deleteColumn.className = 'col';
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-danger';
+            deleteButton.innerHTML = 'Delete';
+            deleteButton.onclick = function () {
+                deleteRow(newRow);
+                updateClasses();
+            };
+            deleteColumn.appendChild(deleteButton);
+            newRow.appendChild(deleteColumn);
+
+            formContainer.appendChild(newRow);
+
+            // Cập nhật lại các class cho tất cả các dòng
+            updateClasses();
+        }
+
+        function deleteRow(row) {
+            var formContainer = document.getElementById('formContainer');
+            formContainer.removeChild(row);
+
+            // Cập nhật lại các class cho tất cả các dòng sau khi xóa
+            updateClasses();
+        }
+
+        function updateClasses() {
+            var formContainer = document.getElementById('formContainer');
+            var rows = Array.from(formContainer.getElementsByClassName('form-row')); // Chuyển HTMLCollection thành mảng
+
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].classList.remove('row-' + i); // Xóa lớp cũ
+                rows[i].classList.add('row-' + i); // Cập nhật lớp mới
+            }
+        }
+
+// Gọi hàm addRow() ban đầu để hiển thị dòng đầu tiên
+
+
+// Gọi hàm addAddRowBut
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/navBar.js" type="text/javascript"></script>
 </body>
