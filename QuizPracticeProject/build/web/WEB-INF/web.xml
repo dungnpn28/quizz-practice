@@ -268,6 +268,14 @@
         <servlet-name>StudyLessonController</servlet-name>
         <servlet-class>controller.StudyingLessonController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewQuizDetailsAEController</servlet-name>
+        <servlet-class>controller.AddNewQuizDetailsAEController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionDetailController</servlet-name>
+        <servlet-class>controller.QuestionDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogInController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -527,6 +535,14 @@
     <servlet-mapping>
         <servlet-name>StudyLessonController</servlet-name>
         <url-pattern>/studylesson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewQuizDetailsAEController</servlet-name>
+        <url-pattern>/addnewquizdetailsae</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionDetailController</servlet-name>
+        <url-pattern>/questiondetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

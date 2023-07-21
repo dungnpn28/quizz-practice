@@ -111,6 +111,38 @@ public class QuestionDAO extends MyDAO {
         return q;
     }
 
+    public Question getQuestionDetailById(int questionId) {
+        Question q = null;
+        try {
+            String strSelect = "select id,subject_id,lesson_id,content,option_a,option_b,option_c,option_d,answer,answer_explaination,level,status,created,modified from question where id =?";
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, questionId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                int subjectId = rs.getInt(2);
+                int lessonId = rs.getInt(3);
+
+                String content = rs.getString(4);
+                String optionA = rs.getString(5);
+                String optionB = rs.getString(6);
+                String optionC = rs.getString(7);
+                String optionD = rs.getString(8);
+                String answer = rs.getString(9);
+                String answer_explaination = rs.getString(10);
+                String level = rs.getString(11);
+                boolean status = rs.getBoolean(12);
+                String created = rs.getString(13);
+                String modified = rs.getString(14);
+
+                q = new Question(id, subjectId, lessonId, content, optionA, optionB, optionC, optionD, answer, answer_explaination, level, status, created, modified);
+            }
+        } catch (Exception e) {
+            System.out.println("getQuestionDetailById:" + e.getMessage());
+        }
+        return q;
+    }
+
     public ArrayList<Question> getAllListQuestionByExamId(int examId) {
         ArrayList<Question> questionList = new ArrayList<>();
         try {
@@ -149,7 +181,7 @@ public class QuestionDAO extends MyDAO {
 //                + "                answer, answer_explaination, level from question\n"
 //                + "				order by id ASC\n"
 //                + "                offset (?-1)*? row fetch next ? rows only";
-        String Sql = "select id, subject_id, lesson_id, content, level from question WHERE 1=1";
+        String Sql = "select id, subject_id, lesson_id, content, level,status from question WHERE 1=1";
 
         if (!subject.equals("all")) {
             Sql += " and [subject_id]= ?";
@@ -194,7 +226,8 @@ public class QuestionDAO extends MyDAO {
                 int lesson_id = rs.getInt(3);
                 String content = rs.getString(4);
                 String Level = rs.getString(5);
-                questionList.add(new Question(id, subject_id, lesson_id, content, Level));
+                Boolean status = rs.getBoolean(6);
+                questionList.add(new Question(id, subject_id, lesson_id, content, Level, status));
             }
 
         } catch (Exception e) {
@@ -401,5 +434,68 @@ public class QuestionDAO extends MyDAO {
             System.out.println("getMaxId: " + e.getMessage());
         }
         return -1;
+    }
+    public List<Integer> getQuestionIdBySubjectIdAndQuestionType(int subjectId, int type_id) {
+        String Sql = "select question.id from question\n"
+                + "inner join question_dimension on question.id = question_dimension.question_id\n"
+                + "inner join dimension on dimension.id = question_dimension.dimension_id\n"
+                + "where question.subject_id = ? and type_id = ?";
+        List<Integer> t = new ArrayList<>();
+        int xId;
+        try {
+            PreparedStatement ps = con.prepareStatement(Sql);
+            ps.setInt(1, subjectId);
+            ps.setInt(2, type_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                xId = rs.getInt("id");
+                t.add(xId);
+            }
+        } catch (Exception e) {
+            System.out.println("getQuestionIdBySubjectIdAndQuestionType" + e.getMessage());
+        }
+        return t;
+    }
+
+    public void updateQuestion(int subjectId, String level, String content, String explaination, String optionA, String optionB, String optionC, String optionD, String answer, int id, boolean status) {
+        try {
+            String strAdd;
+            if (explaination.isEmpty() || explaination.equals("")) {
+                strAdd = "update question set subject_id=?,level=?,content=?,answer_explaination= null,option_a=?,option_b=?,option_c=?,option_d=?,answer=?,modified=GETDATE(),status=? where id=?";
+                ps = con.prepareStatement(strAdd);
+
+                ps.setInt(1, subjectId);
+                ps.setString(2, level);
+                ps.setString(3, content);
+
+                ps.setString(4, optionA);
+                ps.setString(5, optionB);
+                ps.setString(6, optionC);
+                ps.setString(7, optionD);
+                ps.setString(8, answer);
+                ps.setBoolean(9, status);
+                ps.setInt(10, id);
+                ps.executeUpdate();
+            } else {
+                strAdd = "update question set subject_id=?,level=?,content=?,answer_explaination=?,option_a=?,option_b=?,option_c=?,option_d=?,answer=?,modified=GETDATE(),status=? where id=?";
+                ps = con.prepareStatement(strAdd);
+
+                ps.setInt(1, subjectId);
+                ps.setString(2, level);
+                ps.setString(3, content);
+                ps.setString(4, explaination);
+                ps.setString(5, optionA);
+                ps.setString(6, optionB);
+                ps.setString(7, optionC);
+                ps.setString(8, optionD);
+                ps.setString(9, answer);
+                ps.setBoolean(10, status);
+                ps.setInt(11, id);
+                ps.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            System.out.println("updateQuestion: " + e.getMessage());
+        }
     }
 }

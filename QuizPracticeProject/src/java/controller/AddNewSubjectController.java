@@ -52,7 +52,7 @@ public class AddNewSubjectController extends HttpServlet {
         SubjectDAO sj = new SubjectDAO();
         sj.addNewSubject(thumbnail, name, category_id, status, description, featuredValue, owner_id);
 
-        String uploadPath = "web/uploads/" + thumbnail;
+        String uploadPath = "D:/QUIZZEROPROJECT/QuizPracticeProject/web/uploads/" + thumbnail;
         try {
             FileOutputStream fos = new FileOutputStream(uploadPath);
             InputStream is = file.getInputStream();

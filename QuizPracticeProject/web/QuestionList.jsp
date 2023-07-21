@@ -139,6 +139,7 @@
                                     <th>Lesson</th>
                                     <th>Content</th>
                                     <th>Level</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -166,11 +167,19 @@
 
                                     <td>${questionList.getLevel()}</td>
                                     <td>
-                                        <form method="post" action="questionList">
-                                            <button type="submit" name="btnUpdate" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Edit</button>
-                                            <button type="submit" name="btnDel" style="background: linear-gradient(90deg,#755bea,#ff72c0);">Delete</button>
-                                            <input hidden name="qid" value="${questionList.id}">
-                                        </form>
+                                        <c:if test="${questionList.status == false}">
+                                            <div style="font-weight: bold;color:red;">Deactive</div>
+                                        </c:if>
+                                        <c:if test="${questionList.status == true}">
+                                            <div style="font-weight: bold;color:green;">Active</div>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <div class=' d-flex justify-content-center'>
+                                        <a href="questiondetail?id=${questionList.id}"><img src="img/magnifying-glass.png" style="height:25px;width:25px;"></a> &nbsp;&nbsp;&nbsp;
+                                        <a href="deletequestion?id=${questionList.id}"><img src="img/recycle-bin.png" style="height:25px;width:25px;"></a>
+                                        </div>
+
                                     </td>
 
 

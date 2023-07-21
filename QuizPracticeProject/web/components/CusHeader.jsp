@@ -100,9 +100,9 @@
                         <form id="userProfileForm" name="userProfileForm" action="changeUserProfile" method="post" enctype="multipart/form-data" >
                             <div class="col-md-5">
                                 <div class="col text-center">
-                                    <img id="imagePreview" src="uploads/${sessionScope.uProfile.avatar}" width="200" height="250">
+                                    <img id="imagePreviews" src="uploads/${sessionScope.uProfile.avatar}" width="200" height="250">
                                     <br>
-                                    <input name="avatar" type="file" accept="image/*" onchange="loadFile(event)">
+                                    <input name="avatar" type="file" accept="image/*" onchange="loadFiles(event)">
                                 </div>
                             </div>
                             <div class="col-md-7" >
@@ -126,6 +126,15 @@
                 </div>
             </div>
         </div>
+        <script>
+            var loadFiles = function (event) {
+                var output = document.getElementById('imagePreviews');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            };
+        </script>
         <script src="js/UserProfileValidate.js" type="text/javascript"></script>                       
         <script src="js/PopUp.js" type="text/javascript"></script>
         <script src="js/PreviewImage.js" type="text/javascript"></script>

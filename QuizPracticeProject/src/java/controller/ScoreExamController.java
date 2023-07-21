@@ -31,6 +31,7 @@ public class ScoreExamController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AttemptDAO a = new AttemptDAO();
         QuestionDAO q = new QuestionDAO();
+        ExamDAO e = new ExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
         int examId = Integer.parseInt(req.getParameter("examid"));
@@ -40,11 +41,11 @@ public class ScoreExamController extends HttpServlet {
             a.createNullAttempt(attemptId, examId, question.getId(), u.getId());
         }
         double score = a.getExamScore(attemptId, examId, u.getId());
+        double pass_score = e.getExamById(examId).getPass_rate()*10/100;
         req.setAttribute("examscore", score);
         req.setAttribute("examId", examId);
         req.setAttribute("attId", attemptId);
-
-        ExamDAO e = new ExamDAO();
+        req.setAttribute("pass_score", pass_score);
         String examName = e.getExamNameById(examId);
         req.setAttribute("examname", examName);
 

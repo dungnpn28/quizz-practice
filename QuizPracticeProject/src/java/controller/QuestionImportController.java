@@ -90,7 +90,7 @@ public class QuestionImportController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String filePath = "D:\\02.FPTU\\05.Semester5\\02.SWP391\\QuestionImportTemplate.xlsx";
+        String filePath = "D:\\QUIZZEROPROJECT\\QuizPracticeProject\\web\\uploads\\QuestionImportTemplate.xlsx";
         File downloadFile = new File(filePath);
         FileInputStream inStream = new FileInputStream(downloadFile);
 

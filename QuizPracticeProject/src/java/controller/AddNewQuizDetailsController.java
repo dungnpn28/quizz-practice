@@ -97,10 +97,10 @@ public class AddNewQuizDetailsController extends HttpServlet {
         boolean xType = Boolean.parseBoolean("mode");
         String xDescription = request.getParameter("description");
         int xQuestions = Integer.parseInt(request.getParameter("questions"));
-        int xquesType = Integer.parseInt(request.getParameter("questionType"));
+        //int xquesType = Integer.parseInt(request.getParameter("questionType"));
 
         ExamDAO eDAO = new ExamDAO();
-        eDAO.insertExam(xName, xSubject, xLevel, hour, minute, xPassrate, xQuestions, xDescription, xType, xquesType);
+        eDAO.insertExam(xName, xSubject, xLevel, hour, minute, xPassrate, xQuestions, xDescription, xType);
         response.sendRedirect("cusHome");
     }
 
