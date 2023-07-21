@@ -410,6 +410,31 @@ public class QuestionDAO extends MyDAO {
         return t;
     }
 
+    public void addQuestionDimension(int quesId, int dimensionId) {
+        try {
+            String sqlAdd = "INSERT INTO [question_dimension] (question_id, dimension_id) VALUES (?, ?)";
+            ps = con.prepareStatement(sqlAdd);
+            ps.setInt(1, quesId);
+            ps.setInt(2, dimensionId);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println("addQuestionDimension: " + e.getMessage());
+        }
+    }
+
+    public int getMaxId() {
+        try {
+            String sqlGet = "SELECT MAX(id) from question";
+            ps = con.prepareStatement(sqlGet);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) { 
+            System.out.println("getMaxId: " + e.getMessage());
+        }
+        return -1;
+    }
     public List<Integer> getQuestionIdBySubjectIdAndQuestionType(int subjectId, int type_id) {
         String Sql = "select question.id from question\n"
                 + "inner join question_dimension on question.id = question_dimension.question_id\n"

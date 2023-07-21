@@ -27,7 +27,7 @@
                 </div>
                 <div class="runout-time w-100 h-auto col-md-4">
 
-                    
+                    <h1 id ="timer"></h1>
 
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">
@@ -165,7 +165,7 @@
                                 <div class="question-navigation">
                                     <c:forEach var="question" begin="1" end="${endP}">
                                         <a href="quizhandle?id=${id}&page=${question}">${question}</a>
-                                    </c:forEach>
+                                    </c:forEach>b 
                                 </div>
                                 <div class="navigate-btn">
                                     <button onclick="closePopup()">Back to Exam</button>
@@ -207,23 +207,39 @@
                 </c:forEach>
         </main>
         <script>
-            // Function to update the remaining time
-            function updateRemainingTime() {
-                // Send an AJAX request to the servlet to get the updated remaining time
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "quizhandle", true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Update the remaining time on the page
-                        var remainingTime = xhr.responseText;
-                        document.getElementById("remainingTime").innerText = remainingTime;
+            function startCountdown(seconds) {
+                var timer = setInterval(function () {
+                    var minutes = Math.floor(seconds / 60);
+                    var remainingSeconds = seconds % 60;
+
+                    // Format the time with leading zeros if needed
+                    var displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
+                    var displaySeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
+
+                    document.getElementById('timer').innerText = displayMinutes + ":" + displaySeconds;
+                    
+                    if (seconds <= 0 || ) {
+                        clearInterval(timer);
+                        window.location.href = "scorequiz?examid=${id}&attId=${attId}";
+                        localStorage.removeItem('countdownSeconds');
+                    } else {
+                        // Save the remaining seconds in localStorage
+                        localStorage.setItem('countdownSeconds', seconds);
                     }
-                };
-                xhr.send();
+                    seconds--;
+                }, 1000); // Update the display every 1 second (1000 milliseconds)
             }
 
-            // Update the remaining time every second
-            setInterval(updateRemainingTime, 1000);
+            // Check if there are remaining seconds stored in localStorage
+            var storedSeconds = localStorage.getItem('countdownSeconds');
+
+            // Start the countdown or continue from the stored time
+            if (storedSeconds !== null && !isNaN(storedSeconds)) {
+                startCountdown(parseInt(storedSeconds));
+            } else {
+                // Start the countdown with a duration of 5 minutes (300 seconds)
+                startCountdown(${examDuration});
+            }
         </script>
     </body>
 

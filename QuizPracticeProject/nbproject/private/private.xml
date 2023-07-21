@@ -3,28 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/RegisterController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/PracticeListDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/SubjectDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/css/UserList.css</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/PracticeDetailsDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/QuestionListController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/SubjectDetailsDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/QuestionDetailController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/SubjectDetailAE.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/EditLessonDetails.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/EditSlider.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/EditQuizDetails.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/UserList.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/WEB-INF/web.xml</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/AddNewQuizDetailsAE.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/model/Question.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/ChangePasswordController.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/css/SubjectDetailAE.css</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/dal/QuestionDAO.java</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/QuestionList.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/web/QuestionDetail.jsp</file>
-            <file>file:/D:/QUIZZEROPROJECT/QuizPracticeProject/src/java/controller/SubjectDetailAEController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/js/QuestionImport.js</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/controller/QuestionImportController.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/SimulationExam.jsp</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/src/java/dal/QuestionDAO.java</file>
+            <file>file:/D:/02.FPTU/05.Semester5/02.SWP391/01.QuizPractice_Project/QuizPracticeProject/web/QuestionList.jsp</file>
         </group>
     </open-files>
 </project-private>
