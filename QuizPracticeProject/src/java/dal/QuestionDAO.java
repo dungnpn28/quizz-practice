@@ -347,7 +347,7 @@ public class QuestionDAO extends MyDAO {
             ps.setString(7, (String) q.getOptionD());
             ps.setString(8, (String) q.getAnswer());
             ps.setString(9, (String) q.getAnswer_explaination());
-            ps.setString(10, (String) q.getAnswer());
+            ps.setString(10, (String) q.getLevel());
             if (q.isStatus()) {
                 ps.setInt(11, 1);
             } else {
@@ -359,7 +359,6 @@ public class QuestionDAO extends MyDAO {
             System.out.println("addQuestion: " + e.getMessage());
         }
     }
-
 
     public List<Integer> getQuestionIdBySubjectId(int subjectId) {
         String Sql = "select id from question where subject_id = ?";
@@ -376,5 +375,31 @@ public class QuestionDAO extends MyDAO {
         } catch (Exception e) {
         }
         return t;
+    }
+
+    public void addQuestionDimension(int quesId, int dimensionId) {
+        try {
+            String sqlAdd = "INSERT INTO [question_dimension] (question_id, dimension_id) VALUES (?, ?)";
+            ps = con.prepareStatement(sqlAdd);
+            ps.setInt(1, quesId);
+            ps.setInt(2, dimensionId);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println("addQuestionDimension: " + e.getMessage());
+        }
+    }
+
+    public int getMaxId() {
+        try {
+            String sqlGet = "SELECT MAX(id) from question";
+            ps = con.prepareStatement(sqlGet);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) { 
+            System.out.println("getMaxId: " + e.getMessage());
+        }
+        return -1;
     }
 }

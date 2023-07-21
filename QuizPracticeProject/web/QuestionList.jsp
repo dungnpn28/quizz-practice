@@ -45,7 +45,6 @@
         %>
         <% } %>
         <%@include file="components/CusHeader.jsp"%>
-
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">               
@@ -99,25 +98,30 @@
                         <button onclick="openPopup();" style="background-color: #755bea; padding: 7px 16px; text-decoration: none; color: #ffffff">Question Import</button>
 
                         <div id="question-import" class="question-import-overlay">
-                            <div class="question-import-content" >
-
-                                <h1 style="font-weight: bold;" class="d-flex justify-content-center">Question Import</h1>
+                            <div class="question-import-content">
+                                
+                                <div class="d-flex justify-content-between">
+                                    <h1 style="font-weight: bold;">Question Import</h1>
+                                    <button onclick="closePopup();">X</button>
+                                </div>
                                 <div class="question-import-button">
-                                    <form class="d-flex justify-content-between" action="questionimport" method="post" enctype='multipart/form-data'>
-                                        <div class="question-import-left d-flex flex-column">                                       
-                                            <h2>Upload Excel file</h2>
-                                            <input name="xlsxfile" type="file" id="fileInput" onchange="handleFileSelect(event)" />
-                                            <h3 style="color: red; font-weight: bold;" id="resultContainer"></h3>
+                                    <form action="questionimport" method="post" enctype='multipart/form-data'>
+                                        <div class="d-flex justify-content-around">
+                                            <div class="question-import-left d-flex flex-column">                                       
+                                                <h2>Upload Excel File</h2>
+                                                <input name="xlsxfile" type="file" id="fileInput" />
+                                                <h3 style="color: red; font-weight: bold;" id="resultContainer"></h3>
+                                            </div>
+                                            <div class="question-import-right d-flex flex-column">
+                                                <h2>Haven't got template?</h2>
+                                                <a style="color: white; background-color: #755bea; border-radius: 8px;" href="questionimport">Download Excel file</a>
+                                            </div>
                                         </div>
-                                        <div class="question-import-right d-flex flex-column">
-                                            <h2>Haven't got template?</h2>
-                                            <button><a href="questionimport">Download Excel file</a></button>
+                                        <div class="d-flex justify-content-center">
+                                            <input style="display: none; color: white; background-color: #755bea; border-radius: 8px; width: 10%" id="submit" type="submit" name="submit" value="submit">
                                         </div>
-                                        <input style="display: none" id="submit" type="submit" name="submit" value="submit">
                                     </form>
-                                    <div class="d-flex justify-content-center">
-                                        <button onclick="closePopup();">Close</button>
-                                    </div>
+
 
                                 </div>
 
@@ -236,75 +240,51 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                                                function applyFilters() {
-                                                                                    var genderSelect = document.getElementById("gender");
-                                                                                    var roleSelect = document.getElementById("role");
-                                                                                    var statusSelect = document.getElementById("status");
-                                                                                    var searchInput = document.getElementById("searchInput");
+                                    function applyFilters() {
+                                        var genderSelect = document.getElementById("gender");
+                                        var roleSelect = document.getElementById("role");
+                                        var statusSelect = document.getElementById("status");
+                                        var searchInput = document.getElementById("searchInput");
 
-                                                                                    var gender = genderSelect.options[genderSelect.selectedIndex].value;
-                                                                                    var role = roleSelect.options[roleSelect.selectedIndex].value;
-                                                                                    var status = statusSelect.options[statusSelect.selectedIndex].value;
-                                                                                    var search = searchInput.value;
-
-
-
-
-                                                                                    // Build your base URL
-                                                                                    var baseUrl = "userlist?";
-
-                                                                                    if (gender !== "all") {
-                                                                                        baseUrl += "gender=" + gender + "&";
-                                                                                    }
-                                                                                    if (role !== "all") {
-                                                                                        baseUrl += "role=" + role + "&";
-                                                                                    }
-                                                                                    if (status !== "all") {
-                                                                                        baseUrl += "status=" + status + "&";
-                                                                                    }
-                                                                                    if (search.trim() !== "") {
-                                                                                        baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
-                                                                                    }
-
-                                                                                    baseUrl = baseUrl.slice(0, -1);
-                                                                                    localStorage.setItem("gender", gender);
-                                                                                    localStorage.setItem("role", role);
-                                                                                    localStorage.setItem("status", status);
-                                                                                    localStorage.setItem("search", search);
+                                        var gender = genderSelect.options[genderSelect.selectedIndex].value;
+                                        var role = roleSelect.options[roleSelect.selectedIndex].value;
+                                        var status = statusSelect.options[statusSelect.selectedIndex].value;
+                                        var search = searchInput.value;
 
 
 
-                                                                                    // Redirect to the filtered URL
-                                                                                    window.location.href = baseUrl;
-                                                                                }
 
-                                                                                function openPopup() {
-                                                                                    document.getElementById('question-import').classList.add('active');
-                                                                                }
+                                        // Build your base URL
+                                        var baseUrl = "userlist?";
 
-                                                                                function closePopup() {
-                                                                                    document.getElementById('question-import').classList.remove('active');
-                                                                                }
-                                                                                document.getElementById('fileInput').addEventListener('change', function (event) {
-                                                                                    var file = event.target.files[0];
-                                                                                    // display the id=submit
-                                                                                    var allowedType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                                                                                    if (file.type !== allowedType) {
-                                                                                        event.target.value = null; // Clear the file selection
-                                                                                        document.getElementById('resultContainer').textContent = "Invalid file type. Only XLSX files are allowed.";
-                                                                                        return;
-                                                                                    } else {
-                                                                                        document.getElementById('resultContainer').textContent = "";
-                                                                                        //hide the id=submit
-                                                                                        document.getElementById('submit').style.display = 'block';
+                                        if (gender !== "all") {
+                                            baseUrl += "gender=" + gender + "&";
+                                        }
+                                        if (role !== "all") {
+                                            baseUrl += "role=" + role + "&";
+                                        }
+                                        if (status !== "all") {
+                                            baseUrl += "status=" + status + "&";
+                                        }
+                                        if (search.trim() !== "") {
+                                            baseUrl += "search=" + encodeURIComponent(search.trim()) + "&";
+                                        }
 
-                                                                                    }
-                                                                                });
-                                                                                function chooseFile() {
-                                                                                    var fileInput = document.getElementById('fileInput');
-                                                                                    fileInput.click();
-                                                                                }
+                                        baseUrl = baseUrl.slice(0, -1);
+                                        localStorage.setItem("gender", gender);
+                                        localStorage.setItem("role", role);
+                                        localStorage.setItem("status", status);
+                                        localStorage.setItem("search", search);
+
+
+
+                                        // Redirect to the filtered URL
+                                        window.location.href = baseUrl;
+                                    }
+
+
         </script>
+        <script src="js/QuestionImport.js" type="text/javascript"></script>
         <script src="js/PopUp.js"></script>
         <script src="js/navBar.js"></script>
 

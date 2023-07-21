@@ -24,8 +24,6 @@ import model.User;
  * @author Acer
  */
 public class QuizHandleController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final long COUNTDOWN_DURATION = 60; // Countdown duration in seconds
     
 
     @Override
@@ -110,17 +108,6 @@ public class QuizHandleController extends HttpServlet {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
         
-        //count-down timer
-        // Get the current time in seconds
-        long currentTime = System.currentTimeMillis() / 1000;
-
-        // Calculate the remaining time
-        long remainingTime = COUNTDOWN_DURATION - currentTime;
-
-        // Set the remainingTime attribute in the request
-        req.setAttribute("remainingTime", remainingTime);
-
-
         //pagination
         int page = Integer.parseInt(req.getParameter("page"));
         int examId = Integer.parseInt(req.getParameter("id"));
@@ -130,8 +117,6 @@ public class QuizHandleController extends HttpServlet {
         req.setAttribute("id", examId);
         ArrayList<Question> questionList = q.getListQuestionByExamId(examId, page);
         req.setAttribute("questionL", questionList);
-        ArrayList<Question> allQuestionList = q.getAllListQuestionByExamId(examId);
-        req.setAttribute("allQuestionL", allQuestionList);
         req.setAttribute("endP", endPage);
 
         //get attempt id
@@ -141,7 +126,8 @@ public class QuizHandleController extends HttpServlet {
             attemptId = countAttempt;
         }
         req.setAttribute("attId", attemptId);
-
+        ArrayList<Question> allQuestionList = q.getQuestionListByExamAttempt(examId, attemptId, u.getId());
+        req.setAttribute("allQuestionL", allQuestionList);
         //create exam attempts
         a.createAttempt(attemptId, examId, questionId, u.getId());
 
@@ -176,5 +162,5 @@ public class QuizHandleController extends HttpServlet {
         int totalTime = hour * 3600 + minute * 60 + second;
         return totalTime;
     } 
-
+    
 }

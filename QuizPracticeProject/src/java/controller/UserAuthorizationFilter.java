@@ -44,16 +44,14 @@ public class UserAuthorizationFilter implements Filter {
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
         String requestedURL = req.getRequestURI();
-        System.out.println(requestedURL);
-        int userId = 6;
-        if (u!=null) {
-            userId = u.getId();
+        int roleId = 6;
+        if (u != null) {
+            roleId = u.getRole_id();
         }
         ArrayList<Authorization> list = new ArrayList<>();
-        list = a.getAllowedUrlByRoleId(userId);
+        list = a.getAllowedUrlByRoleId(roleId);
         for (Authorization authorization : list) {
             if (requestedURL.contains(req.getContextPath() + "/" + authorization.getUrl())) {
-                System.out.println("aaaa" + req.getContextPath() + "/" + authorization.getUrl());
                 hasPermission = false;
             }
         }
@@ -65,5 +63,3 @@ public class UserAuthorizationFilter implements Filter {
     }
 
 }
-
-
