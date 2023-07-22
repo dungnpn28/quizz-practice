@@ -94,16 +94,24 @@
 
             <div class="dialogs overlays" id="PopUp">
                 <div class="dialog-bodys">
-                    <a class="dialog-close-btns" href="">&times;</a>
-                    <div class="container">
+                    
+                    <div class="container row">
                         <br>
                         <form id="userProfileForm" name="userProfileForm" action="changeUserProfile" method="post" enctype="multipart/form-data" >
                             <div class="col-md-5">
-                                <div class="col text-center">
-                                    <img id="imagePreviews" src="uploads/${sessionScope.uProfile.avatar}" width="200" height="250">
+
+                                <div class="col">
+
+                                    <label>                                        
+                                        <img id="imagePreviews" src="uploads/${sessionScope.uProfile.avatar}">
+                                        <br>
+                                        <input name="avatar" type="file" accept="image/*" id="fileInput" onchange="loadFiles(event)">
+                                        <label class="custom-file-upload" for="fileInput">Choose Image</label>
+                                    </label>
                                     <br>
-                                    <input name="avatar" type="file" accept="image/*" onchange="loadFiles(event)">
+
                                 </div>
+
                             </div>
                             <div class="col-md-7" >
                                 <div class="info">
@@ -117,7 +125,7 @@
                                         <br/>
                                 </div>
                                 <div class="modal-footers">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><a href="" style="text-decoration: none; color: #fff">Cancel</a></button>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>

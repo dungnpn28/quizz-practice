@@ -7,6 +7,7 @@ package dal;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Attempt;
@@ -429,7 +430,7 @@ public class ExamDAO extends MyDAO {
             System.out.println("insertExam:" + e.getMessage());
         }
     }
-    
+
     public List<Integer> getExamIdBySubjectId(String subjectId) {
         List<Integer> t = new ArrayList<>();
         int xExam_id;
@@ -540,33 +541,33 @@ public class ExamDAO extends MyDAO {
         return (t);
     }
 
-public Exam getExamById(int examId) {
-    try {
-        String strSelect = "select * from [exam] "
-                + "where id=?;";
-        int xID;
-        String xName;
-        int xSubject_id;
-        int xLevel;
-        Time xDuration;
-        String xxDuration;
-        double xPass_rate;
-        int xNumQue;
-        String xDescription;
-        Date xCreated;
-        int xMode;
-        Exam x = null;
-        ps = con.prepareStatement(strSelect);
-        ps.setInt(1, examId);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            xName = rs.getString("name");
-            xSubject_id = rs.getInt("subject_id");
-            xLevel = rs.getInt("level");
-            xDuration = rs.getTime("duration");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-            xxDuration = dateFormat.format(xDuration);
-            xPass_rate = rs.getDouble("pass_rate");
+    public Exam getExamById(int examId) {
+        try {
+            String strSelect = "select * from [exam] "
+                    + "where id=?;";
+            int xID;
+            String xName;
+            int xSubject_id;
+            int xLevel;
+            Time xDuration;
+            String xxDuration;
+            double xPass_rate;
+            int xNumQue;
+            String xDescription;
+            Date xCreated;
+            int xMode;
+            Exam x = null;
+            ps = con.prepareStatement(strSelect);
+            ps.setInt(1, examId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                xName = rs.getString("name");
+                xSubject_id = rs.getInt("subject_id");
+                xLevel = rs.getInt("level");
+                xDuration = rs.getTime("duration");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                xxDuration = dateFormat.format(xDuration);
+                xPass_rate = rs.getDouble("pass_rate");
                 xNumQue = rs.getInt("number_of_question");
                 xDescription = rs.getString("description");
                 xCreated = rs.getDate("created");
@@ -653,17 +654,17 @@ public Exam getExamById(int examId) {
                 + "     VALUES (?,?,?,?,?,?,?,GETDATE(),?)";
         try {
             ps = con.prepareStatement(xSql);
-
-            ps.setString(1, "practice " + "GETDATE()");
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            ps.setString(1, "practice " + currentDateTime);
             ps.setInt(2, subject_id);
             ps.setInt(3, 1);
             Time duration = new Time(0, number_of_question * 5, 0);
             ps.setTime(4, duration);
             ps.setDouble(5, 1);
             ps.setInt(6, number_of_question);
-            ps.setString(7, "this is new practice for practice GETDATE()");
+            ps.setString(7, "this is new practice for practice" + currentDateTime);
             ps.setBoolean(8, false);
-            
+
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -677,12 +678,12 @@ public Exam getExamById(int examId) {
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 xId = rs.getInt("id");
             }
             ps.close();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("get max id: " + e.getMessage());
         }
         return xId;

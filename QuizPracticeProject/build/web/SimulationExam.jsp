@@ -26,20 +26,48 @@
         <div class="wrapper">
             <%@include file="components/navbar.jsp" %>
             <div id="content">
-                <h1> existing exams </h1>
-                <div class="row">
-                    <div class="col-md-8">
-                        <table id="examTable" border="1">
+                <h1 style="font-size:35px"> EXISTING EXAMS </h1>
+                <div class="topnav">
+                    <div class="left-container">
+                        <div class="search-bar-container">
+                            <form action="searchByExamName">
+                                <input type="text" id="search-bar" placeholder="Search..." value="${key}" name="keyword">
+                                <button id="search-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </button>
+                            </form>
+
+                        </div>
+                        <div class="filter-container">
+                            <select name="category" id="filter1" onchange="applyFilters()">
+                                <option value= "all" >All</option>
+                                <c:forEach var="subjectList" items="${subjectList}">
+                                    <option value="${subjectList.getId()}" ${subjectList.getId().toString() eq category ? "selected" : ""} >${subjectList.getName()}</option>
+                                </c:forEach>
+                            </select>
+
+                            <a href="simulationExam" class="clear-filter" id="clear-filter" style="text-decoration: none">Clear</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="header_fixed">
+                    <table>
+                        <thead>
                             <tr>
-                                <td> ID </td>
-                                <td> subject </td>
-                                <td> simulation exam </td>
-                                <td> Level </td>
-                                <td> #question</td>
-                                <td> duration </td>
-                                <td> pass rate </td>
+                                <th> ID </th>
+                                <th> subject </th>
+                                <th> simulation exam </th>
+                                <th> Level </th>
+                                <th> #question</th>
+                                <th> duration </th>
+                                <th> pass rate </th>
                             </tr>
-                            <c:forEach var="Exam" items="${examList}">
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${examList}" var="Exam">
                                 <tr>
                                     <td>${Exam.getId()}</td>
                                     <td>${Exam.getSubjectName()}</td>
@@ -48,19 +76,13 @@
                                     <td>${Exam.getNumber_of_question()}</td>
                                     <td>${Exam.getDuration() }</td>
                                     <td>${Exam.getPass_rate() }</td>
-                                </tr>   
+                                </tr>
                             </c:forEach>
+                        </tbody>
 
-                        </table>
-                        <div id="popUpDetailModal" class="modal_popUp">
-                            <div class="modal-content_popUp">
-                                <button class="close-popupDetailExam">&times;Close</button>
-                                <p id="examIdText"></p>
-                                <br/>
-                                <a href="#" id="startExamButton">Quiz Handle</a>
-                            </div>
-                        </div>
-                        <ul class="pagination" style="display: flex; justify-content: center;">
+
+                    </table>
+                    <ul class="pagination" style="display: flex; justify-content: center;">
                             <c:if test="${page > 1}">
                                 <li><a href="simulationExam?page=${page-1}">Previous</a></li>
                                 </c:if>
@@ -71,118 +93,58 @@
                                 <li><a href="simulationExam?page=${page+1}">Next</a></li>
                                 </c:if>
                         </ul>
-                    </div>
-                    <div id="popUpDetailModal" class="modal_popUp">
-                        <div class="modal-content_popUp">
-                            <button class="close-popupDetailExam">&times;Close</button>
-                            <h2>Exam Detail</h2>
-                            <p id="examIdText"></p>
-                            <br/>
-                            <a href="#" id="startExamButton">Quiz Handle</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
 
-                        <div class="rectangle-box">
-                            <div>
-                                <form action="searchBySubject" method="GET">
-                                    <label for="selectedSubject">Choose subject</label>
-                                    <select name="subjectId">
-                                        <option value="0">All</option>
-                                        <c:forEach items="${subjectList}" var="Subject">
-                                            <option value="${Subject.id}">${Subject.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <button type="submit">Choose</button>
-                                </form>
-                            </div>
-                            <form action="searchByExamName">
-                                <input
-                                    value="${key}"
 
-                                    type="search"
-                                    placeholder="Search by exam name"
-                                    aria-label="Search"
-                                    name="keyword"
-                                    />
-                                <button class="btn" type="submit">
-                                    Search
-                                </button>
-                            </form>
-                            <button onclick="sortTable(3, true)">Sort by level</button>
-                            <br/>
-                            <button onclick="sortTable(6, false)">Sort by pass rate</button>
-                            <br/>
-                            <button onclick="sortTable(0, true)">Sort by id</button>
+                </div>
+                <a href="practiceList" class="btn btn-primary">Back to Practice list</a>
 
-                        </div>
+                <div id="popUpDetailModal" class="modal_popUp">
+                    <div class="modal-content_popUp">
+                        <button class="close-popupDetailExam">&times;Close</button>
+                        <h2>Exam Detail</h2>
+                        <p id="examIdText"></p>
+                        <br/>
+                        <a href="#" id="startExamButton">Quiz Handle</a>
                     </div>
                 </div>
             </div>
         </div>
-        <br/>
+    </div>
+    <br/>
 
-        <script>
-            var popUpDetailExams = document.getElementsByClassName("popUpDetailExam");
-            for (var i = 0; i < popUpDetailExams.length; i++) {
-                popUpDetailExams[i].addEventListener("click", function (event) {
-                    event.preventDefault();
+    <script>
+        var popUpDetailExams = document.getElementsByClassName("popUpDetailExam");
+        for (var i = 0; i < popUpDetailExams.length; i++) {
+            popUpDetailExams[i].addEventListener("click", function (event) {
+                event.preventDefault();
 
-                    var examId = this.getAttribute("data-exam-id");
+                var examId = this.getAttribute("data-exam-id");
 
-                    var examIdText = document.getElementById("examIdText");
-                    examIdText.textContent = "Exam ID: " + examId;
-                    // Đặt examId vào URL của nút "Start Exam"
-                    var startExamButton = document.getElementById("startExamButton");
-                    startExamButton.href = "quizhandle?id=" + examId + "&page=1";
+                var examIdText = document.getElementById("examIdText");
+                examIdText.textContent = "Exam ID: " + examId;
+                // Đặt examId vào URL của nút "Start Exam"
+                var startExamButton = document.getElementById("startExamButton");
+                startExamButton.href = "quizhandle?id=" + examId + "&page=1";
 
-                    // Hiển thị popup   
-                    var popUpDetailModal = document.getElementById("popUpDetailModal");
-                    popUpDetailModal.style.display = "block";
-                });
-            }
-            var closePopupDetailExam = document.getElementsByClassName("close-popupDetailExam")[0];
-            closePopupDetailExam.addEventListener("click", function () {
+                // Hiển thị popup   
                 var popUpDetailModal = document.getElementById("popUpDetailModal");
-                popUpDetailModal.style.display = "none";
+                popUpDetailModal.style.display = "block";
             });
+        }
+        var closePopupDetailExam = document.getElementsByClassName("close-popupDetailExam")[0];
+        closePopupDetailExam.addEventListener("click", function () {
+            var popUpDetailModal = document.getElementById("popUpDetailModal");
+            popUpDetailModal.style.display = "none";
+        });
 
-            function sortTable(columnIndex, isNumeric) {
-                var table, rows, switching, i, x, y, shouldSwitch;
-                table = document.getElementById("examTable");
-                switching = true;
-                while (switching) {
-                    switching = false;
-                    rows = table.rows;
-                    for (i = 1; i < (rows.length - 1); i++) {
-                        shouldSwitch = false;
-                        x = rows[i].getElementsByTagName("TD")[columnIndex];
-                        y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
-                        if (isNumeric) {
-                            if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
-                                shouldSwitch = true;
-                                break;
-                            }
-                        } else {
-                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                                shouldSwitch = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (shouldSwitch) {
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-                    }
-                }
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <%@include file="Login.jsp" %>
-        <script src="js/navBar.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </body>
-    <%@include file="components/Footer.jsp" %>
-    <script src="js/PopUp.js" type="text/javascript"></script>
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>        
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <%@include file="Login.jsp" %>
+    <script src="js/navBar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+<%@include file="components/Footer.jsp" %>
+<script src="js/PopUp.js" type="text/javascript"></script>
 </html>
