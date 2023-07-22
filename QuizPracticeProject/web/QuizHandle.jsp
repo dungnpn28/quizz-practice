@@ -26,9 +26,7 @@
                     <img href="quizhandle" src="img/1.png" alt="logo" />
                 </div>
                 <div class="runout-time w-100 h-auto col-md-4">
-
-                    <h1 id ="timer"></h1>
-
+                    <h1 id="countdownTimer"></h1>
                 </div>
                 <div class="exit-button w-100 h-auto col-md-4">
                     <button onclick="openExitPopup()">X</button>
@@ -43,7 +41,7 @@
                             </div>
                             <div class="exit-popup-button">
                                 <button onclick="closeExitPopup()">Back to Exam</button>
-                                <a id="exit-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
+                                <a id="exit-immediate" href="quizhandle?mod=1&id=${id}&page=2">Yes</a>
                             </div>
                         </div>
                     </div>
@@ -182,7 +180,7 @@
                                             </div>
                                             <div class="score-popup-button">
                                                 <button onclick="closeScorePopup()">Back to Exam</button>
-                                                <a id="score-immediate" href="scorequiz?examid=${id}&attId=${attId}">Yes</a>
+                                                <a id="score-immediate" href="quizhandle?mod=1&id=${id}&page=2">Yes</a>
                                             </div>
                                         </div>
                                     </div>
@@ -207,40 +205,48 @@
                 </c:forEach>
         </main>
         <script>
-            function startCountdown(seconds) {
-                var timer = setInterval(function () {
-                    var minutes = Math.floor(seconds / 60);
-                    var remainingSeconds = seconds % 60;
+            var initialCountdownValue = ${examDurations}; // Get the countdown value from the JSP attribute
+        </script>
 
-                    // Format the time with leading zeros if needed
-                    var displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
-                    var displaySeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
+        <script>
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                const displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
+                const displaySeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
+                return displayMinutes + ':' + displaySeconds;
+            }
 
-                    document.getElementById('timer').innerText = displayMinutes + ":" + displaySeconds;
-                    
-                    if (seconds <= 0 || ) {
-                        clearInterval(timer);
+            // Function to update the countdown timer display
+            function updateCountdown(countdownValue) {
+                const countdownTimerElement = document.getElementById('countdownTimer');
+                countdownTimerElement.textContent = formatTime(countdownValue);
+            }
+
+            // Initial update of the countdown display
+            updateCountdown(initialCountdownValue);
+
+            // Function to update the countdown timer display every second
+            function startCountdownDisplay() {
+                var intervalId = setInterval(function () {
+                    initialCountdownValue--; // Decrement the countdown value every second
+
+                    // Update the display
+                    updateCountdown(initialCountdownValue);
+
+                    // Check if the countdown has reached zero
+                    if (initialCountdownValue <= 0) {
+                        clearInterval(intervalId); // Stop the interval when countdown reaches zero
+                        updateCountdown(0); // Set the display to 00:00 when countdown is finished
                         window.location.href = "scorequiz?examid=${id}&attId=${attId}";
-                        localStorage.removeItem('countdownSeconds');
-                    } else {
-                        // Save the remaining seconds in localStorage
-                        localStorage.setItem('countdownSeconds', seconds);
                     }
-                    seconds--;
                 }, 1000); // Update the display every 1 second (1000 milliseconds)
             }
 
-            // Check if there are remaining seconds stored in localStorage
-            var storedSeconds = localStorage.getItem('countdownSeconds');
-
-            // Start the countdown or continue from the stored time
-            if (storedSeconds !== null && !isNaN(storedSeconds)) {
-                startCountdown(parseInt(storedSeconds));
-            } else {
-                // Start the countdown with a duration of 5 minutes (300 seconds)
-                startCountdown(${examDuration});
-            }
+            // Start updating the countdown display
+            startCountdownDisplay();
         </script>
+
     </body>
 
 </html>

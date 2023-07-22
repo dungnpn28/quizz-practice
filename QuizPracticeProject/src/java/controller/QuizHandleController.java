@@ -15,6 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import model.Attempt;
 import model.Question;
 import model.User;
@@ -24,7 +28,9 @@ import model.User;
  * @author Acer
  */
 public class QuizHandleController extends HttpServlet {
-    
+
+    private AtomicInteger timerValue;
+    private ScheduledExecutorService scheduler;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,9 +46,15 @@ public class QuizHandleController extends HttpServlet {
         int questionId = qe.getQuestionIdByExamId(examId, page);
 
         //get exam time 
-        String duration = e.getExamDurationById(examId);
-        int examDurationSecond = convertToTime(duration);
-        req.setAttribute("examDuration", examDurationSecond);
+//        String duration = e.getExamDurationById(examId);
+//        int examDurationSecond = convertToTime(duration);
+//        req.setAttribute("examDuration", examDurationSecond);
+//        System.out.println("aaaaa" + examDurationSecond);
+        if (timerValue != null && timerValue.get() > 0) {
+            timerValue.decrementAndGet();
+        }
+        // Set the remaining time (countdown) as a request attribute
+        req.setAttribute("examDurations", timerValue.get());
 
         //get attempt id
         int countAttempt = a.countExamAttempt(examId, u.getId());
@@ -107,10 +119,10 @@ public class QuizHandleController extends HttpServlet {
         QuestionExamDAO qe = new QuestionExamDAO();
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("user");
-        
+        int examId = Integer.parseInt(req.getParameter("id"));
+
         //pagination
         int page = Integer.parseInt(req.getParameter("page"));
-        int examId = Integer.parseInt(req.getParameter("id"));
         int endPage = qe.countExamQuestion(examId);
         int questionId = qe.getQuestionIdByExamId(examId, page);
         req.setAttribute("p", page);
@@ -126,29 +138,40 @@ public class QuizHandleController extends HttpServlet {
             attemptId = countAttempt;
         }
         req.setAttribute("attId", attemptId);
-        ArrayList<Question> allQuestionList = q.getQuestionListByExamAttempt(examId, attemptId, u.getId());
-        req.setAttribute("allQuestionL", allQuestionList);
-        //create exam attempts
-        a.createAttempt(attemptId, examId, questionId, u.getId());
+        //score exam 
+        if (req.getParameter("mod") != null) {
+            stopCountdownTimer();
+            resp.sendRedirect("scorequiz?examid=" + examId + "&attId=" + attemptId);
+        } else {
+            ArrayList<Question> allQuestionList = q.getQuestionListByExamAttempt(examId, attemptId, u.getId());
+            req.setAttribute("allQuestionL", allQuestionList);
+            //create exam attempts
+            a.createAttempt(attemptId, examId, questionId, u.getId());
 
-        Attempt att = a.getAttempt(attemptId, examId, questionId, u.getId());
-        req.setAttribute("attempt", att);
+            Attempt att = a.getAttempt(attemptId, examId, questionId, u.getId());
+            req.setAttribute("attempt", att);
 
-        //progress bar business
-        int countAnsweredQuestion = a.getTotalAnsweredQuestion(attemptId, examId, u.getId());
-        req.setAttribute("countAnsQues", countAnsweredQuestion);
+            //progress bar business
+            int countAnsweredQuestion = a.getTotalAnsweredQuestion(attemptId, examId, u.getId());
+            req.setAttribute("countAnsQues", countAnsweredQuestion);
 
-        //get exam time 
-        String duration = e.getExamDurationById(examId);
-        int examDurationSecond = convertToTime(duration);
-        req.setAttribute("examDuration", examDurationSecond);
+            //get exam time 
+            String duration = e.getExamDurationById(examId);
+            int examDurationSecond = convertToTime(duration);
 
-        //get attempt list where user_answer not null
-        ArrayList<Attempt> attemptList = a.getAttemptList(attemptId, examId, questionId, u.getId());
-        req.setAttribute("attL", attemptList);
+            if (timerValue == null) {
+                timerValue = new AtomicInteger(examDurationSecond);
+                startCountdownTimer();
+            }
+            req.setAttribute("examDurations", timerValue.get());
 
-        //push to QuizHandle
-        req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);
+            //get attempt list where user_answer not null
+            ArrayList<Attempt> attemptList = a.getAttemptList(attemptId, examId, questionId, u.getId());
+            req.setAttribute("attL", attemptList);
+
+            //push to QuizHandle
+            req.getRequestDispatcher("QuizHandle.jsp").forward(req, resp);
+        }
 
     }
 
@@ -161,6 +184,32 @@ public class QuizHandleController extends HttpServlet {
         int second = Integer.parseInt(t[2]);
         int totalTime = hour * 3600 + minute * 60 + second;
         return totalTime;
-    } 
-    
+    }
+
+    public void startCountdownTimer() {
+        scheduler = Executors.newScheduledThreadPool(1);
+        // Schedule the task to run every second (1000 milliseconds)
+        scheduler.scheduleAtFixedRate(() -> {
+            if (timerValue.get() > 0) {
+                timerValue.decrementAndGet();
+            } else {
+                // Stop the timer when the countdown finishes
+                stopCountdownTimer();
+            }
+        }, 0, 1, TimeUnit.SECONDS); // Delay 0 seconds, repeat every 1 second
+    }
+
+    public void stopCountdownTimer() {
+        // Shutdown the scheduler and stop the timer
+        if (scheduler != null) {
+            timerValue = null;
+            scheduler.shutdown();
+        }
+    }
+
+    @Override
+    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
 }
